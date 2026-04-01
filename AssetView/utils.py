@@ -15,6 +15,7 @@ DRIVE_MAP = {
     "N:/": "/media/n_drive/",
     "S:/": "/media/s_drive/",
     "C:/": "/media/c_drive/",
+    "D:/": "/media/c_drive/",
 }
 __all__ = [
     'as_list',

@@ -19,7 +19,7 @@ defaults:
     use_tls: false
     default_from: "AssetBrowser <no-reply@localhost>"
   projects:
-    base_path: "C:/Users/swetha/projects"
+    base_path: "D:/projects"
     active:
       - OG
       - CHM

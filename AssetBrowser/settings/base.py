@@ -10,8 +10,8 @@ from utils.logger import configure_logging, get_logger
 # ---------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# CONFIG_FILE = os.getenv("CONFIG_FILE", str(BASE_DIR / "config" / "config.yaml"))
-CONFIG_FILE = Path(r"C:\Users\swetha\AssetBrowser\config\config.yaml")
+CONFIG_FILE = os.getenv("CONFIG_FILE", str(BASE_DIR / "config" / "config.yaml"))
+# CONFIG_FILE = Path(r"C:\Users\swetha\AssetBrowser\config\config.yaml")
 FFMPEG_BIN = os.getenv("FFMPEG_BIN", "ffmpeg")
 OIIO_BIN = os.getenv("OIIO_BIN", "oiiotool")
 # ---------------------------------------------------------------------
@@ -119,7 +119,7 @@ INSTALLED_APPS = [
 # Tailwind
 # ---------------------------------------------------------------------
 TAILWIND_APP_NAME = 'theme'
-NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
+NPM_BIN_PATH = "npm"
 
 # ---------------------------------------------------------------------
 # Middleware
