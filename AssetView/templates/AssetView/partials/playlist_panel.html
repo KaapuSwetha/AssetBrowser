@@ -1,0 +1,53 @@
+{# AssetView/partials/playlist_panel.html #}
+<div class="space-y-3">
+  <div class="flex items-center justify-between">
+    <div class="font-semibold text-slate-200">Playlist: {{ pl.name }}</div>
+    <button
+      class="text-xs px-2 py-1 rounded bg-slate-800 hover:bg-slate-700"
+      hx-get="{% url 'review-playlist-play' pl.id %}"
+      hx-target="#previewCard"
+      hx-swap="outerHTML">
+      Play
+    </button>
+  </div>
+
+  <ul class="divide-y divide-slate-800 bg-slate-900/40 rounded-lg border border-slate-800">
+    {% for it in items %}
+      <li class="p-2 flex items-center justify-between">
+        <div class="truncate text-slate-300">
+          {{ it.version.code|default:it.version_id }}
+        </div>
+
+        {# SAFEST: server provides it.media_id in items queryset #}
+        {% if it.media_id %}
+          <button
+            class="text-xs px-2 py-1 rounded bg-slate-800 hover:bg-slate-700"
+            hx-get="{% url 'review-preview-by-id' it.media_id %}"
+            hx-target="#previewCard"
+            hx-swap="outerHTML">
+            View
+          </button>
+
+        {% else %}
+          {# If you didn’t pre-compute media_id, fall back to first related item via |first filter #}
+          {% with it.version.mediaasset_set.all|first as first_ma %}
+            <button
+              class="text-xs px-2 py-1 rounded bg-slate-800 hover:bg-slate-700"
+              {% if first_ma %}
+                hx-get="{% url 'review-preview-by-id' first_ma.id %}"
+                hx-target="#previewCard"
+                hx-swap="outerHTML"
+              {% else %}
+                disabled
+                title="No media"
+              {% endif %}>
+              View
+            </button>
+          {% endwith %}
+        {% endif %}
+      </li>
+    {% empty %}
+      <li class="p-3 text-slate-500 text-sm">No items yet.</li>
+    {% endfor %}
+  </ul>
+</div>

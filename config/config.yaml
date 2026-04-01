@@ -1,0 +1,67 @@
+# AssetBrowser/config/config.yaml
+defaults:
+  app:
+    name: AssetBrowser
+    debug: true  # default, can be overridden per environment
+  logging:
+    log_dir: ./logs
+    level: DEBUG
+    json: true
+    max_bytes: 10485760
+    backup_count: 3
+    log_errors_via_email: false
+    emergency_shutdown_on_critical: false
+    emergency_sentinel: ./assetbrowser_emergency
+  email:
+    backend: django.core.mail.backends.console.EmailBackend
+    host: localhost
+    port: 1025
+    use_tls: false
+    default_from: "AssetBrowser <no-reply@localhost>"
+  projects:
+    base_path: "C:/Users/swetha/projects"
+    active:
+      - OG
+      - CHM
+      - KAR
+  admins:
+    - name: DevOps
+      email: devops@example.local
+  status_update:
+    holders: [ "neelendra" ]
+    ip_to_user:
+      "10.0.0.15": "neelendra"
+      "10.0.0.23": "lead_anim"
+
+# environment-specific overrides
+env:
+  dev:
+    logging:
+      log_errors_via_email: false
+    app:
+      debug: true
+    email:
+      backend: django.core.mail.backends.console.EmailBackend
+      host: localhost
+      port: 1025
+      use_tls: false
+  prod:
+    logging:
+      log_dir: /var/log/assetbrowser
+      level: INFO
+      log_errors_via_email: true
+      emergency_shutdown_on_critical: false
+      emergency_sentinel: /var/run/assetbrowser_emergency
+    app:
+      debug: false
+    email:
+      backend: django.core.mail.backends.smtp.EmailBackend
+      host: smtp.sendgrid.net
+      port: 587
+      use_tls: true
+      default_from: "AssetBrowser <no-reply@assetbrowser.com>"
+    admins:
+      - name: Ops
+        email: ops@example.com
+      - name: Lead
+        email: lead@example.com

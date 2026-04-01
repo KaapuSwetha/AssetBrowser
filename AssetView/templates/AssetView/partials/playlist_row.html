@@ -1,0 +1,13 @@
+{# AssetView/partials/playlist_row.html #}
+<li class="py-1 flex items-center justify-between">
+  <span class="truncate">{{ pl.name }}</span>
+  <span class="flex items-center gap-2">
+    <button
+      class="ml-2 text-xs px-2 py-1 bg-slate-800 rounded hover:bg-slate-700"
+      hx-get="{% url 'review-playlist-panel' pl.id %}"
+      hx-target="#reviewRightSidebar"
+      hx-swap="innerHTML">
+      Open
+    </button>
+  </span>
+</li>

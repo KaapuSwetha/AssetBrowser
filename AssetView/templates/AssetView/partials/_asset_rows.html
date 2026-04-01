@@ -1,0 +1,666 @@
+{% load static %}
+
+{# ─── Drop-in replacement: adds row drag-to-reorder + draggable/resizable modal ─── #}
+
+<div data-context-path="{{ path }}" data-context-name="{{ name }}" data-context-mode="{{ data_type }}" data-context-variant="{{ variant|default:'' }}">
+  <table class="w-full text-left text-sm" id="resizableTable">
+    <thead class="sticky top-0 bg-gray-950/85 backdrop-blur text-[11px] uppercase tracking-wide text-slate-400">
+      <tr id="colHeaderRow">
+       
+{% if rows|length > 1 %}
+<th class="py-2.5 px-3 relative col-drag-th" style="width: 5%; min-width: 40px;" draggable="true" data-col-idx="0">
+  <span class="col-th-label">{# drag handle header #}</span>
+  <div class="column-resizer"></div>
+</th>
+{% endif %}
+<th class="py-2.5 px-3 relative col-drag-th" style="width: 40%; min-width: 240px;" draggable="true" data-col-idx="1">
+          <span class="col-th-label">FileName</span>
+          <div class="column-resizer"></div>
+        </th>
+        <th class="py-2.5 px-3 relative col-drag-th" style="width: 25%; min-width: 140px;" draggable="true" data-col-idx="2">
+          <span class="col-th-label">
+            {% if data_type == "Asset" %}
+              AssetId
+            {% else %}
+              FrameRange
+            {% endif %}
+          </span>
+          <div class="column-resizer"></div>
+        </th>
+        <th class="py-2.5 px-3 relative col-drag-th" style="width: 30%; min-width: 160px;" draggable="true" data-col-idx="3">
+          <span class="col-th-label">Status</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-800" id="draggableTableBody">
+      {% if rows %}
+        {% for r in rows %}
+          <tr class="hover:bg-gray-800/50 transition-colors group comparison-row"
+              draggable="true"
+              data-index="{{ forloop.counter0 }}"
+              data-filename="{{ r.FileName }}"
+              data-row-path="{{ path }}"
+              data-row-mode="{{ data_type }}"
+              data-row-name="{{ name }}"
+              data-row-variant="{{ variant|default:'' }}">
+        {% if rows|length > 1 %}
+        <td class="py-2.5 px-3" onclick="event.stopPropagation();">
+          <div class="row-drag-handle flex items-center gap-2" title="Drag to reorder">
+            <input type="checkbox" 
+            class="row-checkbox w-4 h-4 rounded border-gray-600 bg-gray-700 text-blue-600 focus:ring-2 focus:ring-blue-500"
+            data-row-index="{{ forloop.counter0 }}"
+            data-filename="{{ r.FileName }}">
+          </div>
+        </td>
+        {% endif %}
+            
+            <td class="py-2.5 px-3 cursor-pointer"
+                hx-get="/row-metadata/"
+                hx-vals='js:{
+                  path: this.closest("[data-context-path]").dataset.contextPath,
+                  mode: this.closest("[data-context-path]").dataset.contextMode,
+                  name: this.closest("[data-context-path]").dataset.contextName,
+                  variant: this.closest("[data-context-path]").dataset.contextVariant,
+                  filename: this.closest("tr").dataset.filename,
+                  index: this.closest("tr").dataset.index
+                }'
+                hx-target="#metadataCard"
+                hx-swap="innerHTML"
+                hx-trigger="click">
+              {{ r.FileName }}
+            </td>
+            <td class="py-2.5 px-3 cursor-pointer"
+                hx-get="/row-metadata/"
+                hx-vals='js:{
+                  path: this.closest("[data-context-path]").dataset.contextPath,
+                  mode: this.closest("[data-context-path]").dataset.contextMode,
+                  name: this.closest("[data-context-path]").dataset.contextName,
+                  variant: this.closest("[data-context-path]").dataset.contextVariant,
+                  filename: this.closest("tr").dataset.filename,
+                  index: this.closest("tr").dataset.index
+                }'
+                hx-target="#metadataCard"
+                hx-swap="innerHTML"
+                hx-trigger="click">
+              {% if data_type == "Asset" %}
+                {{ r.AssetId|default:"-" }}
+              {% else %}
+                {{ r.FrameRange|default:"-" }}
+              {% endif %}
+            </td>
+           <td class="py-2.5 px-3 relative">
+  <div id="statusCell-{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}" class="inline-flex items-center gap-2">
+
+    {% if r.Status %}
+      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium {{ r.Status.cls }} shadow-sm cursor-pointer hover:opacity-80 transition-opacity"
+            hx-get="/status-form/"
+            hx-vals='js:{
+              uid: "{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}",
+              path: this.closest("[data-context-path]").dataset.contextPath,
+              mode: this.closest("[data-context-path]").dataset.contextMode,
+              name: this.closest("[data-context-path]").dataset.contextName,
+              variant: this.closest("[data-context-path]").dataset.contextVariant,
+              index: this.closest("tr").dataset.index
+            }'
+            hx-target="#statusPortal-{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}"
+            hx-swap="innerHTML"
+            hx-trigger="click"
+            onclick="event.stopPropagation();"
+            oncontextmenu="showStatusContextMenu(event, this, '{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}')">
+        <i class="fas {{ r.Status.icon }}"></i>
+        <span>{{ r.Status.text }}</span>
+      </span>
+    {% else %}
+      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium bg-slate-800 text-slate-400 shadow-sm cursor-pointer hover:opacity-80 transition-opacity"
+            hx-get="/status-form/"
+            hx-vals='js:{
+              uid: "{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}",
+              path: this.closest("[data-context-path]").dataset.contextPath,
+              mode: this.closest("[data-context-path]").dataset.contextMode,
+              name: this.closest("[data-context-path]").dataset.contextName,
+              variant: this.closest("[data-context-path]").dataset.contextVariant,
+              index: this.closest("tr").dataset.index
+            }'
+            hx-target="#statusPortal-{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}"
+            hx-swap="innerHTML"
+            hx-trigger="click"
+            onclick="event.stopPropagation();"
+            oncontextmenu="showStatusContextMenu(event, this, '{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}')">
+        <i class="fas fa-circle"></i>
+        <span>No Status</span>
+      </span>
+    {% endif %}
+  </div>
+  <div id="statusPortal-{{ path|slugify }}-{{ name|slugify }}-{{ forloop.counter0 }}" class="absolute top-full left-0 z-50 mt-1 min-w-[250px]"></div>
+</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="4" class="py-2.5 px-3 text-center text-gray-500">
+            No data available
+          </td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+(function () {
+  (function initRowDrag() {
+    const tbody = document.getElementById('draggableTableBody');
+    if (!tbody) return;
+
+    let dragSrc       = null;
+    let placeholder   = null;
+    let lastTarget    = null;
+    let animFrame     = null;
+
+    function createPlaceholder(refRow) {
+      const ph = document.createElement('tr');
+      ph.id = 'row-drag-placeholder';
+      ph.style.cssText = `
+        height:${refRow.offsetHeight}px;
+        background:rgba(56,189,248,0.07);
+        outline:2px dashed rgba(56,189,248,0.45);
+        outline-offset:-2px;
+        pointer-events:none;
+        transition:none;
+      `;
+      const td = document.createElement('td');
+      td.colSpan = refRow.cells.length;
+      ph.appendChild(td);
+      return ph;
+    }
+
+    tbody.addEventListener('dragstart', e => {
+      const row = e.target.closest('tr.comparison-row');
+      if (!row) return;
+
+      dragSrc     = row;
+      lastTarget  = null;
+      placeholder = createPlaceholder(row);
+
+      const ghost = row.cloneNode(true);
+      ghost.style.cssText = `
+        position:fixed; top:-9999px; left:-9999px;
+        opacity:0.88; width:${row.offsetWidth}px;
+        background:#1e293b; border:1px solid rgba(56,189,248,0.6);
+        border-radius:6px; pointer-events:none; box-shadow:0 8px 24px #0008;
+      `;
+      document.body.appendChild(ghost);
+      e.dataTransfer.setDragImage(ghost, 24, row.offsetHeight / 2);
+      setTimeout(() => ghost.remove(), 0);
+
+      e.dataTransfer.effectAllowed = 'move';
+      requestAnimationFrame(() => {
+        row.style.opacity = '0.25';
+        row.style.outline = '2px dashed rgba(56,189,248,0.4)';
+      });
+    });
+
+    function onDocDragOver(e) {
+      if (!dragSrc) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+
+      if (animFrame) return;
+      animFrame = requestAnimationFrame(() => {
+        animFrame = null;
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        const target = el?.closest('tr.comparison-row');
+        if (!target || target === dragSrc || target.closest('tbody') !== tbody) return;
+        if (target === lastTarget) return;
+        lastTarget = target;
+
+        const rect = target.getBoundingClientRect();
+        const insertBefore = e.clientY < rect.top + rect.height / 2;
+        if (insertBefore) {
+          tbody.insertBefore(placeholder, target);
+        } else {
+          tbody.insertBefore(placeholder, target.nextSibling);
+        }
+      });
+    }
+
+    function onDocDrop(e) {
+      if (!dragSrc) return;
+      e.preventDefault();
+      if (placeholder.parentNode === tbody) {
+        tbody.insertBefore(dragSrc, placeholder);
+      }
+      cleanup(true);
+    }
+
+    tbody.addEventListener('dragend', () => cleanup(false));
+
+    function cleanup(dropped) {
+      if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
+      placeholder?.remove();
+      placeholder = null;
+      lastTarget  = null;
+
+      if (dragSrc) {
+        dragSrc.style.opacity = '';
+        dragSrc.style.outline = '';
+
+        if (dropped) {
+          tbody.querySelectorAll('tr.comparison-row').forEach((tr, i) => {
+            tr.dataset.index = i;
+            const cb = tr.querySelector('.row-checkbox');
+            if (cb) cb.dataset.rowIndex = i;
+          });
+          dragSrc.style.background = 'rgba(56,189,248,0.12)';
+          setTimeout(() => { if (dragSrc) dragSrc.style.background = ''; }, 400);
+        }
+        dragSrc = null;
+      }
+
+      document.removeEventListener('dragover', onDocDragOver);
+      document.removeEventListener('drop',     onDocDrop);
+    }
+
+    tbody.addEventListener('dragstart', () => {
+      document.addEventListener('dragover', onDocDragOver);
+      document.addEventListener('drop',     onDocDrop);
+    });
+  })();
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     2. CONTEXT MENU + DRAGGABLE / RESIZABLE HISTORY MODAL
+  ═══════════════════════════════════════════════════════════════ */
+  let _statusCtxMenu = null;
+  let _historyModal  = null;
+
+  function closeStatusContextMenu() {
+    if (_statusCtxMenu) { _statusCtxMenu.remove(); _statusCtxMenu = null; }
+    document.removeEventListener('click',       closeStatusContextMenu);
+    document.removeEventListener('contextmenu', closeStatusContextMenu);
+  }
+
+  function onEscClose(e) {
+    if (e.key === 'Escape') {
+      closeStatusContextMenu();
+      closeHistoryModal();
+    }
+  }
+
+  function closeHistoryModal() {
+    if (_historyModal) {
+      _historyModal.classList.remove('status-history-modal--visible');
+      setTimeout(() => {
+        if (_historyModal) { _historyModal.remove(); _historyModal = null; }
+      }, 200);
+      document.removeEventListener('keydown', onEscClose);
+    }
+  }
+
+  function makeDraggable(backdrop, handle, panel) {
+    let dragging = false, ox = 0, oy = 0;
+    handle.style.cursor = 'grab';
+    handle.addEventListener('mousedown', e => {
+      if (e.target.closest('.status-history-modal__close')) return;
+      dragging = true;
+      handle.style.cursor = 'grabbing';
+      const rect = panel.getBoundingClientRect();
+      backdrop.style.alignItems  = 'flex-start';
+      backdrop.style.justifyContent = 'flex-start';
+      panel.style.position = 'fixed';
+      panel.style.left = rect.left + 'px';
+      panel.style.top  = rect.top  + 'px';
+      panel.style.margin = '0';
+      ox = e.clientX - rect.left;
+      oy = e.clientY - rect.top;
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      let nx = e.clientX - ox;
+      let ny = e.clientY - oy;
+      nx = Math.max(0, Math.min(nx, window.innerWidth  - panel.offsetWidth));
+      ny = Math.max(0, Math.min(ny, window.innerHeight - panel.offsetHeight));
+      panel.style.left = nx + 'px';
+      panel.style.top  = ny + 'px';
+    });
+    document.addEventListener('mouseup', () => {
+      if (dragging) { dragging = false; handle.style.cursor = 'grab'; }
+    });
+  }
+
+  function makeResizable(panel) {
+    const MIN_W = 400, MIN_H = 200;
+    let resizing = false, edge = null, sx, sy, sw, sh, sl, st;
+    const HIT = 8;
+    panel.addEventListener('mousemove', e => {
+      if (resizing) return;
+      const r = panel.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const onR = x >= r.width  - HIT;
+      const onB = y >= r.height - HIT;
+      const onL = x <= HIT;
+      const onT = y <= HIT;
+      if (onR && onB) panel.style.cursor = 'se-resize';
+      else if (onL && onB) panel.style.cursor = 'sw-resize';
+      else if (onR && onT) panel.style.cursor = 'ne-resize';
+      else if (onL && onT) panel.style.cursor = 'nw-resize';
+      else if (onR) panel.style.cursor = 'e-resize';
+      else if (onB) panel.style.cursor = 's-resize';
+      else if (onL) panel.style.cursor = 'w-resize';
+      else if (onT) panel.style.cursor = 'n-resize';
+      else panel.style.cursor = '';
+    });
+    panel.addEventListener('mousedown', e => {
+      if (e.target.closest('.status-history-modal__header')) return;
+      const r = panel.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const onR = x >= r.width  - HIT;
+      const onB = y >= r.height - HIT;
+      const onL = x <= HIT;
+      const onT = y <= HIT;
+      if (!onR && !onB && !onL && !onT) return;
+      resizing = true;
+      edge = { onR, onB, onL, onT };
+      sx = e.clientX; sy = e.clientY;
+      sw = r.width;   sh = r.height;
+      sl = r.left;    st = r.top;
+      panel.style.position = 'fixed';
+      panel.style.left = sl + 'px';
+      panel.style.top  = st + 'px';
+      panel.style.width  = sw + 'px';
+      panel.style.height = sh + 'px';
+      panel.style.maxWidth  = 'none';
+      panel.style.maxHeight = 'none';
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!resizing) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      let nw = sw, nh = sh, nl = sl, nt = st;
+      if (edge.onR) nw = Math.max(MIN_W, sw + dx);
+      if (edge.onB) nh = Math.max(MIN_H, sh + dy);
+      if (edge.onL) { nw = Math.max(MIN_W, sw - dx); nl = sl + (sw - nw); }
+      if (edge.onT) { nh = Math.max(MIN_H, sh - dy); nt = st + (sh - nh); }
+      panel.style.width  = nw + 'px';
+      panel.style.height = nh + 'px';
+      panel.style.left   = nl + 'px';
+      panel.style.top    = nt + 'px';
+    });
+    document.addEventListener('mouseup', () => {
+      if (resizing) { resizing = false; edge = null; panel.style.cursor = ''; }
+    });
+  }
+
+  function openHistoryModal(params) {
+    closeHistoryModal();
+    const backdrop = document.createElement('div');
+    backdrop.className = 'status-history-backdrop';
+    backdrop.innerHTML = `
+      <div class="status-history-modal" role="dialog" aria-modal="true" aria-label="Status History">
+        <div class="status-history-modal__header" title="Drag to move">
+          <div class="status-history-modal__title">
+            <i class="fas fa-history"></i>
+            <span>Status History</span>
+          </div>
+          <div class="status-history-modal__header-actions">
+            <span class="status-history-modal__drag-hint">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" style="opacity:.4">
+                <circle cx="2" cy="2"  r="1.3"/>
+                <circle cx="6" cy="2"  r="1.3"/>
+                <circle cx="10" cy="2" r="1.3"/>
+                <circle cx="2" cy="6"  r="1.3"/>
+                <circle cx="6" cy="6"  r="1.3"/>
+                <circle cx="10" cy="6" r="1.3"/>
+                <circle cx="2" cy="10" r="1.3"/>
+                <circle cx="6" cy="10" r="1.3"/>
+                <circle cx="10" cy="10" r="1.3"/>
+              </svg>
+            </span>
+            <button class="status-history-modal__close" id="statusHistoryCloseBtn" title="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="status-history-modal__body" id="statusHistoryBody">
+          <div class="status-history-modal__loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Loading history…</span>
+          </div>
+        </div>
+        <div class="status-history-modal__resize-hint">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:.3">
+            <path d="M9 1L1 9M9 5L5 9M9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(backdrop);
+    _historyModal = backdrop;
+    const panel  = backdrop.querySelector('.status-history-modal');
+    const header = backdrop.querySelector('.status-history-modal__header');
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => backdrop.classList.add('status-history-modal--visible'))
+    );
+    backdrop.querySelector('#statusHistoryCloseBtn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeHistoryModal();
+    });
+    makeDraggable(backdrop, header, panel);
+    makeResizable(panel);
+    htmx.ajax('GET', '/status-history/?' + new URLSearchParams(params), {
+      target: '#statusHistoryBody',
+      swap:   'innerHTML',
+    });
+  }
+
+  window.showStatusContextMenu = function (e, badgeEl, uid, prebuiltParams) {
+    e.preventDefault();
+    e.stopPropagation();
+    closeStatusContextMenu();
+    let params;
+    if (prebuiltParams) {
+      params = prebuiltParams;
+    } else {
+      const row = badgeEl.closest('tr');
+      const ctx = badgeEl.closest('[data-context-path]');
+      params = {
+        uid,
+        path:    ctx?.dataset.contextPath    || '',
+        mode:    ctx?.dataset.contextMode    || '',
+        name:    ctx?.dataset.contextName    || '',
+        variant: ctx?.dataset.contextVariant || '',
+        index:   row?.dataset.index          || '',
+      };
+    }
+    const menu = document.createElement('div');
+    menu.className = 'comparison-context-menu';
+    menu.style.left = e.pageX + 'px';
+    menu.style.top  = e.pageY + 'px';
+    menu.innerHTML  = `
+      <div class="comparison-context-menu-item" id="statusCtxHistory">
+        <i class="fas fa-history" style="color:#38bdf8"></i><span>Status History</span>
+      </div>
+    `;
+    document.body.appendChild(menu);
+    _statusCtxMenu = menu;
+    menu.querySelector('#statusCtxHistory').addEventListener('click', () => {
+      e.stopPropagation();  
+      closeStatusContextMenu();
+      openHistoryModal(params);
+    });
+    setTimeout(() => {
+      document.addEventListener('click',       closeStatusContextMenu);
+      document.addEventListener('contextmenu', closeStatusContextMenu);
+      document.addEventListener('keydown',     onEscClose);
+    }, 100);
+  };
+})();
+
+// Event delegation for status badge right-click — survives HTMX swaps
+document.addEventListener('contextmenu', function (e) {
+  const statusSpan = e.target.closest(
+    '[id^="statusCell-"] span[class*="inline-flex"]'
+  );
+  if (!statusSpan) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const row = statusSpan.closest('tr');
+  const ctx = statusSpan.closest('[data-context-path]');
+  const cell = statusSpan.closest('[id^="statusCell-"]');
+  const uid  = cell ? cell.id.replace('statusCell-', '') : '';
+  const params = {
+    uid,
+    path:    ctx?.dataset.contextPath    || '',
+    mode:    ctx?.dataset.contextMode    || '',
+    name:    ctx?.dataset.contextName    || '',
+    variant: ctx?.dataset.contextVariant || '',
+    index:   row?.dataset.index          || '',
+  };
+  window.showStatusContextMenu(e, statusSpan, uid, params);
+});
+</script>
+
+<style>
+/* ── Row drag-to-reorder ──────────────────────────────────────────────── */
+tr.comparison-row[draggable="true"] {
+  cursor: default;
+}
+.row-drag-handle {
+  cursor: grab;
+  color: #475569;
+  transition: color 0.15s;
+  user-select: none;
+}
+.row-drag-handle:hover {
+  color: #94a3b8;
+}
+tr.comparison-row.drag-over-top {
+  border-top: 2px solid #38bdf8;
+}
+tr.comparison-row.drag-over-bottom {
+  border-bottom: 2px solid #38bdf8;
+}
+#row-drag-placeholder td {
+  background: transparent;
+}
+
+/* ── Column drag-to-reorder ──────────────────────────────────────────────── */
+.col-drag-th {
+  /* label uses grab cursor; resize handle uses col-resize */
+}
+.col-drag-th .col-th-label {
+  cursor: grab;
+  display: inline-block;
+  user-select: none;
+}
+.col-drag-th .col-th-label:active {
+  cursor: grabbing;
+}
+.col-drag-th.col-dragging {
+  opacity: 0.35;
+}
+.col-drag-th.col-drag-over-left::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: #38bdf8;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(56,189,248,0.6);
+}
+.col-drag-th.col-drag-over-right::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: #38bdf8;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(56,189,248,0.6);
+}
+
+/* Ghost pill that follows cursor during column drag */
+.col-drag-ghost-pill {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  background: #0f172a;
+  border: 1px solid #38bdf8;
+  border-radius: 5px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #38bdf8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55);
+  white-space: nowrap;
+  transform: translate(-50%, -140%);
+  transition: none;
+}
+
+/* Status History Modal (draggable + resizable) */
+.status-history-backdrop {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.2s ease;
+}
+.status-history-backdrop.status-history-modal--visible { opacity: 1; }
+.status-history-modal {
+  background: #0f172a;
+  border: 1px solid rgba(148,163,184,0.12);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  width: min(860px, 94vw); max-height: min(560px, 88vh);
+  min-width: 400px; min-height: 200px;
+  display: flex; flex-direction: column;
+  transform: translateY(10px) scale(0.98);
+  transition: transform 0.2s ease;
+  overflow: hidden; position: relative;
+}
+.status-history-modal--visible .status-history-modal { transform: translateY(0) scale(1); }
+.status-history-modal__resize-hint { position: absolute; bottom: 4px; right: 4px; pointer-events: none; color: #94a3b8; }
+.status-history-modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; border-bottom: 1px solid rgba(148,163,184,0.1);
+  flex-shrink: 0; user-select: none;
+}
+.status-history-modal__header:hover { background: rgba(255,255,255,0.02); }
+.status-history-modal__header-actions { display: flex; align-items: center; gap: 10px; }
+.status-history-modal__drag-hint { color: #94a3b8; display: flex; align-items: center; }
+.status-history-modal__title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #94a3b8;
+}
+.status-history-modal__title i { color: #38bdf8; font-size: 13px; }
+.status-history-modal__close {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  color: #64748b; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; transition: all 0.15s;
+}
+.status-history-modal__close:hover { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.3); color: #f87171; }
+.status-history-modal__body {
+  flex: 1; overflow-y: auto; padding: 4px 0 8px; min-height: 0;
+}
+.status-history-modal__body::-webkit-scrollbar { width: 5px; }
+.status-history-modal__body::-webkit-scrollbar-track { background: transparent; }
+.status-history-modal__body::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+.status-history-modal__body .history-panel { padding: 12px 16px; }
+.status-history-modal__body .history-scroll { max-height: none; }
+.status-history-modal__loading {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; padding: 40px; color: #475569; font-size: 12px;
+}
+.status-history-modal__loading i { color: #60a5fa; font-size: 16px; }
+</style>
+
+<link rel="stylesheet" href="{% static 'css/dist/shared_fullscreen.css' %}">
+<link rel="stylesheet" href="{% static 'css/dist/asset_rows.css' %}">
+<script src="{% static 'js/review/video_controls_common.js' %}"></script>
+<script src="{% static 'js/review/asset_rows.js' %}"></script>

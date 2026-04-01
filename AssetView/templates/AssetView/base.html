@@ -1,0 +1,427 @@
+<!-- ======================== base.html (HaloHues standard) ======================== -->
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Asset Browser{% endblock %}</title>
+  {% load static %}
+
+  <!-- Brand favicon -->
+  <link rel="icon" href="{% static 'icons/hhs_card.png' %}" type="image/png">
+
+  <!-- Tailwind (compiled locally) -->
+  <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
+
+  <!-- Self-hosted Font Awesome (optional) -->
+  <link rel="stylesheet" href="{% static 'vendor/fontawesome/css/all.min.css' %}" />
+
+  <!-- Self-hosted Video.js (optional, globally available) -->
+  <link rel="stylesheet" href="{% static 'vendor/videojs/video-js.min.css' %}" />
+
+  {% block extra_head %}{% endblock %}
+  <style>
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideInDown {
+  animation: slideInDown 0.3s ease-out;
+}
+</style>
+</head>
+
+<body
+  class="min-h-[100dvh] flex flex-col bg-gradient-to-br from-gray-900 via-gray-950 to-black text-slate-200 lg:overflow-hidden"
+  hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
+
+<!-- ======================== HEADER ======================== -->
+<header class="sticky top-3 z-50 bg-gray-950/90 backdrop-blur border-b border-brand-900/30 mx-3 rounded-2xl">
+  <div class="w-full 2xl:max-w-[3840px] mx-auto px-3 sm:px-4 lg:px-6 h-14 flex items-center gap-3">
+
+    <!-- Brand (left) -->
+    <div class="shrink-0 flex items-center gap-2 text-[clamp(16px,1.1vw,18px)] font-semibold tracking-wide">
+      <i class="fas fa-cubes text-brand-400/90"></i>
+      <span class="text-slate-100 whitespace-nowrap">Asset Browser</span>
+    </div>
+
+    <!-- Right cluster: search + notifications -->
+    <div class="ml-auto flex items-center gap-3 min-w-0">
+      
+      <!-- Search Container (relative positioning for toast) -->
+      <div id="searchContainer" class="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+        
+        <!-- Search Input -->
+        <div class="relative">
+          <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[15px]"></i>
+          <input
+            id="globalSearch"
+            name="q"
+            type="search"
+            aria-label="Search assets, or shots"
+            autocomplete="off"
+            placeholder="Search assets or shots here..."
+            class="w-full h-11 pl-9 pr-4 rounded-2xl bg-slate-900/70 border border-slate-700/70
+            focus:ring-2 focus:ring-brand-500/60 focus:border-brand-500
+            text-slate-200 placeholder:text-slate-500 shadow-sm shadow-black/20"
+            hx-get="{% url 'AssetView:search_assets' %}"
+            hx-trigger="input changed delay:180ms, keyup[key=='Enter']"
+            hx-target="#searchResultsContent"
+            hx-swap="innerHTML"
+            />
+          </div>
+          
+                  <!-- Toast Container - positioned below search -->
+                  <div id="toast-container" 
+                       class="absolute top-full left-0 right-0 mt-2 z-[60] flex flex-col gap-2">
+                  </div>
+
+        <!-- Search Results Dropdown - positioned below toasts -->
+        <div id="searchResults"
+             class="absolute left-0 right-0 mt-2 max-h-[60vh] overflow-auto rounded-xl border border-slate-800
+                    bg-slate-900/95 shadow-xl scroll-panel"
+             role="listbox" 
+             aria-label="Search results">
+          <div id="searchResultsContent"></div>
+        </div>
+      </div>
+
+      <!-- Notifications (right of search) -->
+      <button
+        id="notifButton"
+        class="relative shrink-0 inline-flex items-center justify-center
+               h-10 w-10 rounded-full hover:bg-slate-800/60 transition"
+        title="Notifications"
+        aria-label="Notifications"
+      >
+        <i class="far fa-bell text-slate-200 text-lg"></i>
+        <span id="notifBadge" class="absolute -top-0.5 -right-0.5 hidden">
+          <span class="inline-block w-2.5 h-2.5 bg-brand-400 rounded-full ring-2 ring-slate-950"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+  <!-- Toast Template -->
+  <template id="toastTemplate">
+    <div class="animate-slideInDown flex items-start gap-3 px-4 py-3 
+              rounded-xl shadow-lg backdrop-blur-sm border 
+              transition-all duration-300 w-full">
+      <i class="toast-icon text-lg shrink-0 mt-0.5"></i>
+      <div class="flex-1 min-w-0">
+        <div class="toast-title font-medium text-sm"></div>
+        <div class="toast-message text-xs opacity-90 mt-0.5"></div>
+      </div>
+      <button onclick="this.closest('.toast').remove(); updateSearchResultsPosition();" 
+              class="shrink-0 hover:opacity-70 transition-opacity ml-2">
+        <i class="fas fa-times text-sm"></i>
+      </button>
+    </div>
+  </template>
+
+  <!-- ======================== MAIN CONTENT ======================== -->
+  <!-- On large screens we avoid outer scroll; inside pages can manage their panes.
+       pb-16 ensures the sticky footer never overlaps. -->
+  <main class="flex-1 min-h-0 px-3 sm:px-4 lg:px-6 py-3 sm:py-4 pb-16 overflow-y-auto lg:overflow-hidden">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="sticky bottom-0 z-50 bg-gray-950/95 backdrop-blur border-t border-brand-900/30
+                 shadow-[0_-8px_24px_-16px_rgb(0_0_0_/_0.7)] h-12">
+    <div class="w-full 2xl:max-w-[3840px] mx-auto h-full px-3 sm:px-4 lg:px-6
+                flex items-center justify-between text-[12px] text-slate-300">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-shield-alt text-sky-400/80"></i>
+        <span class="font-medium">Asset Browser</span>
+        <span class="mx-2 opacity-40">•</span>
+        <span class="tracking-wide">HaloHues Studios</span>
+      </div>
+      <div>© 2025 HaloHues Studios. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- ======================== GLOBAL SCRIPTS ======================== -->
+  <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
+  <script src="{% static 'vendor/videojs/video.min.js' %}"></script>
+
+  <!-- HTMX: subtle page-wide busy cursor -->
+  <script>
+    document.body.addEventListener('htmx:request',   () => document.body.classList.add('cursor-progress'));
+    document.body.addEventListener('htmx:afterSwap', () => document.body.classList.remove('cursor-progress'));
+    document.body.addEventListener('htmx:responseError', () => document.body.classList.remove('cursor-progress'));
+  </script>
+  <script>
+    // Toast notification system - positioned near search 
+      document.body.addEventListener('showToast', function(event) {
+    const detail = event.detail;
+    if (window.Toast && detail) {
+      const type = detail.type || 'info';
+      const title = detail.title || 'Notification';
+      const message = detail.message || '';
+      
+      window.Toast.show({
+        title: title,
+        message: message,
+        type: type,
+        duration: 4000
+      });
+    }
+  });
+    class Toast {
+      static show({title = '', message = '', type = 'info', duration = 4000}) {
+        const container = document.getElementById('toast-container');
+        const template = document.getElementById('toastTemplate');
+        const toast = template.content.cloneNode(true);
+        const toastEl = toast.querySelector('.animate-slideInDown');
+        
+        // Add toast class for easier removal
+        toastEl.classList.add('toast');
+        
+        // Set icon and color based on type
+        const icon = toastEl.querySelector('.toast-icon');
+        const titleEl = toastEl.querySelector('.toast-title');
+        const messageEl = toastEl.querySelector('.toast-message');
+        
+        titleEl.textContent = title;
+        messageEl.textContent = message;
+        
+        const types = {
+          success: {
+            icon: 'fa-check-circle',
+            bg: 'bg-emerald-900/90',
+            border: 'border-emerald-600/60',
+            text: 'text-emerald-50'
+          },
+          error: {
+            icon: 'fa-exclamation-circle',
+            bg: 'bg-rose-900/90',
+            border: 'border-rose-600/60',
+            text: 'text-rose-50'
+          },
+          warning: {
+            icon: 'fa-exclamation-triangle',
+            bg: 'bg-amber-900/90',
+            border: 'border-amber-600/60',
+            text: 'text-amber-50'
+          },
+          info: {
+            icon: 'fa-info-circle',
+            bg: 'bg-sky-900/90',
+            border: 'border-sky-600/60',
+            text: 'text-sky-50'
+          }
+        };
+        
+        const config = types[type] || types.info;
+        toastEl.classList.add(config.bg, config.border, config.text);
+        icon.classList.add(config.icon);
+        
+        container.appendChild(toast);
+        
+        // Update search results position
+        updateSearchResultsPosition();
+        
+        // Auto-remove after duration
+        setTimeout(() => {
+          if (toastEl.parentNode) {
+            toastEl.style.opacity = '0';
+            toastEl.style.transform = 'translateY(-12px)';
+            setTimeout(() => {
+              toastEl.remove();
+              updateSearchResultsPosition();
+            }, 300);
+          }
+        }, duration);
+      }
+      
+      // Helper methods
+      static success(message, title = 'Success') {
+        this.show({title, message, type: 'success'});
+      }
+      
+      static error(message, title = 'Error') {
+        this.show({title, message, type: 'error'});
+      }
+      
+      static warning(message, title = 'Warning') {
+        this.show({title, message, type: 'warning'});
+      }
+      
+      static info(message, title = 'Info') {
+        this.show({title, message, type: 'info'});
+      }
+    }
+
+    // Update search results dropdown position based on toast container height
+    function updateSearchResultsPosition() {
+      const toastContainer = document.getElementById('toast-container');
+      const searchResults = document.getElementById('searchResults');
+      
+      if (!toastContainer || !searchResults) return;
+      
+      const toastHeight = toastContainer.offsetHeight;
+      
+      if (toastHeight > 0) {
+        // Position search results below toasts (input height + gap + toast height + gap)
+        searchResults.style.top = `calc(100% + 0.5rem + ${toastHeight}px + 0.5rem)`;
+      } else {
+        // No toasts, position normally
+        searchResults.style.top = 'calc(100% + 0.5rem)';
+      }
+    }
+
+    // Make Toast globally available
+    window.Toast = Toast;
+
+    // Search dropdown UX
+    (() => {
+      const input    = document.getElementById('globalSearch');
+      const dropdown = document.getElementById('searchResults');
+      const content  = document.getElementById('searchResultsContent');
+
+      const hide = () => {
+        if (content) content.innerHTML = '';
+        dropdown?.classList.add('pointer-events-none');
+        setTimeout(() => dropdown?.classList.remove('pointer-events-none'), 120);
+      };
+
+      // Close when clicking a result (let its HTMX requests fire first)
+      dropdown?.addEventListener('click', (e) => {
+        const hit = e.target.closest('a,button,[data-search-result]');
+        if (!hit) return;
+        setTimeout(hide, 0);
+      });
+
+      // ESC to close
+      input?.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hide();
+      });
+
+      // Click outside to close
+      document.addEventListener('mousedown', (e) => {
+        if (dropdown?.contains(e.target) || input?.contains(e.target)) return;
+        hide();
+      });
+
+      // Fallback (for browsers without :has) — hide when empty.
+      const mo = new MutationObserver(() => {
+        const empty = !content?.innerHTML?.trim();
+        if (dropdown) dropdown.style.display = empty ? 'none' : '';
+        // Update position whenever content changes
+        updateSearchResultsPosition();
+      });
+      if (content) mo.observe(content, { childList: true, subtree: true });
+      
+      // Initialize search results position
+      updateSearchResultsPosition();
+    })();
+  </script>
+
+  <!-- Project Tree: persistent open/close + icon swap (works after HTMX swaps) -->
+  <script>
+  // Project Tree: persistent open/close + icon swap (works after HTMX swaps)
+(() => {
+  const TREE_SELECTOR = '#projectTree'; // root container id
+  const ACCORDION_PER_LEVEL = false;
+
+  const qs  = (sel, ctx=document) => ctx.querySelector(sel);
+  const qsa = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+  function keyFor(d) { return d?.dataset?.key || null; }
+
+  function restore(root) {
+    qsa('details[data-key]', root).forEach(d => {
+      const k = keyFor(d); if (!k) return;
+      const v = localStorage.getItem('tree:'+k);
+      if (v === '1') d.setAttribute('open','');
+      if (v === '0') d.removeAttribute('open');
+    });
+    paint(root);
+  }
+
+  function save(d) {
+    const k = keyFor(d); if (!k) return;
+    localStorage.setItem('tree:'+k, d.open ? '1' : '0');
+  }
+
+  function paint(root) {
+    // Paint all details elements, including those without data-key
+    qsa('details', root).forEach(d => {
+      const summary = qs('summary', d);
+      if (!summary) return;
+      
+      const c = qs('.folder-closed', summary);
+      const o = qs('.folder-open', summary);
+      const caret = qs('.caret', summary);
+      
+      const opened = !!d.open;
+      
+      // Toggle folder icons
+      if (c && o) {
+        if (opened) {
+          c.style.cssText = 'display: none !important';
+          o.style.cssText = 'display: inline-block !important';
+        } else {
+          c.style.cssText = 'display: inline-block !important';
+          o.style.cssText = 'display: none !important';
+        }
+      }
+      
+      // Rotate caret
+      if (caret) {
+        caret.style.transform = opened ? 'rotate(90deg)' : 'rotate(0deg)';
+        caret.style.transition = 'transform 0.2s ease';
+      }
+    });
+  }
+
+  function collapseSiblings(d) {
+    if (!ACCORDION_PER_LEVEL) return;
+    const parent = d.parentElement;
+    qsa(':scope > details', parent).forEach(x => {
+      if (x !== d) { 
+        x.removeAttribute('open'); 
+        save(x); 
+      }
+    });
+  }
+
+  function bind(root) {
+    root.addEventListener('toggle', (e) => {
+      const d = e.target;
+      if (!(d instanceof HTMLDetailsElement)) return;
+      save(d);
+      paint(root);
+      if (d.open) collapseSiblings(d);
+    }, true); // Use capture phase to catch all toggle events
+  }
+
+  function init() {
+    const root = qs(TREE_SELECTOR);
+    if (!root) return;
+    bind(root); 
+    restore(root);
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+  document.body.addEventListener('htmx:afterSwap', (e) => {
+    const t = e.detail?.target;
+    if (!t) return;
+    const tree = t.closest(TREE_SELECTOR) || qs(TREE_SELECTOR, t);
+    if (tree) restore(tree);
+  });
+})();
+  </script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

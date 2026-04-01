@@ -1,0 +1,18 @@
+<div class="p-2 rounded bg-slate-900/60 border border-slate-800">
+  <div class="text-[11px] text-slate-400 mb-1">
+    {{ m.author or "Anon" }} • {{ m.created_at|date:"Y-m-d H:i" }}
+  </div>
+  <div class="text-sm text-slate-200 whitespace-pre-wrap">{{ m.body }}</div>
+
+  <div class="mt-2 flex items-center gap-2">
+    <label class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded cursor-pointer">
+      Upload
+      <input type="file" class="hidden"
+             hx-post="{% url 'review-message-upload' m.id %}"
+             hx-encoding="multipart/form-data">
+    </label>
+    {% for a in m.attachments.all %}
+      <a class="text-[11px] underline" href="{{ a.file.url }}" target="_blank">file-{{ forloop.counter }}</a>
+    {% endfor %}
+  </div>
+</div>

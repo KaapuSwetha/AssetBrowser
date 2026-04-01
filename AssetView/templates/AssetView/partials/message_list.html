@@ -1,0 +1,15 @@
+<div class="space-y-2">
+  {% for m in t.messages.all %}
+    {% include "AssetView/review/partials/message_item.html" with m=m %}
+  {% empty %}
+    <div class="text-xs text-slate-500">No messages.</div>
+  {% endfor %}
+
+  <form class="mt-2 flex items-start gap-2"
+        hx-post="{% url 'review-thread-post' t.id %}"
+        hx-target="#messages-{{ t.id }}" hx-swap="beforeend">
+    {% csrf_token %}
+    <textarea name="body" rows="2" required class="flex-1 text-xs bg-slate-800/60 border border-slate-700 rounded p-2" placeholder="Reply…"></textarea>
+    <button class="px-2 py-1 text-xs rounded bg-slate-800 hover:bg-slate-700">Post</button>
+  </form>
+</div>

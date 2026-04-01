@@ -1,0 +1,16 @@
+<div class="p-2 {% if active %}bg-slate-900/70{% endif %}">
+  <div class="flex items-center justify-between">
+    <div class="text-xs text-slate-300">
+      <span class="opacity-70">#{{ t.id }}</span>
+      {% if t.at_frame %} • frame {{ t.at_frame }}{% endif %}
+      {% if t.at_time %} • {{ t.at_time|floatformat:2 }}s{% endif %}
+    </div>
+    <button class="text-[11px] px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700"
+            hx-get="{% url 'review-thread-messages' t.id %}"
+            hx-target="#messages-{{ t.id }}" hx-swap="innerHTML">Open</button>
+  </div>
+
+  <div id="messages-{{ t.id }}" class="mt-2 text-[13px] leading-5">
+    {% include "AssetView/review/partials/message_list.html" with t=t %}
+  </div>
+</div>

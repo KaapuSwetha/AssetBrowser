@@ -1,0 +1,26 @@
+<div id="reviewSidebar" class="bg-gray-900/70 border border-gray-800 rounded-2xl p-3 w-[340px] flex flex-col gap-3">
+  <!-- Status -->
+  <div id="statusPanel" hx-get="{% url 'review-version-status' version_id %}" hx-trigger="load" class="min-h-[48px]"></div>
+
+  <!-- New note -->
+  <form id="newThreadForm"
+        hx-post="{% url 'review-thread-create' %}"
+        hx-target="#threadList" hx-swap="afterbegin"
+        class="bg-gray-900/60 border border-gray-800 rounded-xl p-2 flex flex-col gap-2">
+    {% csrf_token %}
+    <input type="hidden" name="version_id" value="{{ version_id }}">
+    <input type="hidden" name="media_id" value="{{ media_id }}">
+    <input type="hidden" name="frame" value="{{ frame_or_time.frame }}">
+    <input type="hidden" name="time"  value="{{ frame_or_time.time }}">
+    <textarea name="body" rows="2" class="w-full text-xs bg-slate-800/60 border border-slate-700 rounded p-2" placeholder="New note…"></textarea>
+    <div class="flex justify-end">
+      <button class="px-3 py-1 text-xs rounded bg-slate-800 hover:bg-slate-700">Add Note</button>
+    </div>
+  </form>
+
+  <!-- Threads -->
+  <div id="threadList"
+       hx-get="{% url 'review-threads-version' version_id %}"
+       hx-trigger="load"
+       class="flex-1 overflow-y-auto min-h-[200px] rounded-xl border border-slate-800/60"></div>
+</div>

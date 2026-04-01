@@ -1,0 +1,96 @@
+{# AssetView/partials/compare_panel.html #}
+<div id="comparePanel" class="bg-slate-900/50 border border-slate-800 rounded-xl p-3 space-y-3">
+  <div class="flex items-center gap-2 text-xs">
+    <span class="uppercase tracking-widest text-slate-300">Compare</span>
+    <a href="#" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700"
+       hx-get="{% url 'review-compare' %}?a={{ request.GET.a }}&b={{ request.GET.b }}&mode=side"
+       hx-target="#comparePanel" hx-swap="outerHTML">Side-by-side</a>
+    <a href="#" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700"
+       hx-get="{% url 'review-compare' %}?a={{ request.GET.a }}&b={{ request.GET.b }}&mode=overlay"
+       hx-target="#comparePanel" hx-swap="outerHTML">Overlay</a>
+    <a href="#" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700"
+       hx-get="{% url 'review-compare' %}?a={{ request.GET.a }}&b={{ request.GET.b }}&mode=diff"
+       hx-target="#comparePanel" hx-swap="outerHTML">Difference</a>
+  </div>
+
+  {% if mode == 'side' %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="border border-slate-800 rounded-xl p-2">
+        {% include "AssetView/partials/_preview.html" with media_json=a_json %}
+      </div>
+      <div class="border border-slate-800 rounded-xl p-2">
+        {% include "AssetView/partials/_preview.html" with media_json=b_json %}
+      </div>
+    </div>
+  {% elif mode == 'overlay' %}
+    <div class="relative rounded-xl border border-slate-800 overflow-hidden">
+      <div id="overlayA" class="relative z-0">
+        {% include "AssetView/partials/_preview.html" with media_json=a_json %}
+      </div>
+      <div id="overlayB" class="absolute inset-0 z-10" style="opacity:0.5; pointer-events:none;">
+        {% include "AssetView/partials/_preview.html" with media_json=b_json %}
+      </div>
+      <div class="p-2 border-t border-slate-800 bg-slate-900/60">
+        <input id="overlaySlider" type="range" min="0" max="100" value="50" class="w-full">
+      </div>
+    </div>
+    <script>
+      (function(){
+        const b = document.getElementById('overlayB');
+        const s = document.getElementById('overlaySlider');
+        if (b && s) s.addEventListener('input', ()=> b.style.opacity = (s.value/100));
+      })();
+    </script>
+  {% else %}
+    <div id="diffWrap" class="rounded-xl border border-slate-800 overflow-hidden">
+      <canvas id="diffCanvas" class="w-full h-[60vh] block bg-black"></canvas>
+      <div class="p-2 border-t border-slate-800 bg-slate-900/60 text-xs text-slate-300">Difference view</div>
+    </div>
+    <script>
+      (async function(){
+        // Simple diff for images or paused frames if video; expects <img> in the preview branches.
+        function pickImg(root){ return root.querySelector('img') || root.querySelector('video'); }
+        const root = document.getElementById('comparePanel');
+        const ca = root.querySelector('#overlayA') || root; // when mode switched from overlay
+        const cb = root.querySelector('#overlayB') || root;
+        const a = pickImg(ca);
+        const b = pickImg(cb);
+        const cvs = root.querySelector('#diffCanvas');
+        if (!(a && b && cvs)) return;
+
+        const ctx = cvs.getContext('2d');
+        function resize(){
+          const r = cvs.getBoundingClientRect();
+          cvs.width = Math.max(16, Math.floor(r.width));
+          cvs.height = Math.max(16, Math.floor(r.height));
+        }
+        new ResizeObserver(resize).observe(cvs); resize();
+
+        function drawDiff(){
+          try{
+            // Draw both into offscreen canvases
+            const w = cvs.width, h = cvs.height;
+            const ta = document.createElement('canvas'), tb = document.createElement('canvas');
+            ta.width = tb.width = w; ta.height = tb.height = h;
+            const xa = ta.getContext('2d'), xb = tb.getContext('2d');
+            xa.drawImage(a, 0, 0, w, h);
+            xb.drawImage(b, 0, 0, w, h);
+            const ia = xa.getImageData(0,0,w,h), ib = xb.getImageData(0,0,w,h);
+            const out = ctx.createImageData(w, h);
+            for (let i=0;i<ia.data.length;i+=4){
+              out.data[i]   = Math.abs(ia.data[i]  - ib.data[i]);
+              out.data[i+1] = Math.abs(ia.data[i+1]- ib.data[i+1]);
+              out.data[i+2] = Math.abs(ia.data[i+2]- ib.data[i+2]);
+              out.data[i+3] = 255;
+            }
+            ctx.putImageData(out,0,0);
+          }catch(e){}
+        }
+
+        (a.tagName === 'VIDEO') ? a.addEventListener('pause', drawDiff) : a.addEventListener('load', drawDiff);
+        (b.tagName === 'VIDEO') ? b.addEventListener('pause', drawDiff) : b.addEventListener('load', drawDiff);
+        drawDiff();
+      })();
+    </script>
+  {% endif %}
+</div>

@@ -1,0 +1,85 @@
+{% load departments %}
+
+<div class="tree-guide space-y-1">
+  <details class="group ml-1" data-key="cat:{{ project }}:{{ category }}">
+    <summary class="tree-row">
+      <i class="fa-solid fa-caret-right caret text-slate-400"></i>
+      <i class="fa-regular fa-folder folder-closed ic-folder"></i>
+      <i class="fa-regular fa-folder-open folder-open ic-folder-open"></i>
+      <span class="font-medium truncate">{{ category }}</span>
+    </summary>
+
+    <div class="tree-guide space-y-1">
+      {% if depts %}
+        {% for d in depts %}
+          {% with dept_name=d.name %}
+            {% regroup d.items by asset as asset_list %}
+            
+            <details class="group ml-1" data-key="dept:{{ project }}:{{ category }}:{{ dept_name }}">
+              <summary class="tree-row">
+                <i class="fa-solid fa-caret-right caret text-slate-400"></i>
+                <i class="fa-regular fa-folder folder-closed ic-dept"></i>
+                <i class="fa-regular fa-folder-open folder-open ic-dept"></i>
+                <span class="truncate">{{ dept_name }}</span>
+
+                <span
+                  class="ml-1 rounded-full border text-xs px-2 py-0.5 {{ dept_name|dept_badge_cls }}"
+                  title="{{ asset_list|length }} assets in {{ dept_name }}"
+                  aria-label="{{ asset_list|length }} assets in {{ dept_name }}"
+                >
+                  {{ asset_list|length }} assets
+                </span>
+              </summary>
+
+              <div class="tree-guide">
+                {% for asset_group in asset_list %}
+                  <details class="group ml-1">
+                    <summary class="tree-row">
+                      <i class="fa-solid fa-caret-right caret text-slate-400"></i>
+                      <i class="fa-regular fa-folder folder-closed ic-folder"></i>
+                      <i class="fa-regular fa-folder-open folder-open ic-folder-open"></i>
+                      <span class="truncate">{{ asset_group.grouper }}</span>
+                    </summary>
+
+                    <div class="tree-guide ml-4">
+                      {% regroup asset_group.list by variant as variant_list %}
+                      {% for variant_group in variant_list %}
+                        {% with variant_item=variant_group.list.0 %}
+                          <div class="py-1">
+                            <a
+                              class="inline-flex items-center gap-2 text-slate-200 hover:underline"
+                              hx-get="{% url 'AssetView:get_asset_versions' %}?path={{ variant_item.path|urlencode }}&name={{ variant_item.asset|urlencode }}&variant={{ variant_item.variant|urlencode }}&mode={{ variant_item.mode|urlencode }}"
+                              hx-target="#versionsTable"
+                              hx-swap="innerHTML"
+                              hx-on:click="
+                                htmx.ajax(
+                                  'GET',
+                                  '{% url 'AssetView:get_file_metadata' %}?path={{ variant_item.path|urlencode }}&name={{ variant_item.asset|urlencode }}&variant={{ variant_item.variant|urlencode }}&mode={{ variant_item.mode|urlencode }}',
+                                  { target:'#metadataCard', swap:'outerHTML' }
+                                );
+                              "
+                            >
+                              <i class="fa-regular fa-file-lines ic-file"></i>
+                              <span class="truncate">{{ variant_item.variant }}</span>
+                              {% if variant_group.list|length > 1 %}
+                                <span class="text-xs text-slate-400 ml-1">
+                                  ({{ variant_group.list|length }} versions)
+                                </span>
+                              {% endif %}
+                            </a>
+                          </div>
+                        {% endwith %}
+                      {% endfor %}
+                    </div>
+                  </details>
+                {% endfor %}
+              </div>
+            </details>
+          {% endwith %}
+        {% endfor %}
+      {% else %}
+        <div class="text-slate-500 italic pl-2 py-1">No departments</div>
+      {% endif %}
+    </div>
+  </details>
+</div>

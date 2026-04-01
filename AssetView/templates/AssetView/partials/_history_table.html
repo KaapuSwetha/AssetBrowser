@@ -1,0 +1,394 @@
+{# AssetView/templates/AssetView/partials/_history_table.html #}
+
+{% if history %}
+<div class="history-panel">
+  <div class="history-scroll">
+    <table class="history-table" id="historyTable">
+      <thead>
+        <tr class="history-thead-row">
+          <th class="history-th resizable" style="width:40%" data-col="0">
+            <span class="th-label">Summary</span>
+            <div class="col-resizer" data-col="0"></div>
+          </th>
+          <th class="history-th history-th--nowrap resizable" style="width:15%" data-col="1">
+            <span class="th-label">User</span>
+            <div class="col-resizer" data-col="1"></div>
+          </th>
+          <th class="history-th history-th--nowrap resizable" style="width:15%" data-col="2">
+            <span class="th-label">Date</span>
+            <div class="col-resizer" data-col="2"></div>
+          </th>
+          <th class="history-th resizable" style="width:20%" data-col="3">
+            <span class="th-label">Comment</span>
+            <div class="col-resizer" data-col="3"></div>
+          </th>
+          <th class="history-th history-th--nowrap" style="width:15%" data-col="4">
+            <span class="th-label">Asset ID</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in history reversed %}
+
+        <tr class="history-row {% if forloop.first %}history-row--latest{% endif %}">
+          {# Summary #}
+          <td class="history-td">
+            <span class="font-semibold text-white">{{ entry.username }}</span>
+            <span class="history-muted"> changed status from </span>
+
+            {% if entry.previous_status %}
+              <span class="history-badge {{ entry.previous_status|slugify }}">{{ entry.previous_status }}</span>
+            {% else %}
+              <span class="history-none">none</span>
+            {% endif %}
+
+            <span class="history-muted"> to </span>
+            <span class="history-badge {{ entry.new_status|slugify }}">{{ entry.new_status }}</span>
+            <span class="history-muted"> : added comment</span>
+            {% if entry.comment %}
+              <span class="history-comment-inline" title="{{ entry.comment }}"> {{ entry.comment }}</span>
+            {% endif %}
+          </td>
+
+          {# Username #}
+          <td class="history-td history-td--nowrap">
+            <div class="flex items-center gap-2">
+              <i class="fas fa-user text-slate-400 text-[9px]"></i>
+              <span class="text-white font-semibold">{{ entry.username }}</span>
+            </div>
+          </td>
+
+          {# Timestamp #}
+          <td class="history-td history-td--nowrap history-td--mono">
+            <span title="{{ entry.timestamp }}">
+              {{ entry.timestamp|slice:":10" }}<span class="history-time">{{ entry.timestamp|slice:"10:16" }}</span>
+            </span>
+          </td>
+
+          {# Comment #}
+          <td class="history-td history-td--truncate">
+            {% if entry.comment %}
+              <span class="history-comment-cell" title="{{ entry.comment }}">{{ entry.comment }}</span>
+            {% else %}
+              <span class="history-empty">—</span>
+            {% endif %}
+          </td>
+
+          {# Asset ID #}
+          <td class="history-td history-td--nowrap history-td--mono">
+            {{ entry.asset_id|default:"—" }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  /* ── Layout ─────────────────────────────────────────────────────────── */
+  .history-panel {
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .history-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 260px;
+    transition: max-height 0.25s ease;
+  }
+  .history-scroll.history-collapsed { max-height: 0; overflow: hidden; }
+
+  .status-history-modal__body .history-scroll {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  /* ── Table ───────────────────────────────────────────────────────────── */
+  .history-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .history-thead-row {
+    border-bottom: 1px solid rgba(100,116,139,0.5);
+    background: #1e293b;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .history-th {
+    padding: 8px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #cbd5e1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    user-select: none;
+  }
+  .history-th--nowrap { white-space: nowrap; }
+
+  /* Drag-over highlight */
+  .history-th.drag-over {
+    background: rgba(14,116,144,0.25);
+  }
+  .history-th.dragging {
+    opacity: 0.45;
+  }
+
+  /* Column resize handle */
+  .col-resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    cursor: col-resize;
+    z-index: 2;
+  }
+  .col-resizer::after {
+    content: '';
+    position: absolute;
+    right: 1px;
+    top: 20%;
+    height: 60%;
+    width: 2px;
+    background: rgba(100,116,139,0.4);
+    border-radius: 2px;
+    transition: background 0.15s;
+  }
+  .col-resizer:hover::after,
+  .col-resizer.resizing::after {
+    background: #38bdf8;
+  }
+
+  /* Drag handle cursor on th label */
+  .history-th .th-label {
+    cursor: grab;
+    display: inline-block;
+  }
+  .history-th .th-label:active {
+    cursor: grabbing;
+  }
+
+  .history-row {
+    border-bottom: 1px solid rgba(51,65,85,0.5);
+    transition: background 0.12s;
+  }
+  .history-row:hover { background: rgba(51,65,85,0.3); }
+  .history-row--latest { background: rgba(14,116,144,0.1); }
+
+  .history-td {
+    padding: 8px 16px;
+    color: #cbd5e1;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .history-td--nowrap  { white-space: nowrap; }
+  .history-td--mono    { font-family: ui-monospace, monospace; color: #e2e8f0; }
+  .history-td--truncate { max-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ── Inline text helpers ─────────────────────────────────────────────── */
+  .history-muted         { color: #94a3b8; }
+  .history-none          { color: #64748b; font-style: italic; }
+  .history-comment-inline{ color: #e2e8f0; font-style: italic; }
+  .history-comment-cell  { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-style: italic; }
+  .history-empty         { color: #475569; }
+  .history-time          { color: #64748b; }
+
+  /* ── Badges ──────────────────────────────────────────────────────────── */
+  .history-badge {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    line-height: 1.6;
+    vertical-align: middle;
+  }
+  .history-badge.internal-approved  { background:#059669; color:#fff; }
+  .history-badge.internal-review    { background:#f59e0b; color:#000; }
+  .history-badge.internal-retake    { background:#ef4444; color:#fff; }
+  .history-badge.client-approved    { background:#065f46; color:#e2e8f0; }
+  .history-badge.client-review      { background:#d97706; color:#000; }
+  .history-badge.client-retake      { background:#dc2626; color:#fff; }
+  .history-badge.work-in-progress   { background:#0284c7; color:#fff; }
+  .history-badge.no-status          { background:#475569; color:#e2e8f0; }
+
+  /* ── Scrollbar ───────────────────────────────────────────────────────── */
+  .history-scroll::-webkit-scrollbar        { width: 4px; height: 4px; }
+  .history-scroll::-webkit-scrollbar-track  { background: transparent; }
+  .history-scroll::-webkit-scrollbar-thumb  { background: #334155; border-radius: 2px; }
+
+  /* ── Drag ghost ──────────────────────────────────────────────────────── */
+  .col-drag-ghost {
+    position: fixed;
+    pointer-events: none;
+    background: #1e293b;
+    border: 1px solid #38bdf8;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #38bdf8;
+    z-index: 9999;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    transform: translate(-50%, -50%);
+  }
+</style>
+
+<script>
+(function () {
+  const table = document.getElementById('historyTable');
+  if (!table) return;
+
+  /* ── Column Reorder ──────────────────────────────────────────────────── */
+  let dragSrcIdx = null;
+  let ghost = null;
+
+  function getColIndex(th) {
+    return Array.from(th.parentElement.children).indexOf(th);
+  }
+
+  function moveColumn(from, to) {
+    if (from === to) return;
+    const rows = table.rows;
+    for (let r = 0; r < rows.length; r++) {
+      const cells = rows[r].cells;
+      if (from >= cells.length || to >= cells.length) continue;
+      const moving = cells[from];
+      const ref    = cells[to];
+      if (from < to) {
+        ref.after(moving);
+      } else {
+        ref.before(moving);
+      }
+    }
+  }
+
+  function createGhost(label) {
+    ghost = document.createElement('div');
+    ghost.className = 'col-drag-ghost';
+    ghost.textContent = label;
+    document.body.appendChild(ghost);
+  }
+
+  function updateGhost(x, y) {
+    if (ghost) { ghost.style.left = x + 'px'; ghost.style.top = y + 'px'; }
+  }
+
+  function removeGhost() {
+    if (ghost) { ghost.remove(); ghost = null; }
+  }
+
+  // Attach drag listeners to th labels
+  const ths = table.querySelectorAll('thead .history-th');
+  ths.forEach(th => {
+    const label = th.querySelector('.th-label');
+    if (!label) return;
+
+    label.addEventListener('mousedown', e => {
+      // Don't trigger if clicking on resizer
+      if (e.target.classList.contains('col-resizer')) return;
+      e.preventDefault();
+      dragSrcIdx = getColIndex(th);
+      th.classList.add('dragging');
+      createGhost(label.textContent.trim());
+      updateGhost(e.clientX, e.clientY);
+
+      function onMove(e) {
+        updateGhost(e.clientX, e.clientY);
+        // Highlight target th
+        ths.forEach(t => t.classList.remove('drag-over'));
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        const targetTh = el ? el.closest('.history-th') : null;
+        if (targetTh && targetTh !== th) targetTh.classList.add('drag-over');
+      }
+
+      function onUp(e) {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        removeGhost();
+        th.classList.remove('dragging');
+
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        const targetTh = el ? el.closest('.history-th') : null;
+        ths.forEach(t => t.classList.remove('drag-over'));
+
+        if (targetTh && targetTh !== th) {
+          const toIdx = getColIndex(targetTh);
+          moveColumn(dragSrcIdx, toIdx);
+        }
+        dragSrcIdx = null;
+      }
+
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+  });
+
+  /* ── Column Resize ───────────────────────────────────────────────────── */
+  table.querySelectorAll('.col-resizer').forEach(handle => {
+    handle.addEventListener('mousedown', e => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const th = handle.closest('th');
+      const startX = e.clientX;
+      const startW = th.offsetWidth;
+      handle.classList.add('resizing');
+
+      function onMove(e) {
+        const newW = Math.max(60, startW + e.clientX - startX);
+        th.style.width = newW + 'px';
+      }
+
+      function onUp() {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        handle.classList.remove('resizing');
+      }
+
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+  });
+
+})();
+</script>
+
+{% else %}
+<div class="history-empty-state">
+  <i class="fas fa-history"></i>
+  <span>No status history yet.</span>
+</div>
+<style>
+  .history-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 40px;
+    color: #475569;
+    font-size: 13px;
+    font-style: italic;
+  }
+</style>
+{% endif %}

@@ -1,0 +1,7 @@
+<div class="divide-y divide-slate-800">
+  {% for t in threads %}
+    {% include "AssetView/review/partials/thread_item.html" with t=t active=forloop.first %}
+  {% empty %}
+    <div class="p-3 text-xs text-slate-400">No notes yet.</div>
+  {% endfor %}
+</div>

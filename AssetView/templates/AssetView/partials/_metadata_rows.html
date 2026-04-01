@@ -1,0 +1,71 @@
+{# templates/AssetView/partials/_metadata_rows.html #}
+<div id="metadataCard" class="bg-gray-900/60 border border-gray-800 rounded-xl shadow-lg flex-1 min-h-0 flex flex-col overflow-hidden">
+  <div class="px-4 py-3 border-b border-gray-800 flex items-center gap-2 font-semibold text-xs uppercase tracking-wider text-slate-300">
+    <i class="fas fa-info-circle text-indigo-400/90"></i>
+    <span>Metadata</span>
+  </div>
+  <div class="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900/50 scrollbar-thumb-rounded p-4">
+    <table class="w-full text-left text-sm divide-y divide-gray-800">
+      <tbody class="divide-y divide-gray-800" id="metadataBody">
+        {% if meta %}
+          {% for key, val in meta.items %}
+            {# -------- STATUS row (icon + colored badge), with fallback -------- #}
+            {% if key == "Status" %}
+              <tr class="divide-x divide-gray-800 align-top">
+                <td class="py-2 px-2 w-1/3 text-slate-400">Status</td>
+                <td class="py-2 px-2">
+                  {% if status_badge %}
+                    <span class="ml-2 inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium {{ status_badge.cls }} shadow-sm align-middle">
+                      <i class="fas {{ status_badge.icon }}"></i>
+                      <span>{{ status_badge.text }}</span>
+                    </span>
+                  {% else %}
+                    <span class="whitespace-nowrap text-slate-200">{{ val }}</span>
+                    <span class="ml-2 inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium bg-slate-600 text-white shadow-sm">
+                      <i class="fas fa-question-circle"></i>
+                      <span>{{ val|default:"Unknown" }}</span>
+                    </span>
+                  {% endif %}
+                </td>
+              </tr>
+            {# -------- DATE row (icon + colored age badge), with fallback -------- #}
+            {% elif key == "Date" %}
+              <tr class="divide-x divide-gray-800 align-top">
+                <td class="py-2 px-2 w-1/3 text-slate-400">Date</td>
+                <td class="py-2 px-2">
+                  {% if date_badge %}
+                    <span
+                      class="ml-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-semibold {{ date_badge.badge_class }} shadow-lg"
+                      title="{{ date_badge.title }}">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span>{{ date_badge.text }}</span>
+                    </span>
+                  {% else %}
+                    <span class="text-slate-200 whitespace-pre-wrap break-words">
+                      <i class="fas fa-calendar-alt text-slate-400 mr-1"></i>{{ val|default:"—" }}
+                    </span>
+                  {% endif %}
+                </td>
+              </tr>
+            {# -------- default rows -------- #}
+            {% else %}
+              {# -------- EXCLUDE Variants key from display (variant support) -------- #}
+              {% if key != "Variants" and key != "History" %}
+                <tr class="divide-x divide-gray-800 align-top">
+                  <td class="py-2 px-2 w-1/3 text-slate-400">{{ key }}</td>
+                  <td class="py-2 px-2">
+                    <span class="text-slate-200 whitespace-pre-wrap break-words">{{ val }}</span>
+                  </td>
+                </tr>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="2" class="py-6 text-center text-slate-400">No selection</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>

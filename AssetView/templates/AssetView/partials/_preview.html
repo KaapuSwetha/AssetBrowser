@@ -1,0 +1,267 @@
+{% load static %}
+<div id="previewCard"
+     class="preview-card-container"
+     hx-target="this"
+     hx-swap="outerHTML"
+     data-json-path="{{ path }}">
+
+  <!-- ── Tab Header ──────────────────────────────────────────────────────── -->
+  <div class="card-header" style="padding:0 !important;gap:0;border-bottom:1px solid #1f2937;">
+    <button id="tabPreview" onclick="switchPreviewTab('preview')" class="preview-tab-btn active"
+      style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+             padding:0.55rem 0.875rem;font-size:0.6875rem;font-weight:600;
+             text-transform:uppercase;letter-spacing:0.075em;
+             color:#cbd5e1;background:transparent;border:none;cursor:pointer;
+             border-bottom:2px solid #cbd5e1;transition:all 0.2s;">
+      <i class="fas fa-eye" style="color:#eb78eb"></i><span>Preview</span>
+    </button>
+    <div style="width:1px;background:#1f2937;flex-shrink:0;"></div>
+    <button id="tabHistory" onclick="switchPreviewTab('history')" class="preview-tab-btn"
+      style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+             padding:0.55rem 0.875rem;font-size:0.6875rem;font-weight:600;
+             text-transform:uppercase;letter-spacing:0.075em;
+             color:#cbd5e1;background:transparent;border:none;cursor:pointer;
+             border-bottom:2px solid transparent;transition:all 0.2s;">
+      <i class="fas fa-clock-rotate-left" style="color:#38bdf8;"></i><span>History</span>
+      {% if feedback_files %}
+        <span class="history-tab-badge">{{ feedback_files|length }}</span>
+      {% endif %}
+    </button>
+  </div>
+
+  <!-- ── Preview Panel ───────────────────────────────────────────────────── -->
+  <div id="panelPreview" class="preview-content-wrapper" style="display:flex;">
+    {% if media %}
+      {% if media.type == 'video' %}
+        <div class="media-container video-media">
+          <video id="pvVideo"
+                 class="video-js vjs-default-skin vjs-big-play-centered video-preview"
+                 controls
+                 data-original-path="{{ preview_file_path|default:media.original_path }}"
+                 data-asset-name="{{ name }}"
+                 data-variant="{{ variant|default:'' }}"
+                 data-mode="{{ data_type }}"
+                 data-status="{{ current_status|default:'No Status' }}"
+                 data-json-path="{{ path }}"
+                 preload="metadata" playsinline webkit-playsinline>
+            <source src="{{ media.src }}" type="{{ media.mime_type|default:'video/mp4' }}"/>
+            {% if media.formats %}{% for format in media.formats %}
+              <source src="{{ format.src }}" type="{{ format.type }}"/>
+            {% endfor %}{% endif %}
+          </video>
+        </div>
+
+      {% elif media.type == 'audio' %}
+        <div class="media-container audio-media">
+          <div class="audio-wrapper">
+            <div class="audio-header">
+              <i class="fas fa-music text-fuchsia-400 text-2xl"></i>
+              <span class="audio-title">{{ media.name|default:'Audio File' }}</span>
+            </div>
+            <audio controls class="audio-player">
+              <source src="{{ media.src }}" type="{{ media.mime_type|default:'audio/mpeg' }}"/>
+            </audio>
+          </div>
+        </div>
+
+      {% elif media.type == 'image' %}
+        <div class="media-container image-media">
+          <img id="pvImage" src="{{ media.src }}"
+               data-original-path="{{ media.original_path }}"
+               data-asset-name="{{ name }}" data-variant="{{ variant|default:'' }}"
+               data-mode="{{ data_type }}" data-status="{{ current_status|default:'No Status' }}"
+               data-json-path="{{ path }}" alt="Preview" class="image-preview"
+               title="Click to view fullscreen" onclick="window.openFullscreen(this)"/>
+        </div>
+
+      {% elif media.type == 'pdf' or media.type == 'document' %}
+        <div class="media-container document-media">
+          <iframe src="{{ media.src }}"
+                  data-original-path="{{ media.original_path }}"
+                  data-asset-name="{{ name }}" data-variant="{{ variant|default:'' }}"
+                  data-mode="{{ data_type }}" data-status="{{ current_status|default:'No Status' }}"
+                  data-json-path="{{ path }}" class="document-preview" id="pvDocument"
+                  onclick="window.openFullscreen(this)" title="Click to view fullscreen"></iframe>
+        </div>
+
+      {% elif media.type == 'embed' %}
+        <div class="media-container embed-media">
+          <iframe src="{{ media.src }}" data-original-path="{{ media.original_path }}"
+                  class="embed-preview" id="pvEmbed"></iframe>
+        </div>
+
+      {% else %}
+        <div class="media-container generic-media">
+          <div class="generic-file-wrapper">
+            <i class="fas fa-file text-5xl text-slate-600 mb-4"></i>
+            <h3 class="text-slate-300 font-medium text-lg mb-2">{{ media.name|default:'Media File' }}</h3>
+            <a href="{{ media.src }}" target="_blank" download class="file-download-button">
+              <i class="fas fa-external-link-alt mr-2"></i><span>Open File</span>
+            </a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <div class="media-container empty-media">
+        <div class="empty-state">
+          <i class="fas fa-photo-video text-5xl text-slate-600 mb-3"></i>
+          <p class="text-slate-400 text-lg">Select an item to preview</p>
+          <p class="text-slate-500 text-sm mt-1">Choose an asset or shot from the list</p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- ── History Panel ───────────────────────────────────────────────────── -->
+  <div id="panelHistory" class="history-section" style="display:none;align-items:flex-start;overflow-y:auto;height:100%;">
+
+    {% if feedback_files %}
+      <div style="
+        display: grid;
+        grid-template-columns: {% if feedback_files|length == 1 %}1fr{% else %}repeat(3, 1fr){% endif %};
+        grid-template-rows: {% if feedback_files|length == 1 %}1fr{% else %}auto{% endif %};
+        gap: 6px;
+        width: 100%;
+        height: {% if feedback_files|length == 1 %}100%{% else %}auto{% endif %};
+        box-sizing: border-box;
+        align-content: start;
+      ">
+        {% for fb in feedback_files %}
+
+          {% if fb.type == 'image' %}
+          <div
+            onclick="window.openFullscreen(this.querySelector('img'))"
+            title="Click to view fullscreen"
+            style="
+              position: relative;
+              {% if feedback_files|length == 1 %}height: 100%;{% else %}aspect-ratio: 16/9;{% endif %}
+              background: #000;
+              border-radius: 6px;
+              overflow: hidden;
+              cursor: pointer;
+              border: 1px solid rgba(255,255,255,0.08);
+              transition: border-color 0.2s, box-shadow 0.2s;
+            ">
+            <img src="{{ fb.src }}"
+                 alt="{{ fb.name }}"
+                 data-original-path="{{ fb.path }}"
+                 data-asset-name="{{ name }}"
+                 data-variant="{{ variant|default:'' }}"
+                 data-mode="{{ data_type }}"
+                 data-status="{{ current_status|default:'No Status' }}"
+                 data-json-path="{{ path }}"
+                 loading="lazy"
+                 class="image-preview"
+                 style="height:100% !important"
+            >
+            <div style="
+              position:absolute;inset:0;
+              display:flex;align-items:center;justify-content:center;
+              background:rgba(0,0,0,0);
+              transition:background 0.2s;
+            "
+              onmouseover="this.style.background='rgba(0,0,0,0.4)';this.querySelector('i').style.opacity='1'"
+              onmouseout="this.style.background='rgba(0,0,0,0)';this.querySelector('i').style.opacity='0'">
+              <i class="fas fa-expand" style="color:#fff;font-size:16px;opacity:0;transition:opacity 0.2s;pointer-events:none;"></i>
+            </div>
+          </div>
+
+          {% elif fb.type == 'video' %}
+          <div style="
+            position: relative;
+            {% if feedback_files|length == 1 %}height: 100%;{% else %}aspect-ratio: 16/9;{% endif %}
+            background: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+          ">
+            <video
+              controls
+              preload="metadata"
+              playsinline
+              webkit-playsinline
+              data-original-path="{{ fb.path }}"
+              data-asset-name="{{ name }}"
+              data-variant="{{ variant|default:'' }}"
+              data-mode="{{ data_type }}"
+              data-status="{{ current_status|default:'No Status' }}"
+              data-json-path="{{ path }}"
+              style="width:100%;height:100%;display:block;">
+              <source src="{{ fb.src }}" type="video/mp4"/>
+            </video>
+          </div>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <div class="media-container empty-media">
+        <div class="empty-state">
+          <i class="fas fa-clock-rotate-left" style="font-size:2rem;margin-bottom:12px;opacity:0.4;"></i>
+          <p>No History Yet</p>
+        </div>
+      </div>
+    {% endif %}
+
+  </div><!-- /#panelHistory -->
+
+</div><!-- /#previewCard -->
+
+<!-- ── Annotation tools + modals (outside #previewCard) ─────────────────── -->
+<div id="fullscreenAnnotationTools" class="hidden" style="display:none !important;">
+  {% if can_annotate %}
+  <div class="annotation-tools-overlay">
+    <button data-tool="pen"  class="tooltip-btn" title="Draw"><i class="fas fa-pen"></i></button>
+    <button data-tool="rect" class="tooltip-btn" title="Rectangle"><i class="fas fa-square"></i></button>
+    <button data-tool="text" class="tooltip-btn" title="Add Note"><i class="fas fa-sticky-note"></i></button>
+    <div class="divider"></div>
+    <div class="color-picker-container">
+      <input type="color" id="fsColorPicker" value="#f472b6" title="Choose color"/>
+      <div id="colorPreview" title="Current color"></div>
+    </div>
+    <div class="divider"></div>
+    <button id="fsAnnoSave"  class="tooltip-btn" title="Save Annotation"><i class="fas fa-download"></i></button>
+    <button id="fsAnnoClear" class="tooltip-btn" title="Clear All"><i class="fas fa-trash"></i></button>
+  </div>
+  {% endif %}
+</div>
+
+<div id="textInputModal" class="hidden">
+  <div class="text-modal-content">
+    <h3><i class="fas fa-sticky-note text-fuchsia-400"></i> Add Note</h3>
+    {% if current_status %}
+    <div class="status-selector mb-3">
+      <label class="text-sm text-slate-400 mb-1 block">Status</label>
+      <select id="noteStatusSelect" class="w-full bg-gray-800 text-white border border-gray-700 rounded-lg px-3 py-2 text-sm">
+        {% for status in all_status %}
+          <option value="{{ status.text }}" {% if status.text == current_status %}selected{% endif %}>{{ status.text }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endif %}
+    <textarea id="textInputArea" placeholder="Type your note here..."></textarea>
+    <div class="modal-buttons">
+      <button id="textInputConfirm"><i class="fas fa-check"></i> Add Note</button>
+      <button id="textInputCancel"><i class="fas fa-times"></i> Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchPreviewTab(tab) {
+  const isPreview = tab === 'preview';
+  document.getElementById('panelPreview').style.display = isPreview ? 'flex' : 'none';
+  document.getElementById('panelHistory').style.display = isPreview ? 'none'  : 'flex';
+  const btnPreview = document.getElementById('tabPreview');
+  const btnHistory = document.getElementById('tabHistory');
+  btnPreview.style.borderBottom = isPreview ? '2px solid #cbd5e1' : '2px solid transparent';
+  btnHistory.style.borderBottom = isPreview ? '2px solid transparent' : '2px solid #cbd5e1';
+}
+</script>
+
+<link rel="stylesheet" href="{% static 'css/dist/shared_fullscreen.css' %}">
+<link rel="stylesheet" href="{% static 'css/dist/preview_card.css' %}">
+<script src="{% static 'js/review/video_controls_common.js' %}"></script>
+<script src="{% static 'js/review/preview_annotator.js' %}"></script>

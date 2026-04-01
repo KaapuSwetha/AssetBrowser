@@ -1,0 +1,264 @@
+{# AssetView/partials/_sequence_branch.html #}
+
+<details class="group" data-key="seq:{{ project }}-{{ seq }}">
+    <summary class="tree-row seq-summary"
+             data-project="{{ project }}"
+             data-seq-name="{{ seq }}">
+        <i class="fa-solid fa-caret-right caret text-slate-400"></i>
+        <i class="fa-regular fa-folder folder-closed ic-sequence"></i>
+        <i class="fa-regular fa-folder-open folder-open ic-sequence"></i>
+        <span class="font-medium">{{ seq }}</span>
+        <span class="ml-1 rounded-full border border-emerald-500/60 text-emerald-300 text-xs px-2 py-0.5">
+            {{ shots|length }} shots
+        </span>
+
+        <!-- Dropdown built dynamically on right-click -->
+        <div class="seq-lineup-dropdown"
+             style="display:none; position:fixed;"
+             data-project="{{ project }}"
+             data-seq="{{ seq }}"
+             data-depts='[{% for s in shots %}{% for it in s.depts %}"{{ it.dept }}",{% endfor %}{% endfor %}]'>
+        </div>
+    </summary>
+
+    <div class="tree-guide space-y-1">
+        {% for s in shots %}
+        <details class="group" data-key="shot:{{ project }}:{{ seq }}:{{ s.name }}">
+            <summary class="tree-row">
+                <i class="fa-solid fa-caret-right caret text-slate-400"></i>
+                <i class="fa-regular fa-folder folder-closed ic-shot"></i>
+                <i class="fa-regular fa-folder-open folder-open ic-shot"></i>
+                <span>{{ s.name }}</span>
+            </summary>
+
+            <div class="tree-guide">
+                {% for it in s.depts %}
+                <div class="py-1">
+                    <a class="inline-flex items-center gap-2 text-slate-200 hover:underline"
+                       hx-get="{% url 'AssetView:get_asset_versions' %}?path={{ it.path|urlencode }}&name={{ it.name|urlencode }}&mode={{ it.mode|urlencode }}"
+                       hx-target="#versionsTable"
+                       hx-swap="innerHTML"
+                       hx-on:click="
+                           htmx.ajax('GET',
+                             '{% url 'AssetView:get_file_metadata' %}?path={{ it.path|urlencode }}&name={{ it.name|urlencode }}&mode={{ it.mode|urlencode }}',
+                             {target:'#metadataCard', swap:'outerHTML'});
+                       ">
+                        <i class="fa-regular fa-file-lines ic-file"></i>
+                        <span>{{ it.dept }}</span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </details>
+        {% endfor %}
+    </div>
+</details>
+
+<style>
+/* ── Primary dropdown ── */
+.seq-lineup-dropdown {
+  background: linear-gradient(160deg, #111827, #0f172a);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+  min-width: 200px; padding: 4px; z-index: 9999;
+  animation: seqDropIn .14s ease;
+}
+@keyframes seqDropIn {
+  from { opacity: 0; transform: translateY(-6px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Group wrapper ── */
+.seq-lineup-group { position: relative; }
+
+/* ── Parent option row ── */
+.seq-lineup-option {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 9px 12px; border-radius: 7px;
+  font-size: 13px; color: #cbd5e1; cursor: pointer;
+  background: none; border: none; text-align: left;
+  transition: background .15s, color .15s;
+}
+.seq-lineup-option:hover,
+.seq-lineup-option.active { background: rgba(99,102,241,.18); color: #fff; }
+.seq-lineup-option i { width: 16px; text-align: center; color: #818cf8; font-size: 13px; }
+.seq-lineup-option:hover i,
+.seq-lineup-option.active i { color: #a5b4fc; }
+
+.seq-sub-chevron { margin-left: auto; font-size: 9px; color: #64748b; transition: transform .2s, color .15s; }
+.seq-lineup-option.active .seq-sub-chevron { transform: rotate(90deg); color: #a5b4fc; }
+
+/* ── Sub-menu ── */
+.seq-lineup-submenu {
+  display: none;
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+  border-radius: 0 0 8px 8px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.seq-lineup-suboption {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 8px 16px 8px 36px; border-radius: 6px;
+  font-size: 12px; color: #94a3b8; cursor: pointer;
+  background: none; border: none; text-align: left;
+  transition: background .15s, color .15s;
+}
+.seq-lineup-suboption:hover { background: rgba(99,102,241,.18); color: #fff; }
+.seq-lineup-suboption i { width: 14px; text-align: center; color: #6366f1; font-size: 12px; }
+.seq-lineup-suboption:hover i { color: #a5b4fc; }
+
+/* empty state */
+.seq-lineup-empty {
+  padding: 12px 14px; font-size: 12px; color: #64748b;
+  text-align: center; font-style: italic;
+}
+</style>
+
+<script>
+if (!window._seqLineupInit) {
+  window._seqLineupInit = true;
+
+  /* ── Dept → icon mapping ── */
+  window.DEPT_ICONS = {
+    'animation':   'fas fa-running',
+    'cache':       'fas fa-database',
+    'matchmove':   'fas fa-camera',
+    'lighting':    'fas fa-lightbulb',
+    'compositing': 'fas fa-layer-group',
+    'fx':          'fas fa-fire',
+    'rigging':     'fas fa-project-diagram',
+    'modeling':    'fas fa-cube',
+    'rendering':   'fas fa-film',
+    'layout':      'fas fa-drafting-compass',
+  };
+
+  window.getDeptIcon = function(dept) {
+    const key = dept.toLowerCase().replace(/\s+/g, '');
+    for (const [k, v] of Object.entries(window.DEPT_ICONS)) {
+      if (key.includes(k)) return v;
+    }
+    return 'fas fa-folder';
+  };
+
+  window.buildSeqDropdown = function(dropdown) {
+    if (dropdown.dataset.built) return;
+    dropdown.dataset.built = '1';
+
+    const project = dropdown.dataset.project;
+    const seq     = dropdown.dataset.seq;
+
+    let raw = [];
+    try {
+      const cleaned = (dropdown.dataset.depts || '[]').replace(/,\s*]$/, ']');
+      raw = JSON.parse(cleaned);
+    } catch(e) {
+      console.error('[SeqLineup] Failed to parse depts JSON:', dropdown.dataset.depts, e);
+    }
+
+    const depts = [...new Set(raw.filter(Boolean))];
+
+    if (!depts.length) {
+      dropdown.innerHTML = '<div class="seq-lineup-empty">No departments found</div>';
+      return;
+    }
+
+    dropdown.innerHTML = depts.map(dept => `
+      <div class="seq-lineup-group">
+        <button class="seq-lineup-option seq-lineup-parent"
+                onclick="event.stopPropagation(); toggleSubMenu(this);">
+          <i class="${window.getDeptIcon(dept)}"></i>
+          <span>${dept}</span>
+          <i class="fas fa-chevron-right seq-sub-chevron"></i>
+        </button>
+        <div class="seq-lineup-submenu">
+          <button class="seq-lineup-suboption"
+                  onclick="event.stopPropagation();
+                           closeAllSeqDropdowns();
+                           window.sequencePlayer && window.sequencePlayer.launch('${project}', '${seq}', '${dept}');">
+            <i class="fas fa-play-circle"></i>
+            <span>Play Continuous</span>
+          </button>
+          <button class="seq-lineup-suboption"
+                  onclick="event.stopPropagation();
+                           closeAllSeqDropdowns();
+                           window.sequencePlayer && window.sequencePlayer.launchSBS('${project}', '${seq}', '${dept}');">
+            <i class="fas fa-columns"></i>
+            <span>Side by Side</span>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  };
+
+  window.toggleSubMenu = function(btn) {
+    const group   = btn.closest('.seq-lineup-group');
+    const submenu = group.querySelector('.seq-lineup-submenu');
+    const isOpen  = submenu.style.display === 'block';
+
+    btn.closest('.seq-lineup-dropdown')
+       .querySelectorAll('.seq-lineup-submenu')
+       .forEach(s => s.style.display = 'none');
+    btn.closest('.seq-lineup-dropdown')
+       .querySelectorAll('.seq-lineup-parent')
+       .forEach(b => b.classList.remove('active'));
+
+    if (!isOpen) {
+      submenu.style.display = 'block';
+      btn.classList.add('active');
+    }
+  };
+
+  window.closeAllSeqDropdowns = function() {
+    document.querySelectorAll('.seq-lineup-dropdown').forEach(d => d.style.display = 'none');
+    document.querySelectorAll('.seq-lineup-submenu').forEach(s => s.style.display = 'none');
+    document.querySelectorAll('.seq-lineup-parent').forEach(b => b.classList.remove('active'));
+  };
+
+/* ── Right-click on seq-summary opens the dropdown ── */
+  document.addEventListener('contextmenu', function(e) {
+    const summary = e.target.closest('.seq-summary');
+
+    // Right-clicked outside any summary — just close
+    if (!summary) {
+      closeAllSeqDropdowns();
+      return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const dropdown = summary.querySelector('.seq-lineup-dropdown');
+    if (!dropdown) return;
+
+    const isAlreadyOpen = dropdown.style.display === 'block';
+
+    // Always close everything first
+    closeAllSeqDropdowns();
+
+    // Toggle: if it was open, leave it closed
+    if (isAlreadyOpen) return;
+
+    window.buildSeqDropdown(dropdown);
+
+    dropdown.style.display = 'block';
+    dropdown.style.left = '-9999px';
+    dropdown.style.top  = '-9999px';
+
+    requestAnimationFrame(() => {
+      const mw = dropdown.offsetWidth  || 220;
+      const mh = dropdown.offsetHeight || 100;
+      dropdown.style.left = Math.min(e.clientX, window.innerWidth  - mw - 8) + 'px';
+      dropdown.style.top  = Math.min(e.clientY, window.innerHeight - mh - 8) + 'px';
+    });
+  });
+
+  /* ── Click anywhere outside closes dropdowns ── */
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.seq-lineup-dropdown')) {
+      closeAllSeqDropdowns();
+    }
+  });
+
+} 
+</script>

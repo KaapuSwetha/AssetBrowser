@@ -1,0 +1,91 @@
+{% extends "AssetView/base.html" %}
+{% load static %}
+
+{% block title %}Asset Browser{% endblock %}
+
+{% block content %}
+<div class="max-w-[2400px] mx-auto h-full flex flex-col gap-3 min-h-0">
+
+  <!-- Grid fills available height (desktop); stacks on mobile -->
+  <div class="grid grid-cols-12 gap-3 h-auto lg:h-[calc(100vh-8rem)] min-h-0">
+
+
+    <!-- LEFT: Project Tree -->
+    <aside class="col-span-12 md:col-span-3 xl:col-span-3 card overflow-hidden flex flex-col min-h-[360px] md:min-h-0" aria-label="Projects">
+      <div class="card-header">
+        <i class="fa-regular fa-folder-open text-amber-300/90"></i>
+
+        <span>Projects</span>
+      </div>
+      <div id="projectTree"
+           class="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900/50 scrollbar-thumb-rounded"
+           hx-get="{% url 'AssetView:get_project_tree' %}"
+           hx-trigger="load"
+           hx-target="#projectTree"
+           hx-swap="innerHTML">
+        <!-- Loading state -->
+        <div class="p-4 text-center text-slate-500">
+          <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+          <p>Loading projects…</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER: Versions Table -->
+    <section class="col-span-12 md:col-span-5 xl:col-span-5 flex flex-col gap-3 min-h-[420px] md:min-h-0" aria-label="Versions list">
+      <div id="assetTableMount" class="card h-full flex flex-col overflow-hidden min-h-0">
+        <div class="card-header">
+          <i class="fas fa-table-list text-emerald-400/90"></i>
+          <span>Versions</span>
+          <span class="ml-auto text-[11px] text-slate-400 normal-case" id="versionCount">0 items</span>
+        </div>
+        <div id="versionsTable" class="flex-1 min-h-0 overflow-y-auto scroll-panel">
+          <!-- empty state -->
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Metadata + Preview -->
+    <aside class="col-span-12 md:col-span-4 xl:col-span-4 flex flex-col gap-3 min-h-0" aria-label="Details and preview">
+
+      <div id="metadataCard" class="card flex-1 min-h-[320px] md:min-h-0 flex flex-col overflow-hidden">
+        <div class="card-header">
+          <i class="fas fa-info-circle text-indigo-400/90"></i>
+          <span>Metadata</span>
+        </div>
+        <div class="flex-1 min-h-0 overflow-y-auto p-4 scroll-panel">
+          <table class="w-full text-left text-sm divide-y divide-gray-800">
+            <tbody id="metadataBody">
+              <tr><td colspan="2" class="py-6 text-center text-slate-400">No selection</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="previewCard" class="card flex-1 min-h-[340px] md:min-h-0 flex flex-col overflow-hidden">
+        <div class="card-header">
+          <i class="fas fa-eye text-fuchsia-400/90"></i>
+          <span>Preview</span>
+        </div>
+        <div id="previewPane" class="flex-1 min-h-0 flex items-center justify-center p-4">
+          <div class="text-center text-slate-500 text-sm">
+            <i class="fas fa-image fa-3x mb-2 text-slate-600"></i>
+            <p>Select an item to preview</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+  // Lightweight HTMX request indicator
+  document.body.addEventListener('htmx:request', () => document.body.classList.add('cursor-progress'));
+  document.body.addEventListener('htmx:afterOnLoad', () => document.body.classList.remove('cursor-progress'));
+  document.body.addEventListener('htmx:responseError', () => document.body.classList.remove('cursor-progress'));
+</script>
+{% endblock %}

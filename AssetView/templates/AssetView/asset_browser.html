@@ -1,0 +1,322 @@
+{% extends "AssetView/base.html" %}
+ {% load static %}
+
+{% block title %}Asset Browser{% endblock %}
+
+{% block content %}
+<div class="max-w-[2400px] mx-auto h-full flex flex-col gap-3 min-h-0">
+
+  <!-- Resizable grid container -->
+  <div id="resizableGrid" class="flex gap-3 h-auto lg:h-[calc(100vh-8rem)] min-h-0">
+
+    <!-- LEFT: Projects Panel -->
+    <aside
+      id="projectsPanel"
+      class="card overflow-hidden flex flex-col min-h-[360px] md:min-h-0"
+      style="width: 300px; min-width: 200px; max-width: 600px;"
+      aria-label="Projects"
+    >
+      <div class="card-header">
+        <i class="fa-regular fa-folder-open text-amber-300/90"></i>
+        <span>Projects</span>
+      </div>
+
+      <div
+        id="projectTree"
+        class="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900/50 scrollbar-thumb-rounded"
+        hx-get="{% url 'AssetView:get_project_tree' %}"
+        hx-trigger="load"
+        hx-target="#projectTree"
+        hx-swap="innerHTML"
+      >
+        <div class="p-4 text-center text-slate-500">
+          <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+          <p>Loading projects…</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Resizer 1 -->
+    <div class="resizer" data-target="projectsPanel" data-direction="right"></div>
+
+    <!-- CENTER: Versions Table -->
+    <section 
+      id="versionsPanel"
+      class="flex flex-col gap-3  md:min-h-0" 
+      style="flex: 1; min-width: 300px;"
+      aria-label="Versions list"
+    >
+      <div id="assetTableMount" class="card h-full flex flex-col overflow-hidden min-h-0">
+        <div class="card-header">
+          <i class="fas fa-table-list text-emerald-400/90"></i>
+          <span>Versions</span>
+          {% comment %} <span class="ml-auto text-[11px] text-slate-400 normal-case" id="versionCount">0 items</span> {% endcomment %}
+        </div>
+        <div id="versionsTable" class="flex-1 min-h-0 overflow-y-auto scroll-panel">
+          <!-- empty state -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Resizer 2 -->
+    <div class="resizer" data-target="detailsPanel" data-direction="left"></div>
+
+    <!-- RIGHT: Metadata + Preview -->
+    <aside 
+      id="detailsPanel"
+      class="flex flex-col gap-3 min-h-0" 
+      style="width: 400px; min-width: 280px; max-width: 800px;"
+      aria-label="Details and preview"
+    >
+
+      <div id="metadataCard" class="card flex-1 min-h-[320px] md:min-h-0 flex flex-col overflow-hidden">
+        <div class="card-header">
+          <i class="fas fa-info-circle text-indigo-400/90"></i>
+          <span>Metadata</span>
+        </div>
+        <div class="flex-1 min-h-0 overflow-y-auto p-4 scroll-panel">
+          <table class="w-full text-left text-sm divide-y divide-gray-800">
+            <tbody id="metadataBody">
+              <tr><td colspan="2" class="py-6 text-center text-slate-400">No selection</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="previewCard" class="card flex-1 min-h-[340px] md:min-h-0 flex flex-col overflow-hidden">
+  
+  <!-- Tab Header -->
+  <div class="card-header" style="padding: 0 !important; gap: 0; border-bottom: 1px solid #1f2937;">
+    <button id="tabPreview2" onclick="switchPreviewTab2('preview')"
+      style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+             padding:0.55rem 0.875rem;font-size:0.6875rem;font-weight:600;
+             text-transform:uppercase;letter-spacing:0.075em;
+             color:rgb(203 213 225 / var(--tw-text-opacity, 1));background:transparent;border:none;cursor:pointer;
+             border-bottom:2px solid rgb(203 213 225 / var(--tw-text-opacity, 1));transition:all 0.2s;">
+      <i class="fas fa-eye" style="color: #eb78eb"></i><span>Preview</span>
+    </button>
+    <div style="width:1px;background:#1f2937;flex-shrink:0;"></div>
+    <button id="tabHistory2" onclick="switchPreviewTab2('history')"
+      style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+             padding:0.55rem 0.875rem;font-size:0.6875rem;font-weight:600;
+             text-transform:uppercase;letter-spacing:0.075em;
+             color:rgb(203 213 225 / var(--tw-text-opacity, 1));background:transparent;border:none;cursor:pointer;
+             border-bottom:2px solid transparent;transition:all 0.2s;">
+      <i class="fas fa-clock-rotate-left" style="color: #38bdf8;"></i><span>History</span>
+    </button>
+  </div>
+
+  <!-- Preview Panel -->
+  <div id="panelPreview2" class="flex-1 min-h-0 flex items-center justify-center p-4">
+    <div class="text-center text-slate-500 text-sm">
+      <i class="fas fa-image fa-3x mb-2 text-slate-600"></i>
+      <p>Select an item to preview</p>
+    </div>
+  </div>
+
+  <!-- History Panel -->
+  <div id="panelHistory2" class="flex-1 min-h-0 overflow-y-auto p-4" style="display:none;">
+    <div class="flex flex-col items-center justify-center h-full text-slate-500">
+      <i class="fas fa-clock-rotate-left text-3xl mb-3 opacity-40"></i>
+      <p class="text-sm">No history yet</p>
+    </div>
+  </div>
+
+</div>
+
+    </aside>
+  </div>
+</div>
+
+<style>
+  /* Mobile responsive styles */
+@media (max-width: 768px) {
+  .resizer {
+    display: none !important; /* Hide resizers on mobile */
+  }
+  
+  /* Reset panel widths to full width on mobile */
+  #projectsPanel,
+  #detailsPanel {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+  
+  /* Change layout to vertical stacking on mobile */
+  #resizableGrid {
+    flex-direction: column;
+    height: auto !important;
+    gap: 16px;
+  }
+  
+  /* Reset panels to take natural height */
+  #versionsPanel {
+    flex: none;
+    min-width: 100% !important;
+  }
+  
+  /* Ensure all cards have reasonable min-height on mobile */
+  .card {
+    min-height: 300px !important;
+  }
+}
+  .resizer {
+    width: 8px;
+    cursor: col-resize;
+    background: transparent;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+  }
+
+  .resizer:hover {
+    background: rgba(99, 102, 241, 0.3);
+  }
+
+  .resizer::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 40px;
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 2px;
+  }
+
+  .resizer:hover::before {
+    background: rgba(99, 102, 241, 0.6);
+  }
+
+  .resizer.resizing {
+    background: rgba(99, 102, 241, 0.5);
+  }
+
+  .resizer.resizing::before {
+    background: rgba(99, 102, 241, 0.9);
+  }
+
+  body.resizing {
+    cursor: col-resize;
+    user-select: none;
+  }
+
+  body.resizing * {
+    user-select: none;
+  }
+</style>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+
+function switchPreviewTab2(tab) {
+  const isPreview = tab === 'preview';
+  document.getElementById('panelPreview2').style.display = isPreview ? 'flex'  : 'none';
+  document.getElementById('panelHistory2').style.display = isPreview ? 'none'  : '';
+  const btnPreview = document.getElementById('tabPreview2');
+  const btnHistory = document.getElementById('tabHistory2');
+  btnPreview.style.color        = isPreview ? 'rgb(203 213 225 / var(--tw-text-opacity, 1))'              : 'rgb(203 213 225 / var(--tw-text-opacity, 1))';
+  btnPreview.style.borderBottom = isPreview ? '2px solid rgb(203 213 225 / var(--tw-text-opacity, 1))'    : '2px solid transparent';
+  btnHistory.style.color        = isPreview ? 'rgb(203 213 225 / var(--tw-text-opacity, 1))'              : 'rgb(203 213 225 / var(--tw-text-opacity, 1))';
+  btnHistory.style.borderBottom = isPreview ? '2px solid transparent': '2px solid rgb(203 213 225 / var(--tw-text-opacity, 1))';
+}
+
+  // Lightweight HTMX request indicator
+  document.body.addEventListener('htmx:request', () => document.body.classList.add('cursor-progress'));
+  document.body.addEventListener('htmx:afterOnLoad', () => document.body.classList.remove('cursor-progress'));
+  document.body.addEventListener('htmx:responseError', () => document.body.classList.remove('cursor-progress'));
+
+  // Resizable panels functionality
+  (function() {
+      function isMobileDevice() {
+        return window.innerWidth <= 768 || 
+           ('ontouchstart' in window) || 
+           (navigator.maxTouchPoints > 0);
+      }
+    if (isMobileDevice()) {
+    return; // Exit early on mobile
+  }
+  
+    const resizers = document.querySelectorAll('.resizer');
+    
+    resizers.forEach(resizer => {
+      let isResizing = false;
+      let startX = 0;
+      let startWidth = 0;
+      let targetPanel = null;
+      let direction = resizer.dataset.direction;
+
+      resizer.addEventListener('mousedown', initResize);
+
+      function initResize(e) {
+        isResizing = true;
+        startX = e.clientX;
+        
+        const targetId = resizer.dataset.target;
+        targetPanel = document.getElementById(targetId);
+        startWidth = targetPanel.offsetWidth;
+
+        resizer.classList.add('resizing');
+        document.body.classList.add('resizing');
+
+        document.addEventListener('mousemove', resize);
+        document.addEventListener('mouseup', stopResize);
+        
+        e.preventDefault();
+      }
+
+      function resize(e) {
+        if (!isResizing) return;
+
+        const diff = e.clientX - startX;
+        let newWidth;
+
+        if (direction === 'right') {
+          newWidth = startWidth + diff;
+        } else {
+          newWidth = startWidth - diff;
+        }
+
+        const minWidth = parseInt(getComputedStyle(targetPanel).minWidth) || 200;
+        const maxWidth = parseInt(getComputedStyle(targetPanel).maxWidth) || 800;
+
+        newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
+        targetPanel.style.width = newWidth + 'px';
+      }
+
+      function stopResize() {
+        isResizing = false;
+        resizer.classList.remove('resizing');
+        document.body.classList.remove('resizing');
+        
+        document.removeEventListener('mousemove', resize);
+        document.removeEventListener('mouseup', stopResize);
+
+        // Save panel widths to localStorage
+        if (targetPanel) {
+          localStorage.setItem(targetPanel.id + '_width', targetPanel.style.width);
+        }
+      }
+    });
+
+    // Restore saved widths on page load
+    ['projectsPanel', 'detailsPanel'].forEach(panelId => {
+      const savedWidth = localStorage.getItem(panelId + '_width');
+      if (savedWidth) {
+        const panel = document.getElementById(panelId);
+        if (panel) panel.style.width = savedWidth;
+      }
+    });
+  })();
+</script> 
+
+<!-- ADDED (non-breaking): load review UI helpers -->
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+<script src="https://unpkg.com/htmx.org@1.9.10/dist/ext/preload.js"></script>
+{% endblock %} 
+
+ 
