@@ -20,7 +20,7 @@ from urllib.parse import urlencode
 
 # Import from refactored modules
 from .viewFiles.permissions import check_user_permission
-from .viewFiles.trees_handler import build_category_branch, build_sequence_branch
+from .viewFiles.tree_handler import build_category_branch, build_sequence_branch
 from .viewFiles.metadatahandlers import get_asset_rows, get_row_metadata_data
 from .viewFiles.status_handlers import get_status_form_data, update_status_data
 from .viewFiles.search_handlers import search_assets_data, api_data_search
@@ -28,6 +28,13 @@ from .utils import (
     as_list, entry_to_path, basename_noext, load_json,
     coerce_scalar, status_badge, age_badge, pretty, web_path,
     apply_status_badges, ALL_STATUS, path_date
+)
+from .viewFiles.notifications_handler import (
+    scan_json_for_new_keys,
+    get_unread_notifications,
+    mark_notification_read,
+    mark_all_read,
+    delete_notification,
 )
 from typing import List, Dict
 import subprocess
@@ -135,7 +142,7 @@ def get_feedback_files(preview_path: str) -> list:
 
     Path transform applied:
         <root>/04_publish/<dept>/…/<asset>/preview/<file>
-        →  <root>/07_TempararyData/<dept>/…/<asset>/feedback/
+        →  <root>/07_TemporaryData/<dept>/…/<asset>/feedback/
 
     Returns a list sorted newest-first:
         [{name, src, path, type ('image'|'video'), display_timestamp}, …]
@@ -158,7 +165,7 @@ def get_feedback_files(preview_path: str) -> list:
 
         parts = parent_dir.parts
         remapped = tuple(
-            "07_TempararyData" if part == "04_publish" else part
+            "07_TemporaryData" if part == "04_publish" else part
             for part in parts
         )
 
@@ -964,7 +971,7 @@ def save_annotation(request):
         def _remap_publish_path(p: Path) -> Path:
             parts = p.parts
             remapped = tuple(
-                '07_TempararyData' if part == '04_publish' else part
+                '07_TemporaryData' if part == '04_publish' else part
                 for part in parts
             )
             return Path(*remapped)
@@ -988,11 +995,11 @@ def save_annotation(request):
 
         MEDIA_EXTS = {'.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.tif', '.mp4', '.mov', '.m4v', '.webm', '.avi'}
         existing_versions = [
-        f for f in feedback_dir.iterdir()
-        if f.is_file()
-        and f.suffix.lower() in MEDIA_EXTS
-        and _re_local.match(rf'^{_re_local.escape(base_stem)}_v\d+$', f.stem, _re_local.IGNORECASE)
-     ]
+            f for f in feedback_dir.iterdir()
+            if f.is_file()
+               and f.suffix.lower() in MEDIA_EXTS
+               and _re_local.match(rf'^{_re_local.escape(base_stem)}_v\d+$', f.stem, _re_local.IGNORECASE)
+        ]
         next_version = len(existing_versions) + 1
         output_filename = f"{base_stem}_v{next_version}{original_ext}"
         output_path = feedback_dir / output_filename
@@ -1068,7 +1075,8 @@ def save_annotation(request):
             if not image_data:
                 return JsonResponse({"success": False, "error": "No image data provided"})
 
-            output_ext = original_ext if original_ext.lower() in ['.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif'] else '.png'
+            output_ext = original_ext if original_ext.lower() in ['.jpg', '.jpeg', '.png', '.bmp', '.tiff',
+                                                                  '.tif'] else '.png'
             output_path = output_path.with_suffix(output_ext)
 
             try:
@@ -1726,11 +1734,12 @@ def _collect_clips_for_merge(search_root: Path, sequence: str,
 def _run_merge_job(job_id: str, project: str, sequence: str, dept: str):
     job = _MERGE_JOBS[job_id]
     job["status"] = "running"
-    output_path = None  # track it so we can delete on failure
-    re_path = None
-    concat_path = None
 
     try:
+        # ── Early cancellation guard ────────────────────────────────────────
+        if job.get("status") == "cancelled":
+            return
+
         seq_root = BASE / project / "Sequence"
         if not seq_root.exists():
             raise FileNotFoundError(f"No Sequence folder for project '{project}'")
@@ -1755,6 +1764,10 @@ def _run_merge_job(job_id: str, project: str, sequence: str, dept: str):
         job["clips_total"] = len(clips)
         job["progress"] = 5
 
+        # ── Cancellation check after clip collection ────────────────────────
+        if job.get("status") == "cancelled":
+            return
+
         resolved: list = []
         for c in clips:
             p = resolve_media_path(c["path"])
@@ -1764,17 +1777,22 @@ def _run_merge_job(job_id: str, project: str, sequence: str, dept: str):
                 logger.warning(f"[merge] skipping unresolved clip: {c['path']!r}")
 
         if not resolved:
-            raise ValueError("None of the collected clips could be resolved to real files on disk.")
-
+            raise ValueError(
+                "None of the collected clips could be resolved to real files on disk."
+            )
         job["clips_total"] = len(resolved)
         job["progress"] = 10
+
+        # ── Cancellation check before writing anything to disk ──────────────
+        if job.get("status") == "cancelled":
+            return
 
         output_dir = Path(tempfile.gettempdir()) / "seqmerge"
         output_dir.mkdir(parents=True, exist_ok=True)
         ts = _time.strftime("%Y%m%d_%H%M%S")
         tag = f"{project}_{sequence or 'all'}_{dept or 'alldepts'}_{ts}".replace(" ", "_").replace("/", "_")
         output_path = output_dir / f"{tag}_merged.mp4"
-        job["_expected_output_path"] = str(output_path)
+
         import shutil as _sh
         ffmpeg_bin = _sh.which("ffmpeg")
         if not ffmpeg_bin:
@@ -1789,18 +1807,35 @@ def _run_merge_job(job_id: str, project: str, sequence: str, dept: str):
         job["progress"] = 15
 
         ok = _ffmpeg_concat(ffmpeg_bin, concat_path, output_path, job, re_encode=False)
+
+        # ── Cancellation check between stream-copy and re-encode attempts ───
+        if job.get("status") == "cancelled":
+            try:
+                Path(concat_path).unlink(missing_ok=True)
+            except Exception:
+                pass
+            return
+
         if not ok:
             logger.warning("[merge] stream-copy failed — retrying with re-encode…")
             re_path = output_dir / f"{tag}_merged_reenc.mp4"
             ok = _ffmpeg_concat(ffmpeg_bin, concat_path, re_path, job, re_encode=True)
-            if ok:
-                # delete the failed stream-copy attempt if it exists
+
+            if job.get("status") == "cancelled":
                 try:
-                    output_path.unlink(missing_ok=True)
+                    Path(concat_path).unlink(missing_ok=True)
+                    re_path.unlink(missing_ok=True)
                 except Exception:
                     pass
+                return
+
+            if ok:
                 output_path = re_path
-                re_path = None
+
+        try:
+            Path(concat_path).unlink(missing_ok=True)
+        except Exception:
+            pass
 
         if not ok:
             raise RuntimeError("FFmpeg concat failed (both stream-copy and re-encode).")
@@ -1812,25 +1847,12 @@ def _run_merge_job(job_id: str, project: str, sequence: str, dept: str):
 
     except Exception as exc:
         logger.error(f"[merge] job {job_id} failed: {exc}", exc_info=True)
-        job["status"] = "failed"
-        job["error"] = str(exc)
-        job["progress"] = 0
+        if job.get("status") != "cancelled":
+            job["status"] = "failed"
+            job["error"] = str(exc)
+            job["progress"] = 0
 
-        # ✅ Cleanup partial output files on failure
-        for path_to_clean in [output_path, re_path]:
-            if path_to_clean:
-                try:
-                    Path(path_to_clean).unlink(missing_ok=True)
-                    logger.info(f"[merge] deleted failed output: {path_to_clean}")
-                except Exception as e:
-                    logger.warning(f"[merge] could not delete failed output {path_to_clean}: {e}")
-    finally:
-        # ✅ Always cleanup concat list file
-        if concat_path:
-            try:
-                Path(concat_path).unlink(missing_ok=True)
-            except Exception:
-                pass
+
 def _ffmpeg_concat(ffmpeg_bin: str, concat_file: str,
                    output_path: Path, job: dict,
                    re_encode: bool = False) -> bool:
@@ -1859,6 +1881,20 @@ def _ffmpeg_concat(ffmpeg_bin: str, concat_file: str,
         files_opened = 0
 
         for line in proc.stderr:
+            # ── Cancellation check ──────────────────────────────────────────
+            if job.get("status") == "cancelled":
+                try:
+                    proc.kill()
+                except Exception:
+                    pass
+                # Clean up any partial output already written to disk
+                try:
+                    output_path.unlink(missing_ok=True)
+                except Exception:
+                    pass
+                return False
+            # ───────────────────────────────────────────────────────────────
+
             if "Opening '" in line and "for reading" in line:
                 files_opened += 1
                 job["clips_done"] = files_opened
@@ -1866,6 +1902,18 @@ def _ffmpeg_concat(ffmpeg_bin: str, concat_file: str,
                 job["progress"] = min(pct, 95)
 
         proc.wait(timeout=600)
+
+        # Final cancellation check after stderr is exhausted
+        if job.get("status") == "cancelled":
+            try:
+                proc.kill()
+            except Exception:
+                pass
+            try:
+                output_path.unlink(missing_ok=True)
+            except Exception:
+                pass
+            return False
 
         if proc.returncode != 0:
             logger.error(f"[merge] FFmpeg exited with code {proc.returncode}")
@@ -1918,102 +1966,17 @@ def merge_sbs_clips(request):
 
     return JsonResponse({"job_id": job_id})
 
-@csrf_exempt
-@require_POST
-def cancel_merge_job(request, job_id):
-    job = _MERGE_JOBS.get(job_id)
-    if not job:
-        return JsonResponse({"ok": False, "error": "Unknown job_id"})
-
-    output_path = job.get("_output_path") or job.get("_expected_output_path")
-    job["status"] = "cancelled"
-
-    deleted_immediately = False
-
-    # ✅ Collect ALL files to delete: final output + any leftover _sbs_tmp_* clips
-    paths_to_delete = []
-    if output_path:
-        paths_to_delete.append(Path(output_path))
-
-    # Also wipe intermediate _sbs_tmp_* clips that may still exist on disk
-    try:
-        sbs_dir = Path(tempfile.gettempdir()) / "seqmerge"
-        if sbs_dir.exists():
-            for f in sbs_dir.iterdir():
-                if f.is_file() and f.name.startswith("_sbs_tmp_"):
-                    paths_to_delete.append(f)
-    except Exception as e:
-        logger.warning(f"[cancel] error scanning sbs_tmp clips: {e}")
-
-    def _delete_file(p):
-        """Try to delete a single file synchronously (3 attempts, 200 ms apart)."""
-        for attempt in range(3):
-            if not p.exists():
-                logger.info(f"[cancel] already gone: {p}")
-                return True
-            try:
-                p.unlink()
-                logger.info(f"[cancel] ✅ deleted {p} on attempt {attempt + 1}")
-                return True
-            except PermissionError:
-                logger.warning(f"[cancel] locked on attempt {attempt + 1} for {p}")
-                _time.sleep(0.2)
-            except Exception as e:
-                logger.error(f"[cancel] unlink error for {p}: {e}")
-                return False
-        return False
-
-    # ── Synchronous deletion pass ─────────────────────────────────────────────
-    failed_paths = []
-    for p in paths_to_delete:
-        ok = _delete_file(p)
-        if not ok:
-            failed_paths.append(p)
-
-    deleted_immediately = len(failed_paths) == 0
-
-    if deleted_immediately:
-        # Everything deleted cleanly — remove job record immediately
-        _MERGE_JOBS.pop(job_id, None)
-    else:
-        # ── Background retry for files still locked (e.g. being streamed) ────
-        def _bg_retry():
-            for p in failed_paths:
-                for attempt in range(8):
-                    if not p.exists():
-                        logger.info(f"[cancel] bg: already gone: {p}")
-                        break
-                    try:
-                        p.unlink()
-                        logger.info(f"[cancel] ✅ bg deleted {p} on attempt {attempt + 1}")
-                        break
-                    except PermissionError:
-                        logger.warning(f"[cancel] bg locked retry {attempt + 1}/8 for {p}")
-                        _time.sleep(1.0)
-                    except Exception as e:
-                        logger.error(f"[cancel] bg unlink error for {p}: {e}")
-                        break
-            _MERGE_JOBS.pop(job_id, None)
-
-        threading.Thread(target=_bg_retry, daemon=True).start()
-
-    return JsonResponse({
-        "ok": True,
-        "deleted": deleted_immediately,
-        "paths_targeted": [str(p) for p in paths_to_delete],
-        "paths_failed_sync": [str(p) for p in failed_paths],
-    })
 
 def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: str):
     job = _MERGE_JOBS[job_id]
     job["status"] = "running"
     job["progress"] = 5
-    sbs_clips = []       # track temp clips for cleanup
-    output_path = None   # track final output for cleanup
-    re_path = None
-    concat_path = None   # track concat list for cleanup
 
     try:
+        # ── Early cancellation guard ────────────────────────────────────────
+        if job.get("status") == "cancelled":
+            return
+
         import shutil as _sh
         ffmpeg_bin = _sh.which("ffmpeg")
         if not ffmpeg_bin:
@@ -2029,19 +1992,19 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
         output_dir = Path(tempfile.gettempdir()) / "seqmerge"
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        # ✅ Register expected output path IMMEDIATELY so cancel_merge_job
-        # can find and delete it even if close is clicked during pair-creation
-        ts = _time.strftime("%Y%m%d_%H%M%S")
-        label = job.get("dept", "sbs") or "sbs"
-        safe_label = label.replace(" ", "_").replace("/", "_")
-        _reserved_output_path = output_dir / f"{safe_label}_sbs_{ts}.mp4"
-        job["_expected_output_path"] = str(_reserved_output_path)
-
         total = len(left_paths)
         job["clips_total"] = total
 
+        sbs_clips = []
         for i, (lp, rp) in enumerate(zip(left_paths, right_paths)):
-            if job.get("status") == "failed":
+            # ── Per-clip cancellation check ─────────────────────────────────
+            if job.get("status") == "cancelled":
+                # Clean up any SBS clips already written
+                for clip in sbs_clips:
+                    try:
+                        clip.unlink(missing_ok=True)
+                    except Exception:
+                        pass
                 return
 
             left = resolve_media_path(lp)
@@ -2070,16 +2033,42 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
 
             proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
             for line in proc.stderr:
-                pass
+                # ── Cancellation check inside FFmpeg stderr loop ────────────
+                if job.get("status") == "cancelled":
+                    try:
+                        proc.kill()
+                    except Exception:
+                        pass
+                    try:
+                        sbs_path.unlink(missing_ok=True)
+                    except Exception:
+                        pass
+                    for clip in sbs_clips:
+                        try:
+                            clip.unlink(missing_ok=True)
+                        except Exception:
+                            pass
+                    return
             proc.wait(timeout=300)
 
-            if proc.returncode != 0:
-                logger.warning(f"[sbs-merge] pair {i + 1} failed, skipping")
-                # ✅ delete the failed partial sbs clip immediately
+            if job.get("status") == "cancelled":
+                try:
+                    proc.kill()
+                except Exception:
+                    pass
                 try:
                     sbs_path.unlink(missing_ok=True)
                 except Exception:
                     pass
+                for clip in sbs_clips:
+                    try:
+                        clip.unlink(missing_ok=True)
+                    except Exception:
+                        pass
+                return
+
+            if proc.returncode != 0:
+                logger.warning(f"[sbs-merge] pair {i + 1} failed, skipping")
                 continue
 
             sbs_clips.append(sbs_path)
@@ -2089,7 +2078,18 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
         if not sbs_clips:
             raise RuntimeError("No SBS clips were created successfully")
 
-        output_path = _reserved_output_path
+        # ── Cancellation check before final concat ──────────────────────────
+        if job.get("status") == "cancelled":
+            for clip in sbs_clips:
+                try:
+                    clip.unlink(missing_ok=True)
+                except Exception:
+                    pass
+            return
+
+        ts = _time.strftime("%Y%m%d_%H%M%S")
+        safe_label = label.replace(" ", "_").replace("/", "_")
+        output_path = output_dir / f"{safe_label}_sbs_{ts}.mp4"
 
         job["progress"] = 82
 
@@ -2109,8 +2109,41 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
 
         proc = subprocess.Popen(concat_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
         for line in proc.stderr:
-            pass
+            # ── Cancellation check in final concat stderr loop ──────────────
+            if job.get("status") == "cancelled":
+                try:
+                    proc.kill()
+                except Exception:
+                    pass
+                try:
+                    output_path.unlink(missing_ok=True)
+                    Path(concat_path).unlink(missing_ok=True)
+                except Exception:
+                    pass
+                for clip in sbs_clips:
+                    try:
+                        clip.unlink(missing_ok=True)
+                    except Exception:
+                        pass
+                return
         proc.wait(timeout=600)
+
+        try:
+            Path(concat_path).unlink(missing_ok=True)
+        except Exception:
+            pass
+
+        if job.get("status") == "cancelled":
+            try:
+                output_path.unlink(missing_ok=True)
+            except Exception:
+                pass
+            for clip in sbs_clips:
+                try:
+                    clip.unlink(missing_ok=True)
+                except Exception:
+                    pass
+            return
 
         if proc.returncode != 0:
             logger.warning("[sbs-merge] stream copy failed, retrying with re-encode")
@@ -2126,19 +2159,45 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
             ]
             proc2 = subprocess.Popen(concat_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
             for line in proc2.stderr:
-                pass
+                # ── Cancellation check in re-encode stderr loop ─────────────
+                if job.get("status") == "cancelled":
+                    try:
+                        proc2.kill()
+                    except Exception:
+                        pass
+                    try:
+                        re_path.unlink(missing_ok=True)
+                    except Exception:
+                        pass
+                    for clip in sbs_clips:
+                        try:
+                            clip.unlink(missing_ok=True)
+                        except Exception:
+                            pass
+                    return
             proc2.wait(timeout=600)
+
+            if job.get("status") == "cancelled":
+                try:
+                    re_path.unlink(missing_ok=True)
+                except Exception:
+                    pass
+                for clip in sbs_clips:
+                    try:
+                        clip.unlink(missing_ok=True)
+                    except Exception:
+                        pass
+                return
 
             if proc2.returncode != 0:
                 raise RuntimeError("FFmpeg concat failed for SBS merge")
+            output_path = re_path
 
-            # ✅ delete the failed stream-copy attempt
+        for clip in sbs_clips:
             try:
-                output_path.unlink(missing_ok=True)
+                clip.unlink(missing_ok=True)
             except Exception:
                 pass
-            output_path = re_path
-            re_path = None
 
         job["clips_done"] = total
         job["_output_path"] = str(output_path)
@@ -2148,82 +2207,103 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
 
     except Exception as exc:
         logger.error(f"[sbs-merge] job {job_id} failed: {exc}", exc_info=True)
-        job["status"] = "failed"
-        job["error"] = str(exc)
-        job["progress"] = 0
+        if job.get("status") != "cancelled":
+            job["status"] = "failed"
+            job["error"] = str(exc)
+            job["progress"] = 0
 
-        # ✅ Cleanup final output file on failure
-        for path_to_clean in [output_path, re_path]:
-            if path_to_clean:
-                try:
-                    Path(path_to_clean).unlink(missing_ok=True)
-                    logger.info(f"[sbs-merge] deleted failed output: {path_to_clean}")
-                except Exception as e:
-                    logger.warning(f"[sbs-merge] could not delete failed output: {e}")
+@csrf_exempt
+@require_POST
+def delete_merge_output(request, job_id):
+    """
+    Permanently delete the merged output file for a completed OR in-progress job.
+    Called when the user explicitly chooses 'Yes, delete' in the confirmation dialog.
+    """
+    job = _MERGE_JOBS.get(job_id)
+    if not job:
+        return JsonResponse({"error": "Unknown job_id"}, status=404)
 
-    finally:
-        # ✅ Always cleanup all temp SBS clips and concat list
-        for clip in sbs_clips:
+    # Cancel any still-running FFmpeg work
+    if job.get("status") not in ("done", "failed", "cancelled"):
+        job["status"] = "cancelled"
+        job["error"] = "Deleted by user"
+
+    # Delete the output file regardless of completion state
+    output_path = job.get("_output_path")
+    deleted = False
+    if output_path:
+        try:
+            p = Path(output_path)
+            if p.exists():
+                p.unlink()
+                deleted = True
+            job["_output_path"] = None
+            job["output_web"] = None
+        except Exception as e:
+            logger.error(f"[delete-merge] failed to delete {output_path}: {e}")
+            return JsonResponse({"ok": False, "error": str(e)}, status=500)
+
+    return JsonResponse({"ok": True, "job_id": job_id, "deleted": deleted})
+@csrf_exempt
+@require_POST
+def cancel_merge_job(request, job_id):
+    """Cancel / clean up a queued or running merge job.
+    Only deletes the output file if the job was NOT already done.
+    """
+    job = _MERGE_JOBS.get(job_id)
+    if not job:
+        return JsonResponse({"error": "Unknown job_id"}, status=404)
+
+    job_was_done = job.get("status") == "done"
+
+    # Only mark cancelled (and clean up) if the job is not already completed
+    if not job_was_done:
+        job["status"] = "cancelled"
+        job["error"] = "Cancelled by user"
+
+        # Delete partial/incomplete output — only for incomplete jobs
+        output_path = job.get("_output_path")
+        if output_path:
             try:
-                clip.unlink(missing_ok=True)
+                Path(output_path).unlink(missing_ok=True)
             except Exception:
                 pass
-        if concat_path:
-            try:
-                Path(concat_path).unlink(missing_ok=True)
-            except Exception:
-                pass
 
+        return JsonResponse({"ok": True, "job_id": job_id, "deleted": True})
+
+    # Job already finished — do NOT delete the completed output
+    return JsonResponse({"ok": True, "job_id": job_id, "deleted": False, "already_done": True})
+@require_GET
 @require_GET
 def serve_merge_output(request, job_id):
+    """Stream a temp-stored merged video back to the browser.
+    Add ?download=1 to force a Save-As dialog with a clean filename.
+    """
     from django.http import FileResponse
-
     job = _MERGE_JOBS.get(job_id)
     if not job or job.get("status") != "done":
         return HttpResponseNotFound("Job not ready or unknown.")
-
     p = Path(job.get("_output_path", ""))
     if not p.exists():
         return HttpResponseNotFound("Merged file has been cleaned up.")
 
-    # ✅ Mark as served so cancel knows it may be in use
-    job["_being_served"] = True
+    as_attachment = request.GET.get("download") == "1"
 
-    def _cleanup():
-        _time.sleep(5)
-        try:
-            p.unlink(missing_ok=True)
-            _MERGE_JOBS.pop(job_id, None)
-            logger.info(f"[merge] serve-cleanup done: {p}")
-        except Exception as e:
-            logger.warning(f"[merge] serve-cleanup failed: {e}")
-        finally:
-            if job_id in _MERGE_JOBS:
-                _MERGE_JOBS[job_id]["_being_served"] = False
+    # Build a human-friendly filename for the Save-As dialog
+    project  = job.get("project", "project")
+    sequence = job.get("sequence", "sequence")
+    dept     = job.get("dept", "")
+    suffix   = f"_{dept}" if dept and dept not in ("sbs", "SBS", "") else ("_SBS" if dept.lower() == "sbs" else "")
+    download_name = f"{project}_{sequence}{suffix}_merged.mp4"
 
-    threading.Thread(target=_cleanup, daemon=True).start()
-    return FileResponse(open(p, "rb"), content_type="video/mp4", as_attachment=False)
-def _cleanup_old_merge_files():
-    """Delete any leftover merged files from previous server sessions on startup."""
-    try:
-        import tempfile
-        output_dir = Path(tempfile.gettempdir()) / "seqmerge"
-        if output_dir.exists():
-            deleted = 0
-            for f in output_dir.iterdir():
-                if f.is_file():
-                    try:
-                        f.unlink()
-                        deleted += 1
-                    except Exception:
-                        pass
-            if deleted:
-                logger.info(f"[merge] startup cleanup: deleted {deleted} leftover file(s) from {output_dir}")
-    except Exception as e:
-        logger.warning(f"[merge] startup cleanup failed: {e}")
+    response = FileResponse(
+        open(p, "rb"),
+        content_type="video/mp4",
+        as_attachment=as_attachment,
+        filename=download_name if as_attachment else None,
+    )
+    return response
 
-# Run once on import
-_cleanup_old_merge_files()
 @require_GET
 def get_asset_history(request):
     path = (request.GET.get("path") or "").strip()
@@ -2252,3 +2332,48 @@ def get_asset_history(request):
 
     html = render_to_string("AssetView/partials/_history_table.html", {"history": history})
     return HttpResponse(html)
+
+
+@require_GET
+def get_notifications(request):
+    """
+    Poll endpoint — scans active-project JSON files for new keys/variants,
+    then returns all unread notifications as JSON.
+    """
+    json_files = []
+    for project in ACTIVE:
+        for section in ("Asset", "Sequence"):
+            section_path = BASE / project / section
+            if section_path.exists():
+                json_files.extend(section_path.rglob("*.json"))
+
+    scan_json_for_new_keys(json_files)
+
+    unread = get_unread_notifications()
+    unread.sort(key=lambda n: n.get("timestamp", ""), reverse=True)
+
+    return JsonResponse({"count": len(unread), "notifications": unread})
+
+
+@csrf_exempt
+@require_POST
+def mark_notification_read_view(request, notification_id):
+    """Mark a single notification as read (called when user clicks 'View')."""
+    ok = mark_notification_read(notification_id)
+    return JsonResponse({"ok": ok})
+
+
+@csrf_exempt
+@require_POST
+def mark_all_notifications_read(request):
+    """Mark every unread notification as read."""
+    count = mark_all_read()
+    return JsonResponse({"ok": True, "marked": count})
+
+
+@csrf_exempt
+@require_POST
+def delete_notification_view(request, notification_id):
+    """Permanently delete a single notification (dismiss ×)."""
+    ok = delete_notification(notification_id)
+    return JsonResponse({"ok": ok})

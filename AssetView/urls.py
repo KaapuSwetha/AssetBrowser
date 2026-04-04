@@ -17,7 +17,7 @@ urlpatterns = [
 
     path("versions/", views.get_asset_versions, name="get_asset_versions"),
     path("metadata/", views.get_file_metadata, name="get_file_metadata"),
-    path("sequence-clips/", views.get_sequence_clips, name="get_sequence_clips"),
+path("sequence-clips/", views.get_sequence_clips, name="get_sequence_clips"),
     path("search/", views.search_assets, name="search_assets"),
 
     path("status-form/", views.status_form, name="status_form"),
@@ -38,17 +38,34 @@ urlpatterns = [
     path("api/data/", views.api_data, name="api_data"),
     path("api/ping-asset-update/", upd_views.ping_asset_update, name="ping-asset-update"),
     path("update-status/", views.update_asset_status, name="update_asset_status"),
-    path("merge-output/cancel/<str:job_id>/", views.cancel_merge_job, name="cancel_merge_job"),
     path("status-history/", views.get_asset_history, name="status_history"),
-    path('update-preview-status/', views.update_preview_status, name='update_preview_status'),
-    path('save-annotation/', views.save_annotation, name='save_annotation'),
+     path('update-preview-status/', views.update_preview_status, name='update_preview_status'),
+     path('save-annotation/', views.save_annotation, name='save_annotation'),
     path('row-metadata/', views.get_row_metadata, name='get_row_metadata'),
     path('merge-sequence-clips/',        views.merge_sequence_clips,        name='merge_sequence_clips'),
     path('merge-sequence-clips/status/', views.merge_sequence_clips_status, name='merge_sequence_clips_status'),
-    path('merge-sbs-clips/',        views.merge_sbs_clips,             name='merge_sbs_clips'),
-    path('merge-sbs-clips/status/', views.merge_sequence_clips_status,  name='merge_sbs_clips_status'),
-    path("merge-output/<str:job_id>/", views.serve_merge_output, name="serve_merge_output"),
-]
+    path('merge-sbs-clips/',             views.merge_sbs_clips,             name='merge_sbs_clips'),
+    path('merge-sbs-clips/status/',      views.merge_sequence_clips_status, name='merge_sbs_clips_status'),
+    # cancel must come before the generic job_id route
+    path("merge-output/cancel/<str:job_id>/", views.cancel_merge_job,  name="cancel_merge_job"),
+    path("merge-output/<str:job_id>/",        views.serve_merge_output, name="serve_merge_output"),
+path("merge-output/delete/<str:job_id>/", views.delete_merge_output, name="delete_merge_output"),
+    path("notifications/",
+        views.get_notifications,
+        name="get_notifications"),
+
+   path("notifications/<str:notification_id>/read/",
+        views.mark_notification_read_view,
+        name="mark_notification_read"),
+
+   path("notifications/mark-all-read/",
+        views.mark_all_notifications_read,
+        name="mark_all_notifications_read"),
+
+   path("notifications/<str:notification_id>/delete/",
+        views.delete_notification_view,
+        name="delete_notification"),
+     ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
