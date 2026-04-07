@@ -221,7 +221,10 @@ DEFAULT_FROM_EMAIL = os.environ.get(
 # ---------------------------------------------------------------------
 # Redis (Channels + Cache)
 # ---------------------------------------------------------------------
-REDIS_URL = os.getenv("REDIS_URL", f"redis://{REDIS_HOST}:{REDIS_PORT}/3")
+REDIS_URL = os.getenv("REDIS_URL", f"redis://{REDIS_HOST}:{REDIS_PORT}/0")
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", REDIS_URL + "?db=1")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", REDIS_URL + "?db=2")
 
 CHANNEL_LAYERS = {
     "default": {
@@ -233,11 +236,10 @@ CHANNEL_LAYERS = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": 'redis://127.0.0.1:6379/1',
+        "LOCATION": REDIS_URL,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
     }
 }
-
 # ---------------------------------------------------------------------
 # Sessions
 # ---------------------------------------------------------------------
