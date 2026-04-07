@@ -1,3 +1,4 @@
+# base.py
 import os
 import logging
 from pathlib import Path
@@ -95,10 +96,7 @@ TREE_CACHE_TTL_SECONDS = 10
 # Django Core
 # ---------------------------------------------------------------------
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-default-key")
-ALLOWED_HOSTS = env.list(
-    "DJANGO_ALLOWED_HOSTS",
-    default=["asset-browser.onrender.com", ".onrender.com"]
-)
+ALLOWED_HOSTS = ["asset-browser.onrender.com", ".onrender.com", "127.0.0.1", "localhost", "0.0.0.0"]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
