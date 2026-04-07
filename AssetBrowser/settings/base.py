@@ -96,7 +96,7 @@ TREE_CACHE_TTL_SECONDS = 10
 # Django Core
 # ---------------------------------------------------------------------
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-default-key")
-ALLOWED_HOSTS = ["asset-browser.onrender.com", ".onrender.com", "127.0.0.1", "localhost", "0.0.0.0"]
+ALLOWED_HOSTS = ["assetbrowser-1asu.onrender.com", ".onrender.com", "127.0.0.1", "localhost", "0.0.0.0"]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

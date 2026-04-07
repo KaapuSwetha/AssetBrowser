@@ -12,10 +12,11 @@ if SECRET_KEY == "unsafe-default-key":
     logger.critical("Missing DJANGO_SECRET_KEY in production — aborting startup")
     raise RuntimeError("DJANGO_SECRET_KEY must be set in production!")
 
-ALLOWED_HOSTS = env.list(
-    "DJANGO_ALLOWED_HOSTS",
-    default=["assetbrowser-1asu.onrender.com", ".onrender.com"],
-)
+allowed_hosts_env = os.environ.get("DJANGO_ALLOWED_HOSTS", "").strip()
+if allowed_hosts_env:
+    ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(",") if host.strip()]
+else:
+    ALLOWED_HOSTS = ["assetbrowser-1asu.onrender.com", ".onrender.com"]
 
 # Redis Channels layer
 REDIS_URL = os.environ.get("REDIS_URL", "redis://127.0.0.1:6379/1")
@@ -31,10 +32,14 @@ CHANNEL_LAYERS = {
 }
 
 # CSRF and security
-CSRF_TRUSTED_ORIGINS = [
-    "https://assetbrowser-1asu.onrender.com",
-    "http://assetbrowser-1asu.onrender.com",
-]
+csrf_trusted_origins_env = os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").strip()
+if csrf_trusted_origins_env:
+    CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in csrf_trusted_origins_env.split(",") if origin.strip()]
+else:
+    CSRF_TRUSTED_ORIGINS = [
+        "https://assetbrowser-1asu.onrender.com",
+        "http://assetbrowser-1asu.onrender.com",
+    ]
 # Celery & Email overrides
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", CELERY_BROKER_URL)
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", CELERY_RESULT_BACKEND)

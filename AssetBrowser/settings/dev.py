@@ -24,6 +24,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     '192.168.20.224',
+    'assetbrowser-1asu.onrender.com',
     '0.0.0.0',  # Allows all IPs (for testing)
 ]
 
@@ -32,6 +33,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
     '192.168.20.224',
+    "assetbrowser-1asu.onrender.com"
 ]
 
 logger.info("Loaded development settings")
