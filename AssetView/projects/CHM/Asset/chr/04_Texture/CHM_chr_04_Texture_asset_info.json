@@ -1,0 +1,85 @@
+{
+  "asset_info": {
+    "CHM_chr_horse_White_face_tex": {
+      "AdditionalMaps": [
+        null
+      ],
+      "Alembic": [
+        "N:/CHM/04_publish/04_Texture/chr/hhs_hyd_CHM_00081/abc/CHM_chr_horse_White_face_tex.abc"
+      ],
+      "AssetId": [
+        "hhs_hyd_CHM_00081"
+      ],
+      "DecimatedMesh": [
+        null
+      ],
+      "FileName": [
+        "CHM_chr_horse_White_face_tex"
+      ],
+      "PreviewPath": [
+        "C:/Ref/image1.avif"],
+      "PublishComment": [
+        "CHM_chr_horse_White_face_tex textures published"
+      ],
+      "PublishdFilePath": [
+        "N:/CHM/04_publish/04_Texture/chr/hhs_hyd_CHM_00081/maya/CHM_chr_horse_White_face_tex.ma"
+      ],
+      "Status": [
+        "Internal Approved"
+      ],
+      "TextureSourcePath": [
+        "N:/CHM/04_publish/04_Texture/chr/hhs_hyd_CHM_00081/Sourceimages"
+      ],
+      "Usd": [
+        "N:/CHM/04_publish/04_Texture/chr/hhs_hyd_CHM_00081/usd/CHM_chr_horse_White_face_tex.usd"
+      ],
+      "User": [
+        "manikanth.goud"
+      ],
+      "WorkFilePath": [
+        "N:/CHM/03_work/04_Texture/chr/Horse/maya/scenes/CHM_chr_horse_White_face_tex.ma"
+      ]
+    },
+     "CHM_prp_barrel_tex": {
+            "AdditionalMaps": [
+                null
+            ],
+            "Alembic": [
+                null
+            ],
+            "AssetId": [
+                "hhs_hyd_CHM_01370"
+            ],
+            "DecimatedMesh": [
+                null
+            ],
+            "FileName": [
+                "CHM_prp_barrel_tex"
+            ],
+            "PreviewPath": [
+                "C:/Ref/image2.avif"
+            ],
+            "PublishComment": [
+                "CHM_prp_barrel_tex publishing for next department"
+            ],
+            "PublishdFilePath": [
+                "N:/CHM/04_publish/04_Texture/prp/hhs_hyd_CHM_01370/houdini/CHM_prp_barrel_tex.hip"
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "TextureSourcePath": [
+                null
+            ],
+            "Usd": [
+                null
+            ],
+            "User": [
+                "biswajit.p"
+            ],
+            "WorkFilePath": [
+                "N:/CHM/07_TemporaryData/04_Texture/prp/hhs_hyd_CHM_01370/houdini/CHM_prp_barrel_tex.hip"
+            ]
+        }
+  }
+}

@@ -1,0 +1,150 @@
+{
+    "asset_info": {
+        "OG_chr_Gambeera_groom": {
+            "AdditionalMaps": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Alembic": [
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/abc/OG_chr_Gambeera_groom.abc",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/abc/OG_chr_Gambeera_groom.abc",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/abc/OG_chr_Gambeera_groom.abc",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/abc/OG_chr_Gambeera_groom.abc",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/abc/OG_chr_Gambeera_groom.abc",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/abc/OG_chr_Gambeera_groom.abc"
+            ],
+            "AssetId": [
+                "hhs_hyd_OG_01017",
+                "hhs_hyd_OG_01017",
+                "hhs_hyd_OG_01017",
+                "hhs_hyd_OG_01017",
+                "hhs_hyd_OG_01017",
+                "hhs_hyd_OG_01017",
+                "hhs_hyd_OG_01027",
+                "hhs_hyd_OG_01028"
+            ],
+            "DecimatedMesh": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "FileName": [
+                "OG_chr_Gambeera_groom",
+                "OG_chr_Gambeera_groom",
+                "OG_chr_Gambeera_groom",
+                "OG_chr_Gambeera_groom",
+                "OG_chr_Gambeera_groom",
+                "OG_chr_Gambeera_groom",
+                "OG_chr_Gambeera_groom",
+                "OG_chr_Gambeera_groom"
+            ],
+            "PreviewPath": [
+             "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif",
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg",
+                "C:/Ref/image3.jpg",
+                "C:/Ref/image4.jpg",
+                "C:/Ref/image5.jpg",
+                "C:/Ref/image8.jpg"
+            ],
+            "PublishComment": [
+                "test",
+                "test",
+                "test",
+                "test",
+                "test",
+                "sample",
+                "test",
+                "test"
+            ],
+            "PublishdFilePath": [
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/maya/OG_chr_Gambeera_groom.ma",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/maya/OG_chr_Gambeera_groom.ma",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/maya/OG_chr_Gambeera_groom.ma",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/maya/OG_chr_Gambeera_groom.ma",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/maya/OG_chr_Gambeera_groom.ma",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/maya/OG_chr_Gambeera_groom.ma",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01027/maya/OG_chr_Gambeera_groom.ma",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01028/maya/OG_chr_Gambeera_groom.ma"
+            ],
+            "Status": [
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress"
+            ],
+            "TextureSourcePath": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Usd": [
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/usd/OG_chr_Gambeera_groom.usd",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/usd/OG_chr_Gambeera_groom.usd",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/usd/OG_chr_Gambeera_groom.usd",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/usd/OG_chr_Gambeera_groom.usd",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/usd/OG_chr_Gambeera_groom.usd",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/usd/OG_chr_Gambeera_groom.usd"
+            ],
+            "User": [
+                "venkateswararao.n",
+                "venkateswararao.n",
+                "venkateswararao.n",
+                "venkateswararao.n",
+                "venkateswararao.n",
+                "venkateswararao.n",
+                "venkateswararao.n",
+                "venkateswararao.n"
+            ],
+            "WorkFilePath": [
+                "D:/Venkat/test_files/maya/og/OG_chr_Gambeera_groom.ma",
+                "D:/Venkat/test_files/maya/og/OG_chr_Gambeera_groom.ma",
+                "D:/Venkat/test_files/maya/og/OG_chr_Gambeera_groom.ma",
+                "D:/Venkat/test_files/maya/og/OG_chr_Gambeera_groom.ma",
+                "D:/Venkat/test_files/maya/og/OG_chr_Gambeera_groom.ma",
+                "D:/Venkat/test_files/maya/og/OG_chr_Gambeera_groom.ma",
+                "N:/OG/07_TemporaryData/05_Groom/chr/hhs_hyd_OG_01026/maya/OG_chr_Gambeera_groom.ma",
+                "D:/Venkat/test_files/maya/og/OG_chr_Gambeera_groom.ma"
+            ],
+            "Xgen_Description": [
+                "OG_Gambeera_Groom",
+                "OG_Gambeera_Groom",
+                "OG_Gambeera_Groom",
+                "OG_Gambeera_Groom"
+            ],
+            "Xgen_PublishedPath": [
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/xgen",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/xgen",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01027/xgen",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01028/xgen"
+            ],
+            "Xgen_SourceImages": [
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/Sourceimages",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01017/Sourceimages",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01027/Sourceimages",
+                "N:/OG/04_publish/05_Groom/chr/hhs_hyd_OG_01028/Sourceimages"
+            ]
+        }
+    }
+}

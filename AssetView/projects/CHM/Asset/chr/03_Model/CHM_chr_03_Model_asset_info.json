@@ -1,0 +1,94 @@
+{
+  "asset_info": {
+    "CHM_chr_hero_leg_340_mod": {
+      "AdditionalMaps": [
+        null,
+        null
+      ],
+      "Alembic": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01375/abc/CHM_chr_hero_leg_340_mod.abc",
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01390/abc/CHM_chr_hero_leg_340_mod.abc"
+      ],
+      "AssetId": [
+        "hhs_hyd_CHM_01375",
+        "hhs_hyd_CHM_01390"
+      ],
+      "DecimatedMesh": [
+        null,
+        null
+      ],
+      "FileName": [
+        "CHM_chr_hero_leg_340_mod",
+        "CHM_chr_hero_leg_340_mod"
+      ],
+      "PreviewPath": [
+        "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif"
+                ],
+      "PublishComment": [
+        "a",
+        "d"
+      ],
+      "PublishdFilePath": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01375/maya/CHM_chr_hero_leg_340_mod.ma",
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01390/maya/CHM_chr_hero_leg_340_mod.ma"
+      ],
+      "Status": [
+        "No Status",
+        "No Status"
+      ],
+      "TextureSourcePath": [
+        null,
+        null
+      ],
+      "Usd": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01375/usd/CHM_chr_hero_leg_340_mod.usd",
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01390/usd/CHM_chr_hero_leg_340_mod.usd"
+      ],
+      "User": [
+        "joshua.ramapuram",
+        "joshua.ramapuram"
+      ],
+      "WorkFilePath": [
+        "N:/CHM/03_work/03_Model/chr/hero_leg_340/maya/scenes/CHM_chr_hero_leg_340_mod.ma",
+        "N:/CHM/03_work/03_Model/chr/hero_leg_340/maya/scenes/CHM_chr_hero_leg_340_mod.ma"
+      ]
+    },
+    "CHM_chr_horse_black_mod": {
+      "AdditionalMaps": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01339/Sourceimages/AdditionalMaps"
+      ],
+      "Alembic": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01339/abc/CHM_chr_horse_black_mod.abc"
+      ],
+      "AssetId": [
+        "hhs_hyd_CHM_01339"
+      ],
+      "DecimatedMesh": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01339/Sourceimages/DecimatedMesh"
+      ],
+      "FileName": [
+        "CHM_chr_horse_black_mod"
+      ],
+      "PreviewPath": [
+       "C:/Ref/image1.avif"],
+      "PublishComment": "hlo this is swetha",
+      "PublishdFilePath": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01339/maya/CHM_chr_horse_black_mod.ma"
+      ],
+      "Status": "Work In Progress",
+      "TextureSourcePath": [
+        null
+      ],
+      "Usd": [
+        "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01339/usd/CHM_chr_horse_black_mod.usd"
+      ],
+      "User": [
+        "rajesh.y"
+      ],
+      "WorkFilePath": [
+        "N:/CHM/03_work/03_Model/chr/horse_Black/maya/scenes/CHM_chr_horse_black_mod.ma"
+      ]
+    }
+  }
+}

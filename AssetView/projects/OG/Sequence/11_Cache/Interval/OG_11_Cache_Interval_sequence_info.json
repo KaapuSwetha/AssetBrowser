@@ -1,0 +1,175 @@
+{
+    "sequence_info": {
+        "44A_SH1730": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH1730/cache/v001"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm"
+        
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH1730/OG_Interval_44A_SH1730_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "ramashankar.p"
+            ],
+            "FrameRange": [
+                "1001-1054"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 44A_SH1730 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1054."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:51:58.877258"
+            ]
+        },
+        "44A_SH1700": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH1700/cache/v001"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH1700/OG_Interval_44A_SH1700_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1040"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 44A_SH1700 (('shot_cam', 'OG_chr_ogsgambeera_rig1')), frames 1001-1040."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 12:58:50.086660"
+            ]
+        },
+        "44A_SH2590": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2590/cache/v001",
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2590/cache/v002",
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2590/cache/v003",
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2590/cache/v004",
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2590/cache/v005",
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2590/cache/v006"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm",
+                "C:/Ref/frame5.webm",
+                "C:/Ref/frame3.webm",
+                "C:/Ref/frame4.webm",
+                "C:/Ref/frame2.webm",
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v002.ma",
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v002.ma",
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v002.ma",
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v002.ma",
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v004.ma",
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v005.ma"
+            ],
+            "User": [
+                "vivek.jaiswal",
+                "vivek.jaiswal",
+                "neelendra",
+                "neelendra",
+                "vivek.jaiswal",
+                "yuvraj.maithil"
+            ],
+            "FrameRange": [
+                "1001-1053",
+                "1001-1053",
+                "1001-1053",
+                "1001-1053",
+                "950-1053",
+                "950-1053"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 44A_SH2590 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1053.",
+                "Anim\u2192Light: Alembic cache publish v002 for 44A_SH2590 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1053.",
+                "Anim\u2192Light: Alembic cache publish v003 for 44A_SH2590 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1053.",
+                "Anim\u2192Light: Alembic cache publish v004 for 44A_SH2590 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1053.",
+                "Anim\u2192Light: Alembic cache publish v005 for 44A_SH2590 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 950-1053.",
+                "Anim\u2192Light: Alembic cache publish v006 for 44A_SH2590 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 950-1053."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 12:59:55.491104",
+                "2025-09-15 14:20:01.557658",
+                "2025-09-15 14:38:37.162858",
+                "2025-09-15 14:52:32.851560",
+                "2025-09-15 15:02:49.060527",
+                "2025-09-16 16:58:01.654110"
+            ]
+        },
+        "44A_SH2470": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2470/cache/v001",
+                "N:/OG/04_publish/11_Cache/Interval/44A_SH2470/cache/v002"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm",
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2470/OG_Interval_44A_SH2470_ani_hyd_v001.ma",
+                "N:/OG/04_publish/09_Animation/Interval/44A_SH2470/OG_Interval_44A_SH2470_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "vivek.jaiswal",
+                "bhargav.s"
+            ],
+            "FrameRange": [
+                "1001-1033",
+                "950-1033"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 44A_SH2470 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1033.",
+                "Anim\u2192Light: Alembic cache publish v002 for 44A_SH2470 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 950-1033."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 13:00:26.446677",
+                "2025-09-15 15:10:08.011574"
+            ]
+        }
+    }
+}

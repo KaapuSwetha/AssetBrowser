@@ -1,0 +1,101 @@
+{
+  "asset_info": {
+    "CHM_prp_cg_spear_a_mod": {
+      "AdditionalMaps": [
+        null
+      ],
+      "Alembic": [
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01093/abc/CHM_prp_cg_spear_a_mod.abc"
+      ],
+      "AssetId": [
+        "hhs_hyd_CHM_01093"
+      ],
+      "DecimatedMesh": [
+        null
+      ],
+      "FileName": [
+        "CHM_prp_cg_spear_a_mod"
+      ],
+      "PreviewPath": [
+       
+                "C:/Ref/image7.jpg"
+                ],
+      "PublishComment": [
+        "CHM_prp_cg_spear_a has been published. please check and let us know if there are any issues"
+      ],
+      "PublishdFilePath": [
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01093/maya/CHM_prp_cg_spear_a_mod.ma"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "TextureSourcePath": [
+        null
+      ],
+      "Usd": [
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01093/usd/CHM_prp_cg_spear_a_mod.usd"
+      ],
+      "User": [
+        "sampath.r"
+      ],
+      "WorkFilePath": [
+        "N:/CHM/03_work/03_Model/prp/cg_spear_a/maya/scenes/CHM_prp_cg_spear_a_mod.ma"
+      ]
+    },
+    "CHM_prp_cg_spear_b_mod": {
+      "AdditionalMaps": [
+        null,
+        null
+      ],
+      "Alembic": [
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01094/abc/CHM_prp_cg_spear_b_mod.abc",
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01387/abc/CHM_prp_cg_spear_b_mod.abc"
+      ],
+      "AssetId": [
+        "hhs_hyd_CHM_01094",
+        "hhs_hyd_CHM_01387"
+      ],
+      "DecimatedMesh": [
+        null,
+        null
+      ],
+      "FileName": [
+        "CHM_prp_cg_spear_b_mod",
+        "CHM_prp_cg_spear_b_mod"
+      ],
+      "PreviewPath": [
+       
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg"
+              ],
+      "PublishComment": [
+        "CHM_prp_cg_spear_b has been published. please check and let us know if there are any issues",
+        "uv set has been updated"
+      ],
+      "PublishdFilePath": [
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01094/maya/CHM_prp_cg_spear_b_mod.ma",
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01387/maya/CHM_prp_cg_spear_b_mod.ma"
+      ],
+      "Status": [
+        "Internal Review",
+        "Internal Review"
+      ],
+      "TextureSourcePath": [
+        null,
+        null
+      ],
+      "Usd": [
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01094/usd/CHM_prp_cg_spear_b_mod.usd",
+        "N:/CHM/04_publish/03_Model/prp/hhs_hyd_CHM_01387/usd/CHM_prp_cg_spear_b_mod.usd"
+      ],
+      "User": [
+        "sampath.r",
+        "joshua.ramapuram"
+      ],
+      "WorkFilePath": [
+        "N:/CHM/03_work/03_Model/prp/cg_spear_b/maya/scenes/CHM_prp_cg_spear_b_mod.ma",
+        "N:/CHM/03_work/03_Model/prp/cg_spear_b/maya/scenes/CHM_prp_cg_spear_b_mod.ma"
+      ]
+    }
+  }
+}

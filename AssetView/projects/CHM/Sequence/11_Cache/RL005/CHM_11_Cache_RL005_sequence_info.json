@@ -1,0 +1,78 @@
+{
+    "sequence_info": {
+        "SHOT_0002": {
+            "PublishdFilePath": [
+                "N:/CHM/04_publish/11_Cache/RL005/SHOT_0002/cache/v001",
+                "N:/CHM/04_publish/11_Cache/RL005/SHOT_0002/cache/v002",
+                "N:/CHM/04_publish/11_Cache/RL005/SHOT_0002/cache/v003",
+                "N:/CHM/04_publish/11_Cache/RL005/SHOT_0002/cache/v004",
+                "N:/CHM/04_publish/11_Cache/RL005/SHOT_0002/cache/v005",
+                "N:/CHM/04_publish/11_Cache/RL005/SHOT_0002/cache/v006"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm",
+        "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "S:/CHM/04_publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v003.ma",
+                "S:/CHM/04_publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v003.ma",
+                "S:/CHM/04_publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v004.ma",
+                "S:/CHM/04_publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v005.ma",
+                "S:/CHM/04_publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v005.ma",
+                "S:/CHM/04_publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v006.ma"
+            ],
+            "User": [
+                "dineshsingh.tomar",
+                "neelendra",
+                "jaiwanth.b",
+                "jaiwanth.b",
+                "neelendra",
+                "jaiwanth.b"
+            ],
+            "FrameRange": [
+                "970-1168",
+                "970-1168",
+                "970-1168",
+                "970-1168",
+                "970-1168",
+                "970-1200"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for SHOT_0002 ('shot_cam', 'CHM_chr_horse_rigRN', 'CHM_chr_horse_rigRN1', 'CHM_chr_horse_rigRN3', 'chr_Crippled_man_001RN', 'chr_Crippled_man_002RN', 'prp_Thalwar_001RN'), frames 970-1168.",
+                "Anim\u2192Light: Alembic cache publish v002 for SHOT_0002 ('shot_cam', 'CHM_chr_horse_rigRN', 'CHM_chr_horse_rigRN1', 'CHM_chr_horse_rigRN3', 'chr_Crippled_man_001RN', 'chr_Crippled_man_002RN', 'prp_Thalwar_001RN'), frames 970-1168.",
+                "Anim\u2192Light: Alembic cache publish v003 for SHOT_0002 ('shot_cam', 'CHM_chr_horse_rigRN', 'CHM_chr_horse_rigRN1', 'CHM_chr_horse_rigRN3', 'chr_Crippled_man_001RN', 'chr_Crippled_man_002RN', 'prp_Thalwar_001RN'), frames 970-1168.",
+                "Anim\u2192Light: Alembic cache publish v004 for SHOT_0002 ('shot_cam', 'CHM_chr_horse_rigRN', 'CHM_chr_horse_rigRN1', 'CHM_chr_horse_rigRN3', 'chr_Crippled_man_001RN', 'chr_Crippled_man_002RN', 'prp_Thalwar_001RN'), frames 970-1168.",
+                "Anim\u2192Light: Alembic cache publish v005 for SHOT_0002 ('shot_cam', 'CHM_chr_horse_rigRN', 'CHM_chr_horse_rigRN1', 'CHM_chr_horse_rigRN3', 'chr_Crippled_man_001RN', 'chr_Crippled_man_002RN', 'prp_Thalwar_001RN'), frames 970-1168.",
+                "Anim\u2192Light: Alembic cache publish v006 for SHOT_0002 ('shot_cam', 'CHM_chr_horse_rigRN', 'CHM_chr_horse_rigRN1', 'CHM_chr_horse_rigRN3', 'chr_Crippled_man_001RN', 'chr_Crippled_man_002RN', 'prp_Thalwar_001RN'), frames 970-1200."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-04-23 17:29:29.272707",
+                "2025-04-23 19:31:50.854258",
+                "2025-04-24 16:04:46.236227",
+                "2025-04-24 18:10:37.821305",
+                "2025-04-24 19:12:43.857229",
+                "2025-04-29 17:00:13.331379"
+            ]
+        }
+    }
+}

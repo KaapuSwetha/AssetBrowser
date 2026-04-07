@@ -1,0 +1,469 @@
+{
+    "sequence_info": {
+        "81_MP2860": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP2860/OG_Climax_81_MP2860_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP2860/OG_Climax_81_MP2860_ani_hyd_v003.ma"
+            ],
+            "User": [
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1036"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Approved"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-08 12:03:45.995976"
+            ]
+        },
+        "81_MP3210": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3210/OG_Climax_81_MP3210_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3210/OG_Climax_81_MP3210_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1029"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Approved"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-08 12:05:00.414647"
+            ]
+        },
+        "81_MP3390": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3390/OG_Climax_81_MP3390_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3390/OG_Climax_81_MP3390_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1032"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "approved"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-08 12:05:55.982764"
+            ]
+        },
+        "81_MP3380": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3380/OG_Climax_81_MP3380_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                    
+        "C:/Ref/frame4.webm"
+        
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3380/OG_Climax_81_MP3380_ani_hyd_v003.ma"
+            ],
+            "User": [
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1033"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Approved"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-08 12:10:06.473406"
+            ]
+        },
+        "81_MP2800": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP2800/OG_Climax_81_MP2800_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP2800/OG_Climax_81_MP2800_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1020"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "approved"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-08 12:14:49.788910"
+            ]
+        },
+        "81_MP3230": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3230/OG_Climax_81_MP3230_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3230/OG_Climax_81_MP3230_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1014"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Approved"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-08 12:15:12.048906"
+            ]
+        },
+        "81_MP3360": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3360/OG_Climax_81_MP3360_ani_hyd_v001.ma",
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3360/OG_Climax_81_MP3360_ani_hyd_v002.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame1.webm",
+        "C:/Ref/frame2.webm"
+       
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3360/OG_Climax_81_MP3360_ani_hyd_v001.ma",
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3360/OG_Climax_81_MP3360_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "ramashankar.p",
+                "bhargav.s"
+            ],
+            "FrameRange": [
+                "1001-1015",
+                "1001-1015"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Client App",
+                "Expressiion reatake done App by Pavan"
+            ],
+            "Status": [
+                "Client Approved",
+                "Internal Approved"
+            ],
+            "Date": [
+                "2025-09-08 12:16:01.285328",
+                "2025-09-18 12:26:38.675441"
+            ]
+        },
+        "81_MP3240": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3240/OG_Climax_81_MP3240_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3240/OG_Climax_81_MP3240_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1025"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "App"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-10 17:34:03.000452"
+            ]
+        },
+        "81_MP2880": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP2880/OG_Climax_81_MP2880_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP2880/OG_Climax_81_MP2880_ani_hyd_v005.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1027"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "App"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:36:46.583830"
+            ]
+        },
+        "81_MP3410": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3410/OG_Climax_81_MP3410_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3410/OG_Climax_81_MP3410_Ani_Maya_v010.ma"
+            ],
+            "User": [
+                "ramashankar.p"
+            ],
+            "FrameRange": [
+                "1001-1075"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Client App"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:39:54.564920"
+            ]
+        },
+        "81_MP2830": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP2830/OG_Climax_81_MP2830_ani_hyd_v001.ma",
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP2830/OG_Climax_81_MP2830_ani_hyd_v002.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm",
+                "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP2830/OG_Climax_81_MP2830_ani_hyd_v001.ma",
+                "N:/OG/03_Work/09_Animation/Climax/81_MP2830/OG_Climax_81_MP2830_ani_hyd_v003.ma"
+            ],
+            "User": [
+                "rahul.kumar",
+                "yuvraj.maithil"
+            ],
+            "FrameRange": [
+                "1001-1033",
+                "1001-1033"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "app",
+                "app"
+            ],
+            "Status": [
+                "Client Approved",
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:42:20.722241",
+                "2025-09-18 19:39:07.981338"
+            ]
+        },
+        "81_MP3290": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3290/OG_Climax_81_MP3290_ani_hyd_v001.ma",
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3290/OG_Climax_81_MP3290_ani_hyd_v002.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame3.webm",
+                "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3290/OG_Climax_81_MP3290_Ani_Maya_v001.ma",
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3290/OG_Climax_81_MP3290_Ani_Maya_v002.ma"
+            ],
+            "User": [
+                "ramashankar.p",
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1048",
+                "1001-1048"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Client App",
+                "new requairement added "
+            ],
+            "Status": [
+                "Client Approved",
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:43:10.070232",
+                "2025-09-18 12:27:28.173775"
+            ]
+        },
+        "81_MP3340": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3340/OG_Climax_81_MP3340_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3340/OG_Climax_81_MP3340_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "ramashankar.p"
+            ],
+            "FrameRange": [
+                "1001-1030"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Client App"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:45:59.574993"
+            ]
+        },
+        "81_MP3300": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3300/OG_Climax_81_MP3300_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3300/OG_Climax_81_MP3300_ani_hyd_v001.mov"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3300/OG_Climax_81_MP3300_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1059"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "app"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:48:39.426290"
+            ]
+        },
+        "81_MP3320": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Climax/81_MP3320/OG_Climax_81_MP3320_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Climax/81_MP3320/OG_Climax_81_MP3320_ani_hyd_v004.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1023"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "app"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:54:42.093816"
+            ]
+        }
+    }
+}

@@ -1,0 +1,174 @@
+{
+    "sequence_info": {
+        "44A_SH1730": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH1730/OG_Interval_44A_SH1730_ani_hyd_v001.ma",
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH1730/OG_Interval_44A_SH1730_ani_hyd_v002.ma"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH1730/OG_Interval_44A_SH1730_ani_hyd_v001.ma",
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH1730/OG_Interval_44A_SH1730_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "rahul.kumar",
+                "ramashankar.p"
+            ],
+            "FrameRange": [
+                "1001-1054",
+                "1001-1054"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Approved",
+                "Client App"
+            ],
+            "Status": [
+                "Client Approved",
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-08 11:50:25.653158",
+                "2025-09-15 12:32:58.090501"
+            ]
+        },
+        "44A_SH1700": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH1700/OG_Interval_44A_SH1700_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH1700/OG_Interval_44A_SH1700_ani_hyd_v004.ma"
+            ],
+            "User": [
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1040"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "app"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:41:25.225752"
+            ]
+        },
+        "44A_SH2470": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH2470/OG_Interval_44A_SH2470_ani_hyd_v001.ma",
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH2470/OG_Interval_44A_SH2470_ani_hyd_v002.ma"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame1.webm",
+        "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH2470/OG_Interval_44A_SH2470_ani_hyd_v007.ma",
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH2470/OG_Interval_44A_SH2470_ani_hyd_v008.ma"
+            ],
+            "User": [
+                "vivek.jaiswal",
+                "bhargav.s"
+            ],
+            "FrameRange": [
+                "1001-1033",
+                "950-1033"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "app",
+                "for t pose"
+            ],
+            "Status": [
+                "Client Approved",
+                "Internal Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:42:56.607705",
+                "2025-09-15 15:07:35.718511"
+            ]
+        },
+        "44A_SH2590": {
+            "PublishdFilePath": [
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v001.ma",
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v002.ma",
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v003.ma",
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v004.ma",
+                "N:/OG/04_Publish/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v005.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm",
+                "C:/Ref/frame2.webm",
+                "C:/Ref/frame3.webm",
+                "C:/Ref/frame4.webm",
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v005.ma",
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v005.ma",
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v005.ma",
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v005.ma",
+                "N:/OG/03_Work/09_Animation/Interval/44A_SH2590/OG_Interval_44A_SH2590_ani_hyd_v006.ma"
+            ],
+            "User": [
+                "vivek.jaiswal",
+                "vivek.jaiswal",
+                "vivek.jaiswal",
+                "vivek.jaiswal",
+                "yuvraj.maithil"
+            ],
+            "FrameRange": [
+                "1001-1053",
+                "1001-1053",
+                "950-1053",
+                "950-1053",
+                "950-1053"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "app",
+                "app",
+                "TPOSE DONE",
+                "TPOSE DONE",
+                "expression "
+            ],
+            "Status": [
+                "Client Approved",
+                "Client Approved",
+                "Client Approved",
+                "Client Approved",
+                "Internal Approved"
+            ],
+            "Date": [
+                "2025-09-15 12:44:16.796490",
+                "2025-09-15 12:50:51.917934",
+                "2025-09-15 15:00:33.802601",
+                "2025-09-15 15:01:28.554177",
+                "2025-09-16 16:55:34.712178"
+            ]
+        }
+    }
+}

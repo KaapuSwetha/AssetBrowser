@@ -1,0 +1,62 @@
+{
+    "sequence_info": {
+        "SHOT_0006": {
+            "PublishdFilePath": [
+                "N:/KAR/04_Publish/09_Animation/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                     "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/03_Work/09_Animation/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "yuvraj.maithil"
+            ],
+            "FrameRange": [
+                "1001-1028"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "app"
+            ],
+            "Status": [
+                "Internal Approved"
+            ],
+            "Date": [
+                "2026-02-19 14:38:16.934435"
+            ]
+        },
+         "SHOT_0007": {
+            "PublishdFilePath": [
+                "N:/KAR/04_Publish/09_Animation/SC_054/SHOT_0007/KAR_SC_054_SHOT_0007_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                     "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/03_Work/09_Animation/SC_054/SHOT_0007/KAR_SC_054_SHOT_0007_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "yuvraj.maithil"
+            ],
+            "FrameRange": [
+                "1001-1028"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "app"
+            ],
+            "Status": [
+                "Internal Approved"
+            ],
+            "Date": [
+                "2026-02-19 14:38:16.934435"
+            ]
+        }
+    }
+}

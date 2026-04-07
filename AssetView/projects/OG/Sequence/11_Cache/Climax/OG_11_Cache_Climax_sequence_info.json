@@ -1,0 +1,458 @@
+{
+    "sequence_info": {
+        "81_MP2800": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP2800/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP2800/OG_Climax_81_MP2800_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1020"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP2800 (('shot_cam', 'OG_chr_emraan_rig')), frames 1001-1020."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:50:54.250365"
+            ]
+        },
+        "81_MP2860": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP2860/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP2860/OG_Climax_81_MP2860_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1036"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP2860 (('shot_cam', 'OG_chr_emraan_rig')), frames 1001-1036."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:51:58.840584"
+            ]
+        },
+        "81_MP3210": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3210/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3210/OG_Climax_81_MP3210_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1029"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3210 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1029."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:52:43.729889"
+            ]
+        },
+        "81_MP3230": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3230/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3230/OG_Climax_81_MP3230_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1014"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3230 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1014."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:53:24.445076"
+            ]
+        },
+        "81_MP3360": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3360/cache/v001",
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3360/cache/v002"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame3.webm",
+                "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3360/OG_Climax_81_MP3360_ani_hyd_v001.ma",
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3360/OG_Climax_81_MP3360_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "rahul.kumar",
+                "bhargav.s"
+            ],
+            "FrameRange": [
+                "1001-1015",
+                "1001-1015"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3360 (('shot_cam', 'OG_chr_emraan_rig1')), frames 1001-1015.",
+                "Anim\u2192Light: Alembic cache publish v002 for 81_MP3360 (('shot_cam', 'OG_chr_emraan_rig1')), frames 1001-1015."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:54:18.258261",
+                "2025-09-18 12:27:51.048507"
+            ]
+        },
+        "81_MP3380": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3380/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3380/OG_Climax_81_MP3380_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1033"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3380 (('shot_cam', 'OG_chr_emraan_rig')), frames 1001-1033."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:55:14.745666"
+            ]
+        },
+        "81_MP3390": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3390/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3390/OG_Climax_81_MP3390_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1032"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3390 (('shot_cam', 'OG_chr_emraan_rig')), frames 1001-1032."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-08 12:56:19.317051"
+            ]
+        },
+        "81_MP3240": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3240/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3240/OG_Climax_81_MP3240_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1025"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3240 (('shot_cam', 'OG_chr_ogsgambeera_rig', 'OG_chr_emraan_rig')), frames 1001-1025."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-10 17:38:29.358374"
+            ]
+        },
+        "81_MP3340": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3340/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3340/OG_Climax_81_MP3340_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "ramashankar.p"
+            ],
+            "FrameRange": [
+                "1001-1030"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3340 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1030."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 12:56:43.834140"
+            ]
+        },
+        "81_MP3290": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3290/cache/v001",
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3290/cache/v002"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm",
+                "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3290/OG_Climax_81_MP3290_ani_hyd_v001.ma",
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3290/OG_Climax_81_MP3290_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "ramashankar.p",
+                "vivek.jaiswal"
+            ],
+            "FrameRange": [
+                "1001-1048",
+                "1001-1048"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3290 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1048.",
+                "Anim\u2192Light: Alembic cache publish v002 for 81_MP3290 (('shot_cam', 'OG_chr_ogsgambeera_rig')), frames 1001-1048."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 12:57:39.014240",
+                "2025-09-18 12:28:56.415253"
+            ]
+        },
+        "81_MP3410": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3410/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3410/OG_Climax_81_MP3410_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "ramashankar.p"
+            ],
+            "FrameRange": [
+                "1001-1075"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3410 (('shot_cam', 'OG_chr_ogsgambeera_rig', 'OG_chr_emraan_rig')), frames 1001-1075."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 12:59:38.073476"
+            ]
+        },
+        "81_MP2880": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP2880/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP2880/OG_Climax_81_MP2880_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1027"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP2880 (('shot_cam', 'OG_chr_ogsgambeera_rig1')), frames 1001-1027."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 13:00:34.525265"
+            ]
+        },
+        "81_MP2830": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP2830/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP2830/OG_Climax_81_MP2830_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1033"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP2830 (('shot_cam', 'OG_chr_emraan_rig')), frames 1001-1033."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 13:01:32.694991"
+            ]
+        },
+        "81_MP3300": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3300/cache/v001"
+            ],
+            "PreviewPath": [
+               
+        "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3300/OG_Climax_81_MP3300_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1059"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3300 (('shot_cam', 'OG_chr_emraan_rig')), frames 1001-1059."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 13:02:43.695407"
+            ]
+        },
+        "81_MP3320": {
+            "PublishdFilePath": [
+                "N:/OG/04_publish/11_Cache/Climax/81_MP3320/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/OG/04_publish/09_Animation/Climax/81_MP3320/OG_Climax_81_MP3320_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "1001-1023"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for 81_MP3320 (('shot_cam', 'OG_chr_emraan_rig')), frames 1001-1023."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-09-15 13:03:36.694532"
+            ]
+        }
+    }
+}

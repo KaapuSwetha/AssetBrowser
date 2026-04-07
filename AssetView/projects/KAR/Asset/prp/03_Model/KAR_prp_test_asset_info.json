@@ -1,0 +1,596 @@
+{
+  "asset_info": {
+    "KAR_prp_test_car_mod": {
+      "Variants": {
+        "default": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_001/abc/KAR_prp_test_car_mod.abc"
+          ],
+          "AssetId": [
+            "test_asset_001"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_test_car_mod"
+          ],
+          "PreviewPath": [
+            "C:/Ref/frame6.webm"
+          ],
+          "PublishComment": [
+            "1111111111111111"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_001/maya/KAR_prp_test_car_mod.ma"
+          ],
+          "Status": [
+            "Internal Approved"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_001/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_001/usd/KAR_prp_test_car_mod.usd"
+          ],
+          "User": [
+            "test.user"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/test_car/maya/scenes/KAR_prp_test_car_mod.ma"
+          ],
+          "History": [
+            {
+              "timestamp": "2026-03-05T11:59:39",
+              "asset_id": "test_asset_001",
+              "previous_status": "Internal Approved",
+              "new_status": "No Status",
+              "comment": "a",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:26:15",
+              "asset_id": "test_asset_001",
+              "previous_status": "No Status",
+              "new_status": "Internal Approved",
+              "comment": "22",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            }
+          ]
+        },
+        "CHM_chr_horse_mod": {
+          "AdditionalMaps": [
+            null,
+            null,
+            null,
+            null,
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00514/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00515/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00516/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00544/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00547/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00548/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00604/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01256/Sourceimages/AdditionalMaps",
+            null,
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01259/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01267/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01269/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01270/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01271/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01281/Sourceimages/AdditionalMaps",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01287/Sourceimages/AdditionalMaps",
+            null
+          ],
+          "Alembic": [
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00006/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00007/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00008/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00018/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00514/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00515/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00516/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00544/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00547/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00548/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00604/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01256/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01257/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01259/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01267/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01269/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01270/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01271/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01281/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01287/abc/CHM_chr_horse_mod.abc",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01360/abc/CHM_chr_horse_mod.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_CHM_00006",
+            "hhs_hyd_CHM_00007",
+            "hhs_hyd_CHM_00008",
+            "hhs_hyd_CHM_00018",
+            "hhs_hyd_CHM_00514",
+            "hhs_hyd_CHM_00515",
+            "hhs_hyd_CHM_00516",
+            "hhs_hyd_CHM_00544",
+            "hhs_hyd_CHM_00547",
+            "hhs_hyd_CHM_00548",
+            "hhs_hyd_CHM_00604",
+            "hhs_hyd_CHM_01256",
+            "hhs_hyd_CHM_01257",
+            "hhs_hyd_CHM_01259",
+            "hhs_hyd_CHM_01267",
+            "hhs_hyd_CHM_01269",
+            "hhs_hyd_CHM_01270",
+            "hhs_hyd_CHM_01271",
+            "hhs_hyd_CHM_01281",
+            "hhs_hyd_CHM_01287",
+            "hhs_hyd_CHM_01360"
+          ],
+          "DecimatedMesh": [
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00006/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00007/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00008/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00018/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00514/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00515/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00516/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00544/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00547/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00548/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00604/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01256/Sourceimages/DecimatedMesh",
+            null,
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01259/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01267/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01269/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01270/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01271/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01281/Sourceimages/DecimatedMesh",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01287/Sourceimages/DecimatedMesh",
+            null
+          ],
+          "FileName": [
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod",
+            "CHM_chr_horse_mod"
+          ],
+          "PreviewPath": [
+           "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm",
+        "C:/Ref/frame1.webm",
+        "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm",
+        "C:/Ref/frame1.webm",
+        "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm",
+        "C:/Ref/frame1.webm",
+        "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm"
+          ],
+          "PublishComment": [
+            "nkl",
+            "kljljl",
+            "g",
+            "hello",
+            "Horse has been done please check if there are any issues.",
+            "horse model has been published can you please check if ther are any issues.",
+            "Horse model published,can you please check and inform if there are any issues.",
+            "horse model is done please check and conform if  there is any issues to address.",
+            "Horse model done",
+            "Horse model published please check and inform if there are any issues.",
+            "CHM_chr_horse model is published please check if there any issues to address.",
+            "Asset has been done, please check, UVs has been kept same and penetrations have been removed",
+            "a",
+            "horse model is done.",
+            "asset UV has beeb updated\n",
+            "hlo",
+            "Asset penetrations are remove, please check",
+            "Asset wise updates are done, please check",
+            "asset mouth_piece has been updated, please check",
+            "Asset has been republished,",
+            "hlo"
+          ],
+          "PublishdFilePath": [
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00006/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00007/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00008/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00018/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00514/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00515/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00516/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00544/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00547/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00548/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00604/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01256/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01257/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01259/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01267/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01269/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01270/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01271/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01281/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01287/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01360/maya/CHM_chr_horse_mod.ma"
+          ],
+          "Status": [
+            "Internal Approved",
+            "Internal Approved",
+            "Internal Retake",
+            "Internal Retake",
+            "Internal Approved",
+            "Internal Approved",
+            "Internal Approved",
+            "Internal Approved",
+            "Internal Approved",
+            "Internal Approved",
+            "Internal Approved",
+            "Internal Review",
+            "Internal Review",
+            "Internal Approved",
+            "Internal Review",
+            "Internal Review",
+            "Internal Review",
+            "Internal Review",
+            "Internal Review",
+            "Internal Review",
+            "No Status"
+          ],
+          "TextureSourcePath": [
+            null,
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00007/Sourceimages",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00008/Sourceimages",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00018/Sourceimages",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01256/Sourceimages",
+            null,
+            null,
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01267/Sourceimages",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01269/Sourceimages",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01270/Sourceimages",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01271/Sourceimages",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01281/Sourceimages",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01287/Sourceimages",
+            null
+          ],
+          "Usd": [
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00006/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00007/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00008/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00018/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00514/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00515/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00516/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00544/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00547/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00548/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_00604/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01256/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01257/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01259/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01267/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01269/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01270/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01271/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01281/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01287/usd/CHM_chr_horse_mod.usd",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01360/usd/CHM_chr_horse_mod.usd"
+          ],
+          "User": [
+            "joshua.ramapuram",
+            "joshua.ramapuram",
+            "joshua.ramapuram",
+            "neelendra",
+            "rajesh.y",
+            "rajesh.y",
+            "rajesh.y",
+            "rajesh.y",
+            "rajesh.y",
+            "rajesh.y",
+            "rajesh.y",
+            "joshua.ramapuram",
+            "rajesh.y",
+            "rajesh.y",
+            "sampath.r",
+            "joshua.ramapuram",
+            "joshua.ramapuram",
+            "joshua.ramapuram",
+            "joshua.ramapuram",
+            "joshua.ramapuram",
+            "joshua.ramapuram"
+          ],
+          "WorkFilePath": [
+            "Y:/3D_Modeling/JOSHUA/horse_test/Maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/07_TemporaryData/03_Model/chr/hhs_hyd_CHM_00006/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/07_TemporaryData/03_Model/chr/hhs_hyd_CHM_00007/maya/CHM_chr_horse_mod.ma",
+            "Y:/3D_Modeling/JOSHUA/horse_test/Maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/07_TemporaryData/03_Model/chr/hhs_hyd_CHM_00514/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "S:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "S:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma",
+            "N:/CHM/04_publish/03_Model/chr/hhs_hyd_CHM_01281/maya/CHM_chr_horse_mod.ma",
+            "N:/CHM/03_work/03_Model/chr/horse/maya/scenes/CHM_chr_horse_mod.ma"
+          ]
+        },
+        "anim": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/abc/KAR_prp_test_car_mod_anim.abc"
+          ],
+          "AssetId": [
+            "test_asset_002"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_test_car_mod_anim"
+          ],
+          "PreviewPath": [
+            "C:/Ref/frame3.webm"
+          ],
+          "PublishComment": [
+            "m,n"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/maya/KAR_prp_test_car_mod_anim.ma"
+          ],
+          "Status": [
+            "Internal Approved"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/usd/KAR_prp_test_car_mod_anim.usd"
+          ],
+          "User": [
+            "test.user"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/test_car/maya/scenes/KAR_prp_test_car_mod_anim.ma"
+          ],
+          "History": [
+            {
+              "timestamp": "2026-03-05T12:28:33",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Review",
+              "new_status": "Internal Approved",
+              "comment": "",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:29:49",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "No Status",
+              "comment": "",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:43:17",
+              "asset_id": "test_asset_002",
+              "previous_status": "No Status",
+              "new_status": "Internal Approved",
+              "comment": "1",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:43:17",
+              "asset_id": "test_asset_002",
+              "previous_status": "No Status",
+              "new_status": "Internal Approved",
+              "comment": "1",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:43:49",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "Internal Review",
+              "comment": "helllo  ffffffffffff",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:43:49",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "Internal Review",
+              "comment": "helllo  ffffffffffff",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:47:17",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Review",
+              "new_status": "Internal Approved",
+              "comment": "sdfdf",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:47:41",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "Work In Progress",
+              "comment": ",.,",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:48:25",
+              "asset_id": "test_asset_002",
+              "previous_status": "Work In Progress",
+              "new_status": "Internal Approved",
+              "comment": "gh",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:50:43",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "Internal Review",
+              "comment": "';",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:51:04",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Review",
+              "new_status": "Internal Approved",
+              "comment": "'",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-05T12:54:32",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "Work In Progress",
+              "comment": "d",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            },
+            {
+              "timestamp": "2026-03-09T12:05:00",
+              "asset_id": "test_asset_002",
+              "previous_status": "Work In Progress",
+              "new_status": "Internal Approved",
+              "comment": "erwer",
+              "username": "localhost",
+              "ip_address": "127.0.0.1"
+            },
+            {
+              "timestamp": "2026-03-09T12:05:17",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "Internal Review",
+              "comment": "fh",
+              "username": "localhost",
+              "ip_address": "127.0.0.1"
+            },
+            {
+              "timestamp": "2026-03-09T12:27:57",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Review",
+              "new_status": "Internal Approved",
+              "comment": "kk",
+              "username": "localhost",
+              "ip_address": "127.0.0.1"
+            },
+            {
+              "timestamp": "2026-03-31T14:45:30",
+              "asset_id": "test_asset_002",
+              "previous_status": "Internal Approved",
+              "new_status": "Internal Approved",
+              "comment": "m,n",
+              "username": "swetha",
+              "ip_address": "192.168.20.224"
+            }
+          ]
+        },
+        "prp": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/abc/KAR_prp_test_car_mod_anim.abc"
+          ],
+          "AssetId": [
+            "test_asset_002"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_test_car_mod_anim"
+          ],
+          "PreviewPath": [
+        "C:/Ref/frame1.webm"
+          ],
+          "PublishComment": [
+            "hllllllllllllllllllllllllllllll"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/maya/KAR_prp_test_car_mod_anim.ma"
+          ],
+          "Status": [
+            "Work In Progress"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/test_asset_002/usd/KAR_prp_test_car_mod_anim.usd"
+          ],
+          "User": [
+            "test.user"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/test_car/maya/scenes/KAR_prp_test_car_mod_anim.ma"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,542 @@
+{
+    "sequence_info": {
+        "SHOT_0083": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0083/cache/v001",
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0083/cache/v002",
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0083/cache/v003"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0083/KAR_SC_054_SHOT_0083_mtm_hyd_v001.ma",
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0083/KAR_SC_054_SHOT_0083_mtm_hyd_v002.ma",
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0083/KAR_SC_054_SHOT_0083_mtm_hyd_v003.ma"
+            ],
+            "User": [
+                "srinu.k",
+                "shaik.hasan",
+                "srinu.k"
+            ],
+            "FrameRange": [
+                "1001-1074",
+                "1001-1074",
+                "1001-1074"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0083, frames 1001-1074.",
+                "Anim\u2192Light: Alembic publish v002 for SHOT_0083, frames 1001-1074.",
+                "Anim\u2192Light: Alembic publish v003 for SHOT_0083, frames 1001-1074."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-12 17:00:04.777791",
+                "2026-02-17 15:03:13.829006",
+                "2026-02-19 18:05:02.783005"
+            ]
+        },
+        "SHOT_0006": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0006/cache/v001",
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0006/cache/v002",
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0006/cache/v003",
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0006/cache/v004"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v001.ma",
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v002.ma",
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v003.ma",
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v004.ma"
+            ],
+            "User": [
+                "shaik.hasan",
+                "shaik.hasan",
+                "saiaravind.g",
+                "saiaravind.g"
+            ],
+            "FrameRange": [
+                "1001-1028",
+                "1001-1028",
+                "1001-1028",
+                "1001-1028"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0006, frames 1001-1028.",
+                "Anim\u2192Light: Alembic publish v002 for SHOT_0006, frames 1001-1028.",
+                "Anim\u2192Light: Alembic publish v003 for SHOT_0006, frames 1001-1028.",
+                "Anim\u2192Light: Alembic publish v004 for SHOT_0006, frames 1001-1028."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-17 12:44:11.513136",
+                "2026-02-17 14:29:38.366805",
+                "2026-02-19 14:05:16.469990",
+                "2026-02-19 15:01:44.041194"
+            ]
+        },
+        "SHOT_0003": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0003/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0003/KAR_SC_054_SHOT_0003_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "shaik.hasan"
+            ],
+            "FrameRange": [
+                "1001-1027"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0003, frames 1001-1027."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-17 12:54:43.908641"
+            ]
+        },
+        "SHOT_0005": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0005/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0005/KAR_SC_054_SHOT_0005_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "shaik.hasan"
+            ],
+            "FrameRange": [
+                "1001-1025"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0005, frames 1001-1025."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-17 12:59:10.195694"
+            ]
+        },
+        "SHOT_0021": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0021/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0021/KAR_SC_054_SHOT_0021_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "saiaravind.g"
+            ],
+            "FrameRange": [
+                "1001-1053"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0021, frames 1001-1053."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-18 14:29:53.036521"
+            ]
+        },
+        "SHOT_0008": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0008/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0008/KAR_SC_054_SHOT_0008_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "srinu.k"
+            ],
+            "FrameRange": [
+                "1001-1319"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0008, frames 1001-1319."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-18 14:55:03.819673"
+            ]
+        },
+        "SHOT_0016": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0016/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0016/KAR_SC_054_SHOT_0016_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "srinu.k"
+            ],
+            "FrameRange": [
+                "1001-1035"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0016, frames 1001-1035."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-18 15:01:43.086615"
+            ]
+        },
+        "SHOT_0014": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0014/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0014/KAR_SC_054_SHOT_0014_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "shaik.hasan"
+            ],
+            "FrameRange": [
+                "1001-1094"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0014, frames 1001-1094."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-18 17:51:25.374108"
+            ]
+        },
+        "SHOT_0023": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0023/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0023/KAR_SC_054_SHOT_0023_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "saiaravind.g"
+            ],
+            "FrameRange": [
+                "1001-1044"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0023, frames 1001-1044."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-18 18:35:16.151870"
+            ]
+        },
+        "SHOT_0017": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0017/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0017/KAR_SC_054_SHOT_0017_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "shaik.hasan"
+            ],
+            "FrameRange": [
+                "1001-1064"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0017, frames 1001-1064."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-19 11:22:32.421302"
+            ]
+        },
+        "SHOT_0020": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0020/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0020/KAR_SC_054_SHOT_0020_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "shaik.hasan"
+            ],
+            "FrameRange": [
+                "1001-1070"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0020, frames 1001-1070."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-19 14:56:19.242629"
+            ]
+        },
+        "SHOT_0018": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0018/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0018/KAR_SC_054_SHOT_0018_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "srinu.k"
+            ],
+            "FrameRange": [
+                "1001-1042"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0018, frames 1001-1042."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-19 14:59:12.221455"
+            ]
+        },
+        "SHOT_0007": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0007/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0007/KAR_SC_054_SHOT_0007_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "saiaravind.g"
+            ],
+            "FrameRange": [
+                "1001-1072"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0007, frames 1001-1072."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-19 17:24:17.739178"
+            ]
+        },
+        "SHOT_0078": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0078/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0078/KAR_SC_054_SHOT_0078_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "shaik.hasan"
+            ],
+            "FrameRange": [
+                "1001-1022"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0078, frames 1001-1022."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-19 17:40:38.250045"
+            ]
+        },
+        "SHOT_0072": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0072/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0072/KAR_SC_054_SHOT_0072_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "srinu.k"
+            ],
+            "FrameRange": [
+                "1001-1166"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0072, frames 1001-1166."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-19 18:21:42.997295"
+            ]
+        },
+        "SHOT_0070": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0070/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0070/KAR_SC_054_SHOT_0070_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "srinu.k"
+            ],
+            "FrameRange": [
+                "1001-1072"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0070, frames 1001-1072."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-20 11:16:27.944862"
+            ]
+        },
+        "SHOT_0076B": {
+            "PublishdFilePath": [
+                "N:/KAR/04_publish/11_Cache/SC_054/SHOT_0076B/cache/v001"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame4.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/04_publish/16_Matchmove/SC_054/SHOT_0076B/KAR_SC_054_SHOT_0076B_mtm_hyd_v001.ma"
+            ],
+            "User": [
+                "shaik.hasan"
+            ],
+            "FrameRange": [
+                "1001-1023"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic publish v001 for SHOT_0076B, frames 1001-1023."
+            ],
+            "Status": [
+                "Internal Review"
+            ],
+            "Date": [
+                "2026-02-20 11:18:07.407747"
+            ]
+        }
+    }
+}

@@ -19,7 +19,7 @@ defaults:
     use_tls: false
     default_from: "AssetBrowser <no-reply@localhost>"
   projects:
-    base_path: "D:/projects"
+    base_path: "AssetView/projects"
     active:
       - OG
       - CHM

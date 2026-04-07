@@ -1,0 +1,241 @@
+{
+    "asset_info": {
+        "OG_chr_emraan_rig": {
+            "AdditionalMaps": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Alembic": [
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00828/abc/OG_chr_emraan_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00833/abc/OG_chr_emraan_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00855/abc/OG_chr_emraan_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00856/abc/OG_chr_emraan_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00865/abc/OG_chr_emraan_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00869/abc/OG_chr_emraan_rig.abc"
+            ],
+            "AssetId": [
+                "hhs_hyd_OG_00828",
+                "hhs_hyd_OG_00833",
+                "hhs_hyd_OG_00855",
+                "hhs_hyd_OG_00856",
+                "hhs_hyd_OG_00865",
+                "hhs_hyd_OG_00869"
+            ],
+            "DecimatedMesh": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "FileName": [
+                "OG_chr_emraan_rig",
+                "OG_chr_emraan_rig",
+                "OG_chr_emraan_rig",
+                "OG_chr_emraan_rig",
+                "OG_chr_emraan_rig",
+                "OG_chr_emraan_rig"
+            ],
+            "PreviewPath": [
+             "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif",
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg",
+                "C:/Ref/image3.jpg",
+                "C:/Ref/image7.jpg"
+                ],
+            "PublishComment": [
+                "Rig published.",
+                "Rig updated.",
+                "rig updated with body geometry",
+                "body controls visibility of skin updated",
+                "groom updated",
+                "Rig updated with arnold shader."
+            ],
+            "PublishdFilePath": [
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00828/maya/OG_chr_emraan_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00833/maya/OG_chr_emraan_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00855/maya/OG_chr_emraan_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00856/maya/OG_chr_emraan_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00865/maya/OG_chr_emraan_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00869/maya/OG_chr_emraan_rig.ma"
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved"
+            ],
+            "TextureSourcePath": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Usd": [
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00828/usd/OG_chr_emraan_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00833/usd/OG_chr_emraan_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00855/usd/OG_chr_emraan_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00856/usd/OG_chr_emraan_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00865/usd/OG_chr_emraan_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00869/usd/OG_chr_emraan_rig.usd"
+            ],
+            "User": [
+                "ashish.ramakrishna",
+                "ashish.ramakrishna",
+                "naveen.kumar",
+                "naveen.kumar",
+                "naveen.kumar",
+                "naveen.kumar"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/07_Rig/chr/OG_chr_emraan_rig/publish/OG_chr_emraan_rig.ma",
+                "N:/OG/03_Work/07_Rig/chr/OG_chr_emraan_rig/publish/OG_chr_emraan_rig.ma",
+                "N:/OG/07_TemporaryData/07_Rig/Hari/28_08_2025/OG_chr_emraan_rig.ma",
+                "N:/OG/07_TemporaryData/07_Rig/Hari/29_08_2025/OG_chr_emraan_rig.ma",
+                "D:/RIGGING/Navin/OG/Emraan/publish/OG_chr_emraan_rig.ma",
+                "N:/OG/03_Work/07_Rig/chr/OG_chr_emraan_rig/work/03-09-2025/OG_chr_emraan_rig.ma"
+            ]
+        },
+        "OG_chr_ogsgambeera_rig": {
+            "AdditionalMaps": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Alembic": [
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00834/abc/OG_chr_ogsgambeera_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00835/abc/OG_chr_ogsgambeera_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00842/abc/OG_chr_ogsgambeera_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00843/abc/OG_chr_ogsgambeera_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00857/abc/OG_chr_ogsgambeera_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00861/abc/OG_chr_ogsgambeera_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00872/abc/OG_chr_ogsgambeera_rig.abc",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00874/abc/OG_chr_ogsgambeera_rig.abc"
+            ],
+            "AssetId": [
+                "hhs_hyd_OG_00834",
+                "hhs_hyd_OG_00835",
+                "hhs_hyd_OG_00842",
+                "hhs_hyd_OG_00843",
+                "hhs_hyd_OG_00857",
+                "hhs_hyd_OG_00861",
+                "hhs_hyd_OG_00872",
+                "hhs_hyd_OG_00874"
+            ],
+            "DecimatedMesh": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "FileName": [
+                "OG_chr_ogsgambeera_rig",
+                "OG_chr_ogsgambeera_rig",
+                "OG_chr_ogsgambeera_rig",
+                "OG_chr_ogsgambeera_rig",
+                "OG_chr_ogsgambeera_rig",
+                "OG_chr_ogsgambeera_rig",
+                "OG_chr_ogsgambeera_rig",
+                "OG_chr_ogsgambeera_rig"
+            ],
+            "PreviewPath": [
+             "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif",
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg",
+                "C:/Ref/image3.jpg",
+                "C:/Ref/image4.jpg",
+                "C:/Ref/image6.jpg",
+                "C:/Ref/image7.jpg"],
+            "PublishComment": [
+                "Rig published for matchmove dept",
+                "skin updated",
+                "low poly head updated",
+                "low poly head updated for animation",
+                "body controls visibility off, skin updated asper RA requirement",
+                "add low poly head for Animation",
+                "Rig updated with expression.",
+                "Rig updated with expression blendshape and viewport texture."
+            ],
+            "PublishdFilePath": [
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00834/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00835/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00842/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00843/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00857/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00861/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00872/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00874/maya/OG_chr_ogsgambeera_rig.ma"
+            ],
+            "Status": [
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved"
+            ],
+            "TextureSourcePath": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Usd": [
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00834/usd/OG_chr_ogsgambeera_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00835/usd/OG_chr_ogsgambeera_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00842/usd/OG_chr_ogsgambeera_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00843/usd/OG_chr_ogsgambeera_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00857/usd/OG_chr_ogsgambeera_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00861/usd/OG_chr_ogsgambeera_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00872/usd/OG_chr_ogsgambeera_rig.usd",
+                "N:/OG/04_publish/07_Rig/chr/hhs_hyd_OG_00874/usd/OG_chr_ogsgambeera_rig.usd"
+            ],
+            "User": [
+                "naveen.kumar",
+                "naveen.kumar",
+                "naveen.kumar",
+                "naveen.kumar",
+                "naveen.kumar",
+                "harikrishna.k",
+                "naveen.kumar",
+                "naveen.kumar"
+            ],
+            "WorkFilePath": [
+                "D:/RIGGING/Navin/OG/publish/OG_chr_ogsgambeera_rig.ma",
+                "D:/RIGGING/Navin/OG/publish/OG_chr_ogsgambeera_rig.ma",
+                "D:/Hari/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/07_TemporaryData/07_Rig/chr/hhs_hyd_OG_00842/maya/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/07_TemporaryData/07_Rig/Hari/29_08_2025/OG_chr_ogsgambeera_rig.ma",
+                "D:/Hari/Maya/Work/OG/30_08_2025/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/03_Work/07_Rig/chr/OG_chr_ogsgambeera_rig/publish/OG_chr_ogsgambeera_rig.ma",
+                "N:/OG/03_Work/07_Rig/chr/OG_chr_ogsgambeera_rig/publish/OG_chr_ogsgambeera_rig.ma"
+            ]
+        }
+    }
+}

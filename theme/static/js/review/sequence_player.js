@@ -1,4 +1,4 @@
-//sequence_branch
+//sequence_player
 (function () {
   'use strict';
 
@@ -16,9 +16,6 @@
   let activeMenu  = null;
   let playerState = null;
   let sbsState    = null;
-  // Replaces the old boolean _suppressFsChange. Setting .active = true before
-  // a programmatic fullscreen enter/exit prevents the fullscreenchange listener
-  // from reacting to that change.
   const fsGuard   = { active: false };
   let miniPill    = null;
 
@@ -610,25 +607,18 @@
 // _hardDestroy  –  single place that owns cancel logic
 // ─────────────────────────────────────────────────────────────────────────
 function _hardDestroy() {
-  // 1. Stop client-side polling immediately via the closure ref
   if (playerState && typeof playerState._cancel === 'function') {
     playerState._cancel();
   }
-
-  // 2. Tell the server to kill the FFmpeg job ONLY if merge is not yet complete.
-  //    If the job is already done (video is loaded/playing), skip deletion.
   const jobId       = playerState && playerState._jobId;
-  const mergeIsDone = playerState && !!playerState.video; // video exists = merge completed
+  const mergeIsDone = playerState && !!playerState.video; 
 
   if (jobId && !mergeIsDone) {
-    // Merge was still in progress — ask server to cancel + delete partial file
     fetch(`/merge-output/cancel/${jobId}/`, {
       method: 'POST',
       keepalive: true,
     }).catch(() => {});
   }
-  // If mergeIsDone === true, we intentionally skip the cancel call,
-  // so the server keeps the completed output file intact.
 
   _removePill();
   fsGuard.active = true;
@@ -659,7 +649,7 @@ function _destroyAndDelete() {
   };
 
   if (jobId) {
-    // Call the dedicated delete endpoint — removes file even if merge was complete
+
     fetch(`/merge-output/delete/${jobId}/`, {
       method: 'POST',
       keepalive: true,
@@ -675,7 +665,6 @@ function _destroyAndDelete() {
       })
       .finally(() => doDestroy());
   } else {
-    // No job id (merge never started) — just close
     doDestroy();
   }
 }
@@ -686,7 +675,6 @@ function _destroyKeepFile() {
   if (playerState && typeof playerState._cancel === 'function') {
     playerState._cancel();
   }
-  // Intentionally skip the cancel fetch — file is preserved on server
   _removePill();
   fsGuard.active = true;
   if (isInFullscreen()) {
@@ -701,7 +689,6 @@ function _destroyKeepFile() {
 // onDelete → called if user picks Yes / onKeep → called if user picks No
 // ─────────────────────────────────────────────────────────────────────────
 function _showDeleteConfirm(onDelete, onKeep,onCancel) {
-  // Remove any stale instance
   document.getElementById('seqDeleteConfirmOverlay')?.remove();
 
   const overlay = document.createElement('div');
@@ -805,7 +792,6 @@ overlay.querySelector('#seqDcbCancel').addEventListener('click', () => {
   onCancel();
 });
 
-// backdrop and escape = keep
 overlay.addEventListener('click', e => {
   if (e.target === overlay) { cleanup(); onKeep(); }
 });
@@ -836,8 +822,6 @@ function launchContinuous(project, seqName, dept) {
   const shell = _buildMergedShell(project, seqName, dept);
   document.body.appendChild(shell);
 
-  // Use a ref-object so ANY code path (X btn, Escape, pill close, .mo-cancel)
-  // that calls _hardDestroy will stop the polling via isCancelled().
   const cancelRef = { value: false };
   const isCancelled = () => cancelRef.value;
 
@@ -847,11 +831,9 @@ function launchContinuous(project, seqName, dept) {
     project, seqName, dept,
     minimized: false, _miniPill: null,
     _jobId: null,
-    // Called by _hardDestroy so every close path cancels cleanly
     _cancel: () => { cancelRef.value = true; },
   };
 
-  // .mo-cancel just delegates — _hardDestroy owns the cancel logic
   shell.querySelector('.mo-cancel').addEventListener('click', () => _hardDestroy());
 
   shell.querySelector('.mo-minimize').addEventListener('click', () => minimizePlayer());
@@ -861,9 +843,9 @@ function launchContinuous(project, seqName, dept) {
   shell.querySelector('#seqCloseBtn').addEventListener('click', e => {
   e.stopPropagation();
   _showDeleteConfirm(
-    () => _destroyAndDelete(),        // Delete  → delete file + close player
-    () => { /* do nothing */ },       // Keep it → close dialog, merge continues
-    () => _hardDestroy()              // Cancel  → stop merge, close player, no delete
+    () => _destroyAndDelete(),      
+    () => {  },       
+    () => _hardDestroy()             
   );
 });
   shell.querySelector('#seqMiniPreviewBtn')?.addEventListener('click', e => {
@@ -900,7 +882,6 @@ function launchContinuous(project, seqName, dept) {
     .then(({ job_id, error }) => {
       if (isCancelled()) return;
       if (!job_id) { _showMergeError(shell, error || 'Could not start merge job.'); return; }
-      // Store immediately so _hardDestroy can cancel it
       if (playerState) playerState._jobId = job_id;
       _pollJob(job_id, shell, isCancelled);
     })
@@ -995,15 +976,15 @@ function launchContinuous(project, seqName, dept) {
                 dlBtn.id = 'seqDownloadBtn';
                 dlBtn.title = 'Download merged clip';
                 dlBtn.innerHTML = '<i class="fas fa-download"></i>';
-                // Insert before the first action button
+                
                 actions.insertBefore(dlBtn, actions.firstChild);
 
                 dlBtn.addEventListener('click', e => {
                     e.stopPropagation();
-                    // Trigger browser Save-As by opening the download URL
+                   
                     const a = document.createElement('a');
                     a.href = `/merge-output/${jobId}/?download=1`;
-                    a.download = '';   // lets the server-supplied filename take effect
+                    a.download = ''; 
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
@@ -1369,7 +1350,6 @@ function _mergeAllSBSPairs(pairs, shell, project, seqName, isCancelled) {
     .then(({ job_id, error }) => {
       if (isCancelled()) return;
       if (!job_id) { _showMergeError(shell, error || 'Could not start SBS merge.'); return; }
-      // ← Store job_id so _hardDestroy can cancel the server job
       if (playerState) playerState._jobId = job_id;
       _pollSBSJob(job_id, pairs, 0, shell, isCancelled);
     })
@@ -1503,7 +1483,6 @@ function _mergeAllSBSPairs(pairs, shell, project, seqName, isCancelled) {
 
   // ─────────────────────────────────────────────────────────────────────────
   // FULLSCREEN CHANGE — always minimize, never destroy
-  // Registered once via VU.onFullscreenChange; no manual event loop needed.
   // ─────────────────────────────────────────────────────────────────────────
   onFullscreenChange(() => {
     if (fsGuard.active) return;

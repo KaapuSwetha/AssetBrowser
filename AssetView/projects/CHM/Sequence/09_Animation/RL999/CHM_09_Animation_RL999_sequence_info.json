@@ -1,0 +1,41 @@
+{
+    "sequence_info": {
+        "SHOT_9999": {
+            "FrameRange": [
+                "1001-1168",
+                "970-1168"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm"
+            ],
+            "PublishComment": [
+                null,
+                null
+            ],
+            "PublishdFilePath": [
+                "N:/CHM/04_Publish/09_Animation/RL999/SHOT_9999/CHM_RL999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_Publish/09_Animation/RL999/SHOT_9999/CHM_RL999_SHOT_9999_ani_hyd_v002.ma"
+            ],
+            "SideBySide": [
+                null
+            ],
+            "Status": [
+                "Internal Approved",
+                "Internal Approved"
+            ],
+            "User": [
+                "ramashankar.p",
+                "ramashankar.p"
+            ],
+            "WorkFilePath": [
+                "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v002.ma",
+                "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v002.ma"
+            ]
+        }
+    }
+}

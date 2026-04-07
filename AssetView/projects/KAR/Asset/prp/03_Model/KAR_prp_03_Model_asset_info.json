@@ -1,0 +1,701 @@
+{
+  "asset_info": {
+    "KAR_prp_baleno_blue_mod": {
+      "Variants": {
+        "default": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01415/abc/KAR_prp_baleno_blue_mod.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01415"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_baleno_blue_mod"
+          ],
+          "PreviewPath": [
+            "C:/Ref/image1.avif"
+               ],
+          "PublishComment": [
+            "aa"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01415/maya/KAR_prp_baleno_blue_mod.ma"
+          ],
+          "Status": [
+            "Internal Approved"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01415/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01415/usd/KAR_prp_baleno_blue_mod.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/baleno_blue/maya/scenes/KAR_prp_baleno_blue_mod.ma"
+          ]
+        }
+      }
+    },
+    "KAR_prp_ciaz2016_gold_mod": {
+      "Variants": {
+        "anim": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/abc/KAR_prp_ciaz2016_gold_mod_anim.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01414"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_ciaz2016_gold_mod_anim"
+          ],
+          "PreviewPath": [
+                "C:/Ref/image2.avif"
+               ],
+          "PublishComment": "a",
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/maya/KAR_prp_ciaz2016_gold_mod_anim.ma"
+          ],
+          "Status": "Client Retake",
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/usd/KAR_prp_ciaz2016_gold_mod_anim.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/ciaz2016_gold/maya/scenes/KAR_prp_ciaz2016_gold_mod_anim.ma"
+          ]
+        },
+        "default": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01411/abc/KAR_prp_ciaz2016_gold_mod.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01411"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_ciaz2016_gold_mod"
+          ],
+          "PreviewPath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01411/preview/KAR_prp_ciaz2016_gold_mod.0001.png"
+          ],
+          "PublishComment": "w",
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01411/maya/KAR_prp_ciaz2016_gold_mod.ma"
+          ],
+          "Status": "No Status",
+          "TextureSourcePath": [
+            null
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01411/usd/KAR_prp_ciaz2016_gold_mod.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/ciaz2016_gold/maya/scenes/KAR_prp_ciaz2016_gold_mod.ma"
+          ]
+        },
+        "render": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/abc/KAR_prp_ciaz2016_gold_mod_render.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01414"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_ciaz2016_gold_mod_render"
+          ],
+          "PreviewPath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/preview/KAR_prp_ciaz2016_gold_mod_render.0001.png"
+          ],
+          "PublishComment": [
+            "ciaz2016_gold model has been done as per the env requirement.Please check and let us know"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/maya/KAR_prp_ciaz2016_gold_mod_render.ma"
+          ],
+          "Status": [
+            "Internal Review"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/usd/KAR_prp_ciaz2016_gold_mod_render.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/ciaz2016_gold/maya/scenes/KAR_prp_ciaz2016_gold_mod_render.ma"
+          ]
+        }
+      },
+      "Status": "No Status",
+      "PublishComment": "a"
+    },
+    "KAR_prp_ertiga_maroon_mod": {
+      "Variants": {
+        "anim": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/abc/KAR_prp_ertiga_maroon_mod_anim.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01413"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_ertiga_maroon_mod_anim"
+          ],
+          "PreviewPath": [
+          
+                "C:/Ref/image7.jpg"],
+          "PublishComment": [
+            "ertiga_maroon model has been done.Please check and let us know\n"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/maya/KAR_prp_ertiga_maroon_mod_anim.ma"
+          ],
+          "Status": [
+            "Internal Review"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/usd/KAR_prp_ertiga_maroon_mod_anim.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/ertiga_maroon/maya/scenes/KAR_prp_ertiga_maroon_mod_anim.ma"
+          ]
+        },
+        "default": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01410/abc/KAR_prp_ertiga_maroon_mod.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01410"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_ertiga_maroon_mod"
+          ],
+          "PreviewPath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01410/preview/KAR_prp_ertiga_maroon_mod.0001.png"
+          ],
+          "PublishComment": [
+            "ertiga_maroon model has been done as per the env req.Please check and let us know"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01410/maya/KAR_prp_ertiga_maroon_mod.ma"
+          ],
+          "Status": [
+            "Internal Review"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01410/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01410/usd/KAR_prp_ertiga_maroon_mod.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/ertiga_maroon/maya/scenes/KAR_prp_ertiga_maroon_mod.ma"
+          ]
+        },
+        "render": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/abc/KAR_prp_ertiga_maroon_mod_render.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01413"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_ertiga_maroon_mod_render"
+          ],
+          "PreviewPath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/preview/KAR_prp_ertiga_maroon_mod_render.0001.png"
+          ],
+          "PublishComment": [
+            "ertiga_maroon model has been done as per the env requirement.Please check and let us know\n"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/maya/KAR_prp_ertiga_maroon_mod_render.ma"
+          ],
+          "Status": [
+            "Internal Review"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01413/usd/KAR_prp_ertiga_maroon_mod_render.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/ertiga_maroon/maya/scenes/KAR_prp_ertiga_maroon_mod_render.ma"
+          ]
+        }
+      }
+    },
+    "KAR_prp_small_building_02_mod": {
+      "Variants": {
+        "anim": {
+          "AdditionalMaps": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01402/abc/KAR_prp_small_building_02_mod_anim.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01406/abc/KAR_prp_small_building_02_mod_anim.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01407/abc/KAR_prp_small_building_02_mod_anim.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/abc/KAR_prp_small_building_02_mod_anim.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01402",
+            "hhs_hyd_KAR_01406",
+            "hhs_hyd_KAR_01407",
+            "hhs_hyd_KAR_01408"
+          ],
+          "DecimatedMesh": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "FileName": [
+            "KAR_prp_small_building_02_mod_anim",
+            "KAR_prp_small_building_02_mod_anim",
+            "KAR_prp_small_building_02_mod_anim",
+            "KAR_prp_small_building_02_mod_anim"
+          ],
+          "PreviewPath": [
+          "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif",
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg"
+                ],
+          "PublishComment": [
+            "KAR_prp_small_building_02_mod_anim pipeline test.........",
+            "KAR_prp_small_building_02_mod_anim test...",
+            "KAR_prp_small_building_02_mod_anim.ma test",
+            "KAR_prp_small_building_02_mod_anim.ma test"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01402/maya/KAR_prp_small_building_02_mod_anim.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01406/maya/KAR_prp_small_building_02_mod_anim.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01407/maya/KAR_prp_small_building_02_mod_anim.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/maya/KAR_prp_small_building_02_mod_anim.ma"
+          ],
+          "Status": [
+            "Work In Progress",
+            "Work In Progress",
+            "Work In Progress",
+            "Work In Progress"
+          ],
+          "TextureSourcePath": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01402/usd/KAR_prp_small_building_02_mod_anim.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01406/usd/KAR_prp_small_building_02_mod_anim.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01407/usd/KAR_prp_small_building_02_mod_anim.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/usd/KAR_prp_small_building_02_mod_anim.usd"
+          ],
+          "User": [
+            "neelendra",
+            "neelendra",
+            "neelendra",
+            "neelendra"
+          ],
+          "WorkFilePath": [
+            "C:/Users/neelendra/Desktop/KAR_prp_small_building_02_mod_anim.ma",
+            "C:/Users/neelendra/Desktop/KAR_prp_small_building_02_mod_anim.ma",
+            "C:/Users/neelendra/Desktop/KAR_prp_small_building_02_mod_anim.ma",
+            "C:/Users/neelendra/Desktop/KAR_prp_small_building_02_mod_anim.ma"
+          ]
+        },
+        "default": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01400/abc/KAR_prp_small_building_02_mod.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01401/abc/KAR_prp_small_building_02_mod.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01400",
+            "hhs_hyd_KAR_01401"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_small_building_02_mod"
+          ],
+          "PreviewPath": [
+           
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg"
+                ],
+          "PublishComment": "x",
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01400/maya/KAR_prp_small_building_02_mod.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01401/maya/KAR_prp_small_building_02_mod.ma"
+          ],
+          "Status": "Internal Review",
+          "TextureSourcePath": [
+            null
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01400/usd/KAR_prp_small_building_02_mod.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01401/usd/KAR_prp_small_building_02_mod.usd"
+          ],
+          "User": [
+            "neelendra"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/07_TemporaryData/03_Model/prp/hhs_hyd_KAR_01398/maya/KAR_prp_small_building_02_mod.ma",
+            "N:/KAR/07_TemporaryData/03_Model/prp/hhs_hyd_KAR_01400/maya/KAR_prp_small_building_02_mod.ma"
+          ]
+        },
+        "render": {
+          "AdditionalMaps": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01402/abc/KAR_prp_small_building_02_mod_render.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01403/abc/KAR_prp_small_building_02_mod_render.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01404/abc/KAR_prp_small_building_02_mod_render.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01405/abc/KAR_prp_small_building_02_mod_render.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/abc/KAR_prp_small_building_02_mod_render.abc",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/abc/KAR_prp_small_building_02_mod_render.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01402",
+            "hhs_hyd_KAR_01403",
+            "hhs_hyd_KAR_01404",
+            "hhs_hyd_KAR_01405",
+            "hhs_hyd_KAR_01408",
+            "hhs_hyd_KAR_01408"
+          ],
+          "DecimatedMesh": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "FileName": [
+            "KAR_prp_small_building_02_mod_render",
+            "KAR_prp_small_building_02_mod_render",
+            "KAR_prp_small_building_02_mod_render",
+            "KAR_prp_small_building_02_mod_render",
+            "KAR_prp_small_building_02_mod_render",
+            "KAR_prp_small_building_02_mod_render"
+          ],
+          "PreviewPath": [
+           "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif",
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg",
+                "C:/Ref/image3.jpg",
+                "C:/Ref/image7.jpg" ],
+          "PublishComment": [
+            "KAR_prp_small_building_02_mod_render pipeline test...........",
+            "KAR_prp_small_building_02_mod_render pipeline test...........",
+            "KAR_prp_small_building_02_mod_render pipeline test...........",
+            "KAR_prp_small_building_02_mod_render pipe test continuesly..",
+            "KAR_prp_small_building_02_mod_render.ma test again",
+            "KAR_prp_small_building_02_mod_render test again and again"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01402/maya/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01403/maya/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01404/maya/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01405/maya/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/maya/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/maya/KAR_prp_small_building_02_mod_render.ma"
+          ],
+          "Status": [
+            "Work In Progress",
+            "Work In Progress",
+            "Work In Progress",
+            "Work In Progress",
+            "Work In Progress",
+            "Work In Progress"
+          ],
+          "TextureSourcePath": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01402/usd/KAR_prp_small_building_02_mod_render.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01403/usd/KAR_prp_small_building_02_mod_render.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01404/usd/KAR_prp_small_building_02_mod_render.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01405/usd/KAR_prp_small_building_02_mod_render.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/usd/KAR_prp_small_building_02_mod_render.usd",
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01408/usd/KAR_prp_small_building_02_mod_render.usd"
+          ],
+          "User": [
+            "neelendra",
+            "neelendra",
+            "neelendra",
+            "neelendra",
+            "neelendra",
+            "neelendra"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/07_TemporaryData/03_Model/prp/hhs_hyd_KAR_01403/maya/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/07_TemporaryData/03_Model/prp/hhs_hyd_KAR_01403/maya/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/07_TemporaryData/03_Model/prp/hhs_hyd_KAR_01403/maya/KAR_prp_small_building_02_mod_render.ma",
+            "C:/Users/neelendra/Desktop/KAR_prp_small_building_02_mod_render.ma",
+            "C:/Users/neelendra/Desktop/KAR_prp_small_building_02_mod_render.ma",
+            "N:/KAR/07_TemporaryData/03_Model/prp/hhs_hyd_KAR_01408/maya/KAR_prp_small_building_02_mod_render.ma"
+          ]
+        }
+      }
+    },
+    "KAR_prp_tall_building_bhooja_mod": {
+      "Variants": {
+        "default": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01397/abc/KAR_prp_tall_building_bhooja_mod.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01397"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_tall_building_bhooja_mod"
+          ],
+          "PreviewPath": [
+           
+                "C:/Ref/image7.jpg"],
+          "PublishComment": [
+            "pipeline test"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01397/maya/KAR_prp_tall_building_bhooja_mod.ma"
+          ],
+          "Status": [
+            "Internal Review"
+          ],
+          "TextureSourcePath": [
+            null
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01397/usd/KAR_prp_tall_building_bhooja_mod.usd"
+          ],
+          "User": [
+            "neelendra"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/tall_building_bhooja/maya/scenes/KAR_prp_tall_building_bhooja_mod.ma"
+          ]
+        }
+      }
+    },
+    "KAR_prp_wagonr_blue_mod": {
+      "Variants": {
+        "anim": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/abc/KAR_prp_wagonr_blue_mod_anim.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01412"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_wagonr_blue_mod_anim"
+          ],
+          "PreviewPath": [
+             "C:/Ref/image1.avif"],
+          "PublishComment": [
+            "wagonr_blue model has been done.Please check and let us know"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/maya/KAR_prp_wagonr_blue_mod_anim.ma"
+          ],
+          "Status": [
+            "Internal Review"
+          ],
+          "TextureSourcePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/Sourceimages"
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/usd/KAR_prp_wagonr_blue_mod_anim.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/wagonr_blue/maya/scenes/KAR_prp_wagonr_blue_mod_anim.ma"
+          ]
+        },
+        "default": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01409/abc/KAR_prp_wagonr_blue_mod.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01409"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_wagonr_blue_mod"
+          ],
+          "PreviewPath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01409/preview/KAR_prp_wagonr_blue_mod.0001.png"
+          ],
+          "PublishComment": [
+            "wagonr_blue model has been done as per the env req.Please check and let us know"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01409/maya/KAR_prp_wagonr_blue_mod.ma"
+          ],
+          "Status": [
+            "Internal Review"
+          ],
+          "TextureSourcePath": [
+            null
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01409/usd/KAR_prp_wagonr_blue_mod.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/wagonr_blue/maya/scenes/KAR_prp_wagonr_blue_mod.ma"
+          ]
+        },
+        "render": {
+          "AdditionalMaps": [
+            null
+          ],
+          "Alembic": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/abc/KAR_prp_wagonr_blue_mod_render.abc"
+          ],
+          "AssetId": [
+            "hhs_hyd_KAR_01412"
+          ],
+          "DecimatedMesh": [
+            null
+          ],
+          "FileName": [
+            "KAR_prp_wagonr_blue_mod_render"
+          ],
+          "PreviewPath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/preview/KAR_prp_wagonr_blue_mod_render.0001.png"
+          ],
+          "PublishComment": [
+            "wagonr_blue model has been done as per the env requirement.Please check and let us know"
+          ],
+          "PublishdFilePath": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/maya/KAR_prp_wagonr_blue_mod_render.ma"
+          ],
+          "Status": [
+            "Work In Progress"
+          ],
+          "TextureSourcePath": [
+            null
+          ],
+          "Usd": [
+            "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01412/usd/KAR_prp_wagonr_blue_mod_render.usd"
+          ],
+          "User": [
+            "prashant.p"
+          ],
+          "WorkFilePath": [
+            "N:/KAR/03_Work/03_Model/prp/wagonr_blue/maya/scenes/KAR_prp_wagonr_blue_mod_render.ma"
+          ]
+        }
+      }
+    }
+  }
+}

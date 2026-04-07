@@ -1,0 +1,232 @@
+{
+    "sequence_info": {
+       
+        "SHOT_0219": {
+            "PublishdFilePath": [
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v001.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v002.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v003.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v004.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v005.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v006.ma"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm",
+        "C:/Ref/frame1.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v004.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v005.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v005.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v006.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v006.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0219/KAR_SC_056_SHOT_0219_ani_hyd_v006.ma"
+            ],
+            "User": [
+                "rahul.kumar",
+                "ramashankar.p",
+                "ramashankar.p",
+                "naveen.anumula",
+                "naveen.anumula",
+                "naveen.anumula"
+            ],
+            "FrameRange": [
+                "980-1063",
+                "1001-1063",
+                "980-1063",
+                "1001-1063",
+                "1001-1063",
+                "1001-1063"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "app",
+                "App",
+                "App",
+                "Republsih. back tyres adjusted.",
+                "app. tyres adj",
+                "tyre adj"
+            ],
+            "Status": [
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved"
+            ],
+            "Date": [
+                "2026-01-09 15:07:41.927285",
+                "2026-01-12 12:01:17.719453",
+                "2026-01-12 16:28:22.624571",
+                "2026-02-17 15:46:10.218351",
+                "2026-02-17 15:49:44.634694",
+                "2026-02-17 15:55:05.597553"
+            ]
+        },
+        "SHOT_0230": {
+            "PublishdFilePath": [
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0230/KAR_SC_056_SHOT_0230_ani_hyd_v001.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0230/KAR_SC_056_SHOT_0230_ani_hyd_v002.ma"
+            ],
+            "PreviewPath": [
+               "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm"
+        
+            ],
+            "WorkFilePath": [
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0230/KAR_SC_056_SHOT_0230_ani_hyd_v002.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0230/KAR_SC_056_SHOT_0230_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "rahul.kumar",
+                "rahul.kumar"
+            ],
+            "FrameRange": [
+                "980-1172",
+                "980-1172"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "app",
+                "App."
+            ],
+            "Status": [
+                "Internal Approved",
+                "Internal Approved"
+            ],
+            "Date": [
+                "2026-01-12 15:34:24.190266",
+                "2026-01-12 15:53:12.281539"
+            ]
+        },
+        "SHOT_0186": {
+            "PublishdFilePath": [
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0186/KAR_SC_056_SHOT_0186_ani_hyd_v001.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0186/KAR_SC_056_SHOT_0186_ani_hyd_v002.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0186/KAR_SC_056_SHOT_0186_ani_hyd_v003.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm",
+                "C:/Ref/frame5.webm",
+                "C:/Ref/frame3.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0186/KAR_SC_056_SHOT_0186_ani_hyd_v003.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0186/KAR_SC_056_SHOT_0186_ani_hyd_v004.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0186/KAR_SC_056_SHOT_0186_ani_hyd_v005.ma"
+            ],
+            "User": [
+                "vivek.jaiswal",
+                "vivek.jaiswal",
+                "naveen.anumula"
+            ],
+            "FrameRange": [
+                "1001-1086",
+                "1001-1086",
+                "1001-1086"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "app",
+                "app",
+                "Republish, Ciaz car UV issue. done."
+            ],
+            "Status": [
+                "Internal Approved",
+                "Internal Approved",
+                "Internal Approved"
+            ],
+            "Date": [
+                "2026-02-13 12:24:55.219340",
+                "2026-02-16 11:54:58.974441",
+                "2026-02-17 12:26:56.018284"
+            ]
+        },
+        "SHOT_0105": {
+            "PublishdFilePath": [
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0105/KAR_SC_056_SHOT_0105_ani_hyd_v001.ma",
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0105/KAR_SC_056_SHOT_0105_ani_hyd_v002.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm",
+                "C:/Ref/frame5.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0105/KAR_SC_056_SHOT_0105_ani_hyd_v005.ma",
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0105/KAR_SC_056_SHOT_0105_ani_hyd_v006.ma"
+            ],
+            "User": [
+                "naveen.anumula",
+                "naveen.anumula"
+            ],
+            "FrameRange": [
+                "1001-1074",
+                "1001-1074"
+            ],
+            "FrameRate": [
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "RA app",
+                "RA app"
+            ],
+            "Status": [
+                "Internal Approved",
+                "Internal Approved"
+            ],
+            "Date": [
+                "2026-02-18 11:53:24.533817",
+                "2026-02-18 11:58:31.452674"
+            ]
+        },
+        "SHOT_0104": {
+            "PublishdFilePath": [
+                "N:/KAR/04_Publish/09_Animation/SC_056/SHOT_0104/KAR_SC_056_SHOT_0104_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "N:/KAR/03_Work/09_Animation/SC_056/SHOT_0104/KAR_SC_056_SHOT_0104_ani_hyd_v002.ma"
+            ],
+            "User": [
+                "naveen.anumula"
+            ],
+            "FrameRange": [
+                "995-1021"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "RA app"
+            ],
+            "Status": [
+                "Internal Approved"
+            ],
+            "Date": [
+                "2026-02-18 14:06:36.049655"
+            ]
+        }
+    }
+}

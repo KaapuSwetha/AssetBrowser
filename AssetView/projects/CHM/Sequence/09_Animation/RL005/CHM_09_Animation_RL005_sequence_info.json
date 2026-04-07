@@ -1,0 +1,110 @@
+{
+  "sequence_info": {
+    "SHOT_0002": {
+      "FrameRange": [
+        "1001-1168",
+        "970-1168",
+        "970-1168",
+        "970-1168",
+        "970-1168",
+        "970-1200"
+      ],
+      "FrameRate": [
+        "film",
+        "film",
+        "film",
+        "film",
+        "film",
+        "film"
+      ],
+      "PreviewPath": [
+         "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm",
+        "C:/Ref/frame1.webm"
+      ],
+      "PublishComment": [
+        null,
+        "a",
+        null,
+        null,
+        null,
+        null
+      ],
+      "PublishdFilePath": [
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v001.ma",
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v002.ma",
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v003.ma",
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v004.ma",
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v005.ma",
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v006.ma"
+      ],
+      "SideBySide": [
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0002/CHM_RL005_SHOT_0002_ani_hyd_v006_side_by_side.mov"
+      ],
+      "Status": [
+        "No Status",
+        "Internal Approved",
+        "Internal Approved",
+        "Internal Approved",
+        "Internal Approved",
+        "Internal Approved"
+      ],
+      "User": [
+        "ramashankar.p",
+        "ramashankar.p",
+        "dineshsingh.tomar",
+        "jaiwanth.b",
+        "jaiwanth.b",
+        "jaiwanth.b"
+      ],
+      "WorkFilePath": [
+        "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v002.ma",
+        "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v002.ma",
+        "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v003.ma",
+        "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v004.ma",
+        "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v005.ma",
+        "S:/CHM/03_work/09_Animation/Shot/dinesh/CHM_RL005_SHOT_0002_ani_hyd_v006.ma"
+      ]
+    },
+    "SHOT_0003": {
+      "FrameRange": [
+        "970-1138",
+        "960-1138"
+      ],
+      "FrameRate": [
+        "film",
+        "film"
+      ],
+      "PreviewPath": [
+         "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm"
+      ],
+      "PublishComment": [
+        null,
+        null
+      ],
+      "PublishdFilePath": [
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0003/CHM_RL005_SHOT_0003_ani_hyd_v001.ma",
+        "N:/CHM/04_Publish/09_Animation/RL005/SHOT_0003/CHM_RL005_SHOT_0003_ani_hyd_v002.ma"
+      ],
+      "SideBySide": [
+        null
+      ],
+      "Status": [
+        "Internal Approved",
+        "Internal Approved"
+      ],
+      "User": [
+        "shilpa.m",
+        "yuvraj.maithil"
+      ],
+      "WorkFilePath": [
+        "S:/CHM/03_work/09_Animation/B_0037C007_241219_022303_a1E89/CHM_RL005_SHOT_0003_ani_hyd_v001.ma",
+        "S:/CHM/04_publish/09_Animation/RL005/SHOT_0003/CHM_RL005_SHOT_0003_ani_hyd_v001.ma"
+      ]
+    }
+  }
+}

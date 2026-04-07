@@ -1,0 +1,572 @@
+{
+  "sequence_info": {
+    "SHOT_0083": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0083/KAR_SC_054_SHOT_0083_mtm_hyd_v001.ma",
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0083/KAR_SC_054_SHOT_0083_mtm_hyd_v002.ma",
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0083/KAR_SC_054_SHOT_0083_mtm_hyd_v003.ma"
+      ],
+      "PreviewPath": [
+       "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0083/Maya/KAR_SC_054_SHOT_0083_mtm_hyd_v001.ma",
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0083/Maya/KAR_SC_054_SHOT_0083_mtm_hyd_v001.ma",
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0083/Maya/KAR_SC_054_SHOT_0083_mtm_hyd_v003.ma"
+      ],
+      "User": [
+        "srinu.k",
+        "shaik.hasan",
+        "srinu.k"
+      ],
+      "FrameRange": [
+        "1001-1074",
+        "1001-1074",
+        "1001-1074"
+      ],
+      "FrameRate": [
+        "film",
+        "film",
+        "film"
+      ],
+      "PublishComment": [
+        "MM Done",
+        "wait for arch model update.",
+        "MM Done For Lighting Req"
+      ],
+      "Status": [
+        "Internal Review",
+        "Internal Review",
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-12 16:58:56.171152",
+        "2026-02-17 15:00:55.336754",
+        "2026-02-19 18:01:13.108296"
+      ]
+    },
+    "SHOT_0006": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v001.ma",
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v002.ma",
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v003.ma",
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0006/KAR_SC_054_SHOT_0006_mtm_hyd_v004.ma"
+      ],
+      "PreviewPath": [
+       "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0006/Maya/KAR_SC_054_SHOT_0006_mtm_hyd_v001.ma",
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0006/Maya/KAR_SC_054_SHOT_0006_mtm_hyd_v001.ma",
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0006/Maya/KAR_SC_054_SHOT_0006_mtm_hyd_v002.ma",
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0006/Maya/KAR_SC_054_SHOT_0006_mtm_hyd_v002.ma"
+      ],
+      "User": [
+        "shaik.hasan",
+        "shaik.hasan",
+        "saiaravind.g",
+        "saiaravind.g"
+      ],
+      "FrameRange": [
+        "1001-1028",
+        "1001-1028",
+        "1001-1028",
+        "1001-1028"
+      ],
+      "FrameRate": [
+        "film",
+        "film",
+        "film",
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done_Thar_Rig",
+        "passing to Anim for Jeep RA",
+        "MM_Done For RA Req",
+        "MM_Done For RA Req"
+      ],
+      "Status": [
+        "Internal Review",
+        "Internal Approved",
+        "Internal Review",
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-17 12:41:35.076496",
+        "2026-02-17 14:27:45.503049",
+        "2026-02-19 14:03:23.394040",
+        "2026-02-19 14:51:47.832383"
+      ]
+    },
+    "SHOT_0003": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0003/KAR_SC_054_SHOT_0003_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame3.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0003/Maya/KAR_SC_054_SHOT_0003_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "shaik.hasan"
+      ],
+      "FrameRange": [
+        "1001-1027"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "hi"
+      ],
+      "Status": [
+        "No Status"
+      ],
+      "Date": [
+        "2026-02-17 12:53:30.047673"
+      ]
+    },
+    "SHOT_0005": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0005/KAR_SC_054_SHOT_0005_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame5.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0005/Maya/KAR_SC_054_SHOT_0005_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "shaik.hasan"
+      ],
+      "FrameRange": [
+        "1001-1025"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": "Passing to Anim for Jeep RA",
+      "Status": "Internal Approved",
+      "Date": [
+        "2026-02-17 12:58:03.891459"
+      ]
+    },
+    "SHOT_0021": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0021/KAR_SC_054_SHOT_0021_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame1.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0021/Maya/KAR_SC_054_SHOT_0021_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "saiaravind.g"
+      ],
+      "FrameRange": [
+        "1001-1053"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done "
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-18 14:28:01.175880"
+      ]
+    },
+    "SHOT_0008": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0008/KAR_SC_054_SHOT_0008_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame6.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0008/Maya/KAR_SC_054_SHOT_0008_mtm_hyd_v003.ma"
+      ],
+      "User": [
+        "srinu.k"
+      ],
+      "FrameRange": [
+        "1001-1319"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM Done"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-18 14:48:54.652725"
+      ]
+    },
+    "SHOT_0016": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0016/KAR_SC_054_SHOT_0016_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame2.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0016/Maya/KAR_SC_054_SHOT_0016_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "srinu.k"
+      ],
+      "FrameRange": [
+        "1001-1035"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": "pass to LGT",
+      "Status": "Internal Approved",
+      "Date": [
+        "2026-02-18 15:00:15.053218"
+      ]
+    },
+    "SHOT_0014": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0014/KAR_SC_054_SHOT_0014_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame2.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0014/Maya/KAR_SC_054_SHOT_0014_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "shaik.hasan"
+      ],
+      "FrameRange": [
+        "1001-1094"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-18 17:49:18.833869"
+      ]
+    },
+    "SHOT_0023": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0023/KAR_SC_054_SHOT_0023_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame1.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0023/Maya/KAR_SC_054_SHOT_0023_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "saiaravind.g"
+      ],
+      "FrameRange": [
+        "1001-1044"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-18 18:29:51.501762"
+      ]
+    },
+    "SHOT_0017": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0017/KAR_SC_054_SHOT_0017_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame4.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0017/Maya/KAR_SC_054_SHOT_0017_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "shaik.hasan"
+      ],
+      "FrameRange": [
+        "1001-1064"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done_For_Comp_Only"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-19 11:21:08.077934"
+      ]
+    },
+    "SHOT_0020": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0020/KAR_SC_054_SHOT_0020_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame2.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0020/Maya/KAR_SC_054_SHOT_0020_mtm_hyd_v003.ma"
+      ],
+      "User": [
+        "shaik.hasan"
+      ],
+      "FrameRange": [
+        "1001-1070"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_DONE"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-19 14:54:35.677616"
+      ]
+    },
+    "SHOT_0018": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0018/KAR_SC_054_SHOT_0018_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame2.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0018/Maya/KAR_SC_054_SHOT_0018_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "srinu.k"
+      ],
+      "FrameRange": [
+        "1001-1042"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM Done with BillBoard Asset"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-19 14:57:34.162531"
+      ]
+    },
+    "SHOT_0069": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0069/KAR_SC_054_SHOT_0069_mtm_hyd_v001.ma",
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0069/KAR_SC_054_SHOT_0069_mtm_hyd_v002.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame1.webm",
+        "C:/Ref/frame2.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0069/Maya/KAR_SC_054_SHOT_0069_mtm_hyd_v001.ma",
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0069/Maya/KAR_SC_054_SHOT_0069_mtm_hyd_v002.ma"
+      ],
+      "User": [
+        "srinu.k",
+        "srinu.k"
+      ],
+      "FrameRange": [
+        "1001-1059",
+        "1001-1059"
+      ],
+      "FrameRate": [
+        "film",
+        "film"
+      ],
+      "PublishComment": [
+        "MM Done For Lighting Dept Req",
+        "MM Done For Lighting Req"
+      ],
+      "Status": [
+        "Internal Review",
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-19 16:48:41.430237",
+        "2026-02-19 17:56:35.000709"
+      ]
+    },
+    "SHOT_0007": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0007/KAR_SC_054_SHOT_0007_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame5.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0007/Maya/KAR_SC_054_SHOT_0007_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "saiaravind.g"
+      ],
+      "FrameRange": [
+        "1001-1072"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done For RA Req"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-19 17:20:59.016316"
+      ]
+    },
+    "SHOT_0078": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0078/KAR_SC_054_SHOT_0078_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame3.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0078/Maya/KAR_SC_054_SHOT_0078_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "shaik.hasan"
+      ],
+      "FrameRange": [
+        "1001-1022"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done_For_Lighting_Requirement"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-19 17:39:23.587517"
+      ]
+    },
+    "SHOT_0072": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0072/KAR_SC_054_SHOT_0072_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame4.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0072/Maya/KAR_SC_054_SHOT_0072_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "srinu.k"
+      ],
+      "FrameRange": [
+        "1001-1166"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM Done For Lighting Req"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-19 18:18:22.007387"
+      ]
+    },
+    "SHOT_0070": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0070/KAR_SC_054_SHOT_0070_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame6.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0070/Maya/KAR_SC_054_SHOT_0070_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "srinu.k"
+      ],
+      "FrameRange": [
+        "1001-1072"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM Done For Lighting Dept Req"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-20 11:14:29.661737"
+      ]
+    },
+    "SHOT_0076B": {
+      "PublishdFilePath": [
+        "N:/KAR/04_Publish/16_Matchmove/SC_054/SHOT_0076B/KAR_SC_054_SHOT_0076B_mtm_hyd_v001.ma"
+      ],
+      "PreviewPath": [
+        "C:/Ref/frame1.webm"
+      ],
+      "WorkFilePath": [
+        "N:/KAR/03_Work/16_Matchmove/SC_054/SHOT_0076B/Maya/KAR_SC_054_SHOT_0076B_mtm_hyd_v001.ma"
+      ],
+      "User": [
+        "shaik.hasan"
+      ],
+      "FrameRange": [
+        "1001-1023"
+      ],
+      "FrameRate": [
+        "film"
+      ],
+      "PublishComment": [
+        "MM_Done_Lighting_Department"
+      ],
+      "Status": [
+        "Internal Review"
+      ],
+      "Date": [
+        "2026-02-20 11:16:44.746050"
+      ]
+    }
+  }
+}

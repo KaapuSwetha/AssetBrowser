@@ -1,0 +1,229 @@
+{
+    "asset_info": {
+        "OG_chr_emraan_mod": {
+            "AdditionalMaps": [
+                null,
+                null,
+                null,
+                null
+            ],
+            "Alembic": [
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00764/abc/OG_chr_emraan_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00778/abc/OG_chr_emraan_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00827/abc/OG_chr_emraan_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00853/abc/OG_chr_emraan_mod.abc"
+            ],
+            "AssetId": [
+                "hhs_hyd_OG_00764",
+                "hhs_hyd_OG_00778",
+                "hhs_hyd_OG_00827",
+                "hhs_hyd_OG_00853"
+            ],
+            "DecimatedMesh": [
+                null,
+                null,
+                null,
+                null
+            ],
+            "FileName": [
+                "OG_chr_emraan_mod",
+                "OG_chr_emraan_mod",
+                "OG_chr_emraan_mod",
+                "OG_chr_emraan_mod"
+            ],
+            "PreviewPath": [
+               "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif",
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg"
+            ],
+            "PublishComment": [
+                "Emraan neutral is updated with all the given corrections. Please use this file as primary for rigging, lookdev and grooming. For any queries please reachout to me.",
+                "Team, Jaw, carancle, tongue and lip corrections were addressed in this version. Please proceed which this version. For any queries please reach out to me.",
+                "These is no update on the model. Just updated with OG naming convenstions. ",
+                "Emraan model is updated with the body for roto. Please find the file in Asset browser and for any queries reach out to me."
+            ],
+            "PublishdFilePath": [
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00764/maya/OG_chr_emraan_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00778/maya/OG_chr_emraan_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00827/maya/OG_chr_emraan_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00853/maya/OG_chr_emraan_mod.ma"
+            ],
+            "Status": [
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress"
+            ],
+            "TextureSourcePath": [
+                null,
+                null,
+                null,
+                null
+            ],
+            "Usd": [
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00764/usd/OG_chr_emraan_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00778/usd/OG_chr_emraan_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00827/usd/OG_chr_emraan_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00853/usd/OG_chr_emraan_mod.usd"
+            ],
+            "User": [
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/03_Model/chr/Emraan/maya/scenes/v06/OG_chr_emraan_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/Emraan/maya/scenes/v07/OG_chr_emraan_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/Emraan/maya/scenes/v08/OG_chr_emraan_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/Emraan/maya/scenes/v09/OG_chr_emraan_mod.ma"
+            ]
+        },
+        "OG_chr_ogsgambeera_mod": {
+            "AdditionalMaps": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Alembic": [
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00832/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00837/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00838/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00840/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00841/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00848/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00858/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00871/abc/OG_chr_ogsgambeera_mod.abc",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00873/abc/OG_chr_ogsgambeera_mod.abc"
+            ],
+            "AssetId": [
+                "hhs_hyd_OG_00832",
+                "hhs_hyd_OG_00837",
+                "hhs_hyd_OG_00838",
+                "hhs_hyd_OG_00840",
+                "hhs_hyd_OG_00841",
+                "hhs_hyd_OG_00848",
+                "hhs_hyd_OG_00858",
+                "hhs_hyd_OG_00871",
+                "hhs_hyd_OG_00873"
+            ],
+            "DecimatedMesh": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "FileName": [
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod",
+                "OG_chr_ogsgambeera_mod"
+            ],
+            "PreviewPath": [
+                "C:/Ref/image1.avif",
+                "C:/Ref/image2.avif",
+                "C:/Ref/image7.jpg",
+                "C:/Ref/image8.jpg",
+                "C:/Ref/image3.jpg",
+                "C:/Ref/image4.jpg",
+                "C:/Ref/image5.jpg",
+                "C:/Ref/image6.jpg",
+                "C:/Ref/image7.jpg"
+                ],
+            "PublishComment": [
+                "ogs gambeera model prepared for match moving and rigging only.",
+                "Ogs Gambeera model with eyes and mouth cavity is ready for other department. Grooming and Lookdev should this as a primary file. For any queries please reach out to me.",
+                "Ogs Gambeera model modified as per the rigging requirements.",
+                "Ogs Gambeera model with eyes and mouth cavity is ready for other department. Grooming and Lookdev should this as a primary file. For any queries please reach out to me.",
+                "Ogs Gambeera model modified as per the rigging requirements.",
+                "Neutral model is updated with fixes near the carancle and eyelid area. Please use this file for grooming and other departments.",
+                "Ogs gambeera model is updated, fixes were done near eyes and nose areas. Please use this for current lookdev",
+                "Updated Ogs gambeera model addressed on all the feedbacks which are given till now. Please use this file for rigging.",
+                "Ojas gambheera character publish."
+            ],
+            "PublishdFilePath": [
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00832/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00837/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00838/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00840/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00841/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00848/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00858/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00871/maya/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00873/maya/OG_chr_ogsgambeera_mod.ma"
+            ],
+            "Status": [
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Work In Progress",
+                "Internal Review"
+            ],
+            "TextureSourcePath": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "Usd": [
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00832/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00837/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00838/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00840/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00841/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00848/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00858/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00871/usd/OG_chr_ogsgambeera_mod.usd",
+                "N:/OG/04_publish/03_Model/chr/hhs_hyd_OG_00873/usd/OG_chr_ogsgambeera_mod.usd"
+            ],
+            "User": [
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "mojamill.shaik",
+                "jayasimha.k"
+            ],
+            "WorkFilePath": [
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v01/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v02/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v03/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v02/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v03/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v04/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v06/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/03_Work/03_Model/chr/PSPK/maya/scenes/v10/OG_chr_ogsgambeera_mod.ma",
+                "N:/OG/07_TemporaryData/Rajesh/Pawan_kalyan/OG_chr_ogsgambeera_mod.ma"
+            ]
+        }
+    }
+}

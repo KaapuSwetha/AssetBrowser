@@ -1,0 +1,123 @@
+{
+    "sequence_info": {
+        "SHOT_9999": {
+            "PublishdFilePath": [
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v001",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v002",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v003",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v004",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v005",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v006",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v007",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v008",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v009",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v010",
+                "N:/CHM/04_publish/11_Cache/SC_999/SHOT_9999/cache/v011"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm",
+        "C:/Ref/frame1.webm",
+         "C:/Ref/frame6.webm",
+        "C:/Ref/frame5.webm",
+        "C:/Ref/frame3.webm",
+        "C:/Ref/frame4.webm",
+        "C:/Ref/frame2.webm"
+            ],
+            "WorkFilePath": [
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma",
+                "N:/CHM/04_publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma"
+            ],
+            "User": [
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra",
+                "neelendra"
+            ],
+            "FrameRange": [
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223",
+                "1001-1223"
+            ],
+            "FrameRate": [
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film",
+                "film"
+            ],
+            "PublishComment": [
+                "Anim\u2192Light: Alembic cache publish v001 for SHOT_9999 (('shot_cam', 'prp_hunter_whip_001')), frames 1001-1223.",
+                "Anim\u2192Light: Alembic cache publish v002 for SHOT_9999 (('shot_cam', 'T6_chr_Crippled_man_rig', 'T6_chr_Crippled_man_rig1', 'CHM_prp_soccer_ball_rig1', 'prp_hunter_whip_001')), frames 1001-1223.",
+                "Anim\u2192Light: Alembic cache publish v003 for SHOT_9999 (('shot_cam', 'prp_hunter_whip_001')), frames 1001-1223.",
+                "Anim\u2192Light: Alembic cache publish v004 for SHOT_9999 (('shot_cam', 'prp_hunter_whip_001')), frames 1001-1223.",
+                "Anim\u2192Light: Alembic cache publish v005 for SHOT_9999 (('shot_cam', 'prp_hunter_whip_001')), frames 1001-1223.",
+                "Anim\u2192Light: Alembic cache publish v006 for SHOT_9999 (('shot_cam', 'prp_hunter_whip_001')), frames 1001-1223.",
+                "Anim\u2192Light: Alembic publish v007 for SHOT_9999, frames 1001-1223.",
+                "Anim\u2192Light: Alembic publish v008 for SHOT_9999, frames 1001-1223.",
+                "Anim\u2192Light: Alembic publish v009 for SHOT_9999, frames 1001-1223.",
+                "Anim\u2192Light: Alembic publish v010 for SHOT_9999, frames 1001-1223.",
+                "Anim\u2192Light: Alembic publish v011 for SHOT_9999, frames 1001-1223."
+            ],
+            "Status": [
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review",
+                "Internal Review"
+            ],
+            "Date": [
+                "2025-12-06 19:02:18.768888",
+                "2025-12-06 19:11:58.134914",
+                "2025-12-06 19:16:46.119145",
+                "2025-12-06 19:24:15.513180",
+                "2025-12-06 19:37:55.781861",
+                "2025-12-06 19:43:33.995966",
+                "2025-12-09 12:26:37.223124",
+                "2025-12-09 12:44:41.781610",
+                "2025-12-09 12:52:48.057164",
+                "2025-12-09 13:05:09.122333",
+                "2025-12-09 14:10:47.367375"
+            ]
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "sequence_info": {
+        "SHOT_9999": {
+            "PublishdFilePath": [
+                "N:/CHM/04_Publish/09_Animation/SC_999/SHOT_9999/CHM_SC_999_SHOT_9999_ani_hyd_v001.ma"
+            ],
+            "PreviewPath": [
+                 "C:/Ref/frame6.webm"
+            ],
+            "WorkFilePath": [
+                "C:/Users/neelendra/Desktop/CHM_SC_999_SHOT_9999_ani_hyd_v004.ma"
+            ],
+            "User": [
+                "neelendra"
+            ],
+            "FrameRange": [
+                "1001-1223"
+            ],
+            "FrameRate": [
+                "film"
+            ],
+            "PublishComment": [
+                "pipeline cache test"
+            ],
+            "Status": [
+                "Client Approved"
+            ],
+            "Date": [
+                "2025-12-06 18:56:25.739196"
+            ]
+        }
+    }
+}
