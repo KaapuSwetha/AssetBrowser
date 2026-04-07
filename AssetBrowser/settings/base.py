@@ -219,25 +219,43 @@ DEFAULT_FROM_EMAIL = os.environ.get(
 # ---------------------------------------------------------------------
 # Redis (Channels + Cache)
 # ---------------------------------------------------------------------
-REDIS_URL = os.getenv("REDIS_URL", f"redis://{REDIS_HOST}:{REDIS_PORT}/0")
+REDIS_URL = os.environ.get("REDIS_URL", "").strip() or None
+REDIS_AVAILABLE = bool(REDIS_URL)
 
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", REDIS_URL + "?db=1")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", REDIS_URL + "?db=2")
+CELERY_BROKER_URL = os.environ.get(
+    "CELERY_BROKER_URL",
+    f"{REDIS_URL}?db=1" if REDIS_AVAILABLE else None,
+)
+CELERY_RESULT_BACKEND = os.environ.get(
+    "CELERY_RESULT_BACKEND",
+    f"{REDIS_URL}?db=2" if REDIS_AVAILABLE else None,
+)
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {"hosts": [REDIS_URL]},
-    },
-}
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": REDIS_URL,
-        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+if REDIS_AVAILABLE:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {"hosts": [REDIS_URL]},
+        },
     }
-}
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+        }
+    }
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels.layers.InMemoryChannelLayer",
+        },
+    }
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        }
+    }
 # ---------------------------------------------------------------------
 # Sessions
 # ---------------------------------------------------------------------
