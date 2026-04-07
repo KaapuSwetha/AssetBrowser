@@ -5,6 +5,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
+dist/
 downloads/
 eggs/
 .eggs/
@@ -61,6 +62,7 @@ venv.bak/
 *~
 .DS_Store
 staticfiles/
+media/
 logs/
 celerybeat-schedule.bak
 celerybeat-schedule.dir
