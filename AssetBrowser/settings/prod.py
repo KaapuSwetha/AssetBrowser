@@ -31,6 +31,13 @@ CHANNEL_LAYERS = {
     },
 }
 
+# Use local memory cache in production if Redis is not available
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
 # CSRF and security
 csrf_trusted_origins_env = os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").strip()
 if csrf_trusted_origins_env:
