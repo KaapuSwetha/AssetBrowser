@@ -11,10 +11,7 @@ if SECRET_KEY == "unsafe-default-key":
     logger.critical("Missing DJANGO_SECRET_KEY in production — aborting startup")
     raise RuntimeError("DJANGO_SECRET_KEY must be set in production!")
 
-ALLOWED_HOSTS = env.list(
-    "DJANGO_ALLOWED_HOSTS",
-    default=["asset-browser.onrender.com", ".onrender.com"]
-)
+ALLOWED_HOSTS = ["asset-browser.onrender.com", ".onrender.com"]
 
 # Redis Channels layer
 REDIS_URL = os.environ.get("REDIS_URL", "redis://127.0.0.1:6379/1")
