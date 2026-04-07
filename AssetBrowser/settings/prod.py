@@ -29,9 +29,9 @@ CHANNEL_LAYERS = {
 
 # CSRF and security
 CSRF_TRUSTED_ORIGINS = [
-    f"https://{h}" for h in ALLOWED_HOSTS if h
-] + [f"http://{h}" for h in ALLOWED_HOSTS if h]
-
+    "https://asset-browser.onrender.com",
+    "http://asset-browser.onrender.com",
+]
 # Celery & Email overrides
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", CELERY_BROKER_URL)
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", CELERY_RESULT_BACKEND)
