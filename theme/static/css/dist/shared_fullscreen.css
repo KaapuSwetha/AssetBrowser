@@ -1,0 +1,885 @@
+/* =============================================================================
+   shared.css
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   1. KEYFRAMES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes paPillIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.92); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* alias used in sequence_player */
+@keyframes pillSlideIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.92); }
+  to   { opacity: 1; transform: none; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   2. TOP-BAR CIRCLE BUTTONS — base + hover variants
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#minimizeFullscreenBtn,
+#pipBtn,
+#closeFullscreenBtn,
+#minimizeComparisonBtn,
+#miniPreviewBtn,
+#closeComparisonBtn,
+ #seqMinimizeBtn,
+ #seqCloseBtn,
+ #seqMiniPreviewBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Close — red */
+#closeFullscreenBtn:hover,
+#closeComparisonBtn:hover,
+ #seqCloseBtn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #f87171;
+  transform: scale(1.08) rotate(90deg);
+}
+
+/* Minimize — purple */
+#minimizeFullscreenBtn:hover,
+#minimizeComparisonBtn:hover,
+ #seqMinimizeBtn:hover {
+  background: rgba(192, 38, 211, 0.25);
+  border-color: rgba(192, 38, 211, 0.5);
+  color: #f472b6;
+  transform: scale(1.08);
+}
+
+/* PiP / mini-preview — blue */
+#pipBtn:hover,
+#miniPreviewBtn:hover,
+ #seqMiniPreviewBtn:hover {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #93c5fd;
+  transform: scale(1.08);
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   3. TOP BAR SHELL
+      Shared by: preview_card  ·  asset_rows  ·  sequence_player
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#fsTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10001;
+  min-height: 52px;
+}
+
+/* Media / stack area — sits below the fixed top-bar */
+#stackContainer,
+#fsMediaArea {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
+  margin-top: 52px;
+}
+
+#layer1, #layer2,
+#fsMediaArea video,
+#fsMediaArea img,
+#fsMediaArea iframe {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#comparisonFullscreen video,
+#comparisonFullscreen img,
+#fsMediaArea img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   4. TOP-BAR LABELS
+      Shared by: preview_card  ·  asset_rows  ·  sequence_player
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#fsLabels {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Clip / asset name centred in top-bar (sequence player) */
+#seqClipName {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  color: #e2e8f0;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 12px;
+}
+
+.fs-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.fs-label-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.fs-label-name {
+  color: #94a3b8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Separator dots */
+.fs-dot-blue   { color: #3b82f6;  font-size: 8px; flex-shrink: 0; }
+.fs-dot-orange { color: #fb923c;  font-size: 8px; flex-shrink: 0; }
+.fs-dot-violet { color: #8b5cf6;  font-size: 8px; flex-shrink: 0; }
+
+/* Label colour variants */
+.fs-label-blue   { background: rgba(59,  130, 246, 0.18); color: #93c5fd; }
+.fs-label-orange { background: rgba(251, 146,  60, 0.18); color: #fdba74; }
+.fs-label-violet { background: rgba(139,  92, 246, 0.18); color: #c4b5fd; }
+.fs-label-green  { background: rgba(16,  185, 129, 0.18); color: #6ee7b7; }
+
+/* Right-side action group */
+#fsTopBarRight { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+#miniPreviewBtn { font-size: 13px; }
+
+/* Annotation centre slot (preview_card) */
+#fsAnnoCenter {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Top-bar action group (sequence player) */
+.seq-topbar-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   5. FLOATING MINI PILL — container
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#paMiniPill,
+#cmpMiniPill,
+#seqMiniPill {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #0f1f3d, #0f172a);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: 40px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(59, 130, 246, 0.15),
+    0 0 20px rgba(59, 130, 246, 0.10);
+  cursor: grab;
+  min-width: 240px;
+  max-width: 380px;
+  animation: paPillIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: box-shadow 0.2s;
+  font-family: inherit;
+  color: #fff;
+  user-select: none;
+}
+
+#paMiniPill:hover,
+#cmpMiniPill:hover,
+#seqMiniPill:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(59, 130, 246, 0.3),
+    0 0 32px rgba(59, 130, 246, 0.18);
+}
+
+#paMiniPill.pill-dragging,
+#cmpMiniPill.cmp-pill-dragging,
+#seqMiniPill.seq-pill-dragging {
+  cursor: grabbing !important;
+  transition: none !important;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.8),
+    0 0 0 1.5px rgba(59, 130, 246, 0.5),
+    0 0 32px rgba(59, 130, 246, 0.25) !important;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   6. FLOATING MINI PILL — sub-elements
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.pa-pill-icon,
+.cmp-pill-icon,
+.pill-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.2));
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #60a5fa;
+}
+
+.pa-pill-info,
+.cmp-pill-info,
+.pill-info { flex: 1; overflow: hidden; min-width: 0; }
+
+.pa-pill-title,
+.cmp-pill-title,
+.pill-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pa-pill-sub,
+.pill-sub {
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pill-bar-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.pill-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+.pa-pill-actions,
+.cmp-pill-actions,
+.pill-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+/* Restore — blue */
+.pa-pill-restore,
+.cmp-pill-restore,
+.pill-restore-btn {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #60a5fa; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; transition: all 0.2s;
+}
+
+.pa-pill-restore:hover,
+.cmp-pill-restore:hover,
+.pill-restore-btn:hover { background: rgba(59, 130, 246, 0.4); color: #fff; }
+
+/* Close — red */
+.pa-pill-close,
+.cmp-pill-close,
+.pill-close-btn {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #f87171; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; transition: all 0.2s;
+}
+
+.pa-pill-close:hover,
+.cmp-pill-close:hover,
+.pill-close-btn:hover { background: rgba(239, 68, 68, 0.3); color: #fff; }
+
+/* Mini-preview — purple */
+.pa-pill-mini,
+.pill-mini-btn,
+.cmp-pill-restore {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #a78bfa; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; transition: all 0.2s;
+}
+
+.pa-pill-mini:hover,
+.pill-mini-btn:hover { background: rgba(139, 92, 246, 0.4); color: #fff; }
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   7. MINI PLAYER — shell
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#paMiniPlayer,
+#cmpMiniPlayer,
+#seqMiniPlayer,
+#sbsMiniPlayer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0a0a0a;
+  border-radius: 14px;
+  overflow: visible;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  cursor: default;
+  user-select: none;
+}
+
+#paMiniPlayer.mini-visible,
+#cmpMiniPlayer.cmp-mini-visible,
+#seqMiniPlayer.seq-mini-visible,
+#sbsMiniPlayer.sbs-mini-visible {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+#paMiniPlayer.mini-dragging,
+#cmpMiniPlayer.cmp-mini-dragging,
+#seqMiniPlayer.seq-mini-dragging,
+#sbsMiniPlayer.sbs-mini-dragging {
+  transition: none;
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.8), 0 0 0 1.5px rgba(192, 38, 211, 0.5);
+}
+
+#paMiniPlayer.mini-resizing,
+#cmpMiniPlayer.cmp-mini-resizing,
+#seqMiniPlayer.seq-mini-resizing,
+#sbsMiniPlayer.sbs-mini-resizing {
+  transition: none;
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.8), 0 0 0 1.5px rgba(192, 38, 211, 0.6);
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   8. MINI PLAYER — internals
+   ───────────────────────────────────────────────────────────────────────────── */
+/* Two-panel layout inside cmp mini player */
+#cmpMiniVideoWrap ,#sbsMiniVideoWrap{ flex: 1; position: relative; overflow: hidden; background: #000; display: flex; cursor: pointer; }
+
+.cmp-mini-panel ,.sbs-mini-panel{ flex: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000; }
+.cmp-mini-panel + .cmp-mini-panel,.sbs-mini-panel + .sbs-mini-panel  { border-left: 1px solid rgba(255,255,255,0.08); }
+.cmp-mini-panel video,.sbs-mini-panel video { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+
+.cmp-mini-badge,.sbs-mini-badge { position: absolute; top: 6px; left: 6px; font-size: 8px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; pointer-events: none; z-index: 2; }
+.cmp-mini-badge-blue   { background: rgba(59,130,246,0.3);  color: #93c5fd; }
+.cmp-mini-badge-orange { background: rgba(251,146,60,0.3);   color: #fdba74; }
+
+#cmpMiniProgressFill,#miniProgressFill,#seqMiniProgressFill,#sbsMiniProgressFill  { background: linear-gradient(90deg, #3b82f6, #6366f1); }
+#cmpMiniPlayIcon,#miniPlayIcon,#seqMiniPlayIcon,#sbsMiniPlayIcon     { background: rgba(59,130,246,0.85); }
+#cmpMiniPlayBtn,#miniPlayBtn,#seqMiniPlayBtn,#sbsMiniPlayBtn       { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+#cmpMiniVolBtn:hover, #cmpMiniExpandBtn:hover,#miniVolBtn:hover, #miniExpandBtn:hover,#seqMiniVolBtn:hover, #seqMiniExpandBtn:hover,#sbsMiniVolBtn:hover, #sbsMiniExpandBtn:hover { color: #93c5fd; background: rgba(59,130,246,0.2); }
+
+#paMiniPlayer,#cmpMiniPlayer,#seqMiniPlayer,#sbsMiniPlayer { width: 320px; height: 220px; min-width: 200px; min-height: 150px; }
+
+
+.sbs-mini-badge-left  { background: rgba(139,92,246,.3); color: #c4b5fd; }
+.sbs-mini-badge-right { background: rgba(16,185,129,.3);  color: #6ee7b7; }
+
+#miniInner,
+#cmpMiniInner,
+#seqMiniInner,
+#sbsMiniInner {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+#miniInner > *, #cmpMiniInner > *,
+#seqMiniInner > *, #sbsMiniInner > * { pointer-events: auto; }
+
+#miniDragHandle,
+#cmpMiniDragHandle,
+#seqMiniDragHandle,
+#sbsMiniDragHandle {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 28px;
+  cursor: grab;
+  z-index: 4;
+}
+
+#miniDragHandle:active,
+#cmpMiniDragHandle:active,
+#seqMiniDragHandle:active,
+#sbsMiniDragHandle:active { cursor: grabbing; }
+
+#miniLabel,
+#cmpMiniLabel,
+#seqMiniLabel,
+#sbsMiniLabel {
+  position: absolute;
+  top: 8px; left: 8px;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px;
+  background: rgba(59, 130, 246, 0.22);
+  color: #93c5fd;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  z-index: 5;
+}
+
+#miniVideoWrap,
+#cmpMiniVideoWrap,
+#seqMiniVideoWrap,
+#sbsMiniVideoWrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#miniVideoWrap video,
+#seqMiniVideoWrap video,
+#sbsMiniVideoWrap video { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+
+#miniProgress,
+#cmpMiniProgress,
+#seqMiniProgress,
+#sbsMiniProgress {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 6;
+}
+
+#miniProgressFill,
+#cmpMiniProgressFill,
+#seqMiniProgressFill,
+#sbsMiniProgressFill {
+  height: 100%;
+  width: 0%;
+  border-radius: 9999px;
+  transition: width 0.1s linear;
+}
+
+#miniOverlay,
+#cmpMiniOverlay,
+#seqMiniOverlay,
+#sbsMiniOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.2s;
+  z-index: 3;
+  pointer-events: none;
+}
+
+#miniVideoWrap:hover #miniOverlay,
+#cmpMiniVideoWrap:hover #cmpMiniOverlay,
+#seqMiniVideoWrap:hover #seqMiniOverlay,
+#sbsMiniVideoWrap:hover #sbsMiniOverlay { background: rgba(0, 0, 0, 0.35); }
+
+#miniPlayIcon,
+#cmpMiniPlayIcon,
+#seqMiniPlayIcon,
+#sbsMiniPlayIcon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+#miniVideoWrap:hover #miniPlayIcon,
+#cmpMiniVideoWrap:hover #cmpMiniPlayIcon,
+#seqMiniVideoWrap:hover #seqMiniPlayIcon,
+#sbsMiniVideoWrap:hover #sbsMiniPlayIcon { opacity: 1; transform: scale(1); }
+
+#miniControls,
+#cmpMiniControls,
+#seqMiniControls,
+#sbsMiniControls {
+  height: 40px; min-height: 40px; flex-shrink: 0;
+  background: rgba(15, 15, 20, 0.97);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex; align-items: center;
+  padding: 0 10px; gap: 6px;
+}
+
+#miniPlayBtn,
+#cmpMiniPlayBtn,
+#seqMiniPlayBtn,
+#sbsMiniPlayBtn {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  border: none; color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; flex-shrink: 0;
+  transition: transform 0.15s;
+}
+
+#miniPlayBtn:hover,
+#cmpMiniPlayBtn:hover,
+#seqMiniPlayBtn:hover,
+#sbsMiniPlayBtn:hover { transform: scale(1.1); }
+
+#miniTime,
+#cmpMiniTime,
+#seqMiniTime,
+#sbsMiniTime {
+  font-size: 10px; color: #9ca3af;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap; flex: 1; text-align: center;
+}
+
+#miniVolBtn, #miniExpandBtn, #miniCloseBtn,
+#cmpMiniVolBtn, #cmpMiniExpandBtn, #cmpMiniCloseBtn,
+#seqMiniVolBtn, #seqMiniExpandBtn, #seqMiniCloseBtn,
+#sbsMiniVolBtn, #sbsMiniExpandBtn, #sbsMiniCloseBtn {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; flex-shrink: 0; transition: all 0.15s;
+}
+
+#miniCloseBtn:hover,
+#cmpMiniCloseBtn:hover,
+#seqMiniCloseBtn:hover,
+#sbsMiniCloseBtn:hover {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   9. RESIZE HANDLES — 8-directional, identical across all features
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.mini-resize-handle,
+.cmp-resize-handle,
+.seq-resize-handle { position: absolute; z-index: 10; }
+
+.mini-resize-handle[data-dir="n"],
+.cmp-resize-handle[data-dir="n"],
+.seq-resize-handle[data-dir="n"]  { top:-5px;    left:12px;  right:12px;  height:10px; cursor:n-resize; }
+
+.mini-resize-handle[data-dir="s"],
+.cmp-resize-handle[data-dir="s"],
+.seq-resize-handle[data-dir="s"]  { bottom:-5px; left:12px;  right:12px;  height:10px; cursor:s-resize; }
+
+.mini-resize-handle[data-dir="e"],
+.cmp-resize-handle[data-dir="e"],
+.seq-resize-handle[data-dir="e"]  { right:-5px;  top:12px;   bottom:12px; width:10px;  cursor:e-resize; }
+
+.mini-resize-handle[data-dir="w"],
+.cmp-resize-handle[data-dir="w"],
+.seq-resize-handle[data-dir="w"]  { left:-5px;   top:12px;   bottom:12px; width:10px;  cursor:w-resize; }
+
+.mini-resize-handle[data-dir="nw"],
+.cmp-resize-handle[data-dir="nw"],
+.seq-resize-handle[data-dir="nw"] { top:-5px;    left:-5px;  width:18px;  height:18px; cursor:nw-resize; border-radius:14px 0 0 0; }
+
+.mini-resize-handle[data-dir="ne"],
+.cmp-resize-handle[data-dir="ne"],
+.seq-resize-handle[data-dir="ne"] { top:-5px;    right:-5px; width:18px;  height:18px; cursor:ne-resize; border-radius:0 14px 0 0; }
+
+.mini-resize-handle[data-dir="sw"],
+.cmp-resize-handle[data-dir="sw"],
+.seq-resize-handle[data-dir="sw"] { bottom:-5px; left:-5px;  width:18px;  height:18px; cursor:sw-resize; border-radius:0 0 0 14px; }
+
+.mini-resize-handle[data-dir="se"],
+.cmp-resize-handle[data-dir="se"],
+.seq-resize-handle[data-dir="se"] { bottom:-5px; right:-5px; width:18px;  height:18px; cursor:se-resize; border-radius:0 0 14px 0; }
+
+.mini-resize-handle[data-dir="se"]::after,
+.cmp-resize-handle[data-dir="se"]::after,
+.seq-resize-handle[data-dir="se"]::after {
+  content:''; position:absolute;
+  bottom:5px; right:5px; width:8px; height:8px;
+  border-right:2px solid rgba(192, 38, 211, 0.6);
+  border-bottom:2px solid rgba(192, 38, 211, 0.6);
+  border-radius:0 0 2px 0;
+  opacity:0; transition:opacity 0.2s;
+}
+
+#paMiniPlayer:hover .mini-resize-handle[data-dir="se"]::after,
+#cmpMiniPlayer:hover .cmp-resize-handle[data-dir="se"]::after,
+#seqMiniPlayer:hover .seq-resize-handle[data-dir="se"]::after,
+#sbsMiniPlayer:hover .seq-resize-handle[data-dir="se"]::after { opacity:1; }
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   10. UNIFIED CONTROLS — layout shell
+       Shared by: preview_card  ·  sequence_player  ·  asset_rows
+       NOTE: background colour, height overrides, and padding tweaks stay
+       in each per-file stylesheet to preserve their unique styling.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#unifiedControls {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  z-index: 100;
+  width: 100%;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   11. SEEK ROW
+       Shared by: preview_card  ·  sequence_player
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#fsSeekRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fs-time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: #e2e8f0;
+  flex-shrink: 0;
+  min-width: 36px;
+}
+
+.fs-time-dim { color: #6b7280; }
+
+#seekBarWrapper {
+  flex: 1;
+  position: relative;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.seek-track {
+  position: absolute;
+  left: 0; right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+#seekFill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.05s linear;
+   background: rgb(203 213 225 / var(--tw-text-opacity, 1))
+}
+
+#seekBar {
+  position: absolute;
+  left: 0; right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+#seekBar::-webkit-slider-thumb { width: 14px; height: 14px; }
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   12. CONTROLS ROW & GROUPS
+       Shared by: preview_card  ·  sequence_player  ·  asset_rows
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#fsControlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fs-ctrl-group        { display: flex; align-items: center; gap: 4px; }
+.fs-ctrl-group-left   { flex: 1; display: flex; align-items: center; gap: 4px; justify-content: flex-start; }
+.fs-ctrl-group-right  { flex: 1; display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
+
+.fs-ctrl-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.fs-divider  { width: 1px; height: 16px; background: #374151; flex-shrink: 0; }
+.fs-dot-sm   { font-size: 7px; flex-shrink: 0; }
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   13. ICON BUTTONS — base
+       Hover colours (violet / purple / neutral) are overridden per-file.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.fs-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.fs-icon-btn:hover {
+  background: rgba(139,92,246,.2);
+  border-color: rgba(139,92,246,.4);
+  color: #c4b5fd;
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   14. PLAY / PAUSE BUTTON — base
+       Gradient background, box-shadow, and hover shadow are set per-file.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#playPauseBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  background: rgba(30, 41, 59, 0.7);
+}
+
+#playPauseBtn:hover { transform: translateY(-1px) scale(1.06);box-shadow: 0 6px 16px rgba(139,92,246,.55); }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   15. VOLUME SLIDER — base
+       accent-color is set per-file.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.fs-vol-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80px;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  accent-color: #8b5cf6;
+}
+
+.fs-vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.fs-vol-slider::-moz-range-thumb {
+  width: 12px; height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
