@@ -8,7 +8,9 @@ logger = get_logger(__name__)
 
 def get_redis(retries: int = 3, delay: float = 0.5) -> redis.Redis:
     """Return a Redis connection with small retry window."""
-    url = getattr(settings, "REDIS_URL", "redis://127.0.0.1:6379/3")
+    url = getattr(settings, "REDIS_URL", None)
+    if not url:
+        raise RuntimeError("Redis is not configured. Set REDIS_URL to use Redis-backed features.")
     last_exc = None
     for attempt in range(1, retries + 1):
         try:

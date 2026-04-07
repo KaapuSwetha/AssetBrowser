@@ -19,17 +19,25 @@ else:
     ALLOWED_HOSTS = ["assetbrowser-1asu.onrender.com", ".onrender.com"]
 
 # Redis Channels layer
-REDIS_URL = os.environ.get("REDIS_URL", "redis://127.0.0.1:6379/1")
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [REDIS_URL],
-            "capacity": 10000,
-            "expiry": 10,
+REDIS_URL = os.environ.get("REDIS_URL", "").strip() or None
+
+if REDIS_URL:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [REDIS_URL],
+                "capacity": 10000,
+                "expiry": 10,
+            },
         },
-    },
-}
+    }
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels.layers.InMemoryChannelLayer",
+        }
+    }
 
 # Use local memory cache in production if Redis is not available
 CACHES = {

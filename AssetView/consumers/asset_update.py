@@ -16,22 +16,19 @@ def _get_redis_url():
     """
     try:
         from django.conf import settings
-        # prefer explicit REDIS_URL setting, otherwise fallback to channel layer host/port if present
         redis_url = getattr(settings, "REDIS_URL", None)
-        if not redis_url:
-            # safe fallback: try to read channel layers if they exist, otherwise default localhost
-            cl = getattr(settings, "CHANNEL_LAYERS", None)
-            if cl:
-                try:
-                    host, port = cl["default"]["CONFIG"]["hosts"][0]
-                    redis_url = f"redis://{host}:{port}/3"
-                except Exception:
-                    redis_url = "redis://127.0.0.1:6379/3"
-            else:
-                redis_url = "redis://127.0.0.1:6379/3"
-        return redis_url
+        if redis_url:
+            return redis_url
+        cl = getattr(settings, "CHANNEL_LAYERS", None)
+        if cl:
+            try:
+                host, port = cl["default"]["CONFIG"]["hosts"][0]
+                return f"redis://{host}:{port}/3"
+            except Exception:
+                return None
+        return None
     except Exception:
-        return "redis://127.0.0.1:6379/3"
+        return None
 
 
 @sync_to_async
@@ -39,6 +36,8 @@ def mark_active(session_key: str, ttl: int = 180):
     try:
         import redis
         redis_url = _get_redis_url()
+        if not redis_url:
+            return
         r = redis.Redis.from_url(redis_url)
         r.set(f"artist_active:{session_key}", "1", ex=ttl)
     except Exception as e:
@@ -50,6 +49,8 @@ def mark_inactive(session_key: str):
     try:
         import redis
         redis_url = _get_redis_url()
+        if not redis_url:
+            return
         r = redis.Redis.from_url(redis_url)
         r.delete(f"artist_active:{session_key}")
     except Exception as e:

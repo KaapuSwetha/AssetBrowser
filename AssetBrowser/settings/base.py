@@ -189,8 +189,6 @@ REVIEW_ALLOW_HLS = False  # optional
 REDIS_HOST = env('REDIS_HOST', default='127.0.0.1')
 REDIS_PORT = env.int('REDIS_PORT', default=6379)
 
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", f"redis://{REDIS_HOST}:{REDIS_PORT}/1")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", f"redis://{REDIS_HOST}:{REDIS_PORT}/2")
 
 CELERY_TASK_ACKS_LATE = True
 CELERY_TASK_REJECT_ON_WORKER_LOST = True
@@ -221,25 +219,43 @@ DEFAULT_FROM_EMAIL = os.environ.get(
 # ---------------------------------------------------------------------
 # Redis (Channels + Cache)
 # ---------------------------------------------------------------------
-REDIS_URL = os.getenv("REDIS_URL", f"redis://{REDIS_HOST}:{REDIS_PORT}/0")
+REDIS_URL = os.getenv("REDIS_URL", "").strip() or None
+REDIS_AVAILABLE = bool(REDIS_URL)
 
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", REDIS_URL + "?db=1")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", REDIS_URL + "?db=2")
+CELERY_BROKER_URL = os.environ.get(
+    "CELERY_BROKER_URL",
+    f"{REDIS_URL}?db=1" if REDIS_AVAILABLE else None,
+)
+CELERY_RESULT_BACKEND = os.environ.get(
+    "CELERY_RESULT_BACKEND",
+    f"{REDIS_URL}?db=2" if REDIS_AVAILABLE else None,
+)
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {"hosts": [REDIS_URL]},
-    },
-}
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": REDIS_URL,
-        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+if REDIS_AVAILABLE:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {"hosts": [REDIS_URL]},
+        },
     }
-}
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+        }
+    }
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels.layers.InMemoryChannelLayer",
+        }
+    }
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        }
+    }
 # ---------------------------------------------------------------------
 # Sessions
 # ---------------------------------------------------------------------
