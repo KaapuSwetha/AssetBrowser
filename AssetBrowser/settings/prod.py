@@ -13,7 +13,7 @@ if SECRET_KEY == "unsafe-default-key":
 
 ALLOWED_HOSTS = env.list(
     "DJANGO_ALLOWED_HOSTS",
-    default=os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(","),
+    default=["asset-browser.onrender.com", ".onrender.com"]
 )
 
 # Redis Channels layer
