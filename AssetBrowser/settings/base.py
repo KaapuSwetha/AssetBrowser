@@ -173,7 +173,9 @@ CELERY_IMPORTS = (
 # ---------------------------------------------------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'theme' / 'static']
+# The theme app already exposes `theme/static/` via AppDirectoriesFinder,
+# so we do not need to duplicate it here.
+STATICFILES_DIRS = []
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
