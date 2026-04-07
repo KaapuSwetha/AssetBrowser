@@ -1,7 +1,7 @@
 # AssetView/permissions.py
 import logging
 from typing import Tuple, Optional
-import socket
+
 logger = logging.getLogger(__name__)
 
 def get_client_ip(request) -> Optional[str]:
@@ -21,25 +21,16 @@ def get_client_ip(request) -> Optional[str]:
 
     logger.warning("Could not determine client IP address")
     return None
-def get_render_ips() -> list:
-    """Resolve Render hostname to IPs at runtime."""
-    try:
-        hostname = "assetbrowser-1asu.onrender.com"
-        _, _, ip_list = socket.gethostbyname_ex(hostname)
-        logger.info(f"Resolved Render IPs: {ip_list}")
-        return ip_list
-    except socket.gaierror as e:
-        logger.error(f"Failed to resolve Render hostname: {e}")
-        return []
 
 def check_user_permission(request) -> Tuple[bool, Optional[str], Optional[str]]:
+    """
+    Check if the current user has permission to edit based on IP address.
+    Returns tuple: (can_edit, username, client_ip)
+    
+    Note: Users without an identifiable IP address are also allowed to edit.
+    """
     client_ip = get_client_ip(request)
-
-    # Dynamically check if request comes from Render
-    if client_ip and client_ip in get_render_ips():
-        logger.info(f"Access granted to Render service IP: {client_ip}")
-        return True, 'render_service', client_ip
-
+    logger.info(f"Client IP: {client_ip}")
 
     # Map IP addresses to usernames
     ip_to_username = {
@@ -53,9 +44,9 @@ def check_user_permission(request) -> Tuple[bool, Optional[str], Optional[str]]:
         '127.0.0.1': 'localhost',
     }
 
-    # List of users allowed to edit status - FIXED: Added missing comma
+    # List of users allowed to edit status
     allowed_users = [
-        'swetha', 'neelendra', 'localhost',  # Added comma here
+        'swetha', 'neelendra', 'localhost',
         'subbarao.ch', 'yasasvi.c', 'adam.s', 'naveen.kumar'
     ]
 
@@ -64,7 +55,8 @@ def check_user_permission(request) -> Tuple[bool, Optional[str], Optional[str]]:
     logger.info(f"Resolved username: {username}")
 
     # Check if user is allowed to edit
-    can_edit = username in allowed_users if username else False
-    logger.info(f"Permission check: Username: {username}, Can edit: {can_edit}")
+    # Allow edit if: user is in allowed_users OR client_ip cannot be determined
+    can_edit = (username in allowed_users) if username else True
+    logger.info(f"Permission check: Username: {username}, Can edit: {can_edit}, IP: {client_ip}")
 
     return can_edit, username, client_ip
