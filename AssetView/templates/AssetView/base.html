@@ -115,10 +115,10 @@
     }
 
     /* Thin scrollbar */
-    #notifList::-webkit-scrollbar { width: 3px; }
-    #notifList::-webkit-scrollbar-track { background: transparent; }
-    #notifList::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 99px; }
-  </style>
+   #notifList::-webkit-scrollbar { width: 3px; }
+#notifList::-webkit-scrollbar-track { background: transparent; }
+#notifList::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 99px; }
+</style>
 </head>
 
 <body
@@ -253,8 +253,7 @@
           </div>
 
           <!-- Notification list -->
-          <ul id="notifList" class="max-h-[400px] overflow-y-auto"></ul>
-
+          <ul id="notifList" class="overflow-y-auto" style="max-height: calc(6 * 90px); scroll-behavior: smooth;"></ul>
           <!-- Empty state -->
           <div id="notifEmpty" class="hidden flex-col items-center justify-center py-12 gap-2" style="padding:5px">
             <div class="h-14 rounded-2xl flex items-center justify-center mb-1"
@@ -774,6 +773,11 @@
           removeRow(b.dataset.id);
         });
       });
+      if (notifications.length > 6) {
+    list.style.overflowY = 'auto';
+} else {
+    list.style.overflowY = 'hidden';
+}
     }
     function removeRow(id) {
       const row = list.querySelector(`[data-id="${id}"]`);

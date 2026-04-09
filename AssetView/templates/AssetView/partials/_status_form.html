@@ -9,13 +9,13 @@
       hx-target="this"
       onsubmit="this.querySelector('button[type=submit]').disabled=true"
     >
+      {% csrf_token %}
       <input type="hidden" name="uid" value="{{ uid }}"/>
       <input type="hidden" name="path" value="{{ path }}"/>
       <input type="hidden" name="mode" value="{{ mode }}"/>
       <input type="hidden" name="name" value="{{ name }}"/>
       <input type="hidden" name="variant" value="{{ variant }}"/>  
       <input type="hidden" name="index" value="{{ index }}"/>
-      
       <!-- Status Selection -->
       <div class="px-4 py-2.5 border-b border-slate-600/50">
           <label class="block text-[9px] sm:text-[10px] md:text-xs font-medium text-slate-300 mb-1 md:mb-1.5">Status</label>
