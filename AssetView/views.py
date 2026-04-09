@@ -2333,47 +2333,71 @@ def get_asset_history(request):
     html = render_to_string("AssetView/partials/_history_table.html", {"history": history})
     return HttpResponse(html)
 
-
+ 
 @require_GET
 def get_notifications(request):
     """
-    Poll endpoint — scans active-project JSON files for new keys/variants,
-    then returns all unread notifications as JSON.
+    Poll endpoint — scans active-project JSON files for changes,
+    then returns all UNREAD notifications for the requesting user.
     """
+    # ── Resolve username for this request ─────────────────────────────────
+    _, username, client_ip = check_user_permission(request)
+    if not username:
+        # Fall back to IP-based identity so anonymous users still get
+        # per-session isolation rather than sharing one "anonymous" bucket.
+        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
+ 
+    # ── Scan for new changes across all active projects ───────────────────
     json_files = []
     for project in ACTIVE:
         for section in ("Asset", "Sequence"):
             section_path = BASE / project / section
             if section_path.exists():
                 json_files.extend(section_path.rglob("*.json"))
-
+ 
     scan_json_for_new_keys(json_files)
-
-    unread = get_unread_notifications()
+ 
+    # ── Return only this user's unread notifications ───────────────────────
+    unread = get_unread_notifications(username)
     unread.sort(key=lambda n: n.get("timestamp", ""), reverse=True)
-
+ 
     return JsonResponse({"count": len(unread), "notifications": unread})
-
-
+ 
+ 
 @csrf_exempt
 @require_POST
 def mark_notification_read_view(request, notification_id):
-    """Mark a single notification as read (called when user clicks 'View')."""
-    ok = mark_notification_read(notification_id)
+    """Mark a single notification as read for THIS user only."""
+    _, username, client_ip = check_user_permission(request)
+    if not username:
+        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
+ 
+    ok = mark_notification_read(notification_id, username)
     return JsonResponse({"ok": ok})
-
-
+ 
+ 
 @csrf_exempt
 @require_POST
 def mark_all_notifications_read(request):
-    """Mark every unread notification as read."""
-    count = mark_all_read()
+    """Mark every unread notification as read for THIS user only."""
+    _, username, client_ip = check_user_permission(request)
+    if not username:
+        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
+ 
+    count = mark_all_read(username)
     return JsonResponse({"ok": True, "marked": count})
-
-
+ 
+ 
 @csrf_exempt
 @require_POST
 def delete_notification_view(request, notification_id):
-    """Permanently delete a single notification (dismiss ×)."""
-    ok = delete_notification(notification_id)
+    """
+    Dismiss a single notification for THIS user only.
+    The master notification list is untouched — other users are unaffected.
+    """
+    _, username, client_ip = check_user_permission(request)
+    if not username:
+        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
+ 
+    ok = delete_notification(notification_id, username)
     return JsonResponse({"ok": ok})
