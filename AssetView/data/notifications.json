@@ -1,0 +1,22 @@
+[
+  {
+    "id": "4112936e-798b-4632-89ef-9c1f3cc11714",
+    "type": "new_version",
+    "asset": "KAR_prp_test_car_mod",
+    "key": "default / AssetId",
+    "json_path": "AssetView\\projects\\KAR\\Asset\\prp\\03_Model\\KAR_prp_test_asset_info.json",
+    "timestamp": "2026-04-16T11:35:45.405098",
+    "title": "Publish changed in default",
+    "message": "Asset: KAR_prp_test_car_mod  |  ID: test_asset_001  |  Status: Internal Approved  |  Comment: 1111111111111111"
+  },
+  {
+    "id": "2e64e7ac-2f04-4b8e-80f8-fd732fc6c798",
+    "type": "new_version",
+    "asset": "KAR_prp_test_car_mod",
+    "key": "default / AssetId",
+    "json_path": "AssetView\\projects\\KAR\\Asset\\prp\\03_Model\\KAR_prp_test_asset_info.json",
+    "timestamp": "2026-04-16T11:36:06.022032",
+    "title": "Publish changed in default",
+    "message": "Asset: KAR_prp_test_car_mod  |  ID: test_asset_00111  |  Status: Internal Approved  |  Comment: 1111111111111111"
+  }
+]

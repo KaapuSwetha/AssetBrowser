@@ -14,6 +14,24 @@ This means:
   • A new notification appears for ALL users simultaneously.
   • Marking read / dismissing only affects the current user's state file.
   • Other users still see the notification as unread until they act on it.
+
+Fix log
+-------
+  v2 – Group simultaneous field changes (e.g. Status + Comment updated at
+       the same time on the same shot/variant) into a single notification
+       instead of one notification per field.
+
+  v2 – Also fingerprint and diff root-level fields on every asset/shot entry
+       (i.e. fields stored directly on the shot, outside any "Variants" sub-
+       dict).  This was the reason sequence-shot changes (Status, Comment, …)
+       never produced notifications — sequence JSON files typically keep those
+       fields at the shot root, not inside a Variants block.
+
+  v3 – All notification messages are now a single short context line:
+         Asset: <name>  |  ID: <assetid>  |  Status: <val>  |  Comment: <val>
+       Values are pulled from the latest (post-change) fingerprint so they
+       always reflect the current state of the record.  Empty fields are
+       omitted.  This applies to both single-field and multi-field changes.
 """
 from __future__ import annotations
 import json
@@ -37,7 +55,26 @@ USER_STATE_DIR  = DATA_DIR / "user_state"           # one JSON file per user
 _VERSIONED_FIELDS = {"PublishdFilePath", "PreviewPath", "FileName", "AssetId", "Alembic", "Usd"}
 _STATUS_FIELD     = "Status"
 _COMMENT_FIELD    = "PublishComment"
-_SKIP_FIELDS      = {"History"}
+_SKIP_FIELDS      = {"History", "Variants"}   # "Variants" added so root-fp never recurses into it
+
+# Type priority for summary notifications (lower = higher priority)
+_TYPE_PRIORITY = {
+    "new_version":   0,
+    "status_change": 1,
+    "comment_change":2,
+    "field_change":  3,
+    "new_key":       4,
+}
+
+# Friendly labels shown in notification titles
+_FIELD_LABELS = {
+    "Status":           "Status",
+    "PublishComment":   "Comment",
+    "PublishdFilePath": "Publish Path",
+    "PreviewPath":      "Preview",
+    "FileName":         "File Name",
+    "AssetId":          "Asset ID",
+}
 
 
 # ── Bootstrap ─────────────────────────────────────────────────────────────
@@ -94,9 +131,6 @@ def _user_state_path(username: str) -> Path:
 
 
 def _load_user_state(username: str) -> Dict:
-    """
-    Returns { "read": {id: true, ...}, "deleted": {id: true, ...} }
-    """
     return _load_json_safe(
         _user_state_path(username),
         {"read": {}, "deleted": {}},
@@ -111,7 +145,6 @@ def _save_user_state(username: str, state: Dict):
 def get_unread_notifications(username: str) -> List[Dict]:
     """
     Return notifications that this user has NOT yet read and NOT deleted.
-    The master list is filtered through the user's personal state.
     """
     master       = load_notifications()
     user_state   = _load_user_state(username)
@@ -122,16 +155,15 @@ def get_unread_notifications(username: str) -> List[Dict]:
     for n in master:
         nid = n.get("id")
         if user_deleted.get(nid):
-            continue                        # user dismissed — skip
+            continue
         if user_read.get(nid):
-            continue                        # user already read — skip
-        result.append(dict(n))              # fresh copy, no shared mutation
+            continue
+        result.append(dict(n))
     return result
 
 
 # ── Per-user read / dismiss ────────────────────────────────────────────────
 def mark_notification_read(notification_id: str, username: str) -> bool:
-    """Mark one notification as read for THIS user only."""
     state = _load_user_state(username)
     state.setdefault("read", {})[notification_id] = True
     _save_user_state(username, state)
@@ -139,7 +171,6 @@ def mark_notification_read(notification_id: str, username: str) -> bool:
 
 
 def mark_all_read(username: str) -> int:
-    """Mark every notification as read for THIS user only."""
     master = load_notifications()
     state  = _load_user_state(username)
     state.setdefault("read", {})
@@ -155,13 +186,9 @@ def mark_all_read(username: str) -> int:
 
 
 def delete_notification(notification_id: str, username: str) -> bool:
-    """
-    'Delete' a notification for THIS user only.
-    The master list stays intact so other users are unaffected.
-    """
     state = _load_user_state(username)
     state.setdefault("deleted", {})[notification_id] = True
-    state.setdefault("read",    {})[notification_id] = True  # also counts as read
+    state.setdefault("read",    {})[notification_id] = True
     _save_user_state(username, state)
     return True
 
@@ -189,8 +216,41 @@ def _variant_fingerprint(variant_data: dict) -> dict:
         fields[key] = _as_list(value)
     return {
         "fields":   fields,
-        "top_keys": sorted(variant_data.keys()),
+        "top_keys": sorted(k for k in variant_data.keys() if k not in _SKIP_FIELDS),
     }
+
+
+def _context_message(asset_name: str, new_fp: dict) -> str:
+    """
+    Build the short one-line message used in every notification:
+      Asset: <name>  |  ID: <assetid>  |  Status: <value>  |  Comment: <value>
+
+    Values come from the LATEST fingerprint (post-change) so they always
+    reflect the current state of the record.  Empty fields are omitted.
+    """
+    fields = new_fp.get("fields", {})
+
+    def _latest(key: str) -> str:
+        """Return the last non-empty value for a field."""
+        for v in reversed(fields.get(key, [])):
+            s = _normalise_val(v)
+            if s:
+                return s
+        return ""
+
+    asset_id = _latest("AssetId")
+    status   = _latest("Status")
+    comment  = _latest("PublishComment")
+
+    parts = [f"Asset: {asset_name}"]
+    if asset_id:
+        parts.append(f"ID: {asset_id}")
+    if status:
+        parts.append(f"Status: {status}")
+    if comment:
+        parts.append(f"Comment: {comment}")
+
+    return "  |  ".join(parts)
 
 
 def _diff_field_lists(
@@ -202,8 +262,14 @@ def _diff_field_lists(
     json_path: str,
     notif_type: str,
     title_prefix: str,
+    new_fp: dict,
 ) -> List[Dict]:
+    """
+    Returns per-index change notifications for a single field.
+    The message is always the short context line (asset / ID / status / comment).
+    """
     notifications: List[Dict] = []
+    context = _context_message(asset_name, new_fp)
 
     # Changed entries at existing indexes
     for idx in range(min(len(old_vals), len(new_vals))):
@@ -216,26 +282,21 @@ def _diff_field_lists(
                 key=f"{variant_name} / {field}",
                 json_path=json_path,
                 title=f"{title_prefix} changed in {variant_name}",
-                message=(
-                    f'{asset_name} › {variant_name} [{field}][{idx}]: '
-                    f'"{old_v}" → "{new_v}"'
-                ),
+                message=context,
             ))
 
     # Newly appended entries
     for idx in range(len(old_vals), len(new_vals)):
         new_v = _normalise_val(new_vals[idx])
-        notifications.append(_make_notif(
-            notif_type=notif_type,
-            asset=asset_name,
-            key=f"{variant_name} / {field}",
-            json_path=json_path,
-            title=f"New {title_prefix.lower()} entry in {variant_name}",
-            message=(
-                f'{asset_name} › {variant_name} [{field}][{idx}]: '
-                f'set to "{new_v}"'
-            ),
-        ))
+        if new_v:
+            notifications.append(_make_notif(
+                notif_type=notif_type,
+                asset=asset_name,
+                key=f"{variant_name} / {field}",
+                json_path=json_path,
+                title=f"New {title_prefix.lower()} entry in {variant_name}",
+                message=context,
+            ))
 
     return notifications
 
@@ -247,13 +308,22 @@ def _diff_variant(
     new_fp: dict,
     json_path: str,
 ) -> List[Dict]:
-    notifications: List[Dict] = []
+    """
+    Diff a single variant (or root-level shot block) and return notifications.
 
+    Single field changed   → one specific notification, e.g. "Status changed in anim"
+    Multiple fields changed → ONE summary notification,  e.g. "Status, Comment changed"
+
+    All notification messages use _context_message():
+      Asset: <n>  |  ID: <id>  |  Status: <val>  |  Comment: <val>
+    """
     if not old_fp:
-        return notifications   # first scan — build baseline only
+        return []   # first scan — build baseline only
 
     old_fields: Dict[str, list] = old_fp.get("fields", {})
     new_fields: Dict[str, list] = new_fp.get("fields", {})
+
+    changed_groups: List[tuple] = []  # (field_name, notif_type, [notif, …])
 
     for field in set(old_fields) | set(new_fields):
         if field in _SKIP_FIELDS:
@@ -271,7 +341,7 @@ def _diff_variant(
         else:
             notif_type, title_prefix = "field_change", field
 
-        notifications.extend(_diff_field_lists(
+        field_notifs = _diff_field_lists(
             old_vals=old_vals,
             new_vals=new_vals,
             field=field,
@@ -280,32 +350,62 @@ def _diff_variant(
             json_path=json_path,
             notif_type=notif_type,
             title_prefix=title_prefix,
-        ))
+            new_fp=new_fp,
+        )
 
-    # New field keys appearing inside the variant
+        if field_notifs:
+            changed_groups.append((field, notif_type, field_notifs))
+
+    # ── New field keys appearing inside the variant ───────────────────────
     old_keys = set(old_fp.get("top_keys", []))
     new_keys = set(new_fp.get("top_keys", []))
+    key_notifs: List[Dict] = []
     for key_name in new_keys - old_keys:
         if key_name in _SKIP_FIELDS:
             continue
-        notifications.append(_make_notif(
+        key_notifs.append(_make_notif(
             notif_type="new_key",
             asset=asset_name,
             key=key_name,
             json_path=json_path,
             title=f"New field added to {variant_name}",
-            message=f'"{key_name}" was added to {asset_name} › {variant_name}',
+            message=_context_message(asset_name, new_fp),
         ))
 
-    return notifications
+    if not changed_groups:
+        return key_notifs
+
+    # ── Single field changed ──────────────────────────────────────────────
+    if len(changed_groups) == 1:
+        _field, _type, notifs = changed_groups[0]
+        return notifs + key_notifs
+
+    # ── Multiple fields changed simultaneously → ONE summary notification ─
+    best_type = sorted(
+        [t for _, t, _ in changed_groups],
+        key=lambda x: _TYPE_PRIORITY.get(x, 99),
+    )[0]
+
+    human_list = ", ".join(
+        _FIELD_LABELS.get(f, f) for f, _, _ in changed_groups
+    )
+
+    summary = _make_notif(
+        notif_type=best_type,
+        asset=asset_name,
+        key=variant_name,
+        json_path=json_path,
+        title=f"Multiple fields changed",
+        message=_context_message(asset_name, new_fp),
+    )
+    return [summary] + key_notifs
 
 
 # ── Core scanner ───────────────────────────────────────────────────────────
 def scan_json_for_new_keys(json_files: List[Path]) -> List[Dict]:
     """
     Walk all JSON files, diff against snapshot, append new notifications to
-    the SHARED master list.  Per-user state is never touched here — every user
-    will see new notifications on their next poll.
+    the SHARED master list.  Per-user state is never touched here.
     """
     old_snapshot       = load_snapshot()
     new_snapshot: Dict = {}
@@ -333,6 +433,7 @@ def scan_json_for_new_keys(json_files: List[Path]) -> List[Dict]:
                 if not isinstance(asset_data, dict):
                     continue
 
+                # ── New asset/shot detected ────────────────────────────────
                 if old_asset_names and asset_name not in old_asset_names:
                     new_notifications.append(_make_notif(
                         notif_type="new_key",
@@ -343,6 +444,22 @@ def scan_json_for_new_keys(json_files: List[Path]) -> List[Dict]:
                         message=f'"{asset_name}" was added to {json_file.name}',
                     ))
 
+                # ── Diff root-level fields (catches sequence shot changes) ─
+                root_fp_key = f"{file_key}::{section}::{asset_name}::__root__"
+                old_root_fp = old_snapshot.get(root_fp_key, {})
+                new_root_fp = _variant_fingerprint(asset_data)
+                new_snapshot[root_fp_key] = new_root_fp
+
+                if new_root_fp.get("fields"):
+                    new_notifications.extend(_diff_variant(
+                        asset_name=asset_name,
+                        variant_name=asset_name,
+                        old_fp=old_root_fp,
+                        new_fp=new_root_fp,
+                        json_path=str(json_file),
+                    ))
+
+                # ── Variants sub-dict ─────────────────────────────────────
                 variants_dict: dict = {}
                 if "Variants" in asset_data and isinstance(asset_data["Variants"], dict):
                     variants_dict = asset_data["Variants"]
@@ -378,8 +495,9 @@ def scan_json_for_new_keys(json_files: List[Path]) -> List[Dict]:
                         json_path=str(json_file),
                     ))
 
-                top_keys     = {k for k in asset_data if k != "Variants"}
-                tk_snap_key  = f"{file_key}::{section}::{asset_name}::topkeys"
+                # ── Top-level new key detection ────────────────────────────
+                top_keys    = {k for k in asset_data if k not in _SKIP_FIELDS | {"History"}}
+                tk_snap_key = f"{file_key}::{section}::{asset_name}::topkeys"
                 old_top_keys = set(old_snapshot.get(tk_snap_key, {}).keys())
                 new_snapshot[tk_snap_key] = {k: True for k in top_keys}
 
