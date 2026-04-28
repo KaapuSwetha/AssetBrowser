@@ -48,10 +48,9 @@
     </div>
     <script>
       (async function(){
-        // Simple diff for images or paused frames if video; expects <img> in the preview branches.
         function pickImg(root){ return root.querySelector('img') || root.querySelector('video'); }
         const root = document.getElementById('comparePanel');
-        const ca = root.querySelector('#overlayA') || root; // when mode switched from overlay
+        const ca = root.querySelector('#overlayA') || root; 
         const cb = root.querySelector('#overlayB') || root;
         const a = pickImg(ca);
         const b = pickImg(cb);
@@ -68,7 +67,6 @@
 
         function drawDiff(){
           try{
-            // Draw both into offscreen canvases
             const w = cvs.width, h = cvs.height;
             const ta = document.createElement('canvas'), tb = document.createElement('canvas');
             ta.width = tb.width = w; ta.height = tb.height = h;

@@ -82,16 +82,13 @@
   </div>
 
   <script>
-  // Auto-click last row after versions table is loaded
+  
   document.body.addEventListener('htmx:afterSettle', function(evt) {
     if (evt.detail.target.id === 'versionsTable') {
-      // Give HTMX time to process the new content
       setTimeout(() => {
         const allRows = document.querySelectorAll('#versionsTable tbody tr[data-index]');
         if (allRows.length > 0) {
-          // Get the last row
           const lastRow = allRows[allRows.length - 1];
-          // Trigger the click on the row itself or its first td
           const clickTarget = lastRow.querySelector('td') || lastRow;
           clickTarget.click();
         }

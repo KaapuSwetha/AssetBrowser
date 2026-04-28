@@ -7,243 +7,15 @@
     <title>{% block title %}Asset Browser{% endblock %}</title>
     {% load static %}
 
-    <link
-      rel="icon"
-      href="{% static 'icons/hhs_card.png' %}"
-      type="image/png"
-    />
+    <link rel="icon" href="{% static 'icons/hhs_card.png' %}" type="image/png" />
     <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'vendor/fontawesome/css/all.min.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'vendor/videojs/video-js.min.css' %}"
-    />
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/videojs/video-js.min.css' %}" />
+
+    <!-- HaloHues base styles -->
+    <link rel="stylesheet" href="{% static 'css/dist/base.css' %}" />
 
     {% block extra_head %}{% endblock %}
-    <style>
-      @keyframes slideInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-12px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .animate-slideInDown {
-        animation: slideInDown 0.3s ease-out;
-      }
-
-      /* ── Notification dropdown entrance ── */
-      @keyframes notifIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px) scale(0.96);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-      #notifDropdown {
-        animation: notifIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-
-      /* Badge pop */
-      @keyframes badgePop {
-        0% {
-          transform: scale(0.5);
-          opacity: 0;
-        }
-        60% {
-          transform: scale(1.3);
-        }
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-      @keyframes badgePulse {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
-        }
-        50% {
-          box-shadow: 0 0 0 5px rgba(139, 92, 246, 0);
-        }
-      }
-      #notifCountBadge {
-        animation:
-          badgePop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-          badgePulse 2s ease-in-out 0.4s infinite;
-      }
-
-      /* Bell ring when new arrives */
-      @keyframes bellRing {
-        0%,
-        100% {
-          transform: rotate(0);
-        }
-        15% {
-          transform: rotate(15deg);
-        }
-        30% {
-          transform: rotate(-12deg);
-        }
-        45% {
-          transform: rotate(9deg);
-        }
-        60% {
-          transform: rotate(-6deg);
-        }
-        75% {
-          transform: rotate(3deg);
-        }
-      }
-      #notifBellIcon.ringing {
-        animation: bellRing 0.7s ease-in-out;
-      }
-
-      /* Notification rows — staggered slide-in */
-      @keyframes rowIn {
-        from {
-          opacity: 0;
-          transform: translateX(-12px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      .notif-row {
-        animation: rowIn 0.22s ease-out both;
-      }
-      .notif-row:nth-child(1) {
-        animation-delay: 0.03s;
-      }
-      .notif-row:nth-child(2) {
-        animation-delay: 0.07s;
-      }
-      .notif-row:nth-child(3) {
-        animation-delay: 0.11s;
-      }
-      .notif-row:nth-child(4) {
-        animation-delay: 0.15s;
-      }
-      .notif-row:nth-child(n + 5) {
-        animation-delay: 0.18s;
-      }
-
-      /* Slide-out on dismiss */
-      .notif-row.removing {
-        transition:
-          opacity 0.22s ease,
-          transform 0.22s ease,
-          max-height 0.25s ease,
-          padding 0.25s ease;
-        opacity: 0 !important;
-        transform: translateX(32px) !important;
-        max-height: 0 !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        overflow: hidden;
-      }
-
-      /* Icon avatar glow */
-      .notif-icon-wrap {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        flex-shrink: 0;
-      }
-      .notif-icon-wrap::after {
-        content: "";
-        position: absolute;
-        inset: -1px;
-        border-radius: 11px;
-        background: inherit;
-        opacity: 0.25;
-        filter: blur(6px);
-        z-index: -1;
-      }
-
-      /* Hover shimmer on rows */
-      .notif-row {
-        position: relative;
-        overflow: hidden;
-      }
-      .notif-row::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(255, 255, 255, 0.025) 50%,
-          transparent 100%
-        );
-        transform: translateX(-100%);
-        transition: transform 0.4s ease;
-      }
-      .notif-row:hover::before {
-        transform: translateX(100%);
-      }
-
-      /* Poll progress bar */
-      @keyframes pollBar {
-        from {
-          transform: scaleX(1);
-        }
-        to {
-          transform: scaleX(0);
-        }
-      }
-      #notifPollBar {
-        transform-origin: left;
-        animation: pollBar 20s linear infinite;
-      }
-
-      /* Thin scrollbar */
-      #notifList::-webkit-scrollbar {
-        width: 3px;
-      }
-      #notifList::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      #notifList::-webkit-scrollbar-thumb {
-        background: #4f46e5;
-        border-radius: 99px;
-      }
-
-      /* ── Section divider inside notification list ── */
-      .notif-section-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 16px 6px;
-        font-size: 9px;
-        font-weight: 800;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        position: sticky;
-        top: 0;
-        z-index: 2;
-      }
-      .notif-section-header .section-line {
-        flex: 1;
-        height: 1px;
-        border-radius: 1px;
-        opacity: 0.25;
-      }
-    </style>
   </head>
 
   <body
@@ -309,10 +81,9 @@
           </div>
 
           <!-- ════════════════════════════════════════════════
-           NOTIFICATION BELL
-           ════════════════════════════════════════════════ -->
+               NOTIFICATION BELL
+               ════════════════════════════════════════════════ -->
           <div class="relative shrink-0" id="notifWrapper">
-            <!-- Numeric badge -->
             <span
               id="notifCountBadge"
               style="
@@ -335,11 +106,7 @@
                 user-select: none;
                 z-index: 10;
               "
-            >
-              0
-            </span>
-
-            <!-- Bell button -->
+            >0</span>
             <button
               id="notifButton"
               class="relative inline-flex items-center justify-center h-10 w-10 rounded-full transition-all duration-200 group"
@@ -366,8 +133,6 @@
                 style="color: #a78bfa"
               ></i>
             </button>
-
-            <!-- ── Notification Dropdown ── -->
             <div
               id="notifDropdown"
               class="hidden absolute right-0 top-[calc(100%+12px)] z-[70] w-[340px] sm:w-[380px] rounded-2xl overflow-hidden border border-white/[0.07]"
@@ -384,7 +149,6 @@
                   inset 0 1px 0 rgba(255, 255, 255, 0.04);
               "
             >
-              <!-- Poll progress bar -->
               <div
                 class="h-[2px] w-full overflow-hidden"
                 style="background: rgba(255, 255, 255, 0.04)"
@@ -393,17 +157,11 @@
                   id="notifPollBar"
                   class="h-full w-full"
                   style="
-                    background: linear-gradient(
-                      90deg,
-                      #7c3aed,
-                      #4f46e5,
-                      #0ea5e9
-                    );
+                    background: linear-gradient(90deg, #7c3aed, #4f46e5, #0ea5e9);
                   "
                 ></div>
               </div>
 
-              <!-- Header -->
               <div
                 class="flex items-center justify-between px-4 py-3.5"
                 style="
@@ -427,8 +185,7 @@
                   >
                     <i class="fas fa-bell text-violet-400 text-[11px]"></i>
                   </div>
-                  <span
-                    class="font-semibold text-slate-100 text-[13px] tracking-tight"
+                  <span class="font-semibold text-slate-100 text-[13px] tracking-tight"
                     >Notifications</span
                   >
                   <span
@@ -457,8 +214,6 @@
                   <i class="fas fa-check-double text-[9px]"></i> Mark all read
                 </button>
               </div>
-
-              <!-- ════ Filter tabs: All | Asset | Sequence | Last 3 Days ════ -->
               <div
                 class="flex items-center gap-1 px-3 py-2"
                 style="
@@ -466,7 +221,6 @@
                   background: rgba(255, 255, 255, 0.02);
                 "
               >
-                <!-- All -->
                 <button
                   id="filterAll"
                   class="notif-filter-btn flex-1 text-[11px] font-semibold py-1.5 rounded-lg transition-all duration-150"
@@ -476,10 +230,7 @@
                     color: #c4b5fd;
                   "
                   onclick="setNotifFilter('all')"
-                >
-                  All
-                </button>
-                <!-- Last 3 Days -->
+                >All</button>
                 <button
                   id="filter3days"
                   class="notif-filter-btn flex-1 text-[11px] font-semibold py-1.5 rounded-lg transition-all duration-150 flex items-center justify-center gap-1"
@@ -492,45 +243,44 @@
                 >
                   <i class="fas fa-clock text-[9px]"></i> 3 Days
                 </button>
-                <!-- Asset -->
+              </div>
+              <div
+                class="flex items-center gap-1 px-3 py-1.5"
+                style="
+                  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+                  background: rgba(0, 0, 0, 0.18);
+                "
+              >
                 <button
                   id="filterAsset"
-                  class="notif-filter-btn flex-1 text-[11px] font-semibold py-1.5 rounded-lg transition-all duration-150 flex items-center justify-center gap-1"
+                  class="notif-filter-btn flex-1 text-[10px] font-semibold py-1 rounded-lg transition-all duration-150 flex items-center justify-center gap-1"
                   style="
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    color: #64748b;
+                    background: rgba(139, 92, 246, 0.2);
+                    border: 1px solid rgba(139, 92, 246, 0.4);
+                    color: #c4b5fd;
                   "
-                  onclick="setNotifFilter('asset')"
+                  onclick="setNotifSubFilter('asset')"
                 >
                   <i class="fas fa-cube text-[9px]"></i> Asset
                 </button>
-
-                <!-- Sequence -->
                 <button
                   id="filterSequence"
-                  class="notif-filter-btn flex-1 text-[11px] font-semibold py-1.5 rounded-lg transition-all duration-150 flex items-center justify-center gap-1"
+                  class="notif-filter-btn flex-1 text-[10px] font-semibold py-1 rounded-lg transition-all duration-150 flex items-center justify-center gap-1"
                   style="
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    color: #64748b;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    color: #475569;
                   "
-                  onclick="setNotifFilter('sequence')"
+                  onclick="setNotifSubFilter('sequence')"
                 >
                   <i class="fas fa-film text-[9px]"></i> Sequence
                 </button>
-
-                
               </div>
-
-              <!-- Notification list -->
               <ul
                 id="notifList"
                 class="overflow-y-auto"
                 style="max-height: calc(6 * 90px); scroll-behavior: smooth"
               ></ul>
-
-              <!-- Empty state -->
               <div
                 id="notifEmpty"
                 class="hidden flex-col items-center justify-center py-12 gap-2"
@@ -546,15 +296,11 @@
                 >
                   <i class="far fa-bell-slash text-2xl text-slate-600"></i>
                 </div>
-                <span class="text-[12px] font-medium text-slate-500"
-                  >All caught up!</span
-                >
+                <span class="text-[12px] font-medium text-slate-500">All caught up!</span>
                 <span id="notifEmptySubtext" class="text-[10px] text-slate-600"
                   >No new notifications</span
                 >
               </div>
-
-              <!-- Footer -->
               <div
                 class="px-4 py-2.5 flex items-center justify-between"
                 style="
@@ -563,12 +309,8 @@
                 "
               >
                 <div class="flex items-center gap-1.5">
-                  <div
-                    class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
-                  ></div>
-                  <span class="text-[10px] text-slate-600"
-                    >Auto-refresh every 20s</span
-                  >
+                  <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                 
                 </div>
                 <button
                   id="refreshNotifBtn"
@@ -579,12 +321,10 @@
               </div>
             </div>
           </div>
-          <!-- ── end notification bell ── -->
         </div>
       </div>
     </header>
 
-    <!-- Toast Template -->
     <template id="toastTemplate">
       <div
         class="animate-slideInDown flex items-start gap-3 px-4 py-3 rounded-xl shadow-lg backdrop-blur-sm border transition-all duration-300 w-full"
@@ -595,10 +335,7 @@
           <div class="toast-message text-xs opacity-90 mt-0.5"></div>
         </div>
         <button
-          onclick="
-            this.closest('.toast').remove();
-            updateSearchResultsPosition();
-          "
+          onclick="this.closest('.toast').remove(); updateSearchResultsPosition();"
           class="shrink-0 hover:opacity-70 transition-opacity ml-2"
         >
           <i class="fas fa-times text-sm"></i>
@@ -634,815 +371,21 @@
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
     <script src="{% static 'vendor/videojs/video.min.js' %}"></script>
 
+    <!--
+      Expose Django URL-reversed notification endpoints to base.js.
+      base.js reads window.NOTIF_URLS so it needs no Django template tags.
+    -->
     <script>
-      document.body.addEventListener("htmx:request", () =>
-        document.body.classList.add("cursor-progress"),
-      );
-      document.body.addEventListener("htmx:afterSwap", () =>
-        document.body.classList.remove("cursor-progress"),
-      );
-      document.body.addEventListener("htmx:responseError", () =>
-        document.body.classList.remove("cursor-progress"),
-      );
+      window.NOTIF_URLS = {
+        list:    "{% url 'AssetView:get_notifications' %}",
+        read:    "{% url 'AssetView:mark_notification_read' notification_id='__ID__' %}",
+        markAll: "{% url 'AssetView:mark_all_notifications_read' %}",
+        delete:  "{% url 'AssetView:delete_notification' notification_id='__ID__' %}",
+      };
     </script>
 
-    <!-- ════════════════════════════════════════════════════════
-       TOAST SYSTEM
-  ════════════════════════════════════════════════════════ -->
-    <script>
-      document.body.addEventListener("showToast", function (event) {
-        const detail = event.detail;
-        if (window.Toast && detail) {
-          window.Toast.show({
-            title: detail.title || "Notification",
-            message: detail.message || "",
-            type: detail.type || "info",
-            duration: 4000,
-          });
-        }
-      });
-
-      class Toast {
-        static show({
-          title = "",
-          message = "",
-          type = "info",
-          duration = 4000,
-        }) {
-          const container = document.getElementById("toast-container");
-          const template = document.getElementById("toastTemplate");
-          const toast = template.content.cloneNode(true);
-          const toastEl = toast.querySelector(".animate-slideInDown");
-          toastEl.classList.add("toast");
-
-          toastEl.querySelector(".toast-title").textContent = title;
-          toastEl.querySelector(".toast-message").textContent = message;
-
-          const types = {
-            success: {
-              icon: "fa-check-circle",
-              bg: "bg-emerald-900/90",
-              border: "border-emerald-600/60",
-              text: "text-emerald-50",
-            },
-            error: {
-              icon: "fa-exclamation-circle",
-              bg: "bg-rose-900/90",
-              border: "border-rose-600/60",
-              text: "text-rose-50",
-            },
-            warning: {
-              icon: "fa-exclamation-triangle",
-              bg: "bg-amber-900/90",
-              border: "border-amber-600/60",
-              text: "text-amber-50",
-            },
-            info: {
-              icon: "fa-info-circle",
-              bg: "bg-sky-900/90",
-              border: "border-sky-600/60",
-              text: "text-sky-50",
-            },
-          };
-          const cfg = types[type] || types.info;
-          toastEl.classList.add(cfg.bg, cfg.border, cfg.text);
-          toastEl.querySelector(".toast-icon").classList.add(cfg.icon);
-
-          container.appendChild(toast);
-          updateSearchResultsPosition();
-
-          setTimeout(() => {
-            if (toastEl.parentNode) {
-              toastEl.style.opacity = "0";
-              toastEl.style.transform = "translateY(-12px)";
-              setTimeout(() => {
-                toastEl.remove();
-                updateSearchResultsPosition();
-              }, 300);
-            }
-          }, duration);
-        }
-        static success(msg, title = "Success") {
-          this.show({ title, message: msg, type: "success" });
-        }
-        static error(msg, title = "Error") {
-          this.show({ title, message: msg, type: "error" });
-        }
-        static warning(msg, title = "Warning") {
-          this.show({ title, message: msg, type: "warning" });
-        }
-        static info(msg, title = "Info") {
-          this.show({ title, message: msg, type: "info" });
-        }
-      }
-      window.Toast = Toast;
-
-      function updateSearchResultsPosition() {
-        const tc = document.getElementById("toast-container");
-        const sr = document.getElementById("searchResults");
-        if (!tc || !sr) return;
-        const h = tc.offsetHeight;
-        sr.style.top =
-          h > 0
-            ? `calc(100% + 0.5rem + ${h}px + 0.5rem)`
-            : "calc(100% + 0.5rem)";
-      }
-
-      (() => {
-        const input = document.getElementById("globalSearch");
-        const dropdown = document.getElementById("searchResults");
-        const content = document.getElementById("searchResultsContent");
-
-        const hide = () => {
-          if (content) content.innerHTML = "";
-          dropdown?.classList.add("pointer-events-none");
-          setTimeout(
-            () => dropdown?.classList.remove("pointer-events-none"),
-            120,
-          );
-        };
-
-        dropdown?.addEventListener("click", (e) => {
-          if (e.target.closest("a,button,[data-search-result]"))
-            setTimeout(hide, 0);
-        });
-        input?.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") hide();
-        });
-        document.addEventListener("mousedown", (e) => {
-          if (dropdown?.contains(e.target) || input?.contains(e.target)) return;
-          hide();
-        });
-
-        const mo = new MutationObserver(() => {
-          const empty = !content?.innerHTML?.trim();
-          if (dropdown) dropdown.style.display = empty ? "none" : "";
-          updateSearchResultsPosition();
-        });
-        if (content) mo.observe(content, { childList: true, subtree: true });
-        updateSearchResultsPosition();
-      })();
-    </script>
-
-    <!-- Project Tree: persistent open/close -->
-    <script>
-      (() => {
-        const TREE_SELECTOR = "#projectTree";
-        const ACCORDION_PER_LEVEL = false;
-        const qs = (sel, ctx = document) => ctx.querySelector(sel);
-        const qsa = (sel, ctx = document) =>
-          Array.from(ctx.querySelectorAll(sel));
-
-        function keyFor(d) {
-          return d?.dataset?.key || null;
-        }
-
-        function restore(root) {
-          qsa("details[data-key]", root).forEach((d) => {
-            const k = keyFor(d);
-            if (!k) return;
-            const v = localStorage.getItem("tree:" + k);
-            if (v === "1") d.setAttribute("open", "");
-            if (v === "0") d.removeAttribute("open");
-          });
-          paint(root);
-        }
-
-        function save(d) {
-          const k = keyFor(d);
-          if (!k) return;
-          localStorage.setItem("tree:" + k, d.open ? "1" : "0");
-        }
-
-        function paint(root) {
-          qsa("details", root).forEach((d) => {
-            const summary = qs("summary", d);
-            if (!summary) return;
-            const c = qs(".folder-closed", summary);
-            const o = qs(".folder-open", summary);
-            const caret = qs(".caret", summary);
-            const opened = !!d.open;
-            if (c && o) {
-              c.style.cssText = opened
-                ? "display:none!important"
-                : "display:inline-block!important";
-              o.style.cssText = opened
-                ? "display:inline-block!important"
-                : "display:none!important";
-            }
-            if (caret) {
-              caret.style.transform = opened ? "rotate(90deg)" : "rotate(0deg)";
-              caret.style.transition = "transform 0.2s ease";
-            }
-          });
-        }
-
-        function collapseSiblings(d) {
-          if (!ACCORDION_PER_LEVEL) return;
-          qsa(":scope > details", d.parentElement).forEach((x) => {
-            if (x !== d) {
-              x.removeAttribute("open");
-              save(x);
-            }
-          });
-        }
-
-        function bind(root) {
-          root.addEventListener(
-            "toggle",
-            (e) => {
-              const d = e.target;
-              if (!(d instanceof HTMLDetailsElement)) return;
-              save(d);
-              paint(root);
-              if (d.open) collapseSiblings(d);
-            },
-            true,
-          );
-        }
-
-        function init() {
-          const root = qs(TREE_SELECTOR);
-          if (!root) return;
-          bind(root);
-          restore(root);
-        }
-
-        document.addEventListener("DOMContentLoaded", init);
-        document.body.addEventListener("htmx:afterSwap", (e) => {
-          const t = e.detail?.target;
-          if (!t) return;
-          const tree = t.closest(TREE_SELECTOR) || qs(TREE_SELECTOR, t);
-          if (tree) restore(tree);
-        });
-      })();
-    </script>
-
-    <script>
-      (() => {
-        const btn = document.getElementById("notifButton");
-        const dropdown = document.getElementById("notifDropdown");
-        const badge = document.getElementById("notifCountBadge");
-        const headerCount = document.getElementById("notifHeaderCount");
-        const list = document.getElementById("notifList");
-        const emptyState = document.getElementById("notifEmpty");
-        const markAllBtn = document.getElementById("markAllReadBtn");
-        const refreshBtn = document.getElementById("refreshNotifBtn");
-        const bellIcon = document.getElementById("notifBellIcon");
-
-        let isOpen = false;
-        let pollInterval = null;
-        const POLL_MS = 20_000;
-        let activeFilter = "all"; /* 'all' | 'asset' | 'sequence' | '3days' */
-
-        /* ── Type config ── */
-        const TYPE_CFG = {
-          new_variant: {
-            icon: "fa-code-branch",
-            bg: "rgba(124,58,237,.2)",
-            border: "rgba(124,58,237,.4)",
-            text: "#c4b5fd",
-            dot: "#8b5cf6",
-            label: "New Variant",
-          },
-          new_key: {
-            icon: "fa-key",
-            bg: "rgba(14,165,233,.18)",
-            border: "rgba(14,165,233,.35)",
-            text: "#7dd3fc",
-            dot: "#0ea5e9",
-            label: "New Field",
-          },
-          status_change: {
-            icon: "fa-circle-half-stroke",
-            bg: "rgba(239,68,68,.18)",
-            border: "rgba(239,68,68,.35)",
-            text: "#fca5a5",
-            dot: "#ef4444",
-            label: "Status Change",
-          },
-          comment_change: {
-            icon: "fa-comment-dots",
-            bg: "rgba(251,146,60,.18)",
-            border: "rgba(251,146,60,.35)",
-            text: "#fdba74",
-            dot: "#f97316",
-            label: "Comment",
-          },
-          field_change: {
-            icon: "fa-pen-to-square",
-            bg: "rgba(234,179,8,.18)",
-            border: "rgba(234,179,8,.35)",
-            text: "#fde047",
-            dot: "#eab308",
-            label: "Field Edit",
-          },
-          new_version: {
-            icon: "fa-layer-group",
-            bg: "rgba(16,185,129,.18)",
-            border: "rgba(16,185,129,.35)",
-            text: "#6ee7b7",
-            dot: "#10b981",
-            label: "New Version",
-          },
-          default: {
-            icon: "fa-bell",
-            bg: "rgba(99,102,241,.2)",
-            border: "rgba(99,102,241,.4)",
-            text: "#a5b4fc",
-            dot: "#6366f1",
-            label: "Update",
-          },
-        };
-
-        /* ════════════════════════════════════════════════════
-           MODE HELPERS
-           Derive whether a notification belongs to 'asset' or
-           'sequence' from its json_path field.
-        ════════════════════════════════════════════════════ */
-        function getMode(n) {
-          if (!n.json_path) return "asset"; /* default fallback */
-          const p = n.json_path.replace(/\\/g, "/");
-          return /\/[Ss]equence\//i.test(p) ? "sequence" : "asset";
-        }
-
-        /* ── Filter helpers ── */
-        function applyFilter(notifications) {
-          if (activeFilter === "all") return notifications;
-          if (activeFilter === "3days") {
-            const cutoff = Date.now() - 3 * 24 * 60 * 60 * 1000;
-            return notifications.filter(
-              (n) => new Date(n.timestamp).getTime() >= cutoff,
-            );
-          }
-          /* 'asset' or 'sequence' — match by derived mode */
-          return notifications.filter((n) => getMode(n) === activeFilter);
-        }
-
-        /* ── Tab style constants ── */
-        const TAB_ON  = "background:rgba(139,92,246,.25);border:1px solid rgba(139,92,246,.45);color:#c4b5fd;";
-        const TAB_OFF = "background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#64748b;";
-
-        window.setNotifFilter = function (filter) {
-          activeFilter = filter;
-
-          document.getElementById("filterAll").style.cssText      = filter === "all"      ? TAB_ON : TAB_OFF;
-          document.getElementById("filterAsset").style.cssText    = filter === "asset"    ? TAB_ON : TAB_OFF;
-          document.getElementById("filterSequence").style.cssText = filter === "sequence" ? TAB_ON : TAB_OFF;
-          document.getElementById("filter3days").style.cssText    = filter === "3days"    ? TAB_ON : TAB_OFF;
-
-          renderNotifications(window._notifData || []);
-        };
-
-        /* ── Misc helpers ── */
-        function relTime(iso) {
-          const diff = Date.now() - new Date(iso).getTime();
-          const s = Math.floor(diff / 1000);
-          if (s < 60) return "just now";
-          const m = Math.floor(s / 60);
-          if (m < 60) return `${m}m ago`;
-          const h = Math.floor(m / 60);
-          if (h < 24) return `${h}h ago`;
-          return `${Math.floor(h / 24)}d ago`;
-        }
-
-        function csrfToken() {
-          return (
-            document.cookie
-              .split(";")
-              .find((c) => c.trim().startsWith("csrftoken="))
-              ?.split("=")[1] || ""
-          );
-        }
-
-        function postJSON(url) {
-          return fetch(url, {
-            method: "POST",
-            headers: {
-              "X-CSRFToken": csrfToken(),
-              "Content-Type": "application/json",
-            },
-          });
-        }
-
-        function escHtml(str) {
-          return String(str ?? "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;");
-        }
-
-        /* ── Navigation: jump to the asset that caused the notification ── */
-        function navigateToAsset(n) {
-          if (!n.json_path) {
-            console.warn("[notif] no json_path on notification", n);
-            return;
-          }
-
-          const normalised = n.json_path.replace(/\\/g, "/");
-
-          let mode = "Asset";
-          if (/\/[Ss]equence\//i.test(normalised)) mode = "Sequence";
-
-          let variant = "";
-          if (n.key && n.key.includes(" / ")) {
-            variant = n.key.split(" / ")[0].trim();
-          } else if (n.type === "new_variant") {
-            variant = n.key || "";
-          } else {
-            variant = n.key || "";
-          }
-
-          const path = n.json_path;
-          const name = n.asset;
-
-          htmx.ajax(
-            "GET",
-            "/versions/?" + new URLSearchParams({ path, mode, name, variant }),
-            { target: "#versionsTable", swap: "innerHTML" },
-          );
-
-          htmx.ajax(
-            "GET",
-            "/metadata/?" + new URLSearchParams({ path, mode, name, variant }),
-            { target: "#metadataCard", swap: "innerHTML" },
-          );
-
-          const details = document.getElementById("detailsPanel");
-          if (details)
-            details.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
-
-        /* ════════════════════════════════════════════════════
-           RENDER
-           When filter = 'all', render two labelled sections:
-             § Assets  (cube icon / sky accent)
-             § Sequences  (film icon / emerald accent)
-           When filter = 'asset' or 'sequence', render a flat
-           list of that mode only (no section header needed).
-        ════════════════════════════════════════════════════ */
-        function renderNotifications(notifications) {
-          const visible = applyFilter(notifications);
-          list.innerHTML = "";
-
-          /* Update mark-all button label */
-          if (markAllBtn) {
-            const labels = { all: "Mark all read", asset: "Mark Assets read", sequence: "Mark Sequences read", "3days": "Mark 3-day read" };
-            markAllBtn.innerHTML = `<i class="fas fa-check-double text-[9px]"></i> ${labels[activeFilter] || "Mark all read"}`;
-          }
-
-          if (!visible.length) {
-            emptyState.classList.remove("hidden");
-            emptyState.classList.add("flex");
-
-            /* Contextual empty-state sub-text */
-            const sub = document.getElementById("notifEmptySubtext");
-            if (sub) {
-              sub.textContent =
-                activeFilter === "asset"    ? "No asset notifications" :
-                activeFilter === "sequence" ? "No sequence notifications" :
-                activeFilter === "3days"    ? "Nothing in the last 3 days" :
-                "No new notifications";
-            }
-
-            markAllBtn?.classList.add("hidden");
-            headerCount.classList.add("hidden");
-            list.style.overflowY = "hidden";
-            return;
-          }
-
-          emptyState.classList.add("hidden");
-          emptyState.classList.remove("flex");
-          markAllBtn?.classList.remove("hidden");
-          markAllBtn?.classList.add("flex");
-          headerCount.classList.remove("hidden");
-          headerCount.classList.add("inline-flex");
-          document.getElementById("notifHeaderCountText").textContent =
-            `${visible.length} new`;
-
-          /* ── Build list items ── */
-          if (activeFilter === "all") {
-            /* Split into two buckets and render with section headers */
-            const assets    = visible.filter((n) => getMode(n) === "asset");
-            const sequences = visible.filter((n) => getMode(n) === "sequence");
-
-            if (assets.length) {
-              appendSectionHeader(list, {
-                icon:  "fa-cube",
-                label: "Assets",
-                count: assets.length,
-                color: "#38bdf8",           /* sky-400  */
-                bg:    "rgba(14,165,233,.12)",
-                border:"rgba(14,165,233,.3)",
-              });
-              assets.forEach((n) => appendNotifRow(list, n));
-            }
-
-            if (sequences.length) {
-              appendSectionHeader(list, {
-                icon:  "fa-film",
-                label: "Sequences",
-                count: sequences.length,
-                color: "#34d399",           /* emerald-400 */
-                bg:    "rgba(16,185,129,.12)",
-                border:"rgba(16,185,129,.3)",
-              });
-              sequences.forEach((n) => appendNotifRow(list, n));
-            }
-          } else {
-            /* Flat list — no section header needed */
-            visible.forEach((n) => appendNotifRow(list, n));
-          }
-
-          /* Scroll when > 6 items */
-          list.style.overflowY = visible.length > 6 ? "auto" : "hidden";
-
-          /* ── Attach event handlers ── */
-          list.querySelectorAll(".notif-view-btn").forEach((b) => {
-            b.addEventListener("click", () => {
-              const id = b.dataset.id;
-              const notif = (window._notifData || []).find((n) => n.id === id);
-              postJSON(notifUrl("read", id));
-              window._notifData = (window._notifData || []).filter((n) => n.id !== id);
-              removeRow(id);
-              closeDropdown();
-              if (notif) navigateToAsset(notif);
-            });
-          });
-
-          list.querySelectorAll(".notif-read-btn").forEach((b) => {
-            b.addEventListener("click", () => {
-              const id = b.dataset.id;
-              postJSON(notifUrl("read", id));
-              window._notifData = (window._notifData || []).filter((n) => n.id !== id);
-              removeRow(id);
-            });
-          });
-
-          list.querySelectorAll(".notif-dismiss-btn").forEach((b) => {
-            b.addEventListener("click", () => {
-              const id = b.dataset.id;
-              postJSON(notifUrl("delete", id));
-              window._notifData = (window._notifData || []).filter((n) => n.id !== id);
-              removeRow(id);
-            });
-          });
-        }
-
-        /* ── Append a section divider ── */
-        function appendSectionHeader(parent, { icon, label, count, color, bg, border }) {
-          const div = document.createElement("div");
-          div.className = "notif-section-header";
-          div.style.cssText = `
-            background: rgba(0,0,0,.35);
-            border-bottom: 1px solid rgba(255,255,255,.04);
-            color: ${color};
-          `;
-          div.innerHTML = `
-            <i class="fas ${icon}" style="font-size:9px;"></i>
-            <span>${label}</span>
-            <span style="
-              font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;
-              background:${bg};border:1px solid ${border};color:${color};
-              letter-spacing:.04em;
-            ">${count}</span>
-            <div class="section-line" style="background:${color};"></div>
-          `;
-          parent.appendChild(div);
-        }
-
-        /* ── Build and append a single notification <li> ── */
-        function appendNotifRow(parent, n) {
-          const cfg = TYPE_CFG[n.type] || TYPE_CFG.default;
-          const li = document.createElement("li");
-          li.className = "notif-row";
-          li.dataset.id = n.id;
-          li.style.cssText = `
-            display:flex; align-items:flex-start; gap:12px;
-            padding:12px 16px;
-            border-bottom:1px solid rgba(255,255,255,.05);
-            cursor:default; transition:background .15s ease;
-            position:relative; overflow:hidden;
-          `;
-
-          li.addEventListener("mouseenter", () => {
-            li.style.background = "rgba(139,92,246,.06)";
-            const db = li.querySelector(".notif-dismiss-btn");
-            if (db) db.style.opacity = "1";
-          });
-          li.addEventListener("mouseleave", () => {
-            li.style.background = "";
-            const db = li.querySelector(".notif-dismiss-btn");
-            if (db) db.style.opacity = "0";
-          });
-
-          /* Left accent bar */
-          const accent = document.createElement("div");
-          accent.style.cssText = `position:absolute;left:0;top:0;bottom:0;width:2px;background:${cfg.dot};opacity:.7;border-radius:0 2px 2px 0;`;
-          li.appendChild(accent);
-
-          li.innerHTML += `
-            <!-- Icon -->
-            <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;
-                        display:flex;align-items:center;justify-content:center;
-                        background:${cfg.bg};border:1px solid ${cfg.border};
-                        position:relative;margin-left:6px;">
-              <i class="fas ${cfg.icon}" style="color:${cfg.text};font-size:13px;"></i>
-            </div>
-
-            <!-- Body -->
-            <div style="flex:1;min-width:0;">
-              <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
-                <span style="font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-                             color:${cfg.text};padding:1px 6px;border-radius:4px;
-                             background:${cfg.bg};border:1px solid ${cfg.border};">${cfg.label}</span>
-                <span style="font-size:10px;color:#475569;margin-left:auto;white-space:nowrap;">${relTime(n.timestamp)}</span>
-              </div>
-              <div style="font-size:12px;font-weight:600;color:#f1f5f9;line-height:1.4;margin-bottom:2px;">${escHtml(n.title)}</div>
-              <p style="font-size:11px;color:#64748b;line-height:1.5;margin:0 0 8px 0;">${escHtml(n.message)}</p>
-
-              <!-- Action row -->
-              <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
-
-                <!-- View button -->
-                <button class="notif-view-btn"
-                  data-id="${n.id}"
-                  style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;
-                         color:#c4b5fd;padding:3px 10px;border-radius:8px;cursor:pointer;
-                         background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.35);
-                         transition:all .15s ease;"
-                  onmouseover="this.style.background='rgba(124,58,237,.35)'"
-                  onmouseout="this.style.background='rgba(124,58,237,.2)'">
-                  <i class="fas fa-arrow-up-right-from-square" style="font-size:8px;"></i> View
-                </button>
-
-                <!-- Mark as read button -->
-                <button class="notif-read-btn"
-                  data-id="${n.id}"
-                  style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;
-                         color:#6ee7b7;padding:3px 10px;border-radius:8px;cursor:pointer;
-                         background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);
-                         transition:all .15s ease;"
-                  onmouseover="this.style.background='rgba(16,185,129,.25)'"
-                  onmouseout="this.style.background='rgba(16,185,129,.12)'">
-                  <i class="fas fa-check" style="font-size:8px;"></i> Mark read
-                </button>
-
-                <!-- Asset pill -->
-                <span title="${escHtml(n.asset)}" style="font-size:9px;font-family:monospace;
-                      color:#475569;padding:2px 8px;border-radius:6px;
-                      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
-                      max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-                      display:inline-block;">${escHtml(n.asset)}</span>
-              </div>
-            </div>
-
-            <!-- Dismiss × -->
-            <button class="notif-dismiss-btn" data-id="${n.id}" title="Dismiss"
-              style="flex-shrink:0;opacity:0;color:#475569;background:none;border:none;
-                     cursor:pointer;padding:4px;border-radius:6px;
-                     transition:opacity .15s,color .15s,background .15s;"
-              onmouseover="this.style.color='#f1f5f9';this.style.background='rgba(255,255,255,.08)'"
-              onmouseout="this.style.color='#475569';this.style.background='none'">
-              <i class="fas fa-times" style="font-size:10px;"></i>
-            </button>
-          `;
-
-          parent.appendChild(li);
-        }
-
-        /* ── Remove a row with slide-out animation ── */
-        function removeRow(id) {
-          const row = list.querySelector(`[data-id="${id}"]`);
-          if (!row) return;
-          row.classList.add("removing");
-          setTimeout(() => {
-            row.remove();
-            /* Also remove any now-empty section headers */
-            cleanEmptySections();
-            const remaining = list.querySelectorAll(".notif-row").length;
-            updateBadge(remaining);
-            if (remaining === 0) renderNotifications(window._notifData || []);
-          }, 220);
-        }
-
-        /* Remove a section header whose rows have all been dismissed */
-        function cleanEmptySections() {
-          list.querySelectorAll(".notif-section-header").forEach((hdr) => {
-            /* Count sibling notif-rows until the next header */
-            let next = hdr.nextElementSibling;
-            let hasRows = false;
-            while (next && !next.classList.contains("notif-section-header")) {
-              if (next.classList.contains("notif-row")) { hasRows = true; break; }
-              next = next.nextElementSibling;
-            }
-            if (!hasRows) hdr.remove();
-          });
-        }
-
-        function updateBadge(count) {
-          const prevCount = parseInt(badge.textContent) || 0;
-          if (count > 0) {
-            badge.style.display = "inline-block";
-            badge.textContent = count > 99 ? "99+" : String(count);
-            bellIcon.classList.replace("far", "fas");
-            bellIcon.style.color = "#a78bfa";
-            if (count > prevCount) {
-              bellIcon.classList.remove("ringing");
-              void bellIcon.offsetWidth;
-              bellIcon.classList.add("ringing");
-              setTimeout(() => bellIcon.classList.remove("ringing"), 800);
-            }
-          } else {
-            badge.style.display = "none";
-            bellIcon.classList.replace("fas", "far");
-            bellIcon.style.color = "";
-          }
-        }
-
-        const NOTIF_URLS = {
-          list: "{% url 'AssetView:get_notifications' %}",
-          read: "{% url 'AssetView:mark_notification_read' notification_id='__ID__' %}",
-          markAll: "{% url 'AssetView:mark_all_notifications_read' %}",
-          delete:
-            "{% url 'AssetView:delete_notification' notification_id='__ID__' %}",
-        };
-        function notifUrl(key, id) {
-          return NOTIF_URLS[key].replace("__ID__", id || "");
-        }
-
-        /* ── Poll ── */
-        async function fetchNotifications() {
-          try {
-            const res = await fetch(NOTIF_URLS.list);
-            if (!res.ok) return;
-            const data = await res.json();
-            updateBadge(data.count || 0);
-            window._notifData = data.notifications || [];
-            if (isOpen) renderNotifications(window._notifData);
-          } catch (_) {}
-        }
-
-        /* ── Dropdown open/close ── */
-        function openDropdown() {
-          isOpen = true;
-          btn.setAttribute("aria-expanded", "true");
-          dropdown.classList.remove("hidden");
-          renderNotifications(window._notifData || []);
-        }
-        function closeDropdown() {
-          isOpen = false;
-          btn.setAttribute("aria-expanded", "false");
-          dropdown.classList.add("hidden");
-        }
-
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          isOpen ? closeDropdown() : openDropdown();
-        });
-        document.addEventListener("mousedown", (e) => {
-          if (!document.getElementById("notifWrapper")?.contains(e.target))
-            closeDropdown();
-        });
-
-        /* ── Mark all (respects active filter) ── */
-        markAllBtn?.addEventListener("click", async () => {
-          const visible = applyFilter(window._notifData || []);
-          const ids = visible.map((n) => n.id);
-
-          if (activeFilter !== "all" && ids.length) {
-            /* Mark only the visible subset (asset / sequence / 3days) one by one */
-            await Promise.all(ids.map((id) => postJSON(notifUrl("read", id))));
-            window._notifData = (window._notifData || []).filter(
-              (n) => !ids.includes(n.id),
-            );
-          } else {
-            /* Mark all */
-            await postJSON(NOTIF_URLS.markAll);
-            window._notifData = [];
-          }
-
-          renderNotifications(window._notifData);
-          updateBadge(window._notifData.length);
-        });
-
-        refreshBtn?.addEventListener("click", fetchNotifications);
-
-        function startPolling() {
-          fetchNotifications();
-          pollInterval = setInterval(fetchNotifications, POLL_MS);
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-          window._notifData = [];
-          startPolling();
-        });
-        document.body.addEventListener("htmx:afterSwap", () => {
-          if (!pollInterval) startPolling();
-        });
-      })();
-    </script>
+    <!-- HaloHues base scripts -->
+    <script src="{% static 'js/review/base.js' %}"></script>
 
     {% block extra_scripts %}{% endblock %}
   </body>

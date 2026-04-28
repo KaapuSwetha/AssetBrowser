@@ -1,29 +1,6 @@
-/**
- * video_controls_common.js
- * ─────────────────────────────────────────────────────────────────────────────
- * Shared utilities consumed by:
- *   • sequence_branch.js
- *   • preview_annotator.js
- *   • asset_rows.js
- *
- * Exposes one global namespace:  window.VideoUtils
- *
- * SECTIONS
- *   A.  Fullscreen helpers
- *   B.  Drag helper
- *   C.  Resize helper
- *   D.  Mini-player factory
- *   E.  Floating pill factory
- *   F.  Video playback utilities
- * ─────────────────────────────────────────────────────────────────────────────
- */
+// video_controls_common.js
 (function (global) {
   'use strict';
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // A.  FULLSCREEN HELPERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
   function getFullscreenElement() {
     return document.fullscreenElement || document.webkitFullscreenElement ||
            document.mozFullScreenElement || document.msFullscreenElement || null;
@@ -31,10 +8,6 @@
 
   function isInFullscreen() { return !!getFullscreenElement(); }
 
-  /**
-   * Request native fullscreen on `el`, then call `afterFn()`.
-   * Never rejects — always calls afterFn so callers need no error path.
-   */
   function enterFullscreen(el, afterFn) {
     afterFn = afterFn || function () {};
     var req = el.requestFullscreen || el.webkitRequestFullscreen ||
@@ -45,11 +18,6 @@
       p.then(afterFn).catch(function (err) { console.warn('[VideoUtils] FS error:', err); afterFn(); });
     } else { afterFn(); }
   }
-
-  /**
-   * Exit native fullscreen if active, then call `afterFn()`.
-   * Safe to call when not in fullscreen.
-   */
   function exitFullscreen(afterFn) {
     afterFn = afterFn || function () {};
     var fn = document.exitFullscreen || document.webkitExitFullscreen ||
@@ -60,49 +28,16 @@
     else afterFn();
   }
 
-  /**
-   * Listen for any cross-vendor fullscreenchange event.
-   * @returns {Function} cleanup — call to remove all listeners.
-   */
   function onFullscreenChange(handler) {
     var evts = ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange'];
     evts.forEach(function (ev) { document.addEventListener(ev, handler); });
     return function () { evts.forEach(function (ev) { document.removeEventListener(ev, handler); }); };
   }
-
-  /**
-   * Suppress-flag guard for programmatic FS enter/exit.
-   *
-   * Usage:
-   *   const fsGuard = VideoUtils.createFsGuard();
-   *   fsGuard.run(done => exitFullscreen(() => { doWork(); done(); }));
-   *   // inside fullscreenchange: if (fsGuard.active) return;
-   */
   function createFsGuard() {
     var g = { active: false };
     g.run = function (fn) { g.active = true; fn(function () { g.active = false; }); };
     return g;
   }
-
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // B.  DRAG HELPER
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  /**
-   * Makes `el` draggable via `handleEl`.  Positions with left/top (removes
-   * right/bottom).  Enforces 8 px viewport margin.
-   *
-   * @param {HTMLElement} el
-   * @param {HTMLElement} handleEl
-   * @param {object}     [opts]
-   * @param {number}     [opts.threshold=4]        Pixels before drag is recognised.
-   * @param {string}     [opts.draggingClass]       CSS class added while dragging.
-   * @param {string}     [opts.excludeSelector]     Clicks matching this target skip drag.
-   * @param {Function}   [opts.onDragStart]
-   * @param {Function}   [opts.onDragEnd]           Receives (wasDragged: boolean).
-   * @returns {{ destroy, wasDragged (getter), resetDragged }}
-   */
   function makeDraggable(el, handleEl, opts) {
     opts = opts || {};
     var threshold     = opts.threshold    || 4;
@@ -152,24 +87,6 @@
       },
     };
   }
-
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // C.  RESIZE HELPER
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  /**
-   * Wires 8-directional resize handles inside `el`.
-   * The element must already be positioned with right/bottom.
-   *
-   * @param {HTMLElement} el
-   * @param {object}     [opts]
-   * @param {number}     [opts.minW=200]
-   * @param {number}     [opts.minH=150]
-   * @param {string}     [opts.resizingClass]
-   * @param {string}     [opts.handleSelector]  Defaults to all three resize-handle classes.
-   * @returns {{ destroy }}
-   */
   function makeResizable(el, opts) {
     opts = opts || {};
     var minW = opts.minW || 200, minH = opts.minH || 150;
@@ -227,31 +144,6 @@
       },
     };
   }
-
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // D.  MINI-PLAYER FACTORY
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  /**
-   * Build and mount a floating mini player.
-   *
-   * @param {object} cfg
-   * @param {string}   cfg.id               DOM id for the root element.
-   * @param {string}  [cfg.labelText]        Badge label text.
-   * @param {string}  [cfg.visibleClass]     CSS class applied after mount (show transition).
-   * @param {string}  [cfg.draggingClass]
-   * @param {string}  [cfg.resizingClass]
-   * @param {string}  [cfg.handlePrefix='seq']   Prefix for resize-handle CSS class.
-   * @param {string}  [cfg.innerIdPrefix]         Prefix for inner element IDs (default = cfg.id).
-   * @param {number}  [cfg.minW=200]
-   * @param {number}  [cfg.minH=150]
-   * @param {Function} cfg.buildPanels       (panelsEl) → { primaryVideo, allVideos[] }
-   * @param {Function}[cfg.onExpand]         (currentTime, wasPlaying) called on expand click.
-   * @param {Function}[cfg.onClose]          Called on close click (after destroy).
-   *
-   * @returns {{ el: HTMLElement, destroy: function }}
-   */
   function createMiniPlayer(cfg) {
     var existing = document.getElementById(cfg.id);
     if (existing) existing.remove();
@@ -304,10 +196,8 @@
     var progressFill = el.querySelector('#' + pfx + 'ProgressFill');
     var dragHandle   = el.querySelector('#' + pfx + 'DragHandle');
 
-    // Panels div fills the video wrap area
     Object.assign(panelsEl.style, { position: 'absolute', inset: '0', overflow: 'hidden' });
 
-    // Caller creates and returns media elements
     var built        = cfg.buildPanels(panelsEl);
     var primaryVideo = built.primaryVideo;
     var allVideos    = built.allVideos || [];
@@ -361,8 +251,6 @@
       getPrimary: function () { return primaryVideo ? [primaryVideo] : []; },
       slider: null, muteBtn: volBtn, volIcon: volIconEl,
     });
-
-    // Expand: pass current time AND wasPlaying so callers can restore play state
     expandBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       var ct         = primaryVideo ? primaryVideo.currentTime : 0;
@@ -396,29 +284,6 @@
     return { el: el, destroy: destroy };
   }
 
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // E.  FLOATING PILL FACTORY
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  /**
-   * Build and mount a floating minimized pill.
-   *
-   * @param {object} cfg
-   * @param {string}   cfg.id               DOM id for the pill.
-   * @param {string}  [cfg.iconClass]        FontAwesome class e.g. 'fa-film'.
-   * @param {string}  [cfg.title]
-   * @param {string}  [cfg.subtitle]
-   * @param {string}  [cfg.extraHTML]        Injected after subtitle inside .pill-info (e.g. progress bar).
-   * @param {boolean} [cfg.showMiniBtn=true]
-   * @param {string}  [cfg.draggingClass]
-   * @param {Function} cfg.onMiniPreview
-   * @param {Function} cfg.onRestore
-   * @param {Function} cfg.onClose           Only this button fully destroys.
-   * @param {Function}[cfg.onBodyClick]      Pill body click (defaults to onMiniPreview).
-   *
-   * @returns {{ el, destroy, updateSubtitle }}
-   */
   function createFloatingPill(cfg) {
     var existing = document.getElementById(cfg.id);
     if (existing) existing.remove();
@@ -457,8 +322,6 @@
       var handler = cfg.onBodyClick || cfg.onMiniPreview;
       if (handler) handler();
     });
-
-    // Drag: excludeSelector prevents action buttons from initiating drag
     var dragger = makeDraggable(pill, pill, {
       threshold:       4,
       draggingClass:   cfg.draggingClass || '',
@@ -477,12 +340,6 @@
 
     return { el: pill, destroy: destroy, updateSubtitle: updateSubtitle };
   }
-
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // F.  VIDEO PLAYBACK UTILITIES
-  // ═══════════════════════════════════════════════════════════════════════════
-
   function fmtTime(secs) {
     if (!isFinite(secs) || isNaN(secs)) return '0:00';
     secs = Math.max(0, Math.floor(secs));
@@ -607,24 +464,13 @@
     return { getVolume: function () { return muted ? 0 : volume; }, setVolume: setVolume, toggleMute: toggleMute };
   }
 
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // EXPORT
-  // ═══════════════════════════════════════════════════════════════════════════
-
   global.VideoUtils = {
-    // A. Fullscreen
     getFullscreenElement, isInFullscreen, enterFullscreen, exitFullscreen,
     onFullscreenChange, createFsGuard,
-    // B. Drag
     makeDraggable,
-    // C. Resize
     makeResizable,
-    // D. Mini player
     createMiniPlayer,
-    // E. Pill
     createFloatingPill,
-    // F. Playback
     fmtTime, getFrameRate, getCurrentFrame, getTotalFrames,
     seekByFrames, getVideoDuration, durationsMatch,
     updateSeekBar, setPlaying, wireSpeedSelect,

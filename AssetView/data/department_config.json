@@ -1,0 +1,72 @@
+{
+    "Department_Dependency": {
+    "Modeling":   ["Rigging", "Texturing"],
+    "Rigging":    ["Animation"],
+    "Matchmove":  ["Animation", "Cache", "FX", "Lighting"],
+    "Animation":  ["Cache", "Lighting", "FX"],
+    "Cache":      ["Lighting", "FX", "Compositing"]
+},
+    "Employee_DB":{
+        "Animation":[
+            "naveen"
+        ],
+        "Compositing":[
+            "adarsh"
+        ],
+        "Concept":[
+            "rizwaan"
+        ],
+        "DMP":[
+            "mamta"
+        ],
+        "Environment":[
+            "kumar"
+        ],
+        "FX":[
+            "adesh"
+        ],
+        "Gromming":[
+            "karthik"
+        ],
+       
+        "Lighting":[
+            "eknath"
+        ],
+        "Matchmove":[
+            "sai"
+        ],
+        "Ml":[
+            "jai"
+        ],
+        "Modeling":[
+            "jayasimha"
+        ],
+        "Paint":[
+            "hajirabegum"
+        ],
+        "Production":[
+            "panneerselvan"
+        ],
+        "RenderWrangler":[
+            "janaleela"
+        ],
+        "Rigging":[
+            "ramakrishna"
+        ],
+        "Roto":[
+            "jogarao"
+        ],
+        "SocialMedia":[
+            "sainika"
+        ],
+        "Superviser":[
+            "satyanarayana"
+        ],
+        "TD":[
+           "swetha"
+        ],
+        "Texturing":[
+            "nagaraju"
+        ]
+    }
+}

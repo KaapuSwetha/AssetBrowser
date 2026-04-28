@@ -11,17 +11,9 @@
 
   const table = document.getElementById('resizableTable');
   if (!table) return;
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // MODULE STATE
-  // ═══════════════════════════════════════════════════════════════════════════
   let _miniPill     = null;
   let _overlayState = null;
   const fsGuard     = { active: false };
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // COLUMN RESIZING
-  // ═══════════════════════════════════════════════════════════════════════════
   const resizers = table.querySelectorAll('.column-resizer');
   let currentResizer = null, currentTh = null, startX = 0, startWidth = 0;
 
@@ -55,24 +47,16 @@
     document.removeEventListener('mousemove', handleColMouseMove);
     document.removeEventListener('mouseup',   handleColMouseUp);
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // COLUMN DRAG-TO-REORDER
-  // ═══════════════════════════════════════════════════════════════════════════
   (function initColReorder() {
     const thead     = table.querySelector('thead');
     const headerRow = thead ? thead.querySelector('tr') : null;
     if (!headerRow) return;
-
-    // Live list so it reflects DOM order after each swap
     const ths = () => Array.from(headerRow.querySelectorAll('th'));
 
-    let dragSrcIdx = null;  // column index at drag start
-    let dropIdx    = null;  // resolved drop target index
-    let ghost      = null;  // floating label
-    let indicator  = null;  // vertical drop-line
-
-    // ── swap every row's cells at positions [from] and [to] ───────────────
+    let dragSrcIdx = null;  
+    let dropIdx    = null;  
+    let ghost      = null;  
+    let indicator  = null; 
     function swapColumns(from, to) {
       if (from === to) return;
       const rows = table.rows;
@@ -85,8 +69,6 @@
         else           ref.before(moving);
       }
     }
-
-    // ── ghost label ───────────────────────────────────────────────────────
     function ensureGhost() {
       if (!ghost) {
         ghost = document.createElement('div');
@@ -106,8 +88,6 @@
       if (ghost) { ghost.style.left = x + 'px'; ghost.style.top = y + 'px'; }
     }
     function hideGhost() { if (ghost) ghost.style.display = 'none'; }
-
-    // ── vertical insert-indicator ─────────────────────────────────────────
     function ensureIndicator() {
       if (!indicator) {
         indicator = document.createElement('div');
@@ -126,10 +106,7 @@
       ind.style.display = 'block';
     }
     function hideIndicator() { if (indicator) indicator.style.display = 'none'; }
-
-    // ── wire each <th> ────────────────────────────────────────────────────
     function wireHeader(th) {
-      // Skip pure drag-handle column (no label span)
       const labelSpan = th.querySelector('span:not(.column-resizer)');
       if (!labelSpan) return;
 
@@ -137,7 +114,6 @@
       th.classList.add('col-draggable');
 
       th.addEventListener('dragstart', e => {
-        // Clicking the resize handle must not start a column drag
         if (e.target.classList.contains('column-resizer')) {
           e.preventDefault(); return;
         }
@@ -146,8 +122,6 @@
         dropIdx    = null;
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', String(dragSrcIdx));
-
-        // Replace the browser's default ghost with a transparent 1×1 canvas
         const blank = document.createElement('canvas');
         blank.width = blank.height = 1;
         document.body.appendChild(blank);
@@ -159,7 +133,6 @@
       });
 
       th.addEventListener('drag', e => {
-        // clientX/Y are 0 when the element leaves the window — ignore those
         if (e.clientX || e.clientY) moveGhost(e.clientX, e.clientY);
       });
 
@@ -175,8 +148,6 @@
         const rect = th.getBoundingClientRect();
         const side = e.clientX < rect.left + rect.width / 2 ? 'left' : 'right';
         showIndicator(th, side);
-
-        // Resolve the insertion index from the drop side
         dropIdx = (side === 'right') ? targetIdx : targetIdx;
 
         ths().forEach(t => t.classList.remove('col-drag-over'));
@@ -188,17 +159,14 @@
       });
 
       th.addEventListener('drop', e => {
-        e.preventDefault(); // actual move happens in dragend
+        e.preventDefault(); 
       });
 
       th.addEventListener('dragend', () => {
-        // Restore visual state
         th.classList.remove('col-dragging');
         ths().forEach(t => t.classList.remove('col-drag-over'));
         hideGhost();
         hideIndicator();
-
-        // Perform the swap
         if (dragSrcIdx !== null && dropIdx !== null && dragSrcIdx !== dropIdx) {
           swapColumns(dragSrcIdx, dropIdx);
         }
@@ -210,10 +178,6 @@
 
     ths().forEach(wireHeader);
   })();
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CHECKBOX SELECTION (max 2 rows)
-  // ═══════════════════════════════════════════════════════════════════════════
   const selectAllCheckbox = document.getElementById('selectAllCheckbox');
   const rowCheckboxes     = table.querySelectorAll('.row-checkbox');
   let selectedRows = [];
@@ -261,10 +225,6 @@
     if (selectedRows.length > 2) selectedRows = selectedRows.slice(-2);
     updateCompareButton();
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FLOATING COMPARE BUTTON
-  // ═══════════════════════════════════════════════════════════════════════════
   const compareBtn = document.createElement('div');
   compareBtn.id = 'floatingCompareBtn';
   compareBtn.innerHTML = `
@@ -298,10 +258,6 @@
     const ctxItem = document.getElementById('openComparisonFullscreen');
     if (ctxItem) ctxItem.style.pointerEvents = busy ? 'none' : '';
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CONTEXT MENU
-  // ═══════════════════════════════════════════════════════════════════════════
   let contextMenu = null;
 
   table.querySelectorAll('.comparison-row').forEach(row => {
@@ -337,10 +293,6 @@
     if (contextMenu) { contextMenu.remove(); contextMenu = null; }
     document.removeEventListener('click', closeContextMenu);
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // HELPERS
-  // ═══════════════════════════════════════════════════════════════════════════
   function _allVids(overlay) {
     return ['cv1', 'cv2', 'sv1', 'sv2']
       .map(c => overlay.querySelector('.' + c))
@@ -359,10 +311,6 @@
       <span style="font-size:12px;">${label}</span>
     </div>`;
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // PILL — build / remove / minimize / restore / hard-destroy
-  // ═══════════════════════════════════════════════════════════════════════════
   function _rebuildPill() {
     document.querySelectorAll('#cmpMiniPill').forEach(el => el.remove());
     if (_miniPill) {
@@ -520,10 +468,6 @@
       finish();
     }
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // COMPARISON MINI PLAYER
-  // ═══════════════════════════════════════════════════════════════════════════
   function _openMiniPlayer() {
     if (!_overlayState) return;
     if (document.getElementById('cmpMiniPlayer')) return;
@@ -748,10 +692,6 @@
     mini.classList.remove('cmp-mini-visible');
     setTimeout(() => { if (mini.parentNode) mini.remove(); }, 300);
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // BUILD OVERLAY SHELL
-  // ═══════════════════════════════════════════════════════════════════════════
   function buildOverlayShell(rowsData) {
     const baseLabel = _rowLabel(rowsData[0]);
     const overLabel = _rowLabel(rowsData[1]);
@@ -875,10 +815,6 @@
 
     return overlay;
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // PARSE MEDIA
-  // ═══════════════════════════════════════════════════════════════════════════
   function parseMediaFromHtml(html, index) {
     const cleanHtml   = html.replace(/\s*hx-swap-oob="true"/g, '');
     const doc         = new DOMParser().parseFromString(cleanHtml, 'text/html');
@@ -915,10 +851,6 @@
 
     return { type: mediaType, src: mediaSrc, poster };
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CREATE MEDIA ELEMENT HTML
-  // ═══════════════════════════════════════════════════════════════════════════
   function createMediaElement(mediaInfo, cls) {
     if (mediaInfo.type === 'video') {
       const pa = mediaInfo.poster ? `poster="${mediaInfo.poster}"` : '';
@@ -932,10 +864,6 @@
     }
     return `<div style="color:#6b7280;font-size:13px;">No media available</div>`;
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OPEN COMPARISON
-  // ═══════════════════════════════════════════════════════════════════════════
   function openComparisonFullscreen() {
     closeContextMenu();
     if (selectedRows.length !== 2) {
@@ -1002,10 +930,6 @@
       setCompareBusy(false);
     });
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CONTROLS SETUP
-  // ═══════════════════════════════════════════════════════════════════════════
   function setupComparisonControls(overlay, rowsData, media1, media2) {
     let viewMode = 'overlay';
 
@@ -1262,20 +1186,12 @@
       }
     });
   }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FULLSCREEN CHANGE
-  // ═══════════════════════════════════════════════════════════════════════════
   const cleanupFsChangeListener = VU.onFullscreenChange(function _onFsChange() {
     if (fsGuard.active) return;
     if (!VU.isInFullscreen() && _overlayState && !_overlayState.minimized) {
       _minimizeOverlay();
     }
   });
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CLEAR SELECTION
-  // ═══════════════════════════════════════════════════════════════════════════
   function clearSelection() {
     closeContextMenu();
     rowCheckboxes.forEach(cb => { cb.checked = false; updateRowSelection(cb); });

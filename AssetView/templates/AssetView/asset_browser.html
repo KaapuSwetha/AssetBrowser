@@ -5,8 +5,6 @@
 
 {% block content %}
 <div class="max-w-[2400px] mx-auto h-full flex flex-col gap-3 min-h-0">
-
-  <!-- Resizable grid container -->
   <div id="resizableGrid" class="flex gap-3 h-auto lg:h-[calc(100vh-8rem)] min-h-0">
 
     <!-- LEFT: Projects Panel -->
@@ -224,13 +222,9 @@ function switchPreviewTab2(tab) {
   btnHistory.style.color        = isPreview ? 'rgb(203 213 225 / var(--tw-text-opacity, 1))'              : 'rgb(203 213 225 / var(--tw-text-opacity, 1))';
   btnHistory.style.borderBottom = isPreview ? '2px solid transparent': '2px solid rgb(203 213 225 / var(--tw-text-opacity, 1))';
 }
-
-  // Lightweight HTMX request indicator
   document.body.addEventListener('htmx:request', () => document.body.classList.add('cursor-progress'));
   document.body.addEventListener('htmx:afterOnLoad', () => document.body.classList.remove('cursor-progress'));
   document.body.addEventListener('htmx:responseError', () => document.body.classList.remove('cursor-progress'));
-
-  // Resizable panels functionality
   (function() {
       function isMobileDevice() {
         return window.innerWidth <= 768 || 
@@ -238,7 +232,7 @@ function switchPreviewTab2(tab) {
            (navigator.maxTouchPoints > 0);
       }
     if (isMobileDevice()) {
-    return; // Exit early on mobile
+    return; 
   }
   
     const resizers = document.querySelectorAll('.resizer');
@@ -295,15 +289,11 @@ function switchPreviewTab2(tab) {
         
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
-
-        // Save panel widths to localStorage
         if (targetPanel) {
           localStorage.setItem(targetPanel.id + '_width', targetPanel.style.width);
         }
       }
     });
-
-    // Restore saved widths on page load
     ['projectsPanel', 'detailsPanel'].forEach(panelId => {
       const savedWidth = localStorage.getItem(panelId + '_width');
       if (savedWidth) {
@@ -313,8 +303,6 @@ function switchPreviewTab2(tab) {
     });
   })();
 </script> 
-
-<!-- ADDED (non-breaking): load review UI helpers -->
 <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 <script src="https://unpkg.com/htmx.org@1.9.10/dist/ext/preload.js"></script>
 {% endblock %} 

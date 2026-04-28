@@ -8,7 +8,8 @@ from pathlib import Path
 from django.conf import settings
 from django.http import (
     HttpResponse, HttpResponseBadRequest,
-    HttpResponseNotFound, JsonResponse
+    HttpResponseNotFound, JsonResponse,
+    StreamingHttpResponse,
 )
 import re as _re
 from django.views.decorators.csrf import csrf_exempt
@@ -57,10 +58,7 @@ _MERGE_JOBS: dict = {}
 # Helper function to resolve media paths
 # --------------------------------------------------------------------------- #
 def resolve_media_path(path_str: str) -> Path:
-    """
-    Resolve various path formats to actual file system paths.
-    Handles: URLs, web paths (/media/...), absolute paths, relative paths, Windows paths.
-    """
+    
     if not path_str:
         return None
 
@@ -137,16 +135,7 @@ def resolve_media_path(path_str: str) -> Path:
 
 
 def get_feedback_files(preview_path: str) -> list:
-    """
-    Scan the feedback folder that corresponds to the given preview path.
-
-    Path transform applied:
-        <root>/04_publish/<dept>/…/<asset>/preview/<file>
-        →  <root>/07_TemporaryData/<dept>/…/<asset>/feedback/
-
-    Returns a list sorted newest-first:
-        [{name, src, path, type ('image'|'video'), display_timestamp}, …]
-    """
+    
     if not preview_path:
         return []
 
@@ -228,7 +217,7 @@ def get_feedback_files(preview_path: str) -> list:
 # --------------------------------------------------------------------------- #
 @require_GET
 def asset_browser(_request):
-    """Main page shell; table is populated via HTMX requests."""
+    
     return render(_request, "AssetView/asset_browser.html",
                   {"empty_versions": []})
 
@@ -247,7 +236,7 @@ def get_project_tree(_request):
 @cache_page(60, key_prefix="ab:cat")
 @require_GET
 def get_category_branch(request):
-    """Render Asset tree: Category → Department → Items."""
+    
     project = (request.GET.get("project") or "").strip()
     if not project:
         return HttpResponse("<div class='px-3 py-2 text-ink-500'>No project</div>")
@@ -260,7 +249,7 @@ def get_category_branch(request):
 @cache_page(60, key_prefix="ab:seq")
 @require_GET
 def get_sequence_branch(request):
-    """Render Sequence tree: Sequence → Shot → Departments (files)."""
+    
     project = (request.GET.get("project") or "").strip()
     if not project:
         return HttpResponse("<div class='px-3 py-2 text-ink-500'>No project</div>")
@@ -275,7 +264,7 @@ def get_sequence_branch(request):
 # --------------------------------------------------------------------------- #
 @require_GET
 def get_asset_versions(request):
-    """Return table rows for a given JSON file + mode + name."""
+    
     path = (request.GET.get("path") or "").strip()
     mode = (request.GET.get("mode") or "").strip()
     name = (request.GET.get("name") or "").strip()
@@ -472,7 +461,7 @@ def get_file_metadata(request):
 # --------------------------------------------------------------------------- #
 @require_GET
 def search_assets(request):
-    """Search for assets and sequences."""
+    
     q = (request.GET.get("q") or "").strip().lower()
     if len(q) < 2:
         return HttpResponse(status=204)
@@ -587,7 +576,6 @@ def check_permission(request):
             'username_found': username is not None
         }
     })
-
 
 @csrf_exempt
 @require_GET
@@ -741,7 +729,7 @@ def update_asset_status(request):
 @csrf_exempt
 @require_POST
 def update_preview_status(request):
-    """Update status from fullscreen preview annotations - UPDATE at correct index"""
+    
     try:
         status = (request.POST.get("status") or "No Status").strip()
         comment = (request.POST.get("comment") or "").strip()
@@ -885,7 +873,7 @@ def update_preview_status(request):
 
 
 def find_json_for_asset(media_path, asset_name, variant, mode):
-    """Find the JSON file that contains the given asset."""
+    
     import os
     if '.' in asset_name:
         asset_base_name = os.path.splitext(asset_name)[0]
@@ -931,7 +919,7 @@ def find_json_for_asset(media_path, asset_name, variant, mode):
 @csrf_exempt
 @require_POST
 def save_annotation(request):
-    """Save annotated media (image or video) with annotations burned in."""
+    
     try:
         media_path = (request.POST.get("media_path") or "").strip()
         asset_name = (request.POST.get("asset_name") or "").strip()
@@ -1252,7 +1240,7 @@ def burn_annotations_to_video(input_path, output_path, annotations):
 
 
 def create_annotation_overlay(self, annotation, temp_dir):
-    """Create FFmpeg overlay command for an annotation."""
+    
     try:
         anno_type = annotation.get('type')
         color = annotation.get('color', '#FF0000')
@@ -1301,7 +1289,7 @@ def create_annotation_overlay(self, annotation, temp_dir):
 
 
 def _is_sbs_preview(path_str: str) -> bool:
-    """Return True if the path is a pre-rendered side-by-side composite file."""
+    
     return str(path_str).lower().endswith('_side_by_side.mov')
 
 
@@ -1561,7 +1549,7 @@ _VIDEO_EXTS = {".mp4", ".mov", ".m4v", ".webm", ".avi", ".mxf"}
 _DEPT_KEYWORDS: Dict[str, List[str]] = {
     "animation": ["animation", "09_animation", "_ani_"],
     "matchmove": ["matchmove", "16_matchmove", "_mtm_"],
-    "cache": ["cache", "15_cache", "_cac_"],
+    "cache": ["cache", "11_cache", "_cac_"],
     "lighting": ["lighting", "12_lighting", "_lgt_"],
     "compositing": ["compositing", "comp", "_comp_"],
     "rigging": ["rigging", "rig", "_rig_"],
@@ -2212,13 +2200,11 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
             job["error"] = str(exc)
             job["progress"] = 0
 
+
 @csrf_exempt
 @require_POST
 def delete_merge_output(request, job_id):
-    """
-    Permanently delete the merged output file for a completed OR in-progress job.
-    Called when the user explicitly chooses 'Yes, delete' in the confirmation dialog.
-    """
+    
     job = _MERGE_JOBS.get(job_id)
     if not job:
         return JsonResponse({"error": "Unknown job_id"}, status=404)
@@ -2244,12 +2230,12 @@ def delete_merge_output(request, job_id):
             return JsonResponse({"ok": False, "error": str(e)}, status=500)
 
     return JsonResponse({"ok": True, "job_id": job_id, "deleted": deleted})
+
+
 @csrf_exempt
 @require_POST
 def cancel_merge_job(request, job_id):
-    """Cancel / clean up a queued or running merge job.
-    Only deletes the output file if the job was NOT already done.
-    """
+    
     job = _MERGE_JOBS.get(job_id)
     if not job:
         return JsonResponse({"error": "Unknown job_id"}, status=404)
@@ -2273,12 +2259,12 @@ def cancel_merge_job(request, job_id):
 
     # Job already finished — do NOT delete the completed output
     return JsonResponse({"ok": True, "job_id": job_id, "deleted": False, "already_done": True})
+
+
 @require_GET
 @require_GET
 def serve_merge_output(request, job_id):
-    """Stream a temp-stored merged video back to the browser.
-    Add ?download=1 to force a Save-As dialog with a clean filename.
-    """
+    
     from django.http import FileResponse
     job = _MERGE_JOBS.get(job_id)
     if not job or job.get("status") != "done":
@@ -2290,10 +2276,10 @@ def serve_merge_output(request, job_id):
     as_attachment = request.GET.get("download") == "1"
 
     # Build a human-friendly filename for the Save-As dialog
-    project  = job.get("project", "project")
+    project = job.get("project", "project")
     sequence = job.get("sequence", "sequence")
-    dept     = job.get("dept", "")
-    suffix   = f"_{dept}" if dept and dept not in ("sbs", "SBS", "") else ("_SBS" if dept.lower() == "sbs" else "")
+    dept = job.get("dept", "")
+    suffix = f"_{dept}" if dept and dept not in ("sbs", "SBS", "") else ("_SBS" if dept.lower() == "sbs" else "")
     download_name = f"{project}_{sequence}{suffix}_merged.mp4"
 
     response = FileResponse(
@@ -2303,6 +2289,7 @@ def serve_merge_output(request, job_id):
         filename=download_name if as_attachment else None,
     )
     return response
+
 
 @require_GET
 def get_asset_history(request):
@@ -2333,71 +2320,118 @@ def get_asset_history(request):
     html = render_to_string("AssetView/partials/_history_table.html", {"history": history})
     return HttpResponse(html)
 
- 
+
 @require_GET
 def get_notifications(request):
-    """
-    Poll endpoint — scans active-project JSON files for changes,
-    then returns all UNREAD notifications for the requesting user.
-    """
-    # ── Resolve username for this request ─────────────────────────────────
+    
     _, username, client_ip = check_user_permission(request)
     if not username:
-        # Fall back to IP-based identity so anonymous users still get
-        # per-session isolation rather than sharing one "anonymous" bucket.
         username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
- 
-    # ── Scan for new changes across all active projects ───────────────────
-    json_files = []
-    for project in ACTIVE:
-        for section in ("Asset", "Sequence"):
-            section_path = BASE / project / section
-            if section_path.exists():
-                json_files.extend(section_path.rglob("*.json"))
- 
-    scan_json_for_new_keys(json_files)
- 
-    # ── Return only this user's unread notifications ───────────────────────
+
     unread = get_unread_notifications(username)
     unread.sort(key=lambda n: n.get("timestamp", ""), reverse=True)
- 
+
     return JsonResponse({"count": len(unread), "notifications": unread})
- 
- 
+
+
 @csrf_exempt
 @require_POST
 def mark_notification_read_view(request, notification_id):
-    """Mark a single notification as read for THIS user only."""
+    
     _, username, client_ip = check_user_permission(request)
     if not username:
         username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
- 
+
     ok = mark_notification_read(notification_id, username)
     return JsonResponse({"ok": ok})
- 
- 
+
+
 @csrf_exempt
 @require_POST
 def mark_all_notifications_read(request):
-    """Mark every unread notification as read for THIS user only."""
+    
     _, username, client_ip = check_user_permission(request)
     if not username:
         username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
- 
+
     count = mark_all_read(username)
     return JsonResponse({"ok": True, "marked": count})
- 
- 
+
+
 @csrf_exempt
 @require_POST
 def delete_notification_view(request, notification_id):
-    """
-    Dismiss a single notification for THIS user only.
-    The master notification list is untouched — other users are unaffected.
-    """
+    
     _, username, client_ip = check_user_permission(request)
     if not username:
         username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
- 
+
     ok = delete_notification(notification_id, username)
     return JsonResponse({"ok": ok})
+
+
+import time as _time  # already imported as _time in the merge section above
+
+
+def notification_stream(request):
+    
+    _, username, client_ip = check_user_permission(request)
+    if not username:
+        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
+
+    def _collect_json_files():
+        files = []
+        for project in ACTIVE:
+            for section in ("Asset", "Sequence"):
+                p = BASE / project / section
+                if p.exists():
+                    files.extend(p.rglob("*.json"))
+        return files
+
+    def event_stream():
+        last_ids: set = set()
+        while True:
+            try:
+                # No more scan here — watcher handles it
+                unread = get_unread_notifications(username)
+                unread.sort(key=lambda n: n.get("timestamp", ""), reverse=True)
+
+                current_ids = {n["id"] for n in unread}
+                if current_ids != last_ids:
+                    last_ids = current_ids
+                    payload = json.dumps({"count": len(unread), "notifications": unread})
+                    yield f"data: {payload}\n\n"
+                else:
+                    yield ": keepalive\n\n"
+            except GeneratorExit:
+                break
+            except Exception as exc:
+                logger.warning(f"[SSE] stream error: {exc}")
+                yield ": error\n\n"
+
+            _time.sleep(3)  # reduce SSE poll interval too
+
+    response = StreamingHttpResponse(
+        streaming_content=event_stream(),
+        content_type="text/event-stream; charset=utf-8",
+    )
+    response["Cache-Control"] = "no-cache, no-store"
+    response["X-Accel-Buffering"] = "no"  # disable nginx/gunicorn buffering
+    response["Connection"] = "keep-alive"
+    return response
+
+
+from .viewFiles.notifications_handler import start_background_watcher
+
+
+def _get_all_json_files():
+    files = []
+    for project in ACTIVE:
+        for section in ("Asset", "Sequence"):
+            p = BASE / project / section
+            if p.exists():
+                files.extend(p.rglob("*.json"))
+    return files
+
+
+start_background_watcher(_get_all_json_files, interval_seconds=3)

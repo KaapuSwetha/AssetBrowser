@@ -297,15 +297,12 @@
   function removeGhost() {
     if (ghost) { ghost.remove(); ghost = null; }
   }
-
-  // Attach drag listeners to th labels
   const ths = table.querySelectorAll('thead .history-th');
   ths.forEach(th => {
     const label = th.querySelector('.th-label');
     if (!label) return;
 
     label.addEventListener('mousedown', e => {
-      // Don't trigger if clicking on resizer
       if (e.target.classList.contains('col-resizer')) return;
       e.preventDefault();
       dragSrcIdx = getColIndex(th);
@@ -315,7 +312,6 @@
 
       function onMove(e) {
         updateGhost(e.clientX, e.clientY);
-        // Highlight target th
         ths.forEach(t => t.classList.remove('drag-over'));
         const el = document.elementFromPoint(e.clientX, e.clientY);
         const targetTh = el ? el.closest('.history-th') : null;

@@ -102,19 +102,19 @@
   },
   "AssetView\\projects\\OG\\Asset\\chr\\03_Model\\OG_chr_03_Model_asset_info.json::asset_info::OG_chr_emraan_mod::variant_names": {},
   "AssetView\\projects\\OG\\Asset\\chr\\03_Model\\OG_chr_03_Model_asset_info.json::asset_info::OG_chr_emraan_mod::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Asset\\chr\\03_Model\\OG_chr_03_Model_asset_info.json::asset_info::OG_chr_ogsgambeera_mod::__root__": {
     "fields": {
@@ -280,19 +280,19 @@
   },
   "AssetView\\projects\\OG\\Asset\\chr\\03_Model\\OG_chr_03_Model_asset_info.json::asset_info::OG_chr_ogsgambeera_mod::variant_names": {},
   "AssetView\\projects\\OG\\Asset\\chr\\03_Model\\OG_chr_03_Model_asset_info.json::asset_info::OG_chr_ogsgambeera_mod::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Asset\\chr\\03_Model\\OG_chr_03_Model_asset_info.json::sequence_info::__asset_names__": {},
   "AssetView\\projects\\OG\\Asset\\chr\\05_Groom\\OG_chr_05_Groom_asset_info.json::asset_info::__asset_names__": {
@@ -466,22 +466,22 @@
   },
   "AssetView\\projects\\OG\\Asset\\chr\\05_Groom\\OG_chr_05_Groom_asset_info.json::asset_info::OG_chr_Gambeera_groom::variant_names": {},
   "AssetView\\projects\\OG\\Asset\\chr\\05_Groom\\OG_chr_05_Groom_asset_info.json::asset_info::OG_chr_Gambeera_groom::topkeys": {
-    "Xgen_Description": true,
-    "Usd": true,
-    "AssetId": true,
+    "Xgen_PublishedPath": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
-    "Xgen_SourceImages": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "Xgen_Description": true,
+    "Xgen_SourceImages": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "Xgen_PublishedPath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Asset\\chr\\05_Groom\\OG_chr_05_Groom_asset_info.json::sequence_info::__asset_names__": {},
   "AssetView\\projects\\OG\\Asset\\chr\\07_Rig\\OG_chr_07_Rig_asset_info.json::asset_info::__asset_names__": {
@@ -613,19 +613,19 @@
   },
   "AssetView\\projects\\OG\\Asset\\chr\\07_Rig\\OG_chr_07_Rig_asset_info.json::asset_info::OG_chr_emraan_rig::variant_names": {},
   "AssetView\\projects\\OG\\Asset\\chr\\07_Rig\\OG_chr_07_Rig_asset_info.json::asset_info::OG_chr_emraan_rig::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Asset\\chr\\07_Rig\\OG_chr_07_Rig_asset_info.json::asset_info::OG_chr_ogsgambeera_rig::__root__": {
     "fields": {
@@ -778,19 +778,19 @@
   },
   "AssetView\\projects\\OG\\Asset\\chr\\07_Rig\\OG_chr_07_Rig_asset_info.json::asset_info::OG_chr_ogsgambeera_rig::variant_names": {},
   "AssetView\\projects\\OG\\Asset\\chr\\07_Rig\\OG_chr_07_Rig_asset_info.json::asset_info::OG_chr_ogsgambeera_rig::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Asset\\chr\\07_Rig\\OG_chr_07_Rig_asset_info.json::sequence_info::__asset_names__": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::asset_info::__asset_names__": {},
@@ -855,15 +855,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2800::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2800::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2860::__root__": {
     "fields": {
@@ -909,15 +909,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2860::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2860::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3210::__root__": {
     "fields": {
@@ -963,15 +963,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3210::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3210::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3230::__root__": {
     "fields": {
@@ -1017,15 +1017,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3230::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3230::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3360::__root__": {
     "fields": {
@@ -1080,15 +1080,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3360::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3360::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3380::__root__": {
     "fields": {
@@ -1134,15 +1134,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3380::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3380::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3390::__root__": {
     "fields": {
@@ -1188,15 +1188,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3390::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3390::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3240::__root__": {
     "fields": {
@@ -1242,15 +1242,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3240::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3240::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3340::__root__": {
     "fields": {
@@ -1296,15 +1296,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3340::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3340::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3290::__root__": {
     "fields": {
@@ -1359,15 +1359,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3290::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3290::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3410::__root__": {
     "fields": {
@@ -1413,15 +1413,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3410::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3410::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2880::__root__": {
     "fields": {
@@ -1467,15 +1467,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2880::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2880::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2830::__root__": {
     "fields": {
@@ -1521,15 +1521,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2830::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP2830::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3300::__root__": {
     "fields": {
@@ -1575,15 +1575,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3300::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3300::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3320::__root__": {
     "fields": {
@@ -1629,15 +1629,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3320::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Climax\\OG_11_Cache_Climax_sequence_info.json::sequence_info::81_MP3320::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::__asset_names__": {
@@ -1690,15 +1690,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH1730::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH1730::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH1700::__root__": {
     "fields": {
@@ -1744,15 +1744,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH1700::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH1700::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH2590::__root__": {
     "fields": {
@@ -1843,15 +1843,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH2590::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH2590::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH2470::__root__": {
     "fields": {
@@ -1906,15 +1906,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH2470::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\11_Cache\\Interval\\OG_11_Cache_Interval_sequence_info.json::sequence_info::44A_SH2470::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::__asset_names__": {
@@ -1978,15 +1978,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2860::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2860::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3210::__root__": {
     "fields": {
@@ -2032,15 +2032,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3210::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3210::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3390::__root__": {
     "fields": {
@@ -2086,15 +2086,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3390::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3390::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3380::__root__": {
     "fields": {
@@ -2140,15 +2140,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3380::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3380::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2800::__root__": {
     "fields": {
@@ -2194,15 +2194,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2800::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2800::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3230::__root__": {
     "fields": {
@@ -2248,15 +2248,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3230::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3230::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3360::__root__": {
     "fields": {
@@ -2311,15 +2311,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3360::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3360::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3240::__root__": {
     "fields": {
@@ -2365,15 +2365,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3240::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3240::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2880::__root__": {
     "fields": {
@@ -2419,15 +2419,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2880::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2880::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3410::__root__": {
     "fields": {
@@ -2473,15 +2473,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3410::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3410::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2830::__root__": {
     "fields": {
@@ -2536,15 +2536,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2830::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP2830::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3290::__root__": {
     "fields": {
@@ -2599,15 +2599,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3290::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3290::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3340::__root__": {
     "fields": {
@@ -2653,15 +2653,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3340::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3340::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3300::__root__": {
     "fields": {
@@ -2707,15 +2707,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3300::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3300::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3320::__root__": {
     "fields": {
@@ -2761,15 +2761,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3320::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Climax\\OG_09_Animation_Climax_sequence_info.json::sequence_info::81_MP3320::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::__asset_names__": {
@@ -2831,15 +2831,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH1730::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH1730::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH1700::__root__": {
     "fields": {
@@ -2885,15 +2885,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH1700::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH1700::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH2470::__root__": {
     "fields": {
@@ -2948,15 +2948,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH2470::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH2470::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH2590::__root__": {
     "fields": {
@@ -3038,15 +3038,15 @@
   },
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH2590::variant_names": {},
   "AssetView\\projects\\OG\\Sequence\\09_Animation\\Interval\\OG_09_Animation_Interval_sequence_info.json::sequence_info::44A_SH2590::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Asset\\prp\\03_Model\\CHM_prp_03_Model_asset_info.json::asset_info::__asset_names__": {
     "CHM_prp_cg_spear_a_mod": true,
@@ -3112,19 +3112,19 @@
   },
   "AssetView\\projects\\CHM\\Asset\\prp\\03_Model\\CHM_prp_03_Model_asset_info.json::asset_info::CHM_prp_cg_spear_a_mod::variant_names": {},
   "AssetView\\projects\\CHM\\Asset\\prp\\03_Model\\CHM_prp_03_Model_asset_info.json::asset_info::CHM_prp_cg_spear_a_mod::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Asset\\prp\\03_Model\\CHM_prp_03_Model_asset_info.json::asset_info::CHM_prp_cg_spear_b_mod::__root__": {
     "fields": {
@@ -3199,19 +3199,19 @@
   },
   "AssetView\\projects\\CHM\\Asset\\prp\\03_Model\\CHM_prp_03_Model_asset_info.json::asset_info::CHM_prp_cg_spear_b_mod::variant_names": {},
   "AssetView\\projects\\CHM\\Asset\\prp\\03_Model\\CHM_prp_03_Model_asset_info.json::asset_info::CHM_prp_cg_spear_b_mod::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Asset\\prp\\03_Model\\CHM_prp_03_Model_asset_info.json::sequence_info::__asset_names__": {},
   "AssetView\\projects\\CHM\\Asset\\chr\\03_Model\\CHM_chr_03_Model_asset_info.json::asset_info::__asset_names__": {
@@ -3291,19 +3291,19 @@
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\03_Model\\CHM_chr_03_Model_asset_info.json::asset_info::CHM_chr_hero_leg_340_mod::variant_names": {},
   "AssetView\\projects\\CHM\\Asset\\chr\\03_Model\\CHM_chr_03_Model_asset_info.json::asset_info::CHM_chr_hero_leg_340_mod::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\03_Model\\CHM_chr_03_Model_asset_info.json::asset_info::CHM_chr_horse_black_mod::__root__": {
     "fields": {
@@ -3365,19 +3365,19 @@
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\03_Model\\CHM_chr_03_Model_asset_info.json::asset_info::CHM_chr_horse_black_mod::variant_names": {},
   "AssetView\\projects\\CHM\\Asset\\chr\\03_Model\\CHM_chr_03_Model_asset_info.json::asset_info::CHM_chr_horse_black_mod::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\03_Model\\CHM_chr_03_Model_asset_info.json::sequence_info::__asset_names__": {},
   "AssetView\\projects\\CHM\\Asset\\chr\\04_Texture\\CHM_chr_04_Texture_asset_info.json::asset_info::__asset_names__": {
@@ -3444,19 +3444,19 @@
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\04_Texture\\CHM_chr_04_Texture_asset_info.json::asset_info::CHM_chr_horse_White_face_tex::variant_names": {},
   "AssetView\\projects\\CHM\\Asset\\chr\\04_Texture\\CHM_chr_04_Texture_asset_info.json::asset_info::CHM_chr_horse_White_face_tex::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\04_Texture\\CHM_chr_04_Texture_asset_info.json::asset_info::CHM_prp_barrel_tex::__root__": {
     "fields": {
@@ -3518,19 +3518,19 @@
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\04_Texture\\CHM_chr_04_Texture_asset_info.json::asset_info::CHM_prp_barrel_tex::variant_names": {},
   "AssetView\\projects\\CHM\\Asset\\chr\\04_Texture\\CHM_chr_04_Texture_asset_info.json::asset_info::CHM_prp_barrel_tex::topkeys": {
-    "Usd": true,
-    "AssetId": true,
     "Alembic": true,
-    "TextureSourcePath": true,
+    "Status": true,
     "FileName": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "DecimatedMesh": true,
+    "PreviewPath": true,
     "User": true,
     "AdditionalMaps": true,
+    "AssetId": true,
+    "TextureSourcePath": true,
+    "Usd": true,
+    "WorkFilePath": true,
     "PublishdFilePath": true,
-    "PreviewPath": true,
-    "Status": true
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Asset\\chr\\04_Texture\\CHM_chr_04_Texture_asset_info.json::sequence_info::__asset_names__": {},
   "AssetView\\projects\\CHM\\Sequence\\11_Cache\\RL005\\CHM_11_Cache_RL005_sequence_info.json::asset_info::__asset_names__": {},
@@ -3626,15 +3626,15 @@
   },
   "AssetView\\projects\\CHM\\Sequence\\11_Cache\\RL005\\CHM_11_Cache_RL005_sequence_info.json::sequence_info::SHOT_0002::variant_names": {},
   "AssetView\\projects\\CHM\\Sequence\\11_Cache\\RL005\\CHM_11_Cache_RL005_sequence_info.json::sequence_info::SHOT_0002::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Sequence\\11_Cache\\SC_999\\CHM_11_Cache_SC_999_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\CHM\\Sequence\\11_Cache\\SC_999\\CHM_11_Cache_SC_999_sequence_info.json::sequence_info::__asset_names__": {
@@ -3774,15 +3774,15 @@
   },
   "AssetView\\projects\\CHM\\Sequence\\11_Cache\\SC_999\\CHM_11_Cache_SC_999_sequence_info.json::sequence_info::SHOT_9999::variant_names": {},
   "AssetView\\projects\\CHM\\Sequence\\11_Cache\\SC_999\\CHM_11_Cache_SC_999_sequence_info.json::sequence_info::SHOT_9999::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL005\\CHM_09_Animation_RL005_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL005\\CHM_09_Animation_RL005_sequence_info.json::sequence_info::__asset_names__": {
@@ -3873,15 +3873,15 @@
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL005\\CHM_09_Animation_RL005_sequence_info.json::sequence_info::SHOT_0002::variant_names": {},
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL005\\CHM_09_Animation_RL005_sequence_info.json::sequence_info::SHOT_0002::topkeys": {
-    "FrameRate": true,
-    "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
+    "SideBySide": true,
     "User": true,
-    "PublishdFilePath": true,
-    "PreviewPath": true,
     "Status": true,
-    "SideBySide": true
+    "PreviewPath": true,
+    "PublishdFilePath": true,
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "FrameRange": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL005\\CHM_09_Animation_RL005_sequence_info.json::sequence_info::SHOT_0003::__root__": {
     "fields": {
@@ -3935,15 +3935,15 @@
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL005\\CHM_09_Animation_RL005_sequence_info.json::sequence_info::SHOT_0003::variant_names": {},
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL005\\CHM_09_Animation_RL005_sequence_info.json::sequence_info::SHOT_0003::topkeys": {
-    "FrameRate": true,
-    "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
+    "SideBySide": true,
     "User": true,
-    "PublishdFilePath": true,
-    "PreviewPath": true,
     "Status": true,
-    "SideBySide": true
+    "PreviewPath": true,
+    "PublishdFilePath": true,
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "FrameRange": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL999\\CHM_09_Animation_RL999_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL999\\CHM_09_Animation_RL999_sequence_info.json::sequence_info::__asset_names__": {
@@ -4001,15 +4001,15 @@
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL999\\CHM_09_Animation_RL999_sequence_info.json::sequence_info::SHOT_9999::variant_names": {},
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\RL999\\CHM_09_Animation_RL999_sequence_info.json::sequence_info::SHOT_9999::topkeys": {
-    "FrameRate": true,
-    "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
+    "SideBySide": true,
     "User": true,
-    "PublishdFilePath": true,
-    "PreviewPath": true,
     "Status": true,
-    "SideBySide": true
+    "PreviewPath": true,
+    "PublishdFilePath": true,
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "FrameRange": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\SC_999\\CHM_09_Animation_SC_999_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\SC_999\\CHM_09_Animation_SC_999_sequence_info.json::sequence_info::__asset_names__": {
@@ -4059,15 +4059,15 @@
   },
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\SC_999\\CHM_09_Animation_SC_999_sequence_info.json::sequence_info::SHOT_9999::variant_names": {},
   "AssetView\\projects\\CHM\\Sequence\\09_Animation\\SC_999\\CHM_09_Animation_SC_999_sequence_info.json::sequence_info::SHOT_9999::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Asset\\prp\\03_Model\\KAR_prp_03_Model_asset_info.json::asset_info::__asset_names__": {
     "KAR_prp_baleno_blue_mod": true,
@@ -5657,15 +5657,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0083::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0083::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0006::__root__": {
     "fields": {
@@ -5738,15 +5738,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0006::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0006::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0003::__root__": {
     "fields": {
@@ -5792,15 +5792,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0003::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0003::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0005::__root__": {
     "fields": {
@@ -5846,15 +5846,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0005::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0005::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0021::__root__": {
     "fields": {
@@ -5900,15 +5900,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0021::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0021::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0008::__root__": {
     "fields": {
@@ -5954,15 +5954,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0008::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0008::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0016::__root__": {
     "fields": {
@@ -6008,15 +6008,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0016::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0016::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0014::__root__": {
     "fields": {
@@ -6062,15 +6062,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0014::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0014::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0023::__root__": {
     "fields": {
@@ -6116,15 +6116,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0023::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0023::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0017::__root__": {
     "fields": {
@@ -6170,15 +6170,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0017::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0017::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0020::__root__": {
     "fields": {
@@ -6224,15 +6224,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0020::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0020::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0018::__root__": {
     "fields": {
@@ -6278,15 +6278,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0018::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0018::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0069::__root__": {
     "fields": {
@@ -6341,15 +6341,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0069::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0069::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0007::__root__": {
     "fields": {
@@ -6395,15 +6395,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0007::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0007::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0078::__root__": {
     "fields": {
@@ -6449,15 +6449,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0078::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0078::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0072::__root__": {
     "fields": {
@@ -6503,15 +6503,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0072::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0072::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0070::__root__": {
     "fields": {
@@ -6557,15 +6557,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0070::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0070::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0076B::__root__": {
     "fields": {
@@ -6611,15 +6611,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0076B::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_054\\KAR_16_Matchmove_SC_054_sequence_info.json::sequence_info::SHOT_0076B::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::__asset_names__": {
@@ -6675,15 +6675,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0182A::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0182A::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0185::__root__": {
     "fields": {
@@ -6729,15 +6729,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0185::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0185::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0209::__root__": {
     "fields": {
@@ -6783,15 +6783,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0209::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0209::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0211::__root__": {
     "fields": {
@@ -6837,15 +6837,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0211::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0211::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0212::__root__": {
     "fields": {
@@ -6891,15 +6891,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0212::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0212::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0215::__root__": {
     "fields": {
@@ -6945,15 +6945,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0215::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0215::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0221::__root__": {
     "fields": {
@@ -6999,15 +6999,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0221::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\16_Matchmove\\SC_056\\KAR_16_Matchmove_SC_056_sequence_info.json::sequence_info::SHOT_0221::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::__asset_names__": {
@@ -7091,15 +7091,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0083::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0083::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0006::__root__": {
     "fields": {
@@ -7172,15 +7172,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0006::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0006::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0003::__root__": {
     "fields": {
@@ -7226,15 +7226,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0003::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0003::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0005::__root__": {
     "fields": {
@@ -7280,15 +7280,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0005::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0005::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0021::__root__": {
     "fields": {
@@ -7334,15 +7334,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0021::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0021::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0008::__root__": {
     "fields": {
@@ -7388,15 +7388,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0008::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0008::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0016::__root__": {
     "fields": {
@@ -7442,15 +7442,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0016::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0016::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0014::__root__": {
     "fields": {
@@ -7496,15 +7496,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0014::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0014::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0023::__root__": {
     "fields": {
@@ -7550,15 +7550,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0023::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0023::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0017::__root__": {
     "fields": {
@@ -7604,15 +7604,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0017::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0017::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0020::__root__": {
     "fields": {
@@ -7658,15 +7658,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0020::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0020::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0018::__root__": {
     "fields": {
@@ -7712,15 +7712,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0018::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0018::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0007::__root__": {
     "fields": {
@@ -7766,15 +7766,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0007::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0007::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0078::__root__": {
     "fields": {
@@ -7820,15 +7820,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0078::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0078::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0072::__root__": {
     "fields": {
@@ -7874,15 +7874,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0072::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0072::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0070::__root__": {
     "fields": {
@@ -7928,15 +7928,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0070::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0070::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0076B::__root__": {
     "fields": {
@@ -7982,15 +7982,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0076B::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_054\\KAR_11_Cache_SC_054_sequence_info.json::sequence_info::SHOT_0076B::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::__asset_names__": {
@@ -8063,15 +8063,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0228::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0228::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0223::__root__": {
     "fields": {
@@ -8135,15 +8135,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0223::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0223::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0225::__root__": {
     "fields": {
@@ -8207,15 +8207,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0225::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0225::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0219::__root__": {
     "fields": {
@@ -8288,15 +8288,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0219::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0219::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0230::__root__": {
     "fields": {
@@ -8351,15 +8351,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0230::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0230::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0012_L02A::__root__": {
     "fields": {
@@ -8423,15 +8423,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0012_L02A::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\11_Cache\\SC_056\\KAR_11_Cache_SC_056_sequence_info.json::sequence_info::SHOT_0012_L02A::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_054\\KAR_09_Animation_SC_054_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_054\\KAR_09_Animation_SC_054_sequence_info.json::sequence_info::__asset_names__": {
@@ -8482,15 +8482,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_054\\KAR_09_Animation_SC_054_sequence_info.json::sequence_info::SHOT_0006::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_054\\KAR_09_Animation_SC_054_sequence_info.json::sequence_info::SHOT_0006::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_054\\KAR_09_Animation_SC_054_sequence_info.json::sequence_info::SHOT_0007::__root__": {
     "fields": {
@@ -8536,15 +8536,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_054\\KAR_09_Animation_SC_054_sequence_info.json::sequence_info::SHOT_0007::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_054\\KAR_09_Animation_SC_054_sequence_info.json::sequence_info::SHOT_0007::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::asset_info::__asset_names__": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::__asset_names__": {
@@ -8643,15 +8643,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0219::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0219::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0230::__root__": {
     "fields": {
@@ -8706,15 +8706,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0230::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0230::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0186::__root__": {
     "fields": {
@@ -8778,15 +8778,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0186::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0186::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0105::__root__": {
     "fields": {
@@ -8841,15 +8841,15 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0105::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0105::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0104::__root__": {
     "fields": {
@@ -8895,14 +8895,14 @@
   },
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0104::variant_names": {},
   "AssetView\\projects\\KAR\\Sequence\\09_Animation\\SC_056\\KAR_09_Animation_SC_056_sequence_info.json::sequence_info::SHOT_0104::topkeys": {
-    "FrameRate": true,
-    "Date": true,
     "FrameRange": true,
-    "PublishComment": true,
-    "WorkFilePath": true,
     "User": true,
-    "PublishdFilePath": true,
+    "Status": true,
+    "Date": true,
     "PreviewPath": true,
-    "Status": true
+    "FrameRate": true,
+    "WorkFilePath": true,
+    "PublishdFilePath": true,
+    "PublishComment": true
   }
 }

@@ -214,12 +214,8 @@ if (!window._seqLineupInit) {
     document.querySelectorAll('.seq-lineup-submenu').forEach(s => s.style.display = 'none');
     document.querySelectorAll('.seq-lineup-parent').forEach(b => b.classList.remove('active'));
   };
-
-/* ── Right-click on seq-summary opens the dropdown ── */
   document.addEventListener('contextmenu', function(e) {
     const summary = e.target.closest('.seq-summary');
-
-    // Right-clicked outside any summary — just close
     if (!summary) {
       closeAllSeqDropdowns();
       return;
@@ -232,11 +228,7 @@ if (!window._seqLineupInit) {
     if (!dropdown) return;
 
     const isAlreadyOpen = dropdown.style.display === 'block';
-
-    // Always close everything first
     closeAllSeqDropdowns();
-
-    // Toggle: if it was open, leave it closed
     if (isAlreadyOpen) return;
 
     window.buildSeqDropdown(dropdown);
@@ -253,7 +245,6 @@ if (!window._seqLineupInit) {
     });
   });
 
-  /* ── Click anywhere outside closes dropdowns ── */
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.seq-lineup-dropdown')) {
       closeAllSeqDropdowns();
