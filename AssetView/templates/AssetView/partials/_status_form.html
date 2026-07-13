@@ -9,13 +9,13 @@
       hx-target="this"
       onsubmit="this.querySelector('button[type=submit]').disabled=true"
     >
-      {% csrf_token %}
       <input type="hidden" name="uid" value="{{ uid }}"/>
       <input type="hidden" name="path" value="{{ path }}"/>
       <input type="hidden" name="mode" value="{{ mode }}"/>
       <input type="hidden" name="name" value="{{ name }}"/>
       <input type="hidden" name="variant" value="{{ variant }}"/>  
       <input type="hidden" name="index" value="{{ index }}"/>
+      
       <!-- Status Selection -->
       <div class="px-4 py-2.5 border-b border-slate-600/50">
           <label class="block text-[9px] sm:text-[10px] md:text-xs font-medium text-slate-300 mb-1 md:mb-1.5">Status</label>
@@ -69,6 +69,7 @@
     const portalEl = document.getElementById('statusPortal-' + uid);
     const formEl = document.getElementById('statusForm-' + uid);
     if (formEl) {
+      // remove resize/orientation/scroll handlers if attached
       if (formEl._statusResizeHandler) {
         window.removeEventListener('resize', formEl._statusResizeHandler);
         window.removeEventListener('orientationchange', formEl._statusResizeHandler);
@@ -78,6 +79,7 @@
         window.removeEventListener('scroll', formEl._statusScrollHandler, true);
         delete formEl._statusScrollHandler;
       }
+      // Remove visual indicator from row
       var statusCell = document.getElementById('statusCell-' + uid) || portalEl.closest('[id^="statusCell-"]');
       if (statusCell) {
         var row = statusCell.closest('tr');
@@ -92,6 +94,7 @@
     }
     if (portalEl) portalEl.innerHTML = '';
   }
+  // expose globally so inline onclick handlers can call it
   window.closeStatusForm = closeStatusForm;
 
   var allPortals = document.querySelectorAll('[id^="statusPortal-"]');
@@ -114,76 +117,115 @@
     var viewportWidth = window.innerWidth;
     var spaceBelow = viewportHeight - portalRect.bottom;
     var spaceAbove = portalRect.top;
+
+    // Find the table container to respect its boundaries
     var table = portal.closest('table');
     var tableRect = table ? table.getBoundingClientRect() : null;
+
+    // Choose the inner panel (first child div) as target for width adjustments
     var panel = form.querySelector(':scope > div') || form;
+
+    // Compute adaptive width: prefer default, but cap to table width and viewport
     var isMobile = viewportWidth < 640;
-    var defaultWidth = isMobile ? 220 : 260; 
+    var defaultWidth = isMobile ? 220 : 260; // slightly smaller on mobile
     var minWidth = isMobile ? 160 : 180;
     var maxWidthViewport = Math.floor(viewportWidth * 0.95);
     var maxWidthTable = tableRect ? Math.floor(tableRect.width - 16) : maxWidthViewport;
     var allowedMax = Math.max(minWidth, Math.min(maxWidthTable, maxWidthViewport));
     var finalWidth = Math.max(minWidth, Math.min(defaultWidth, allowedMax));
     panel.style.width = finalWidth + 'px';
+    // also ensure panel doesn't force layout when portal is zero-size
     panel.style.maxWidth = allowedMax + 'px';
+    
+    // Move form to document body so it doesn't affect table layout, then position
     if (form.parentElement !== document.body) {
       document.body.appendChild(form);
     }
+    
+    // Add visual indicator to the row
     if (statusCell) {
       var row = statusCell.closest('tr');
       if (row) {
         row.classList.add('status-form-active');
-        row.style.backgroundColor = 'rgba(16, 185, 129, 0.1)'; 
+        row.style.backgroundColor = 'rgba(16, 185, 129, 0.1)'; // emerald tint
         row.style.outline = '2px solid rgba(16, 185, 129, 0.5)';
         row.style.outlineOffset = '-2px';
       }
     }
+    
+    // close form when viewport size/orientation changes while open, or on scroll
     if (!form._statusResizeHandler) {
       var _resizeHandler = function() { closeStatusForm('{{ uid }}'); };
       var _scrollHandler = function() { closeStatusForm('{{ uid }}'); };
       window.addEventListener('resize', _resizeHandler);
       window.addEventListener('orientationchange', _resizeHandler);
+      // Listen for scroll on window and any scrollable parent
       window.addEventListener('scroll', _scrollHandler, true);
       form._statusResizeHandler = _resizeHandler;
       form._statusScrollHandler = _scrollHandler;
     }
+
+    // Determine the status cell to anchor the popup
     var statusCell = portal.closest('[id^="statusCell-"]') || document.getElementById('statusCell-{{ uid }}');
     var cellRect = statusCell ? statusCell.getBoundingClientRect() : portalRect;
+
+    // Default absolute positioning relative to viewport (account for scroll)
     form.style.position = 'absolute';
     form.style.right = 'auto';
     form.style.transform = 'none';
+
+    // Compute horizontal position: align right edge of popup to right edge of the cell
     var leftPos = Math.round(cellRect.right - finalWidth);
+    // Clamp to viewport
     leftPos = Math.max(8, Math.min(leftPos, viewportWidth - finalWidth - 8));
+
+    // UNIFIED VERTICAL POSITIONING LOGIC (same for mobile and desktop)
+    // Determine row position within table for smart vertical placement
     var tableBody = statusCell ? statusCell.closest('tbody') : null;
     var currentRow = statusCell ? statusCell.closest('tr') : null;
     var allRows = tableBody ? Array.from(tableBody.querySelectorAll('tr')) : [];
     var rowIndex = currentRow && allRows.length ? allRows.indexOf(currentRow) : -1;
     var totalRows = allRows.length || 0;
+
     var isLastRows = (totalRows > 10 && rowIndex >= 0 && rowIndex >= totalRows - 3);
+
     var topPos;
     if (isLastRows && spaceAbove > formHeight + 12) {
+      // For the last 3 rows, open upward when space allows
       topPos = Math.round(cellRect.top - formHeight - 6 + window.scrollY);
     } else if (spaceBelow > formHeight + 12) {
+      // Otherwise prefer opening downward if space permits
       topPos = Math.round(cellRect.bottom + 8 + window.scrollY);
     } else if (spaceAbove > formHeight + 12) {
+      // If no space below but enough above, open above
       topPos = Math.round(cellRect.top - formHeight - 6 + window.scrollY);
     } else {
+      // Fallback: pin near top so form is visible
       topPos = Math.round(window.scrollY + 8);
     }
+
     form.style.left = leftPos + 'px';
     form.style.top = topPos + 'px';
+    
+    // Check if form would overflow on the right side
     setTimeout(function() {
       var formRect = form.getBoundingClientRect();
+      
+      // If we have table boundaries, respect them
       if (tableRect) {
-        var tableRightEdge = tableRect.right - 10; 
+        var tableRightEdge = tableRect.right - 10; // 10px padding from edge
         
         if (formRect.right > tableRightEdge) {
+          // Form overflows table, align to right edge of table
           var overflowAmount = formRect.right - tableRightEdge;
           form.style.right = overflowAmount + 'px';
         }
+        
+        // Also check left boundary
         if (formRect.left < tableRect.left + 10) {
           form.style.right = 'auto';
           form.style.left = '10px';
+          // shrink panel if still overflowing to left
           var overLeft = (tableRect.left + 10) - formRect.left;
           if (overLeft > 0) {
             var currentPanelWidth = panel.getBoundingClientRect().width;
@@ -191,6 +233,7 @@
           }
         }
       } else {
+        // Fallback to viewport boundaries
         if (formRect.right > viewportWidth - 10) {
           var overflow = formRect.right - (viewportWidth - 10);
           var currentRight = parseInt(form.style.right) || 0;

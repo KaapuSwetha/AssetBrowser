@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}Asset Browser{% endblock %}</title>
+    <title>{% block title %}ATLAS{% endblock %}</title>
     {% load static %}
 
     <link rel="icon" href="{% static 'icons/hhs_card.png' %}" type="image/png" />
@@ -31,10 +31,8 @@
       >
         <!-- Brand -->
         <div
-          class="shrink-0 flex items-center gap-2 text-[clamp(16px,1.1vw,18px)] font-semibold tracking-wide"
-        >
-          <i class="fas fa-cubes text-brand-400/90"></i>
-          <span class="text-slate-100 whitespace-nowrap">Asset Browser</span>
+          class="shrink-0 flex items-center gap-2 text-[clamp(16px,1.1vw,18px)] font-semibold tracking-wide">
+          <img src="{% static 'icons/assetbrowser.png' %}" alt="HaloHues Logo" style="max-width: 85px; "  class="w-6 h-6 rounded-sm">
         </div>
 
         <!-- Right cluster: search + notifications -->
@@ -151,8 +149,7 @@
             >
               <div
                 class="h-[2px] w-full overflow-hidden"
-                style="background: rgba(255, 255, 255, 0.04)"
-              >
+                style="background: rgba(255, 255, 255, 0.04)">
                 <div
                   id="notifPollBar"
                   class="h-full w-full"
@@ -204,8 +201,8 @@
                 </div>
                 <button
                   id="markAllReadBtn"
-                  class="hidden items-center gap-1.5 text-[10px] text-slate-400 hover:text-violet-300 transition-all duration-150 font-medium px-2.5 py-1 rounded-lg"
-                  style="
+                  class="flex items-center gap-1.5 text-[10px] text-slate-400 hover:text-violet-300 transition-all duration-150 font-medium px-2.5 py-1 rounded-lg"
+                  style="display:flex;
                     background: rgba(255, 255, 255, 0.05);
                     border: 1px solid rgba(255, 255, 255, 0.08);
                   "
@@ -359,7 +356,7 @@
       >
         <div class="flex items-center gap-2">
           <i class="fas fa-shield-alt text-sky-400/80"></i>
-          <span class="font-medium">Asset Browser</span>
+          <span class="font-medium">ATLAS</span>
           <span class="mx-2 opacity-40">•</span>
           <span class="tracking-wide">HaloHues Studios</span>
         </div>
@@ -371,10 +368,6 @@
     <script src="{% static 'vendor/htmx/htmx.min.js' %}"></script>
     <script src="{% static 'vendor/videojs/video.min.js' %}"></script>
 
-    <!--
-      Expose Django URL-reversed notification endpoints to base.js.
-      base.js reads window.NOTIF_URLS so it needs no Django template tags.
-    -->
     <script>
       window.NOTIF_URLS = {
         list:    "{% url 'AssetView:get_notifications' %}",
@@ -388,5 +381,6 @@
     <script src="{% static 'js/review/base.js' %}"></script>
 
     {% block extra_scripts %}{% endblock %}
+  
   </body>
 </html>

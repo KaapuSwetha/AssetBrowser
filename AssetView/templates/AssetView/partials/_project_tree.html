@@ -1,10 +1,7 @@
-
 {% load static %}
-{% comment %} {# templates/AssetView/partials/_project_tree.html #} {% endcomment %}
 <ul class="space-y-1">
   {% for p in projects %}
     <li>
-      <!-- Project row -->
       <details class="group ml-1">
         <summary class="tree-row">
           <i class="fa-solid fa-caret-right caret text-slate-400"></i>
@@ -12,13 +9,14 @@
           <i class="fa-regular fa-folder-open folder-open ic-folder-open"></i>
           <span class="font-medium truncate">{{ p.name }}</span>
         </summary>
-        <!-- Project children: Assets + Sequence -->
         <div class="tree-guide space-y-1">
 
-          <!-- Assets node -->
+          <!-- Assets node — right-click to download zip -->
           <details class="group">
             <summary
-              class="tree-row"
+              class="tree-row zip-node"
+              data-project="{{ p.name }}"
+              data-category="Asset"
               hx-get="{% url 'AssetView:get_category_branch' %}?project={{ p.name|urlencode }}"
               hx-target="#cat-{{ p.name }}"
               hx-swap="innerHTML"
@@ -32,24 +30,24 @@
             <div id="cat-{{ p.name }}" class="tree-guide space-y-1"></div>
           </details>
 
-          <!-- Sequence node — right-click gives continuous-playback context menu -->
-          <details class="group seq-node"
-         data-project="{{ p.name }}"
-         data-seq-node="true">
-    <summary
-      class="tree-row"
-      hx-get="{% url 'AssetView:get_sequence_branch' %}?project={{ p.name|urlencode }}"
-      hx-target="#seq-{{ p.name }}"
-      hx-swap="innerHTML"
-      hx-trigger="click once"
-    >
-      <i class="fa-solid fa-caret-right caret text-slate-400"></i>
-      <i class="fa-regular fa-folder folder-closed ic-sequence"></i>
-      <i class="fa-regular fa-folder-open folder-open ic-sequence"></i>
-      <span>Sequence</span>
-    </summary>
-    <div id="seq-{{ p.name }}" class="tree-guide space-y-1"></div>
-</details>
+          <!-- Sequence node — right-click to download zip -->
+          <details class="group seq-node" data-project="{{ p.name }}" data-seq-node="true">
+            <summary
+              class="tree-row zip-node"
+              data-project="{{ p.name }}"
+              data-category="Sequence"
+              hx-get="{% url 'AssetView:get_sequence_branch' %}?project={{ p.name|urlencode }}"
+              hx-target="#seq-{{ p.name }}"
+              hx-swap="innerHTML"
+              hx-trigger="click once"
+            >
+              <i class="fa-solid fa-caret-right caret text-slate-400"></i>
+              <i class="fa-regular fa-folder folder-closed ic-sequence"></i>
+              <i class="fa-regular fa-folder-open folder-open ic-sequence"></i>
+              <span>Sequence</span>
+            </summary>
+            <div id="seq-{{ p.name }}" class="tree-guide space-y-1"></div>
+          </details>
 
         </div>
       </details>
@@ -58,7 +56,209 @@
     <li class="text-slate-500 italic">No active projects</li>
   {% endfor %}
 </ul>
+
 <link rel="stylesheet" href="{% static 'css/dist/shared_fullscreen.css' %}">
 <link rel="stylesheet" href="{% static 'css/dist/sequence-player.css' %}">
 <script src="{% static 'js/review/video_controls_common.js' %}"></script>
 <script src="{% static 'js/review/sequence_player.js' %}"></script>
+
+<style>
+.zip-context-menu {
+  position: fixed; z-index: 10000; min-width: 200px; padding: 4px;
+  background: linear-gradient(160deg, #111827, #0f172a);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+  animation: zipMenuIn .14s ease;
+}
+@keyframes zipMenuIn { from{opacity:0; transform:translateY(-6px) scale(.97);} to{opacity:1; transform:none;} }
+.zip-context-menu button {
+  display:flex; align-items:center; gap:10px; width:100%;
+  padding:9px 12px; border-radius:7px; font-size:13px; color:#cbd5e1;
+  background:none; border:none; text-align:left; cursor:pointer;
+  transition:background .15s, color .15s;
+}
+.zip-context-menu button:hover { background: rgba(99,102,241,.18); color:#fff; }
+.zip-context-menu button i { width:16px; text-align:center; color:#818cf8; }
+
+#zipProgressContainer {
+  position: fixed; bottom: 16px; right: 16px; z-index: 10000;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.zip-progress-card {
+  width: 280px; background: linear-gradient(160deg, #111827, #0f172a);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.55);
+  padding: 12px 14px; color: #e2e8f0; font-size: 12px;
+  animation: zipMenuIn .14s ease;
+}
+.zip-progress-card .zp-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-weight:600; }
+.zip-progress-card .zp-title button { background:none; border:none; color:#94a3b8; cursor:pointer; font-size:12px; }
+.zip-progress-card .zp-bar-track { height:6px; border-radius:4px; background:rgba(255,255,255,.08); overflow:hidden; }
+.zip-progress-card .zp-bar-fill { height:100%; background:#6366f1; transition:width .2s ease; }
+.zip-progress-card .zp-status { margin-top:6px; color:#94a3b8; }
+.zip-progress-card.zp-error .zp-bar-fill { background:#f43f5e; }
+.zip-progress-card.zp-done .zp-bar-fill { background:#10b981; }
+</style>
+
+<script>
+if (!window._zipDownloadInit) {
+  window._zipDownloadInit = true;
+
+  function ensureZipContainer() {
+    let c = document.getElementById('zipProgressContainer');
+    if (!c) {
+      c = document.createElement('div');
+      c.id = 'zipProgressContainer';
+      document.body.appendChild(c);
+    }
+    return c;
+  }
+
+  function closeZipMenu() {
+    document.querySelectorAll('.zip-context-menu').forEach(m => m.remove());
+  }
+
+  function makeProgressCard(jobId, label) {
+    const container = ensureZipContainer();
+    const card = document.createElement('div');
+    card.className = 'zip-progress-card';
+    card.id = `zip-card-${jobId}`;
+    card.innerHTML = `
+      <div class="zp-title">
+        <span>Zipping ${label}</span>
+        <button type="button" data-action="cancel">✕</button>
+      </div>
+      <div class="zp-bar-track"><div class="zp-bar-fill" style="width:0%"></div></div>
+      <div class="zp-status">Starting…</div>
+    `;
+    container.appendChild(card);
+
+    card.querySelector('[data-action="cancel"]').addEventListener('click', () => {
+      fetch(`/zip/cancel/${jobId}/`, { method: 'POST', headers: {'X-CSRFToken': getCsrfToken()} })
+        .catch(() => {});
+      card.remove();
+    });
+
+    return card;
+  }
+
+  function getCsrfToken() {
+    const m = document.cookie.match(/csrftoken=([^;]+)/);
+    return m ? m[1] : '';
+  }
+
+  function pollZipJob(jobId, label) {
+    const card = makeProgressCard(jobId, label);
+    const bar = card.querySelector('.zp-bar-fill');
+    const status = card.querySelector('.zp-status');
+
+    const interval = setInterval(async () => {
+      if (!document.body.contains(card)) { clearInterval(interval); return; }
+
+      try {
+        const res = await fetch(`/zip/status/?job_id=${jobId}`);
+        const data = await res.json();
+
+        if (data.error && !data.status) {
+          clearInterval(interval);
+          status.textContent = data.error;
+          card.classList.add('zp-error');
+          return;
+        }
+
+        bar.style.width = `${data.progress || 0}%`;
+
+        if (data.status === 'queued' || data.status === 'running') {
+          status.textContent = `${data.files_done || 0} / ${data.files_total || '?'} files…`;
+        } else if (data.status === 'done') {
+          clearInterval(interval);
+          status.textContent = 'Done — downloading…';
+          card.classList.add('zp-done');
+          window.location.href = data.output_web;
+          setTimeout(() => card.remove(), 4000);
+        } else if (data.status === 'failed') {
+          clearInterval(interval);
+          status.textContent = data.error || 'Failed';
+          card.classList.add('zp-error');
+        } else if (data.status === 'cancelled') {
+          clearInterval(interval);
+          status.textContent = 'Cancelled';
+          card.remove();
+        }
+      } catch (e) {
+        clearInterval(interval);
+        status.textContent = 'Error checking status';
+        card.classList.add('zp-error');
+      }
+    }, 1000);
+  }
+
+  function startZipDownload(project, category, subpath = '', label = '') {
+    return (async () => {
+      try {
+        const res = await fetch('/zip/start/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCsrfToken(),
+          },
+          body: new URLSearchParams({ project, category, path: subpath }),
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          if (window.Toast) Toast.error(data.error, 'Zip Failed');
+          return;
+        }
+        pollZipJob(data.job_id, label || (subpath ? `${project} / ${subpath}` : `${project} / ${category}`));
+      } catch (e) {
+        if (window.Toast) Toast.error('Could not start zip job', 'Error');
+      }
+    })();
+  }
+
+  document.addEventListener('contextmenu', function (e) {
+    const node = e.target.closest('.zip-node');
+    if (!node) {
+      closeZipMenu();
+      return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+    closeZipMenu();
+
+    const project  = node.dataset.project;
+    const category = node.dataset.category;
+    const subpath  = node.dataset.path  || '';
+    const label    = node.dataset.label || category;
+
+    const menu = document.createElement('div');
+    menu.className = 'zip-context-menu';
+    menu.innerHTML = `
+      <button type="button" data-action="zip">
+        <i class="fas fa-file-zipper"></i>
+        <span>Download ${project} as ZIP</span>
+      </button>
+    `;
+    document.body.appendChild(menu);
+
+    menu.querySelector('[data-action="zip"]').addEventListener('click', () => {
+      closeZipMenu();
+      startZipDownload(project, category, subpath, label);
+    });
+
+    menu.style.left = '-9999px';
+    menu.style.top = '-9999px';
+    requestAnimationFrame(() => {
+      const mw = menu.offsetWidth || 200;
+      const mh = menu.offsetHeight || 44;
+      menu.style.left = Math.min(e.clientX, window.innerWidth - mw - 8) + 'px';
+      menu.style.top = Math.min(e.clientY, window.innerHeight - mh - 8) + 'px';
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.zip-context-menu')) closeZipMenu();
+  });
+}
+</script>

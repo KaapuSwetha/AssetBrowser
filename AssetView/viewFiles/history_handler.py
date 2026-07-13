@@ -5,7 +5,7 @@ from typing import Optional
 from datetime import datetime
 logger = logging.getLogger(__name__)
 
-def append_history_entry(block, asset_id, previous_status, new_status, 
+def append_history_entry(block, asset_id, previous_status, new_status,
                          username, ip_address, comment=""):
     entry = {
         "timestamp":       datetime.now().isoformat(timespec="seconds"),

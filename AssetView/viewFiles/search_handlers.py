@@ -4,10 +4,7 @@ from ..utils import load_json, coerce_scalar, basename_noext, entry_to_path, as_
 
 
 def extract_department_from_publish_path(publish_path: str) -> str:
-    """Extract department name from the published file path.
-    Expected structure: .../PROJECT/XX_publish/DEPARTMENT/type/...
-    Example: N:/KAR/04_publish/03_Model/prp/... -> returns '03_Model'
-    """
+   
     try:
         path = Path(publish_path)
         parts = path.parts
@@ -24,9 +21,7 @@ def extract_department_from_publish_path(publish_path: str) -> str:
 
 
 def extract_department_from_json_path(json_path: Path) -> str:
-    """Extract department name from the JSON file path.
-    Expected path structure: .../PROJECT/Asset_or_Sequence/DEPARTMENT/...
-    """
+    
     try:
         parts = json_path.parts
         # Find the index of 'Asset' or 'Sequence' in the path

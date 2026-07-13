@@ -266,6 +266,11 @@
       document.addEventListener('drop',     onDocDrop);
     });
   })();
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     2. CONTEXT MENU + DRAGGABLE / RESIZABLE HISTORY MODAL
+  ═══════════════════════════════════════════════════════════════ */
   let _statusCtxMenu = null;
   let _historyModal  = null;
 
@@ -492,6 +497,8 @@
     }, 100);
   };
 })();
+
+// Event delegation for status badge right-click — survives HTMX swaps
 document.addEventListener('contextmenu', function (e) {
   const statusSpan = e.target.closest(
     '[id^="statusCell-"] span[class*="inline-flex"]'

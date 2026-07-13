@@ -35,8 +35,10 @@ from .viewFiles.notifications_handler import (
     get_unread_notifications,
     mark_notification_read,
     mark_all_read,
-    delete_notification,
+    delete_notification, start_background_watcher
 )
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from typing import List, Dict
 import subprocess
 import tempfile
@@ -45,6 +47,7 @@ import uuid
 import time as _time
 
 logger = logging.getLogger(__name__)
+from django.contrib.auth.decorators import login_required
 
 # --------------------------------------------------------------------------- #
 # Settings
@@ -58,7 +61,6 @@ _MERGE_JOBS: dict = {}
 # Helper function to resolve media paths
 # --------------------------------------------------------------------------- #
 def resolve_media_path(path_str: str) -> Path:
-    
     if not path_str:
         return None
 
@@ -135,7 +137,6 @@ def resolve_media_path(path_str: str) -> Path:
 
 
 def get_feedback_files(preview_path: str) -> list:
-    
     if not preview_path:
         return []
 
@@ -217,7 +218,6 @@ def get_feedback_files(preview_path: str) -> list:
 # --------------------------------------------------------------------------- #
 @require_GET
 def asset_browser(_request):
-    
     return render(_request, "AssetView/asset_browser.html",
                   {"empty_versions": []})
 
@@ -225,10 +225,12 @@ def asset_browser(_request):
 # --------------------------------------------------------------------------- #
 # Tree fragments
 # --------------------------------------------------------------------------- #
-@cache_page(60, key_prefix="ab:tree")
 @require_GET
 def get_project_tree(_request):
-    ctx = {"projects": [{"name": p} for p in ACTIVE]}
+    from utils.config import load_config
+    config = load_config(config_path=str(settings.CONFIG_FILE), reload_on_change=True)
+    active = sorted(config.get("projects", {}).get("active", ACTIVE))
+    ctx = {"projects": [{"name": p} for p in active]}
     html = render_to_string("AssetView/partials/_project_tree.html", ctx)
     return HttpResponse(html)
 
@@ -236,7 +238,6 @@ def get_project_tree(_request):
 @cache_page(60, key_prefix="ab:cat")
 @require_GET
 def get_category_branch(request):
-    
     project = (request.GET.get("project") or "").strip()
     if not project:
         return HttpResponse("<div class='px-3 py-2 text-ink-500'>No project</div>")
@@ -249,7 +250,6 @@ def get_category_branch(request):
 @cache_page(60, key_prefix="ab:seq")
 @require_GET
 def get_sequence_branch(request):
-    
     project = (request.GET.get("project") or "").strip()
     if not project:
         return HttpResponse("<div class='px-3 py-2 text-ink-500'>No project</div>")
@@ -264,7 +264,6 @@ def get_sequence_branch(request):
 # --------------------------------------------------------------------------- #
 @require_GET
 def get_asset_versions(request):
-    
     path = (request.GET.get("path") or "").strip()
     mode = (request.GET.get("mode") or "").strip()
     name = (request.GET.get("name") or "").strip()
@@ -461,7 +460,6 @@ def get_file_metadata(request):
 # --------------------------------------------------------------------------- #
 @require_GET
 def search_assets(request):
-    
     q = (request.GET.get("q") or "").strip().lower()
     if len(q) < 2:
         return HttpResponse(status=204)
@@ -495,7 +493,6 @@ def search_assets(request):
 # --------------------------------------------------------------------------- #
 @require_GET
 def status_form(request):
-    """Return the status update form, but only if user has permission."""
     uid = (request.GET.get("uid") or "").strip()
     path = (request.GET.get("path") or "").strip()
     mode = (request.GET.get("mode") or "").strip()
@@ -577,6 +574,7 @@ def check_permission(request):
         }
     })
 
+
 @csrf_exempt
 @require_GET
 def debug_path_resolution(request):
@@ -632,6 +630,7 @@ def update_asset_status(request):
                 "message": "Only authorized users can change status."
             }
         })
+        return response
 
     try:
         response_html, trigger_data = update_status_data(
@@ -729,7 +728,6 @@ def update_asset_status(request):
 @csrf_exempt
 @require_POST
 def update_preview_status(request):
-    
     try:
         status = (request.POST.get("status") or "No Status").strip()
         comment = (request.POST.get("comment") or "").strip()
@@ -836,16 +834,15 @@ def update_preview_status(request):
                 if target_index < len(asset_id_list)
                 else "unknown"
             )
-
-        append_history_entry(
-            block=block,
-            asset_id=asset_id,
-            previous_status=old_status,
-            new_status=status,
-            comment=comment,
-            username=username,
-            ip_address=client_ip,
-        )
+            append_history_entry(  # ← FIXED: indented inside the if block
+                block=block,
+                asset_id=asset_id,
+                previous_status=old_status,
+                new_status=status,
+                comment=comment,
+                username=username,
+                ip_address=client_ip,
+            )
         p.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
         return JsonResponse({
@@ -873,7 +870,6 @@ def update_preview_status(request):
 
 
 def find_json_for_asset(media_path, asset_name, variant, mode):
-    
     import os
     if '.' in asset_name:
         asset_base_name = os.path.splitext(asset_name)[0]
@@ -919,7 +915,6 @@ def find_json_for_asset(media_path, asset_name, variant, mode):
 @csrf_exempt
 @require_POST
 def save_annotation(request):
-    
     try:
         media_path = (request.POST.get("media_path") or "").strip()
         asset_name = (request.POST.get("asset_name") or "").strip()
@@ -1240,7 +1235,6 @@ def burn_annotations_to_video(input_path, output_path, annotations):
 
 
 def create_annotation_overlay(self, annotation, temp_dir):
-    
     try:
         anno_type = annotation.get('type')
         color = annotation.get('color', '#FF0000')
@@ -1289,7 +1283,6 @@ def create_annotation_overlay(self, annotation, temp_dir):
 
 
 def _is_sbs_preview(path_str: str) -> bool:
-    
     return str(path_str).lower().endswith('_side_by_side.mov')
 
 
@@ -1353,23 +1346,28 @@ def get_sequence_clips(request):
             name_list = as_list(shot_data.get("FileName", []))
             publish_list = as_list(shot_data.get("PublishdFilePath", []))
 
-            valid = []
-            for i, p in enumerate(preview_list):
-                if not p or _is_sbs_preview(p):
-                    continue
-
-                pub = publish_list[i] if i < len(publish_list) else ""
-                if not is_top_level:
-                    preview_ok = _path_belongs_to_sequence(p, sequence)
-                    publish_ok = _path_belongs_to_sequence(pub, sequence)
-                    if not preview_ok and not publish_ok:
+            def _collect_valid(preview_list, publish_list, allow_sbs):
+                """Inner helper — reused for both passes."""
+                result = []
+                for i, p in enumerate(preview_list):
+                    if not p:
                         continue
-
-                if dept and not _dept_matches(dept, str(p)):
-                    if not _dept_matches(dept, str(pub)):
+                    if not allow_sbs and _is_sbs_preview(p):
                         continue
+                    pub = publish_list[i] if i < len(publish_list) else ""
+                    if not is_top_level:
+                        if not _path_belongs_to_sequence(p, sequence) and \
+                                not _path_belongs_to_sequence(pub, sequence):
+                            continue
+                    if dept and not _dept_matches(dept, str(p)):
+                        if not _dept_matches(dept, str(pub)):
+                            continue
+                    result.append((i, p))
+                return result
 
-                valid.append((i, p))
+            valid = _collect_valid(preview_list, publish_list, allow_sbs=False)
+            if not valid:  # all previews are SBS — use them anyway
+                valid = _collect_valid(preview_list, publish_list, allow_sbs=True)
 
             if not valid:
                 continue
@@ -1457,22 +1455,26 @@ def _get_compare_clips(search_root: Path, project: str, sequence: str, dept: str
             publish_list = as_list(shot_data.get("PublishdFilePath", []))
 
             clean = []
-            for i, p in enumerate(preview_list):
-                if not p or _is_sbs_preview(p):
-                    continue
 
-                pub = publish_list[i] if i < len(publish_list) else ""
-
-                if not is_top_level:
-                    if not _path_belongs_to_sequence(p, sequence) and \
-                            not _path_belongs_to_sequence(pub, sequence):
+            def _pick_compare(allow_sbs):
+                out = []
+                for i, p in enumerate(preview_list):
+                    if not p:
                         continue
-
-                if dept:
-                    if not _dept_matches(dept, str(p)) and not _dept_matches(dept, str(pub)):
+                    if not allow_sbs and _is_sbs_preview(p):
                         continue
+                    pub = publish_list[i] if i < len(publish_list) else ""
+                    if not is_top_level:
+                        if not _path_belongs_to_sequence(p, sequence) and \
+                                not _path_belongs_to_sequence(pub, sequence):
+                            continue
+                    if dept:
+                        if not _dept_matches(dept, str(p)) and not _dept_matches(dept, str(pub)):
+                            continue
+                    out.append(p)
+                return out
 
-                clean.append(p)
+            clean = _pick_compare(False) or _pick_compare(True)
 
             if not clean:
                 continue
@@ -1570,9 +1572,7 @@ def _dept_matches(dept: str, path_or_text: str) -> bool:
 
 
 def _dept_matches_json(dept: str, json_file: Path) -> bool:
-    if not dept:
-        return True
-    return _dept_matches(dept, str(json_file).lower())
+    return True
 
 
 def _ver_label(name_str: str) -> str:
@@ -1688,18 +1688,26 @@ def _collect_clips_for_merge(search_root: Path, sequence: str,
             publish_list = as_list(shot_data.get("PublishdFilePath", []))
 
             valid = []
-            for i, p in enumerate(preview_list):
-                if not p or _is_sbs_preview(p):
-                    continue
-                pub = publish_list[i] if i < len(publish_list) else ""
-                if not is_top_level:
-                    if not _path_belongs_to_sequence(p, sequence) and \
-                            not _path_belongs_to_sequence(pub, sequence):
+
+            def _pick(allow_sbs):
+                out = []
+                for i, p in enumerate(preview_list):
+                    if not p:
                         continue
-                if dept:
-                    if not _dept_matches(dept, str(p)) and not _dept_matches(dept, str(pub)):
+                    if not allow_sbs and _is_sbs_preview(p):
                         continue
-                valid.append((i, p))
+                    pub = publish_list[i] if i < len(publish_list) else ""
+                    if not is_top_level:
+                        if not _path_belongs_to_sequence(p, sequence) and \
+                                not _path_belongs_to_sequence(pub, sequence):
+                            continue
+                    if dept:
+                        if not _dept_matches(dept, str(p)) and not _dept_matches(dept, str(pub)):
+                            continue
+                    out.append((i, p))
+                return out
+
+            valid = _pick(False) or _pick(True)
 
             if not valid:
                 continue
@@ -2204,7 +2212,6 @@ def _run_sbs_merge_job(job_id: str, left_paths: list, right_paths: list, label: 
 @csrf_exempt
 @require_POST
 def delete_merge_output(request, job_id):
-    
     job = _MERGE_JOBS.get(job_id)
     if not job:
         return JsonResponse({"error": "Unknown job_id"}, status=404)
@@ -2235,7 +2242,6 @@ def delete_merge_output(request, job_id):
 @csrf_exempt
 @require_POST
 def cancel_merge_job(request, job_id):
-    
     job = _MERGE_JOBS.get(job_id)
     if not job:
         return JsonResponse({"error": "Unknown job_id"}, status=404)
@@ -2264,7 +2270,6 @@ def cancel_merge_job(request, job_id):
 @require_GET
 @require_GET
 def serve_merge_output(request, job_id):
-    
     from django.http import FileResponse
     job = _MERGE_JOBS.get(job_id)
     if not job or job.get("status") != "done":
@@ -2323,11 +2328,9 @@ def get_asset_history(request):
 
 @require_GET
 def get_notifications(request):
-    
     _, username, client_ip = check_user_permission(request)
     if not username:
-        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
-
+        username = f"unknown@{client_ip}" if client_ip else "anonymous"
     unread = get_unread_notifications(username)
     unread.sort(key=lambda n: n.get("timestamp", ""), reverse=True)
 
@@ -2337,11 +2340,9 @@ def get_notifications(request):
 @csrf_exempt
 @require_POST
 def mark_notification_read_view(request, notification_id):
-    
     _, username, client_ip = check_user_permission(request)
     if not username:
-        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
-
+        username = f"unknown@{client_ip}" if client_ip else "anonymous"
     ok = mark_notification_read(notification_id, username)
     return JsonResponse({"ok": ok})
 
@@ -2349,11 +2350,9 @@ def mark_notification_read_view(request, notification_id):
 @csrf_exempt
 @require_POST
 def mark_all_notifications_read(request):
-    
     _, username, client_ip = check_user_permission(request)
     if not username:
-        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
-
+        username = f"unknown@{client_ip}" if client_ip else "anonymous"
     count = mark_all_read(username)
     return JsonResponse({"ok": True, "marked": count})
 
@@ -2361,10 +2360,9 @@ def mark_all_notifications_read(request):
 @csrf_exempt
 @require_POST
 def delete_notification_view(request, notification_id):
-    
     _, username, client_ip = check_user_permission(request)
     if not username:
-        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
+        username = f"unknown@{client_ip}" if client_ip else "anonymous"
 
     ok = delete_notification(notification_id, username)
     return JsonResponse({"ok": ok})
@@ -2374,10 +2372,9 @@ import time as _time  # already imported as _time in the merge section above
 
 
 def notification_stream(request):
-    
     _, username, client_ip = check_user_permission(request)
     if not username:
-        username = (client_ip or "anonymous").replace(".", "_").replace(":", "_")
+        username = f"unknown@{client_ip}" if client_ip else "anonymous"
 
     def _collect_json_files():
         files = []
@@ -2421,9 +2418,6 @@ def notification_stream(request):
     return response
 
 
-from .viewFiles.notifications_handler import start_background_watcher
-
-
 def _get_all_json_files():
     files = []
     for project in ACTIVE:
@@ -2435,3 +2429,297 @@ def _get_all_json_files():
 
 
 start_background_watcher(_get_all_json_files, interval_seconds=3)
+
+@require_POST
+def check_path_exists(request):
+    path = request.POST.get("path", "").strip()
+    if not path:
+        return JsonResponse({"exists": False, "error": "No path provided"})
+    exists = os.path.exists(path)
+    return JsonResponse({"exists": exists})
+import zipfile  # add alongside the existing `import subprocess, tempfile, threading, uuid, time as _time`
+
+_ZIP_JOBS: dict = {}
+
+
+def _resolve_zip_root(project: str, category: str, subpath: str = ""):
+    """
+    Resolve as far down BASE/project/category/subpath as real directories
+    exist on disk (category -> type -> department are real folders).
+
+    Anything beyond that — an asset group like 'FJ_chr_imanvi_mod' or a
+    variant like 'anim' — is virtual: it's built from JSON content, not a
+    real folder. Those leftover segments are returned as `filter_parts`
+    so the caller can filter down to just that asset/variant inside the
+    JSON instead of trying to walk to a folder that doesn't exist.
+
+    Returns (root_path, filter_parts) — root_path is None if nothing
+    resolves at all.
+    """
+    if project not in ACTIVE:
+        return None, []
+    if category not in {"Asset", "Sequence"}:
+        return None, []
+
+    root = (BASE / project / category).resolve()
+    if not root.exists():
+        return None, []
+
+    if not subpath:
+        return root, []
+
+    segments = [s for s in subpath.replace("\\", "/").split("/") if s]
+
+    current = root
+    consumed = 0
+    for seg in segments:
+        candidate = (current / seg).resolve()
+        try:
+            candidate.relative_to(root)  # guard against path traversal
+        except ValueError:
+            break
+        if candidate.is_dir():
+            current = candidate
+            consumed += 1
+        else:
+            break
+
+    filter_parts = segments[consumed:]  # e.g. ['FJ_chr_imanvi_mod'] or ['FJ_chr_imanvi_mod', 'anim']
+    return current, filter_parts
+
+
+@csrf_exempt
+@require_POST
+def start_zip_download(request):
+    """Kick off a background job that zips an Asset/Sequence folder tree,
+    an individual asset group, or a single variant."""
+    project = (request.POST.get("project") or "").strip()
+    category = (request.POST.get("category") or "").strip()
+    subpath = (request.POST.get("path") or "").strip()
+
+    root, filter_parts = _resolve_zip_root(project, category, subpath)
+    if not root:
+        return JsonResponse(
+            {"error": "Invalid or missing project/category/path"}, status=400
+        )
+
+    job_id = str(uuid.uuid4())
+    _ZIP_JOBS[job_id] = {
+        "status": "queued",
+        "progress": 0,
+        "files_total": 0,
+        "files_done": 0,
+        "output_web": None,
+        "error": None,
+        "project": project,
+        "category": category,
+        "subpath": subpath,
+        "_output_path": None,
+    }
+
+    threading.Thread(
+        target=_run_zip_job,
+        args=(job_id, root, project, category, subpath, filter_parts),
+        daemon=True,
+    ).start()
+
+    return JsonResponse({
+        "job_id": job_id,
+        "message": f"Zipping started for {project} / {category}{('/' + subpath) if subpath else ''}",
+    })
+
+
+@require_GET
+def zip_download_status(request):
+    job_id = (request.GET.get("job_id") or "").strip()
+    job = _ZIP_JOBS.get(job_id)
+    if not job:
+        return JsonResponse({"error": "Unknown job_id"}, status=404)
+
+    return JsonResponse({
+        "job_id": job_id,
+        "status": job["status"],
+        "progress": job["progress"],
+        "files_done": job["files_done"],
+        "files_total": job["files_total"],
+        "output_web": job["output_web"],
+        "error": job["error"],
+        "project": job["project"],
+        "category": job["category"],
+    })
+
+
+def _extract_publish_paths(json_path: Path, asset_filter: str = "", variant_filter: str = "") -> list:
+   
+    PUBLISH_FIELDS = (
+        "PublishdFilePath", "PreviewPath", "Alembic", "Usd", "FBX",
+        "AdditionalMaps", "DecimatedMesh", "TextureSourcePath",
+    )
+
+    paths = []
+    try:
+        data = load_json(json_path)
+    except Exception as exc:
+        logger.warning(f"[zip] failed to parse {json_path}: {exc}")
+        return paths
+
+    for section_key in ("asset_info", "sequence_info"):
+        blob = data.get(section_key) or {}
+        for asset_name, asset_data in blob.items():
+            if asset_filter and asset_name != asset_filter:
+                continue
+
+            variants = asset_data.get("Variants") or {"default": asset_data}
+            for variant_name, block in variants.items():
+                if variant_filter and variant_name != variant_filter:
+                    continue
+                if not isinstance(block, dict):
+                    continue
+
+                for field in PUBLISH_FIELDS:
+                    for v in as_list(block.get(field)):
+                        if v:
+                            paths.append(str(v))
+
+    return paths
+
+
+def _arcname_for_publish_path(raw_path: str, project: str, fallback_name: str) -> Path:
+
+    norm = raw_path.replace("\\", "/")
+    parts = [p for p in norm.split("/") if p]
+
+    if project in parts:
+        idx = parts.index(project)
+        parts = parts[idx:]
+    else:
+        parts = parts[1:] if len(parts) > 1 else parts
+
+    return Path(*parts) if parts else Path(fallback_name)
+
+
+def _run_zip_job(job_id: str, root: Path, project: str, category: str,
+                  subpath: str, filter_parts: list = None):
+    job = _ZIP_JOBS[job_id]
+    job["status"] = "running"
+
+    filter_parts = filter_parts or []
+    asset_filter = filter_parts[0] if len(filter_parts) >= 1 else ""
+    variant_filter = filter_parts[1] if len(filter_parts) >= 2 else ""
+
+    try:
+        if job.get("status") == "cancelled":
+            return
+
+        json_files = [f for f in root.rglob("*.json") if f.is_file()]
+        if not json_files:
+            raise ValueError(f"No asset metadata (.json) found under {root}")
+
+        raw_paths = []
+        for jf in json_files:
+            raw_paths.extend(_extract_publish_paths(jf, asset_filter, variant_filter))
+
+        seen = set()
+        resolved_files = []
+        for p in raw_paths:
+            if p in seen:
+                continue
+            seen.add(p)
+
+            fp = resolve_media_path(p)
+            if not fp:
+                fp = Path(str(p).replace("/", "\\"))
+
+            if fp and fp.exists() and fp.is_file():
+                resolved_files.append((p, fp))
+            else:
+                logger.warning(f"[zip] skipping missing/unresolved file: {p}")
+
+        job["files_total"] = len(resolved_files)
+        if not resolved_files:
+            scope = " / ".join([category, subpath]) if subpath else category
+            raise ValueError(f"No real files could be resolved on disk for {project} / {scope}")
+
+        output_dir = Path(tempfile.gettempdir()) / "assetview_zips"
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        ts = _time.strftime("%Y%m%d_%H%M%S")
+        tag_bits = [project, category] + (
+            [subpath.replace("/", "_").replace("\\", "_")] if subpath else []
+        )
+        tag = "_".join(tag_bits).replace(" ", "_")
+        output_path = output_dir / f"{tag}_{ts}.zip"
+
+        with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zf:
+            for i, (raw_path, fp) in enumerate(resolved_files):
+                if job.get("status") == "cancelled":
+                    break
+
+                arcname = _arcname_for_publish_path(raw_path, project, fp.name)
+                try:
+                    zf.write(fp, arcname=str(arcname))
+                except Exception as exc:
+                    logger.warning(f"[zip] skipping file {fp}: {exc}")
+
+                job["files_done"] = i + 1
+                job["progress"] = min(int(((i + 1) / len(resolved_files)) * 100), 99)
+
+        if job.get("status") == "cancelled":
+            output_path.unlink(missing_ok=True)
+            return
+
+        job["_output_path"] = str(output_path)
+        job["output_web"] = f"/zip-output/{job_id}/"
+        job["status"] = "done"
+        job["progress"] = 100
+
+    except Exception as exc:
+        logger.error(f"[zip] job {job_id} failed: {exc}", exc_info=True)
+        if job.get("status") != "cancelled":
+            job["status"] = "failed"
+            job["error"] = str(exc)
+            job["progress"] = 0
+
+
+@csrf_exempt
+@require_POST
+def cancel_zip_job(request, job_id):
+    job = _ZIP_JOBS.get(job_id)
+    if not job:
+        return JsonResponse({"error": "Unknown job_id"}, status=404)
+
+    if job.get("status") != "done":
+        job["status"] = "cancelled"
+        job["error"] = "Cancelled by user"
+        output_path = job.get("_output_path")
+        if output_path:
+            try:
+                Path(output_path).unlink(missing_ok=True)
+            except Exception:
+                pass
+        return JsonResponse({"ok": True, "job_id": job_id})
+
+    return JsonResponse({"ok": True, "job_id": job_id, "already_done": True})
+
+
+@require_GET
+def serve_zip_output(request, job_id):
+    from django.http import FileResponse
+    job = _ZIP_JOBS.get(job_id)
+    if not job or job.get("status") != "done":
+        return HttpResponseNotFound("Job not ready or unknown.")
+
+    p = Path(job.get("_output_path", ""))
+    if not p.exists():
+        return HttpResponseNotFound("Zip file has been cleaned up.")
+
+    project = job.get("project", "project")
+    download_name = f"{project}.zip"
+
+    response = FileResponse(
+        open(p, "rb"),
+        content_type="application/zip",
+        as_attachment=True,
+        filename=download_name,
+    )
+    return response

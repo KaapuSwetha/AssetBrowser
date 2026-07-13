@@ -18,5 +18,16 @@
     "timestamp": "2026-04-16T11:36:06.022032",
     "title": "Publish changed in default",
     "message": "Asset: KAR_prp_test_car_mod  |  ID: test_asset_00111  |  Status: Internal Approved  |  Comment: 1111111111111111"
+  },
+  {
+    "id": "2b8b2fc3-5f84-4278-ad4a-cf20ae97c78f",
+    "type": "status_change",
+    "asset": "KAR_prp_baleno_blue_mod",
+    "key": "default",
+    "json_path": "AssetView\\projects\\KAR\\Asset\\prp\\03_Model\\KAR_prp_03_Model_asset_info.json",
+    "dept": "Model",
+    "variant": "default",
+    "timestamp": "2026-05-04T10:52:47.064698",
+    "message": "Asset: KAR_prp_baleno_blue_mod  |  Dept: Model  |  ID: hhs_hyd_KAR_01415  |  Status: Internal Review  |  Comment: k"
   }
 ]

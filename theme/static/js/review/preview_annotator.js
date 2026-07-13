@@ -1,5 +1,15 @@
-//  preview_annotator.js
- 
+/**
+ * preview_annotator.js
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Single-asset fullscreen preview with:
+ *   • Drawing annotations (pen / rect / text)
+ *   • Note modal with status update
+ *   • Mini Player (Picture-in-Picture replacement)
+ *   • Video.js integration
+ *
+ * Depends on:  video_controls_common.js  (must be loaded first)
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
 (function () {
   'use strict';
 
@@ -8,9 +18,16 @@
     return;
   }
   const VU = window.VideoUtils;
+
+  // ── Pill / minimize state ─────────────────────────────────────────────────
   let _miniPill         = null;
+  // Replaces the old boolean _suppressFsChange.
   const fsGuard         = { active: false };
   let _pillMeta         = { label: 'Preview' };
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // GLOBAL ANNOTATION STATE
+  // ─────────────────────────────────────────────────────────────────────────
   if (typeof window.annotationState === 'undefined') {
     window.annotationState = {
       isFullscreen: false,
@@ -35,10 +52,17 @@
         wasPlayingBeforeNote: false,
       },
       videoEventListeners: [],
+      _draggingAnno: null,
+_dragOffsetX: 0,
+_dragOffsetY: 0,
       modalInitialized: false,
     };
   }
   const annotationState = window.annotationState;
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // BUILD FULLSCREEN SHELL
+  // ─────────────────────────────────────────────────────────────────────────
   function buildFullscreenShell(assetName, variantName, originalPath) {
     const label = [assetName, variantName].filter(Boolean).join(' / ')
       || (originalPath ? originalPath.split('/').pop() : '')
@@ -106,6 +130,10 @@
     `;
     return container;
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // WIRE BOTTOM CONTROLS
+  // ─────────────────────────────────────────────────────────────────────────
   function wireBottomControls(container) {
     const seekBar         = container.querySelector('#seekBar');
     const seekFill        = container.querySelector('#seekFill');
@@ -121,6 +149,8 @@
     const volumeBar       = container.querySelector('#volumeBar');
     const speedSelect     = container.querySelector('#speedSelect');
     const miniPreviewBtn          = container.querySelector('#miniPreviewBtn');
+
+    // ── VJS / raw-video accessors ─────────────────────────────────────────
     function vjsPlayer() { return annotationState.videojsPlayer || null; }
     function videoEl()   { return annotationState.mediaElement; }
 
@@ -155,6 +185,8 @@
       if (p && typeof p.pause === 'function') { p.pause(); return; }
       videoEl()?.pause();
     }
+
+    // ── Seek-bar update (VideoUtils) ──────────────────────────────────────
     function updateSeekUI() {
       const raw = { currentTime: currentTime(), duration: duration() };
       VU.updateSeekBar({ primary: raw.duration ? raw : null, seekBar, seekFill, currentTimeEl });
@@ -163,17 +195,23 @@
     container._updateSeekUI   = updateSeekUI;
     container._updatePlayIcon = () => { playIcon.className = isPaused() ? 'fas fa-play' : 'fas fa-pause'; };
     container._totalTimeEl    = totalTimeEl;
+
+    // ── Play / Pause ──────────────────────────────────────────────────────
     playPauseBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       isPaused() ? playMedia() : pauseMedia();
       setTimeout(container._updatePlayIcon, 50);
     });
+
+    // ── Seek bar ──────────────────────────────────────────────────────────
     seekBar.addEventListener('input', () => {
       const dur = duration(); if (!dur) return;
       setTime((seekBar.value / 1000) * dur);
       seekFill.style.width      = (seekBar.value / 10) + '%';
       currentTimeEl.textContent = VU.fmtTime((seekBar.value / 1000) * dur);
     });
+
+    // ── Frame step (VideoUtils.seekByFrames) ──────────────────────────────
     function seekFrame(delta) {
       const v = videoEl(); if (!v || v.tagName !== 'VIDEO') return;
       const fps = VU.getFrameRate(v);
@@ -184,20 +222,28 @@
 
     frameBackBtn.addEventListener('click',    (e) => { e.stopPropagation(); seekFrame(-1); });
     frameForwardBtn.addEventListener('click', (e) => { e.stopPropagation(); seekFrame(1); });
+
+    // ── Loop (VideoUtils.createLoopController) ────────────────────────────
     const loopCtrl = VU.createLoopController({
       getVideos: () => { const v = videoEl(); return v ? [v] : []; },
       btn: loopBtn,
     });
     container._setLoop        = loopCtrl.setLoop;
     container._getLoopEnabled = loopCtrl.isEnabled;
+
+    // ── Volume / Mute (VideoUtils.createVolumeController) ─────────────────
     VU.createVolumeController({
       getPrimary: () => { const v = videoEl(); return v ? [v] : []; },
       slider:  volumeBar,
       muteBtn: muteBtn,
       volIcon: volIcon,
     });
+
+    // ── Playback speed (VideoUtils.wireSpeedSelect) ───────────────────────
     container._speedSelect = speedSelect;
     VU.wireSpeedSelect(speedSelect, videoEl, null);
+
+    // ── Mini Player (custom PiP) ──────────────────────────────────────────
     if (miniPreviewBtn) {
       miniPreviewBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -222,6 +268,10 @@
 
     container._playPauseBtn = playPauseBtn;
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // BIND VJS EVENTS TO BOTTOM CONTROLS
+  // ─────────────────────────────────────────────────────────────────────────
   function bindVJSToBottomControls(container, player) {
     const updateSeekUI   = container._updateSeekUI;
     const updatePlayIcon = container._updatePlayIcon;
@@ -251,6 +301,13 @@
       player.readyState && player.readyState() >= 1 ? setTotal() : player.one('loadedmetadata', setTotal);
     }
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // MINI PLAYER  (_createPaMiniPlayer)
+  // Named distinctly so it doesn't shadow VU.createMiniPlayer.
+  // Uses VU.makeResizable for the resize handles; keeps the right/bottom
+  // drag pattern inline so coordinates stay consistent.
+  // ─────────────────────────────────────────────────────────────────────────
   function _createPaMiniPlayer(videoSrc, startTime, label) {
     const existing = document.getElementById('paMiniPlayer');
     if (existing) existing.remove();
@@ -298,6 +355,8 @@
     const progressFill = mini.querySelector('#miniProgressFill');
     const videoWrap    = mini.querySelector('#miniVideoWrap');
     const dragHandle   = mini.querySelector('#miniDragHandle');
+
+    // ── Load sources ──────────────────────────────────────────────────────
     if (Array.isArray(videoSrc)) {
       videoSrc.forEach(s => {
         const src = document.createElement('source');
@@ -337,12 +396,16 @@
       e.stopPropagation();
       video.paused ? video.play().catch(() => {}) : video.pause();
     });
+
+    // ── Volume / Mute (VideoUtils) ────────────────────────────────────────
     VU.createVolumeController({
       getPrimary: () => [video],
       slider:  null,
       muteBtn: volBtn,
       volIcon: volIcon,
     });
+
+    // ── Expand ────────────────────────────────────────────────────────────
     expandBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const curTime    = video.currentTime;
@@ -361,7 +424,11 @@
         window.openFullscreen(origEl);
       }
     });
+
+    // ── Close ─────────────────────────────────────────────────────────────
     closeBtn.addEventListener('click', (e) => { e.stopPropagation(); _destroyPaMiniPlayer(); });
+
+    // ── Drag  (right/bottom coordinate system) ────────────────────────────
     let isDragging = false, dragStartX = 0, dragStartY = 0, initRight = 24, initBottom = 24;
 
     dragHandle.addEventListener('mousedown', (e) => {
@@ -385,11 +452,15 @@
     }
     document.addEventListener('mousemove', onDragMove);
     document.addEventListener('mouseup',   onDragUp);
+
+    // ── Resize  (VideoUtils.makeResizable) ───────────────────────────────
     const resizer = VU.makeResizable(mini, {
       minW: 200, minH: 150,
       resizingClass:  'mini-resizing',
       handleSelector: '.mini-resize-handle',
     });
+
+    // Store cleanup on the element so destroyPaMiniPlayer can call it
     mini._destroy = () => {
       document.removeEventListener('mousemove', onDragMove);
       document.removeEventListener('mouseup',   onDragUp);
@@ -410,6 +481,10 @@
     setTimeout(() => { if (mini.parentNode) mini.remove(); }, 300);
     if (annotationState.miniView === mini) annotationState.miniView = null;
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // OPEN FULLSCREEN
+  // ─────────────────────────────────────────────────────────────────────────
   window.openFullscreen = function (element) {
     if (element.tagName === 'AUDIO') return;
     if (window._fullscreenContainer) {
@@ -455,6 +530,8 @@
     const isVideo   = origEl.tagName === 'VIDEO';
     const isImage   = origEl.tagName === 'IMG';
     const isIframe  = origEl.tagName === 'IFRAME';
+
+    // Wire top-bar buttons once only (fresh container each call)
     const _onMinimize = (e) => {
       e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
       _minimizeAnnotator();
@@ -594,7 +671,11 @@
 
     setTimeout(() => resizeCanvas(),        100);
     setTimeout(() => initAnnotationTools(), 200);
+
+    // CSS fullscreen — primary mechanism (works everywhere incl. iOS)
     _applyCSSFullscreen(container);
+
+    // Native fullscreen — best-effort enhancement (desktop only)
     _tryNativeFullscreen(container);
 
     if (isVideo) {
@@ -613,6 +694,10 @@
       }, 150);
     }
   };
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CSS FULLSCREEN
+  // ─────────────────────────────────────────────────────────────────────────
   function _applyCSSFullscreen(container) {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
@@ -634,10 +719,14 @@
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
   }
+
+  // Best-effort native fullscreen via VideoUtils.enterFullscreen.
+  // Never calls cleanupFullscreen on failure; CSS layer is already active.
   function _tryNativeFullscreen(container) {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     if (isIOS) return;
+    // Pass an empty afterFn — CSS layer is already live; we don't need the callback here.
     VU.enterFullscreen(container, () => {});
   }
 
@@ -694,6 +783,10 @@
     }
     ctx.restore();
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // INIT VIDEO.JS
+  // ─────────────────────────────────────────────────────────────────────────
   function initFullscreenVideoJS(videoEl, sources, startTime, shouldAutoplay) {
     if (typeof videojs === 'undefined') return null;
     const player = videojs(videoEl, {
@@ -712,6 +805,10 @@
     annotationState.videojsPlayer = player;
     return player;
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // NOTE / MEDIA PAUSE HELPERS
+  // ─────────────────────────────────────────────────────────────────────────
   function pauseMediaForNote() {
     if (!annotationState.mediaElement || annotationState.mediaElement.tagName !== 'VIDEO') {
       annotationState.noteState.wasPlayingBeforeNote = false; return;
@@ -736,6 +833,10 @@
     }
     annotationState.noteState.wasPlayingBeforeNote = false;
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // INIT ANNOTATION TOOLS
+  // ─────────────────────────────────────────────────────────────────────────
   function initAnnotationTools() {
     const tc = annotationState.activeToolsContainer; if (!tc) return;
 
@@ -819,6 +920,10 @@ if (saveBtn) {
     document.addEventListener('keydown', handleKeyboardShortcuts);
     window.addEventListener('resize', resizeCanvas);
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // STATUS UPDATE
+  // ─────────────────────────────────────────────────────────────────────────
   function updateStatusInJSON(status, comment, mediaPath, assetName, variant, mode, jsonPath) {
     const STATUS_MAP = {
       'Internal Approved': { cls:'bg-emerald-600 text-white',  icon:'fa-check-circle'   },
@@ -887,6 +992,10 @@ if (saveBtn) {
       } else { if (window.Toast) Toast.error(data.error || 'Failed to update status', 'Update Failed'); }
     }).catch(() => { if (window.Toast) Toast.error('Network error while updating status', 'Error'); });
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // NOTE MODAL
+  // ─────────────────────────────────────────────────────────────────────────
   function initFullscreenNoteModal() {
     const modal = annotationState.activeTextModal; if (!modal) return;
     if (annotationState.modalInitialized && modal.dataset.initialized === 'true') return;
@@ -978,53 +1087,107 @@ if (saveBtn) {
     if (statusSelect && annotationState.mediaElement) statusSelect.value = annotationState.mediaElement.dataset.status || 'No Status';
     setTimeout(() => textarea.focus(), 50);
   }
-  function handleMouseDown(e) {
-    if (!annotationState.currentTool || !annotationState.canvas) return;
-    const rect = annotationState.canvas.getBoundingClientRect();
-    annotationState.startX = e.clientX - rect.left;
-    annotationState.startY = e.clientY - rect.top;
-    annotationState.drawing = true;
-    let timestamp = null, frame = null;
-    if (annotationState.mediaElement && annotationState.mediaElement.tagName === 'VIDEO') {
-      timestamp = annotationState.mediaElement.currentTime;
-      frame     = VU.getCurrentFrame(annotationState.mediaElement);
-    }
-    if (annotationState.currentTool === 'pen') {
-      annotationState.annotations.push({ type:'pen', points:[{ x:annotationState.startX, y:annotationState.startY }], color:annotationState.color, timestamp, frame });
-    } else if (annotationState.currentTool === 'rect') {
-      annotationState.annotations.push({ type:'rect', x:annotationState.startX, y:annotationState.startY, width:0, height:0, color:annotationState.color, timestamp, frame });
+function getTextAnnotationAt(x, y) {
+  if (!annotationState.ctx) return null;
+  annotationState.ctx.font = 'bold 20px Arial';
+  const pad = 8, th = 24;
+  for (let i = annotationState.annotations.length - 1; i >= 0; i--) {
+    const anno = annotationState.annotations[i];
+    if (anno.type !== 'text') continue;
+    const w = annotationState.ctx.measureText(anno.text).width;
+    if (x >= anno.x - pad && x <= anno.x - pad + w + pad * 2 &&
+        y >= anno.y - th  && y <= anno.y - th + th + pad) {
+      return anno;
     }
   }
+  return null;
+}
+  // ─────────────────────────────────────────────────────────────────────────
+  // MOUSE HANDLERS
+  // ─────────────────────────────────────────────────────────────────────────
+function handleMouseDown(e) {
+  if (!annotationState.canvas) return;
+  const rect = annotationState.canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
 
-  function handleMouseMove(e) {
-    if (!annotationState.drawing || annotationState.currentTool === 'text' || !annotationState.currentTool || !annotationState.canvas) return;
-    const rect = annotationState.canvas.getBoundingClientRect();
-    const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
-    const last = annotationState.annotations[annotationState.annotations.length - 1];
-    if (annotationState.currentTool === 'pen')  last.points.push({ x:cx, y:cy });
-    if (annotationState.currentTool === 'rect') { last.width = cx - annotationState.startX; last.height = cy - annotationState.startY; }
+  const hitAnno = getTextAnnotationAt(mx, my);
+  if (hitAnno) {
+    annotationState._draggingAnno = hitAnno;
+    annotationState._dragOffsetX  = mx - hitAnno.x;
+    annotationState._dragOffsetY  = my - hitAnno.y;
+    annotationState.canvas.style.cursor = 'grabbing';
+    return;
+  }
+
+  if (!annotationState.currentTool) return;
+  annotationState.startX  = mx;
+  annotationState.startY  = my;
+  annotationState.drawing = true;
+  let timestamp = null, frame = null;
+  if (annotationState.mediaElement && annotationState.mediaElement.tagName === 'VIDEO') {
+    timestamp = annotationState.mediaElement.currentTime;
+    frame     = VU.getCurrentFrame(annotationState.mediaElement);
+  }
+  if (annotationState.currentTool === 'pen') {
+    annotationState.annotations.push({ type: 'pen', points: [{ x: mx, y: my }], color: annotationState.color, timestamp, frame });
+  } else if (annotationState.currentTool === 'rect') {
+    annotationState.annotations.push({ type: 'rect', x: mx, y: my, width: 0, height: 0, color: annotationState.color, timestamp, frame });
+  }
+}
+
+function handleMouseMove(e) {
+  if (!annotationState.canvas) return;
+  const rect = annotationState.canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  if (annotationState._draggingAnno) {
+    annotationState._draggingAnno.x = mx - annotationState._dragOffsetX;
+    annotationState._draggingAnno.y = my - annotationState._dragOffsetY;
     redrawAnnotations();
+    return;
   }
 
-  function handleMouseUp() {
-    annotationState.drawing = false;
-    if (annotationState.currentTool === 'pen' || annotationState.currentTool === 'rect') {
-      annotationState.activeToolsContainer?.querySelectorAll('.tooltip-btn').forEach(b => b.classList.remove('active'));
-      annotationState.currentTool = null; updateCursor();
-    }
+  if (!annotationState.currentTool && !annotationState.drawing) {
+    annotationState.canvas.style.cursor = getTextAnnotationAt(mx, my) ? 'grab' : 'default';
   }
 
-  function updateCursor() {
-    if (!annotationState.canvas) return;
-    annotationState.canvas.classList.remove('pen-mode','rect-mode','text-mode','move-mode');
-    annotationState.canvas.style.pointerEvents = annotationState.currentTool ? 'auto' : 'none';
-    switch (annotationState.currentTool) {
-      case 'pen':  annotationState.canvas.classList.add('pen-mode');  annotationState.canvas.style.cursor='crosshair'; break;
-      case 'rect': annotationState.canvas.classList.add('rect-mode'); annotationState.canvas.style.cursor='crosshair'; break;
-      case 'text': annotationState.canvas.classList.add('text-mode'); annotationState.canvas.style.cursor='default';   break;
-      default:     annotationState.canvas.style.cursor='default'; annotationState.canvas.style.pointerEvents='none';
-    }
+  if (!annotationState.drawing || annotationState.currentTool === 'text' || !annotationState.currentTool) return;
+  const last = annotationState.annotations[annotationState.annotations.length - 1];
+  if (annotationState.currentTool === 'pen')  last.points.push({ x: mx, y: my });
+  if (annotationState.currentTool === 'rect') { last.width = mx - annotationState.startX; last.height = my - annotationState.startY; }
+  redrawAnnotations();
+}
+function handleMouseUp() {
+  if (annotationState._draggingAnno) {
+    annotationState._draggingAnno = null;
+    updateCursor();
+    return;
   }
+  annotationState.drawing = false;
+  if (annotationState.currentTool === 'pen' || annotationState.currentTool === 'rect') {
+    annotationState.activeToolsContainer?.querySelectorAll('.tooltip-btn').forEach(b => b.classList.remove('active'));
+    annotationState.currentTool = null;
+    updateCursor();
+  }
+}
+function updateCursor() {
+  if (!annotationState.canvas) return;
+  annotationState.canvas.classList.remove('pen-mode', 'rect-mode', 'text-mode', 'move-mode');
+  const hasDraggable = annotationState.annotations.some(a => a.type === 'text');
+  annotationState.canvas.style.pointerEvents = (annotationState.currentTool || hasDraggable) ? 'auto' : 'none';
+  switch (annotationState.currentTool) {
+    case 'pen':  annotationState.canvas.classList.add('pen-mode');  annotationState.canvas.style.cursor = 'crosshair'; break;
+    case 'rect': annotationState.canvas.classList.add('rect-mode'); annotationState.canvas.style.cursor = 'crosshair'; break;
+    case 'text': annotationState.canvas.classList.add('text-mode'); annotationState.canvas.style.cursor = 'default';   break;
+    default:     annotationState.canvas.style.cursor = 'default';
+  }
+}
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SAVE ANNOTATIONS
+  // ─────────────────────────────────────────────────────────────────────────
   function saveAnnotation() {
     if (!annotationState.mediaElement || !annotationState.canvas) return;
     const mediaEl      = annotationState.mediaElement;
@@ -1168,9 +1331,12 @@ function initHistoryVersionLabels() {
     ':scope > div[style*="display: grid"], :scope > div[style*="display:grid"]'
   );
   if (!grid) return;
+
+  // ── 1. Wrap any bare (unwrapped) cards ───────────────────────────────────
   Array.from(grid.children)
     .filter(el => !el.classList.contains('feedback-card-wrapper'))
     .forEach(card => {
+      // Remove the fullscreen overlay div (contains fa-expand) if present
       card.querySelectorAll('div').forEach(div => {
         if (div.querySelector('.fa-expand, [class*="fa-expand"]')) div.remove();
       });
@@ -1186,10 +1352,16 @@ function initHistoryVersionLabels() {
 
   const wrappers = Array.from(grid.querySelectorAll(':scope > .feedback-card-wrapper'));
   if (!wrappers.length) return;
+
+  // ── 2. Reverse DOM so Django's last child (newest) becomes first ──────────
+  //    Only do this ONCE — guard with a flag on the grid element
   if (!grid.dataset.versionsInitialized) {
     wrappers.reverse().forEach(w => grid.appendChild(w));
     grid.dataset.versionsInitialized = 'true';
   }
+
+  // ── 3. Number top → bottom: top card = vTotal (newest), bottom = v1 ──────
+  //    Hide labels entirely when there is only one item.
   const all = Array.from(grid.querySelectorAll(':scope > .feedback-card-wrapper'));
   const total = all.length;
   all.forEach((wrapper, idx) => {
@@ -1204,16 +1376,26 @@ function initHistoryVersionLabels() {
     }
   });
 }
+
+// ── Run on page load ──────────────────────────────────────────────────────────
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initHistoryVersionLabels);
 } else {
   setTimeout(initHistoryVersionLabels, 0);
 }
+
+// ── Re-run after HTMX swaps (e.g. switching asset) ───────────────────────────
 document.addEventListener('htmx:afterSwap', (evt) => {
   if (evt.detail.target.id === 'previewCard') {
     setTimeout(initHistoryVersionLabels, 120);
   }
 });
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// injectFeedbackIntoHistoryPanel
+// Prepends a newly saved card and re-numbers ALL wrappers to stay in sync.
+// ─────────────────────────────────────────────────────────────────────────────
 
 function injectFeedbackIntoHistoryPanel(src, mediaType) {
   const historyPanel = document.getElementById('panelHistory');
@@ -1240,12 +1422,15 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       box-sizing: border-box;
       align-content: start;
     `;
+    // Mark as already initialized so initHistoryVersionLabels won't reverse again
     grid.dataset.versionsInitialized = 'true';
     historyPanel.appendChild(grid);
   }
 
   const existingCount = grid.children.length;
   const newTotal      = existingCount + 1;
+
+  // ── Build media card ──────────────────────────────────────────────────────
   const card = document.createElement('div');
 
   if (mediaType === 'video') {
@@ -1257,7 +1442,7 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     `;
     card.innerHTML = `
       <video controls preload="metadata" playsinline webkit-playsinline
-        style="width:100%;height:100%;object-fit:cover;display:block;">
+        style="width:100%;height:100%;display:block;">
         <source src="${src}" type="video/mp4"/>
       </video>
     `;
@@ -1271,7 +1456,7 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     card.title = 'Click to view fullscreen';
     card.innerHTML = `
       <img src="${src}" alt="Feedback" loading="lazy"
-        style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        style="width:100%;height:100%;display:block;"/>
     `;
     card.addEventListener('mouseover', () => {
       card.style.borderColor = 'rgba(192,38,211,0.55)';
@@ -1286,6 +1471,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       if (img) window.openFullscreen(img);
     });
   }
+
+  // ── Wrapper + label ───────────────────────────────────────────────────────
   const versionLabel = document.createElement('div');
   versionLabel.className = 'feedback-version-label';
 
@@ -1293,7 +1480,12 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
   cardWrapper.className = 'feedback-card-wrapper';
   cardWrapper.appendChild(card);
   cardWrapper.appendChild(versionLabel);
+
+  // Prepend — newest always at top
   grid.insertBefore(cardWrapper, grid.firstChild);
+
+  // ── Re-number ALL wrappers: top = vNewTotal … bottom = v1 ────────────────
+  //    Hide labels entirely when there is only one item.
   Array.from(grid.querySelectorAll(':scope > .feedback-card-wrapper')).forEach((w, idx) => {
     const lbl = w.querySelector('.feedback-version-label');
     if (!lbl) return;
@@ -1304,6 +1496,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       lbl.innerHTML = `<i class="fas fa-layer-group"></i> v${newTotal - idx}`;
     }
   });
+
+  // ── Grid layout ───────────────────────────────────────────────────────────
   if (newTotal === 1) {
     grid.style.gridTemplateColumns = '1fr';
     grid.style.gridTemplateRows   = '1fr';
@@ -1342,6 +1536,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       }
     }
   }
+
+  // ── History tab badge ─────────────────────────────────────────────────────
   const badge = document.querySelector('.history-tab-badge');
   if (badge) {
     badge.textContent = parseInt(badge.textContent || '0') + 1;
@@ -1357,6 +1553,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
 
   if (typeof switchPreviewTab === 'function') switchPreviewTab('history');
 }
+ // KEYBOARD SHORTCUTS
+  // ─────────────────────────────────────────────────────────────────────────
   function handleKeyboardShortcuts(e) {
     if (!annotationState.isFullscreen)          return;
     if (annotationState.textareaFocused)         return;
@@ -1420,6 +1618,10 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       if (modal && !modal.classList.contains('hidden')) { e.preventDefault(); modal.querySelector('#textInputConfirm')?.click(); }
     }
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CLEANUP
+  // ─────────────────────────────────────────────────────────────────────────
   function cleanupFullscreen() {
     _removeCSSFullscreen(window._fullscreenContainer);
 
@@ -1459,10 +1661,11 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     }
 
     Object.assign(annotationState, {
-      isFullscreen: false, currentTool: null, annotations: [],
-      canvas: null, ctx: null, activeToolsContainer: null, activeTextModal: null,
-      mediaElement: null, videojsPlayer: null,
-    });
+  isFullscreen: false, currentTool: null, annotations: [],
+  canvas: null, ctx: null, activeToolsContainer: null, activeTextModal: null,
+  mediaElement: null, videojsPlayer: null,
+  _draggingAnno: null, _dragOffsetX: 0, _dragOffsetY: 0,
+});
     if (annotationState.noteState) {
       Object.assign(annotationState.noteState, { pendingTextPosition:null, editingAnnotationId:null, wasPlayingBeforeNote:false });
     }
@@ -1478,6 +1681,10 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     const t2 = document.getElementById('textInputModal');
     if (t2) { t2.classList.add('hidden'); t2.style.display='none'; }
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PILL
+  // ─────────────────────────────────────────────────────────────────────────
   function _rebuildPill() {
   const existing = document.getElementById('paMiniPill');
   if (existing) existing.remove();
@@ -1485,6 +1692,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     if (typeof _miniPill._destroyDrag === 'function') _miniPill._destroyDrag();
     _miniPill = null;
   }
+
+  // Check if current media is a video
   const isVideo = annotationState.mediaElement?.tagName === 'VIDEO';
 
   const pill = document.createElement('div');
@@ -1517,6 +1726,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     if (pill._wasDragged) { pill._wasDragged = false; return; }
     _restoreAnnotator();
   });
+
+  // Only add mini button event listener if it exists
   const miniBtn = pill.querySelector('#paPillMiniBtn');
   if (miniBtn) {
     miniBtn.addEventListener('click', e => {
@@ -1542,6 +1753,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
   pill.querySelector('#paPillCloseBtn').addEventListener('click', e => {
     e.stopPropagation(); _hardDestroyAnnotator();
   });
+
+  // ── Pill drag (left/top coordinate system) ────────────────────────────
   let isDragging = false, dragStartX = 0, dragStartY = 0;
   let baseLeft = 0, baseTop = 0;
   const DRAG_THRESHOLD = 4;
@@ -1605,6 +1818,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       fsGuard.active = false;
       _rebuildPill();
     };
+
+    // Only call exitFullscreen if native fullscreen is actually active
     if (document.fullscreenElement || document.webkitFullscreenElement) {
       VU.exitFullscreen(doMinimize);
     } else {
@@ -1642,6 +1857,10 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     _removePill();
     closeFullscreen();
   }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CLOSE FULLSCREEN
+  // ─────────────────────────────────────────────────────────────────────────
   function closeFullscreen() {
     fsGuard.active = true;
     if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {});
@@ -1652,6 +1871,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       doClean();
     }
   }
+
+  // Registered once via VU.onFullscreenChange — no manual event loop needed.
   VU.onFullscreenChange(function () {
     if (fsGuard.active) return;
     if (!VU.isInFullscreen() && window._fullscreenContainer) {
@@ -1661,6 +1882,10 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
       });
     }
   });
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PREVIEW PLAYER (standard page-level Video.js instance)
+  // ─────────────────────────────────────────────────────────────────────────
   (function () {
     let previewPlayer = null;
 
@@ -1737,6 +1962,8 @@ function injectFeedbackIntoHistoryPanel(src, mediaType) {
     });
     window.addEventListener('beforeunload', cleanupPreviewPlayer);
   })();
+
+  // Global 'f' key shortcut to open fullscreen from anywhere on the page.
   document.addEventListener('keydown', function (e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     if (e.key === 'f' || e.key === 'F') {

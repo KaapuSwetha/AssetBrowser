@@ -41,20 +41,10 @@
   font-family: inherit; color: #fff; position: relative; overflow: hidden;
 }
 
-/* ── Sequence-specific label classes (different names from .fs-label-*) ── */
+/* ── Sequence-specific label classes ── */
 .seq-label-violet { background: rgba(139,92,246,.18); color: #c4b5fd; }
 .seq-label-green  { background: rgba(16,185,129,.18);  color: #6ee7b7; }
 .seq-label-name   { color: #94a3b8; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
-
-/* ── Floating pill — merging pulse ── */
-#seqMiniPill.pill-merging .pill-icon {
-  animation: pillIconPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes pillIconPulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(139,92,246,.5); }
-  50%      { box-shadow: 0 0 0 8px rgba(139,92,246,0); }
-}
 
 /* ── Media area ── */
 #seqMediaArea {
@@ -122,12 +112,12 @@
 }
 #mergingOverlay .mo-cancel:hover { background: rgba(239,68,68,.22); border-color: rgba(239,68,68,.5); }
 
-#mergingOverlay.mo-error .mo-icon    { color: #ef4444; background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); animation: none; }
+#mergingOverlay.mo-error .mo-icon     { color: #ef4444; background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); animation: none; }
 #mergingOverlay.mo-error .mo-bar-fill { background: rgba(239,68,68,.5); }
 #mergingOverlay.mo-error .mo-minimize { display: none; }
-#mergingOverlay.mo-error .mo-cancel  { background: rgba(30,41,59,.7); border-color: rgba(255,255,255,.15); color: #94a3b8; }
+#mergingOverlay.mo-error .mo-cancel   { background: rgba(30,41,59,.7); border-color: rgba(255,255,255,.15); color: #94a3b8; }
 
-/* ── Bottom controls — violet overrides ── */
+/* ── Bottom controls ── */
 #unifiedControls {
   background: rgba(8,8,8,.98);
   padding: 6px 16px 10px;
@@ -141,3 +131,255 @@
 }
 #seqLoadingOverlay i    { font-size: 28px; color: #8b5cf6; }
 #seqLoadingOverlay span { font-size: 13px; color: #94a3b8; }
+
+/* =============================================================================
+   MULTI-SESSION PILLS
+   ============================================================================= */
+
+.seqMiniPillInstance {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 99995;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  min-width: 260px;
+  max-width: 360px;
+  background: linear-gradient(135deg, rgba(17,24,39,.97), rgba(15,23,42,.97));
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow .15s;
+  animation: pillSlideIn .22s cubic-bezier(.34,1.56,.64,1);
+}
+.seqMiniPillInstance:hover {
+  box-shadow: 0 16px 44px rgba(0,0,0,.7), 0 0 0 1px rgba(99,102,241,.25);
+}
+
+@keyframes pillSlideIn {
+  from { opacity: 0; transform: translateX(40px) scale(.92); }
+  to   { opacity: 1; transform: none; }
+}
+
+.seqMiniPillInstance.pill-merging            { border-color: rgba(139,92,246,.35); }
+.seqMiniPillInstance.pill-merging .pill-icon { animation: pillIconPulse 1.8s ease-in-out infinite; }
+
+@keyframes pillIconPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(139,92,246,.5); }
+  50%      { box-shadow: 0 0 0 8px rgba(139,92,246,0); }
+}
+
+.seqMiniPillInstance .pill-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(139,92,246,.25), rgba(99,102,241,.15));
+  border: 1px solid rgba(139,92,246,.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #8b5cf6;
+}
+
+.seqMiniPillInstance .pill-info  { flex: 1; min-width: 0; }
+.seqMiniPillInstance .pill-title {
+  font-size: 12px; font-weight: 600; color: #e2e8f0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.seqMiniPillInstance .pill-sub {
+  font-size: 11px; color: #64748b; margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: color .3s;
+}
+.seqMiniPillInstance .pill-bar-track {
+  margin-top: 5px; height: 3px; border-radius: 9999px;
+  background: rgba(255,255,255,.08); overflow: hidden;
+}
+.seqMiniPillInstance .pill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+  border-radius: 9999px; transition: width .4s ease; width: 0%;
+}
+
+.seqMiniPillInstance .pill-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.seqMiniPillInstance .pill-actions button {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  color: #94a3b8; cursor: pointer; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.seqMiniPillInstance .pill-restore-btn:hover { background: rgba(99,102,241,.2);  color: #a5b4fc; border-color: rgba(99,102,241,.3); }
+.seqMiniPillInstance .pill-mini-btn:hover    { background: rgba(16,185,129,.2);   color: #6ee7b7; border-color: rgba(16,185,129,.3); }
+.seqMiniPillInstance .pill-close-btn:hover   { background: rgba(239,68,68,.2);    color: #f87171; border-color: rgba(239,68,68,.3); }
+.seqMiniPillInstance.seq-pill-dragging       { cursor: grabbing; opacity: .88; }
+
+.seqMiniPlayerInstance,
+.sbsMiniPlayerInstance {
+  position: fixed;
+  right: 24px;
+  bottom: 120px;
+  z-index: 99990;
+  width: 340px;
+  height: 260px;          /* explicit height — REQUIRED for inner flex column */
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.7);
+  opacity: 0;
+  transform: scale(.94) translateY(12px);
+  transition: opacity .25s ease, transform .25s ease;
+  box-sizing: border-box;
+}
+.seqMiniPlayerInstance.seq-mini-visible,
+.sbsMiniPlayerInstance.sbs-mini-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Inner flex column fills the fixed-size container */
+#seqMiniInner,
+#sbsMiniInner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Drag handle ── */
+.seqMiniDragHandle,
+.sbsMiniDragHandle {
+  height: 22px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(139,92,246,.12), rgba(99,102,241,.08));
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  cursor: grab;
+  display: flex; align-items: center; justify-content: center;
+}
+.seqMiniDragHandle::after,
+.sbsMiniDragHandle::after {
+  content: '';
+  width: 32px; height: 3px;
+  background: rgba(255,255,255,.18);
+  border-radius: 9999px;
+}
+.seqMiniDragHandle:active,
+.sbsMiniDragHandle:active { cursor: grabbing; }
+
+/* ── Label ── */
+.seqMiniLabel,
+.sbsMiniLabel {
+  flex-shrink: 0;
+  padding: 4px 10px 2px;
+  font-size: 10px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: #475569;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── Video wrap — takes all remaining height ── */
+.seqMiniVideoWrap,
+.sbsMiniVideoWrap {
+  flex: 1 1 0;      /* grow to fill remaining space */
+  position: relative;
+  background: #000;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 0;    /* prevents flex child from ignoring shrink */
+}
+
+.seqMiniVideoWrap video,
+.sbsMiniVideoWrap video {
+  width: 100%; height: 100%;
+  object-fit: contain; display: block;
+}
+
+/* ── Progress bar ── */
+.seqMiniProgress,
+.sbsMiniProgress {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; z-index: 5;
+  background: rgba(255,255,255,.08);
+}
+.seqMiniProgressFill,
+.sbsMiniProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+  transition: width .1s linear; width: 0%;
+}
+
+/* ── Play/pause overlay ── */
+.seqMiniOverlay,
+.sbsMiniOverlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.seqMiniPlayIcon,
+.sbsMiniPlayIcon {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #fff;
+  opacity: 0; transition: opacity .2s;
+}
+.seqMiniVideoWrap:hover .seqMiniPlayIcon,
+.sbsMiniVideoWrap:hover .sbsMiniPlayIcon { opacity: 1; }
+
+/* ── Controls row ── */
+.seqMiniControls,
+.sbsMiniControls {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 8px 6px;
+  background: rgba(8,8,8,.9);
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.seqMiniControls button,
+.sbsMiniControls button {
+  background: rgba(255,255,255,.06); border: none;
+  border-radius: 6px; color: #94a3b8; cursor: pointer;
+  width: 26px; height: 26px; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s; flex-shrink: 0;
+}
+.seqMiniControls button:hover,
+.sbsMiniControls button:hover { background: rgba(99,102,241,.2); color: #c4b5fd; }
+
+.seqMiniTime,
+.sbsMiniTime {
+  font-size: 10px; color: #64748b; flex: 1; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── SBS two-panel layout ── */
+.sbsMiniVideoWrap { display: flex; }
+.sbs-mini-panel   { flex: 1; position: relative; overflow: hidden; background: #000; }
+.sbs-mini-panel video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.sbs-mini-badge {
+  position: absolute; bottom: 4px;
+  padding: 1px 7px; border-radius: 9999px;
+  font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  pointer-events: none; z-index: 5;
+}
+.sbs-mini-badge-left  { left:  6px; background: rgba(99,102,241,.7);  color: #e0e7ff; }
+.sbs-mini-badge-right { right: 6px; background: rgba(16,185,129,.7);  color: #d1fae5; }
+
+/* ── Resize handles ── */
+.seq-resize-handle { position: absolute; z-index: 10; }
+.seq-resize-handle[data-dir="n"]  { top: -4px;    left: 8px;    right: 8px;   height: 8px;  cursor: n-resize; }
+.seq-resize-handle[data-dir="s"]  { bottom: -4px; left: 8px;    right: 8px;   height: 8px;  cursor: s-resize; }
+.seq-resize-handle[data-dir="e"]  { right: -4px;  top: 8px;     bottom: 8px;  width: 8px;   cursor: e-resize; }
+.seq-resize-handle[data-dir="w"]  { left: -4px;   top: 8px;     bottom: 8px;  width: 8px;   cursor: w-resize; }
+.seq-resize-handle[data-dir="nw"] { top: -4px;    left: -4px;   width: 12px;  height: 12px; cursor: nw-resize; }
+.seq-resize-handle[data-dir="ne"] { top: -4px;    right: -4px;  width: 12px;  height: 12px; cursor: ne-resize; }
+.seq-resize-handle[data-dir="sw"] { bottom: -4px; left: -4px;   width: 12px;  height: 12px; cursor: sw-resize; }
+.seq-resize-handle[data-dir="se"] { bottom: -4px; right: -4px;  width: 12px;  height: 12px; cursor: se-resize; }
+
+/* ── Drag / resize cursor states ── */
+.seq-mini-dragging,
+.sbs-mini-dragging { cursor: grabbing !important; }
+.seq-mini-resizing,
+.sbs-mini-resizing { user-select: none; }
