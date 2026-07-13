@@ -24,7 +24,7 @@
     <div class="tree-guide space-y-1">
         {% for s in shots %}
         <details class="group" data-key="shot:{{ project }}:{{ seq }}:{{ s.name }}">
-            <summary class="tree-row"
+            <summary class="tree-row zip-dl-node"
          data-dl-level="shot"
          data-dl-project="{{ project }}"
          data-dl-seq="{{ seq }}"
@@ -37,13 +37,13 @@
 
             <div class="tree-guide">
                 {% for it in s.depts %}
-                <div class="py-1">
+                <div class="py-1 zip-dl-node"
+                     data-dl-level="shot_dept"
+                     data-dl-project="{{ project }}"
+                     data-dl-seq="{{ seq }}"
+                     data-dl-shot="{{ s.name }}"
+                     data-dl-dept="{{ it.dept }}">
                     <a class="inline-flex items-center gap-2 text-slate-200 hover:underline"
-                       data-dl-level="shot_dept"
-                       data-dl-project="{{ project }}"
-                       data-dl-seq="{{ seq }}"
-                       data-dl-shot="{{ s.name }}"
-                       data-dl-dept="{{ it.dept }}"
                        hx-get="{% url 'AssetView:get_asset_versions' %}?path={{ it.path|urlencode }}&name={{ it.name|urlencode }}&mode={{ it.mode|urlencode }}"
                        hx-target="#versionsTable"
                        hx-swap="innerHTML"
@@ -123,7 +123,28 @@
   text-align: center; font-style: italic;
 }
 
-/* ── Download progress card (only needed if the asset tree's zip CSS isn't already loaded) ── */
+/* ── Simple single-option zip menu (shot / shot+dept levels) ──
+   NOTE: deliberately a DIFFERENT class name than the project tree's
+   .zip-context-menu — sharing a class caused this script's "nothing
+   matched, close menus" fallback to delete the project tree's menu
+   for the Asset/Sequence top-level nodes on the very same click. */
+.seq-zip-context-menu {
+  position: fixed; z-index: 10000; min-width: 200px; padding: 4px;
+  background: linear-gradient(160deg, #111827, #0f172a);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+  animation: seqDropIn .14s ease;
+}
+.seq-zip-context-menu button {
+  display:flex; align-items:center; gap:10px; width:100%;
+  padding:9px 12px; border-radius:7px; font-size:13px; color:#cbd5e1;
+  background:none; border:none; text-align:left; cursor:pointer;
+  transition:background .15s, color .15s;
+}
+.seq-zip-context-menu button:hover { background: rgba(99,102,241,.18); color:#fff; }
+.seq-zip-context-menu button i { width:16px; text-align:center; color:#818cf8; }
+
+/* ── Download progress card ── */
 #zipProgressContainer {
   position: fixed; bottom: 16px; right: 16px; z-index: 10000;
   display: flex; flex-direction: column; gap: 8px;
@@ -261,48 +282,92 @@ if (!window._seqLineupInit) {
     document.querySelectorAll('.seq-lineup-parent').forEach(b => b.classList.remove('active'));
   };
 
-/* ── Right-click on seq-summary opens the dropdown ── */
+  function closeSimpleZipMenu() {
+    document.querySelectorAll('.seq-zip-context-menu').forEach(m => m.remove());
+  }
+
+/* ── Right-click on seq-summary opens the full dropdown (sequence + per-dept) ── */
   document.addEventListener('contextmenu', function(e) {
     const summary = e.target.closest('.seq-summary');
 
-    // Right-clicked outside any summary — just close
-    if (!summary) {
+    if (summary) {
+      e.preventDefault();
+      e.stopPropagation();
       closeAllSeqDropdowns();
+      closeSimpleZipMenu();
+
+      const dropdown = summary.querySelector('.seq-lineup-dropdown');
+      if (!dropdown) return;
+
+      window.buildSeqDropdown(dropdown);
+
+      dropdown.style.display = 'block';
+      dropdown.style.left = '-9999px';
+      dropdown.style.top  = '-9999px';
+
+      requestAnimationFrame(() => {
+        const mw = dropdown.offsetWidth  || 220;
+        const mh = dropdown.offsetHeight || 100;
+        dropdown.style.left = Math.min(e.clientX, window.innerWidth  - mw - 8) + 'px';
+        dropdown.style.top  = Math.min(e.clientY, window.innerHeight - mh - 8) + 'px';
+      });
+      return;
+    }
+
+    /* ── Right-click on a shot or shot+dept row — simple single-option menu ── */
+    const node = e.target.closest('.zip-dl-node');
+    if (!node) {
+      closeAllSeqDropdowns();
+      closeSimpleZipMenu();
       return;
     }
 
     e.preventDefault();
     e.stopPropagation();
-
-    const dropdown = summary.querySelector('.seq-lineup-dropdown');
-    if (!dropdown) return;
-
-    const isAlreadyOpen = dropdown.style.display === 'block';
-
-    // Always close everything first
     closeAllSeqDropdowns();
+    closeSimpleZipMenu();
 
-    // Toggle: if it was open, leave it closed
-    if (isAlreadyOpen) return;
+    const project = node.dataset.dlProject;
 
-    window.buildSeqDropdown(dropdown);
+    const menu = document.createElement('div');
+    menu.className = 'seq-zip-context-menu';
+    menu.innerHTML = `
+      <button type="button" data-action="zip">
+        <i class="fas fa-file-zipper"></i>
+        <span>Download ${project} as ZIP</span>
+      </button>
+    `;
+    document.body.appendChild(menu);
 
-    dropdown.style.display = 'block';
-    dropdown.style.left = '-9999px';
-    dropdown.style.top  = '-9999px';
+    menu.querySelector('[data-action="zip"]').addEventListener('click', () => {
+      closeSimpleZipMenu();
+      window.treeDownload.start({
+        dlLevel: node.dataset.dlLevel,
+        dlProject: node.dataset.dlProject,
+        dlSeq: node.dataset.dlSeq,
+        dlShot: node.dataset.dlShot,
+        dlDept: node.dataset.dlDept,
+        dlMode: 'Sequence',
+      });
+    });
 
+    menu.style.left = '-9999px';
+    menu.style.top = '-9999px';
     requestAnimationFrame(() => {
-      const mw = dropdown.offsetWidth  || 220;
-      const mh = dropdown.offsetHeight || 100;
-      dropdown.style.left = Math.min(e.clientX, window.innerWidth  - mw - 8) + 'px';
-      dropdown.style.top  = Math.min(e.clientY, window.innerHeight - mh - 8) + 'px';
+      const mw = menu.offsetWidth || 200;
+      const mh = menu.offsetHeight || 44;
+      menu.style.left = Math.min(e.clientX, window.innerWidth - mw - 8) + 'px';
+      menu.style.top = Math.min(e.clientY, window.innerHeight - mh - 8) + 'px';
     });
   });
 
-  /* ── Click anywhere outside closes dropdowns ── */
+  /* ── Click anywhere outside closes dropdowns/menus ── */
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.seq-lineup-dropdown')) {
       closeAllSeqDropdowns();
+    }
+    if (!e.target.closest('.seq-zip-context-menu')) {
+      closeSimpleZipMenu();
     }
   });
 
@@ -310,8 +375,9 @@ if (!window._seqLineupInit) {
 
 /* ────────────────────────────────────────────────────────────
    window.treeDownload — actually performs the zip download.
-   Reuses the same /zip/start/ and /zip/status/ endpoints as the
-   Asset tree's zip-node system, so no backend changes needed.
+   Sends seq/shot/dept as separate POST fields so the backend can
+   filter to exactly the right scope (sequence, department, shot,
+   or shot+department).
    ──────────────────────────────────────────────────────────── */
 if (!window.treeDownload) {
 
@@ -404,14 +470,11 @@ if (!window.treeDownload) {
     start(opts) {
       const project  = opts.dlProject;
       const category = opts.dlMode || 'Sequence';
+      const seq   = opts.dlSeq || '';
+      const shot  = (opts.dlLevel === 'shot' || opts.dlLevel === 'shot_dept') ? (opts.dlShot || '') : '';
+      const dept  = (opts.dlLevel === 'department' || opts.dlLevel === 'shot_dept') ? (opts.dlDept || '') : '';
 
-      const parts = [];
-      if (opts.dlSeq) parts.push(opts.dlSeq);
-      if ((opts.dlLevel === 'shot' || opts.dlLevel === 'shot_dept') && opts.dlShot) parts.push(opts.dlShot);
-      if ((opts.dlLevel === 'department' || opts.dlLevel === 'shot_dept') && opts.dlDept) parts.push(opts.dlDept);
-
-      const path  = parts.join('/');
-      const label = [project, ...parts].join(' / ');
+      const label = [project, seq, shot, dept].filter(Boolean).join(' / ');
 
       (async () => {
         try {
@@ -421,7 +484,7 @@ if (!window.treeDownload) {
               'Content-Type': 'application/x-www-form-urlencoded',
               'X-CSRFToken': tdGetCsrfToken(),
             },
-            body: new URLSearchParams({ project, category, path }),
+            body: new URLSearchParams({ project, category, path: seq, shot, dept }),
           });
           const data = await res.json();
 
