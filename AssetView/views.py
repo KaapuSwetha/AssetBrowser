@@ -2487,16 +2487,205 @@ def _resolve_zip_root(project: str, category: str, subpath: str = ""):
     filter_parts = segments[consumed:]  # e.g. ['FJ_chr_imanvi_mod'] or ['FJ_chr_imanvi_mod', 'anim']
     return current, filter_parts
 
+def _resolve_sequence_zip_root(project: str, seq_name: str = ""):
+    """
+    Resolve BASE/project/Sequence[/seq_name].
+    Returns (root_path, resolved_seq_name) — resolved_seq_name preserves
+    the real on-disk casing/spelling even if the frontend sent something
+    slightly different.
+    """
+    if project not in ACTIVE:
+        return None, ""
 
+    seq_root = (BASE / project / "Sequence").resolve()
+    if not seq_root.exists():
+        return None, ""
+
+    if not seq_name:
+        return seq_root, ""
+
+    candidate = (seq_root / seq_name).resolve()
+    try:
+        candidate.relative_to(seq_root)  # guard against path traversal
+    except ValueError:
+        return None, ""
+
+    if candidate.is_dir():
+        return candidate, seq_name
+
+    match = next(
+        (d for d in seq_root.iterdir() if d.is_dir() and d.name.lower() == seq_name.lower()),
+        None,
+    )
+    if match:
+        return match, match.name
+
+    # Sequence folder doesn't exist as a real directory — fall back to the
+    # whole Sequence root and still filter by seq_name via JSON content.
+    return seq_root, seq_name
+
+
+def _extract_sequence_publish_paths(json_path: Path, shot_filter: str = "", dept_filter: str = "") -> list:
+    """
+    Pull real, on-disk delivered file paths out of a sequence_info JSON.
+
+    shot_filter: if set, only include that exact shot name (e.g. 'SHOT_0002')
+    dept_filter: if set, only include files whose path matches that
+                 department (uses the same keyword matching as the rest
+                 of the sequence code — _dept_matches), since department
+                 isn't a JSON key here, just something reflected in the path.
+    """
+    PUBLISH_FIELDS = (
+        "PublishdFilePath", "PreviewPath", "Alembic", "Usd", "FBX",
+        "AdditionalMaps", "DecimatedMesh", "TextureSourcePath",
+    )
+
+    paths = []
+    try:
+        data = load_json(json_path)
+    except Exception as exc:
+        logger.warning(f"[zip] failed to parse {json_path}: {exc}")
+        return paths
+
+    blob = data.get("sequence_info") or {}
+    for shot_name, shot_data in blob.items():
+        if shot_filter and shot_name != shot_filter:
+            continue
+        if not isinstance(shot_data, dict):
+            continue
+
+        for field in PUBLISH_FIELDS:
+            for v in as_list(shot_data.get(field)):
+                if not v:
+                    continue
+                if dept_filter and not _dept_matches(dept_filter, str(v)):
+                    continue
+                paths.append(str(v))
+
+    return paths
+
+
+def _run_sequence_zip_job(job_id: str, root: Path, project: str,
+                           seq_name: str, shot_filter: str, dept_filter: str):
+    job = _ZIP_JOBS[job_id]
+    job["status"] = "running"
+
+    try:
+        if job.get("status") == "cancelled":
+            return
+
+        json_files = [f for f in root.rglob("*.json") if f.is_file()]
+        if not json_files:
+            raise ValueError(f"No sequence metadata (.json) found under {root}")
+
+        raw_paths = []
+        for jf in json_files:
+            raw_paths.extend(_extract_sequence_publish_paths(jf, shot_filter, dept_filter))
+
+        seen = set()
+        resolved_files = []
+        for p in raw_paths:
+            if p in seen:
+                continue
+            seen.add(p)
+
+            fp = resolve_media_path(p)
+            if not fp:
+                fp = Path(str(p).replace("/", "\\"))
+
+            if fp and fp.exists() and fp.is_file():
+                resolved_files.append((p, fp))
+            else:
+                logger.warning(f"[zip] skipping missing/unresolved file: {p}")
+
+        job["files_total"] = len(resolved_files)
+        if not resolved_files:
+            scope = " / ".join([b for b in (seq_name, shot_filter, dept_filter) if b]) or "ALL"
+            raise ValueError(f"No real files could be resolved on disk for {project} / Sequence / {scope}")
+
+        output_dir = Path(tempfile.gettempdir()) / "assetview_zips"
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        ts = _time.strftime("%Y%m%d_%H%M%S")
+        tag_bits = [project, "Sequence"] + [b.replace(" ", "_") for b in (seq_name, shot_filter, dept_filter) if b]
+        tag = "_".join(tag_bits)
+        output_path = output_dir / f"{tag}_{ts}.zip"
+
+        with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zf:
+            for i, (raw_path, fp) in enumerate(resolved_files):
+                if job.get("status") == "cancelled":
+                    break
+
+                arcname = _arcname_for_publish_path(raw_path, project, fp.name)
+                try:
+                    zf.write(fp, arcname=str(arcname))
+                except Exception as exc:
+                    logger.warning(f"[zip] skipping file {fp}: {exc}")
+
+                job["files_done"] = i + 1
+                job["progress"] = min(int(((i + 1) / len(resolved_files)) * 100), 99)
+
+        if job.get("status") == "cancelled":
+            output_path.unlink(missing_ok=True)
+            return
+
+        job["_output_path"] = str(output_path)
+        job["output_web"] = f"/zip-output/{job_id}/"
+        job["status"] = "done"
+        job["progress"] = 100
+
+    except Exception as exc:
+        logger.error(f"[zip] job {job_id} failed: {exc}", exc_info=True)
+        if job.get("status") != "cancelled":
+            job["status"] = "failed"
+            job["error"] = str(exc)
+            job["progress"] = 0
 @csrf_exempt
 @require_POST
 def start_zip_download(request):
-    """Kick off a background job that zips an Asset/Sequence folder tree,
-    an individual asset group, or a single variant."""
+    """Kick off a background job that zips an Asset or Sequence scope —
+    category, type, department, asset group, variant (Asset side), or
+    sequence, department, shot, shot+department (Sequence side)."""
     project = (request.POST.get("project") or "").strip()
     category = (request.POST.get("category") or "").strip()
-    subpath = (request.POST.get("path") or "").strip()
+    subpath = (request.POST.get("path") or "").strip()   # Asset: full subpath. Sequence: just the seq name.
+    shot = (request.POST.get("shot") or "").strip()       # Sequence only
+    dept = (request.POST.get("dept") or "").strip()       # Sequence only
 
+    if category == "Sequence":
+        root, seq_name = _resolve_sequence_zip_root(project, subpath)
+        if not root:
+            return JsonResponse(
+                {"error": "Invalid or missing project/sequence"}, status=400
+            )
+
+        job_id = str(uuid.uuid4())
+        _ZIP_JOBS[job_id] = {
+            "status": "queued",
+            "progress": 0,
+            "files_total": 0,
+            "files_done": 0,
+            "output_web": None,
+            "error": None,
+            "project": project,
+            "category": category,
+            "subpath": subpath,
+            "_output_path": None,
+        }
+
+        threading.Thread(
+            target=_run_sequence_zip_job,
+            args=(job_id, root, project, seq_name, shot, dept),
+            daemon=True,
+        ).start()
+
+        scope = " / ".join([b for b in (seq_name, shot, dept) if b]) or "ALL"
+        return JsonResponse({
+            "job_id": job_id,
+            "message": f"Zipping started for {project} / Sequence / {scope}",
+        })
+
+    # ── Asset side (unchanged) ──
     root, filter_parts = _resolve_zip_root(project, category, subpath)
     if not root:
         return JsonResponse(
@@ -2528,7 +2717,6 @@ def start_zip_download(request):
         "message": f"Zipping started for {project} / {category}{('/' + subpath) if subpath else ''}",
     })
 
-
 @require_GET
 def zip_download_status(request):
     job_id = (request.GET.get("job_id") or "").strip()
@@ -2550,7 +2738,7 @@ def zip_download_status(request):
 
 
 def _extract_publish_paths(json_path: Path, asset_filter: str = "", variant_filter: str = "") -> list:
-   
+
     PUBLISH_FIELDS = (
         "PublishdFilePath", "PreviewPath", "Alembic", "Usd", "FBX",
         "AdditionalMaps", "DecimatedMesh", "TextureSourcePath",
