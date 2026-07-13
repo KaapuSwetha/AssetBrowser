@@ -18,31 +18,29 @@ def check_user_permission(request) -> Tuple[bool, Optional[str], Optional[str]]:
     client_ip = get_client_ip(request)
 
     ip_to_username = {
-        '192.168.20.224': 'swetha',
-        '10.1.0.223':     'neelendra',
-        '10.0.0.73':      'neelendra',
-        '10.1.0.165':     'subbarao.ch',
-        '10.1.0.121':     'yasasvi.c',
-        '10.1.0.108':     'adam.s',
-        '10.1.0.214':     'naveen.kumar',
         '127.0.0.1':      'localhost',
     }
 
     allowed_users = [
-        'swetha', 'neelendra', 'localhost',
-        'subbarao.ch', 'yasasvi.c', 'adam.s', 'naveen.kumar',
+        'localhost'
     ]
 
     bare_username = ip_to_username.get(client_ip)
-    can_edit = bare_username in allowed_users if bare_username else False
 
-    # Build composite identity so each physical user gets their own
-    # notification-state file while still resolving to the same department.
-    # get_user_department() strips the @IP suffix automatically.
-    if bare_username and client_ip:
-        username = f"{bare_username}@{client_ip}"   # e.g. "swetha@192.168.20.224"
+    # --- Default fallback for unmapped IPs ---
+    DEFAULT_USERNAME = 'guest'      # or None, if you don't want to name them
+    DEFAULT_CAN_EDIT = False        # set True only if you really want unknown IPs to edit
+
+    if bare_username is None:
+        bare_username = DEFAULT_USERNAME
+        can_edit = DEFAULT_CAN_EDIT
     else:
-        username = bare_username                     # None for unknown IPs
+        can_edit = bare_username in allowed_users
+
+    if bare_username and client_ip:
+        username = f"{bare_username}@{client_ip}"
+    else:
+        username = bare_username
 
     logger.info(f"Permission check — ip={client_ip} bare={bare_username} "
                 f"identity={username} can_edit={can_edit}")
