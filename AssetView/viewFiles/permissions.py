@@ -1,62 +1,49 @@
-# AssetView/permissions.py
 import logging
 from typing import Tuple, Optional
 
 logger = logging.getLogger(__name__)
 
 def get_client_ip(request) -> Optional[str]:
-    """Get the real client IP address considering all common proxy headers."""
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0].strip()
-        logger.debug(f"IP from X-Forwarded-For: {ip}")
         return ip
-
-    # Try other common headers
     for header in ['HTTP_X_REAL_IP', 'HTTP_CLIENT_IP', 'REMOTE_ADDR']:
         ip = request.META.get(header)
         if ip:
-            logger.debug(f"IP from {header}: {ip}")
             return ip
-
-    logger.warning("Could not determine client IP address")
     return None
 
 def check_user_permission(request) -> Tuple[bool, Optional[str], Optional[str]]:
-    """
-    Check if the current user has permission to edit based on IP address.
-    Returns tuple: (can_edit, username, client_ip)
-    
-    Note: Users without an identifiable IP address are also allowed to edit.
-    """
     client_ip = get_client_ip(request)
-    logger.info(f"Client IP: {client_ip}")
 
-    # Map IP addresses to usernames
     ip_to_username = {
         '192.168.20.224': 'swetha',
-        '10.1.0.223': 'neelendra',
-        '10.0.0.73': 'neelendra',
-        '10.1.0.165': 'subbarao.ch',
-        '10.1.0.121': 'yasasvi.c',
-        '10.1.0.108': 'adam.s',
-        '10.1.0.214': 'naveen.kumar',
-        '127.0.0.1': 'localhost',
+        '10.1.0.223':     'neelendra',
+        '10.0.0.73':      'neelendra',
+        '10.1.0.165':     'subbarao.ch',
+        '10.1.0.121':     'yasasvi.c',
+        '10.1.0.108':     'adam.s',
+        '10.1.0.214':     'naveen.kumar',
+        '127.0.0.1':      'localhost',
     }
 
-    # List of users allowed to edit status
     allowed_users = [
         'swetha', 'neelendra', 'localhost',
-        'subbarao.ch', 'yasasvi.c', 'adam.s', 'naveen.kumar'
+        'subbarao.ch', 'yasasvi.c', 'adam.s', 'naveen.kumar',
     ]
 
-    # Get username based on IP address
-    username = ip_to_username.get(client_ip)
-    logger.info(f"Resolved username: {username}")
+    bare_username = ip_to_username.get(client_ip)
+    can_edit = bare_username in allowed_users if bare_username else False
 
-    # Check if user is allowed to edit
-    # Allow edit if: user is in allowed_users OR client_ip cannot be determined
-    can_edit = (username in allowed_users) if username else True
-    logger.info(f"Permission check: Username: {username}, Can edit: {can_edit}, IP: {client_ip}")
+    # Build composite identity so each physical user gets their own
+    # notification-state file while still resolving to the same department.
+    # get_user_department() strips the @IP suffix automatically.
+    if bare_username and client_ip:
+        username = f"{bare_username}@{client_ip}"   # e.g. "swetha@192.168.20.224"
+    else:
+        username = bare_username                     # None for unknown IPs
 
+    logger.info(f"Permission check — ip={client_ip} bare={bare_username} "
+                f"identity={username} can_edit={can_edit}")
     return can_edit, username, client_ip

@@ -28,6 +28,7 @@
 #miniPreviewBtn,
 #closeComparisonBtn,
  #seqMinimizeBtn,
+ #seqDownloadBtn,
  #seqCloseBtn,
  #seqMiniPreviewBtn {
   width: 36px;
@@ -54,7 +55,13 @@
   color: #f87171;
   transform: scale(1.08) rotate(90deg);
 }
-
+#seqDownloadBtn:hover
+{
+background: rgba(34, 197, 94, 0.25);
+border-color: rgba(34, 197, 94, 0.5);
+color: #4ade80;
+transform: scale(1.08)
+}
 /* Minimize — purple */
 #minimizeFullscreenBtn:hover,
 #minimizeComparisonBtn:hover,
@@ -78,7 +85,6 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    3. TOP BAR SHELL
-      Shared by: preview_card  ·  asset_rows  ·  sequence_player
    ───────────────────────────────────────────────────────────────────────────── */
 
 #fsTopBar {
@@ -362,8 +368,7 @@
 
 /* Mini-preview — purple */
 .pa-pill-mini,
-.pill-mini-btn,
-.cmp-pill-restore {
+.pill-mini-btn{
   width: 28px; height: 28px; border-radius: 8px;
   background: rgba(139, 92, 246, 0.2);
   border: 1px solid rgba(139, 92, 246, 0.35);
@@ -697,9 +702,6 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    10. UNIFIED CONTROLS — layout shell
-       Shared by: preview_card  ·  sequence_player  ·  asset_rows
-       NOTE: background colour, height overrides, and padding tweaks stay
-       in each per-file stylesheet to preserve their unique styling.
    ───────────────────────────────────────────────────────────────────────────── */
 
 #unifiedControls {
@@ -716,7 +718,6 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    11. SEEK ROW
-       Shared by: preview_card  ·  sequence_player
    ───────────────────────────────────────────────────────────────────────────── */
 
 #fsSeekRow {
@@ -774,7 +775,6 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    12. CONTROLS ROW & GROUPS
-       Shared by: preview_card  ·  sequence_player  ·  asset_rows
    ───────────────────────────────────────────────────────────────────────────── */
 
 #fsControlsRow {
@@ -803,7 +803,6 @@
 
 /* ─────────────────────────────────────────────────────────────────────────────
    13. ICON BUTTONS — base
-       Hover colours (violet / purple / neutral) are overridden per-file.
    ───────────────────────────────────────────────────────────────────────────── */
 
 .fs-icon-btn {
@@ -828,8 +827,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   14. PLAY / PAUSE BUTTON — base
-       Gradient background, box-shadow, and hover shadow are set per-file.
+   14. PLAY / PAUSE BUTTON 
    ───────────────────────────────────────────────────────────────────────────── */
 
 #playPauseBtn {
@@ -851,8 +849,7 @@
 #playPauseBtn:hover { transform: translateY(-1px) scale(1.06);box-shadow: 0 6px 16px rgba(139,92,246,.55); }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   15. VOLUME SLIDER — base
-       accent-color is set per-file.
+   15. VOLUME SLIDER
    ───────────────────────────────────────────────────────────────────────────── */
 
 .fs-vol-slider {

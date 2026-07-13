@@ -342,6 +342,7 @@ function updateSearchResultsPosition() {
     if (ASSET_VARIANT_CFG[v]) return ASSET_VARIANT_CFG[v];
     return { ...ASSET_VARIANT_FALLBACK, label: v };
   }
+
   /* ── Change-type badge config ── */
   const TYPE_BADGE_CFG = {
     status_change: {
@@ -349,6 +350,11 @@ function updateSearchResultsPosition() {
       bg: "rgba(239,68,68,.15)", border: "rgba(239,68,68,.35)",
       text: "#fca5a5", dot: "#ef4444", label: "Status Changed",
     },
+    new_asset: {
+  icon: "fa-cube",
+  bg: "rgba(124,58,237,.15)", border: "rgba(124,58,237,.35)",
+  text: "#c4b5fd", dot: "#8b5cf6", label: "New Variant",
+},
     new_version: {
       icon: "fa-code-branch",
       bg: "rgba(124,58,237,.15)", border: "rgba(124,58,237,.35)",
@@ -364,6 +370,11 @@ function updateSearchResultsPosition() {
       bg: "rgba(14,165,233,.15)", border: "rgba(14,165,233,.3)",
       text: "#7dd3fc", dot: "#0ea5e9", label: "Comment",
     },
+    new_shot: {
+  icon: "fa-clapperboard",
+  bg: "rgba(16,185,129,.15)", border: "rgba(16,185,129,.35)",
+  text: "#6ee7b7", dot: "#10b981", label: "New Shot",
+},
     field_change: {
       icon: "fa-pen",
       bg: "rgba(100,116,139,.15)", border: "rgba(100,116,139,.3)",
@@ -382,64 +393,79 @@ function updateSearchResultsPosition() {
     return /\/[Ss]equence\//i.test(p) ? "sequence" : "asset";
   }
 
-  function getNotifDisplayCfg(n) {
+
+function getNotifDisplayCfg(n) {
     const mode = getMode(n);
     const type = n.type || "";
+
     if (type === "status_change") return TYPE_BADGE_CFG.status_change;
+
     if (mode === "sequence") {
-      const dept = n.dept || "";
-      if (SEQ_DEPT_CFG[dept]) return SEQ_DEPT_CFG[dept];
+        // ── Show dept badge for sequence shots (Animation, Cache, Matchmove etc)
+        const dept = n.dept || "";
+        if (dept && SEQ_DEPT_CFG[dept]) return SEQ_DEPT_CFG[dept];
+        return TYPE_BADGE_CFG.new_shot;  // fallback if dept not in config
     }
+
     if (mode === "asset") return getAssetVariantCfg(n);
+
     return TYPE_BADGE_CFG[type] || TYPE_BADGE_CFG.default;
-  }
+}
 
 function getTypePillHtml(n) {
-  const type = n.type || "";
-  const mode = getMode(n);
-  const mainCfg = getNotifDisplayCfg(n);
-  let pills = "";
+    const type = n.type || "";
+    const mode = getMode(n);
+    const mainCfg = getNotifDisplayCfg(n);
+    let pills = "";
 
-  const mainIsType    = Object.values(TYPE_BADGE_CFG).includes(mainCfg);
-  const mainIsDept    = mode === "sequence" && !!n.dept && mainCfg === SEQ_DEPT_CFG[n.dept];
-  const mainIsVariant = mode === "asset" && mainCfg === getAssetVariantCfg(n);
+    // ── Sequence (non-status_change): dept is the main badge,
+    //    so render the type pill (e.g. "New Shot") alongside it
+    if (mode === "sequence" && type !== "status_change") {
+        const tc = TYPE_BADGE_CFG[type] || TYPE_BADGE_CFG.default;
+        return `
+            <span style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                         color:${tc.text};padding:2px 6px;border-radius:4px;
+                         background:${tc.bg};border:1px solid ${tc.border};white-space:nowrap;">
+              <i class="fas ${tc.icon}" style="font-size:7px;margin-right:2px;"></i>${tc.label}
+            </span>`;
+    }
 
-  // 1. Type pill: show when main badge is NOT already a type badge
-  if (!mainIsType) {
-    const tc = TYPE_BADGE_CFG[type] || TYPE_BADGE_CFG.default;
-    pills += `
-      <span style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-                   color:${tc.text};padding:2px 6px;border-radius:4px;
-                   background:${tc.bg};border:1px solid ${tc.border};white-space:nowrap;">
-        <i class="fas ${tc.icon}" style="font-size:7px;margin-right:2px;"></i>${tc.label}
-      </span>`;
-  }
+    const mainIsType    = Object.values(TYPE_BADGE_CFG).includes(mainCfg);
+    const mainIsVariant = mode === "asset" && mainCfg === getAssetVariantCfg(n);
 
-  // 2. Dept pill for sequence: show when main badge is a type badge (not the dept itself)
-  //    This is the key fix — mainIsType=true means dept got suppressed before, now it shows
-  if (mode === "sequence" && n.dept && (mainIsType || !mainIsDept)) {
-    const dc = SEQ_DEPT_CFG[n.dept] || {};
-    pills += `
-      <span style="font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
-                   color:${dc.text || "#7dd3fc"};padding:2px 6px;border-radius:4px;white-space:nowrap;
-                   background:${dc.bg || "rgba(14,165,233,.1)"};border:1px solid ${dc.border || "rgba(14,165,233,.22)"};">
-        <i class="fas ${dc.icon || "fa-film"}" style="font-size:7px;margin-right:2px;"></i>${escHtml(n.dept)}
-      </span>`;
-  }
+    if (!mainIsType) {
+        const tc = TYPE_BADGE_CFG[type] || TYPE_BADGE_CFG.default;
+        pills += `
+            <span style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                         color:${tc.text};padding:2px 6px;border-radius:4px;
+                         background:${tc.bg};border:1px solid ${tc.border};white-space:nowrap;">
+              <i class="fas ${tc.icon}" style="font-size:7px;margin-right:2px;"></i>${tc.label}
+            </span>`;
+    }
 
-  // 3. Variant pill for asset
-  if (mode === "asset" && !mainIsVariant) {
-    const vcfg = getAssetVariantCfg(n);
-    pills += `
-      <span style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-                   color:${vcfg.text};padding:2px 6px;border-radius:4px;
-                   background:${vcfg.bg};border:1px solid ${vcfg.border};white-space:nowrap;">
-        <i class="fas ${vcfg.icon}" style="font-size:7px;margin-right:2px;"></i>${vcfg.label}
-      </span>`;
-  }
+    if (mode === "sequence" && n.dept) {
+        const dc = SEQ_DEPT_CFG[n.dept] || {};
+        pills += `
+            <span style="font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+                         color:${dc.text || "#7dd3fc"};padding:2px 6px;border-radius:4px;white-space:nowrap;
+                         background:${dc.bg || "rgba(14,165,233,.1)"};border:1px solid ${dc.border || "rgba(14,165,233,.22)"};">
+              <i class="fas ${dc.icon || "fa-film"}" style="font-size:7px;margin-right:2px;"></i>${escHtml(n.dept)}
+            </span>`;
+    }
 
-  return pills;
+    if (mode === "asset" && !mainIsVariant) {
+        const vcfg = getAssetVariantCfg(n);
+        pills += `
+            <span style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+                         color:${vcfg.text};padding:2px 6px;border-radius:4px;
+                         background:${vcfg.bg};border:1px solid ${vcfg.border};white-space:nowrap;">
+              <i class="fas ${vcfg.icon}" style="font-size:7px;margin-right:2px;"></i>${vcfg.label}
+            </span>`;
+    }
+
+    return pills;
 }
+
   /* ── Tab / sub-filter style constants ── */
   const TAB_ON =
     "background:rgba(139,92,246,.25);border:1px solid rgba(139,92,246,.45);color:#c4b5fd;";
@@ -449,26 +475,6 @@ function getTypePillHtml(n) {
     "background:rgba(139,92,246,.2);border:1px solid rgba(139,92,246,.4);color:#c4b5fd;";
   const SUB_OFF =
     "background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#475569;";
-
-  window.setNotifFilter = function (filter) {
-    activeFilter = filter;
-    document.getElementById("filterAll").style.cssText =
-      filter === "all" ? TAB_ON : TAB_OFF;
-    document.getElementById("filter3days").style.cssText =
-      filter === "3days" ? TAB_ON : TAB_OFF;
-    list.innerHTML = "";
-    renderNotifications(window._notifData || []);
-  };
-
-  window.setNotifSubFilter = function (sub) {
-    activeSubFilter = sub;
-    document.getElementById("filterAsset").style.cssText =
-      sub === "asset" ? SUB_ON : SUB_OFF;
-    document.getElementById("filterSequence").style.cssText =
-      sub === "sequence" ? SUB_ON : SUB_OFF;
-    list.innerHTML = "";
-    renderNotifications(window._notifData || []);
-  };
 
   const HIDDEN_TYPES = new Set(["new_key", "comment_change", "field_change"]);
 
@@ -483,7 +489,64 @@ function getTypePillHtml(n) {
     result = result.filter((n) => getMode(n) === activeSubFilter);
     return result;
   }
+ function updateBadge() {
+  const notifications = window._notifData || [];
 
+  // Filter out hidden types first (same as applyFilter does)
+  let filtered = notifications.filter((n) => !HIDDEN_TYPES.has(n.type));
+
+  // Apply time filter based on activeFilter
+  if (activeFilter === "3days") {
+    const cutoff = Date.now() - 3 * 24 * 60 * 60 * 1000;
+    filtered = filtered.filter(
+      (n) => new Date(n.timestamp).getTime() >= cutoff,
+    );
+  }
+  // For "all" filter, no time filtering - just hidden types removed
+
+  // Count ALL modes (asset + sequence combined) since we're not filtering by sub-filter here
+  const count = filtered.length;
+
+  const prevCount = parseInt(badge.textContent) || 0;
+  if (count > 0) {
+    badge.style.display = "inline-block";
+    badge.textContent = count > 99 ? "99+" : String(count);
+    bellIcon.classList.replace("far", "fas");
+    bellIcon.style.color = "#a78bfa";
+    if (count > prevCount) {
+      bellIcon.classList.remove("ringing");
+      void bellIcon.offsetWidth;
+      bellIcon.classList.add("ringing");
+      setTimeout(() => bellIcon.classList.remove("ringing"), 800);
+    }
+  } else {
+    badge.style.display = "none";
+    badge.textContent = "0";
+    bellIcon.classList.replace("fas", "far");
+    bellIcon.style.color = "";
+  }
+}
+ window.setNotifFilter = function (filter) {
+  activeFilter = filter;
+  document.getElementById("filterAll").style.cssText =
+    filter === "all" ? TAB_ON : TAB_OFF;
+  document.getElementById("filter3days").style.cssText =
+    filter === "3days" ? TAB_ON : TAB_OFF;
+  list.innerHTML = "";
+  renderNotifications(window._notifData || []);
+  updateBadge(); // ← Already present, good
+};
+
+window.setNotifSubFilter = function (sub) {
+  activeSubFilter = sub;
+  document.getElementById("filterAsset").style.cssText =
+    sub === "asset" ? SUB_ON : SUB_OFF;
+  document.getElementById("filterSequence").style.cssText =
+    sub === "sequence" ? SUB_ON : SUB_OFF;
+  list.innerHTML = "";
+  renderNotifications(window._notifData || []);
+  updateBadge(); // ← Already present, good
+};
   /* ── Misc helpers ── */
   function relTime(iso) {
     const diff = Date.now() - new Date(iso).getTime();
@@ -495,6 +558,18 @@ function getTypePillHtml(n) {
     if (h < 24) return `${h}h ago`;
     return `${Math.floor(h / 24)}d ago`;
   }
+  (() => {
+  const TICK_MS = 30_000; // re-evaluate every 30 seconds
+
+  function tickTimestamps() {
+    document.querySelectorAll(".notif-row [data-ts]").forEach((el) => {
+      const iso = el.dataset.ts;
+      if (iso) el.textContent = relTime(iso);
+    });
+  }
+
+  setInterval(tickTimestamps, TICK_MS);
+})();
 
   function csrfToken() {
     return (
@@ -534,12 +609,16 @@ function getTypePillHtml(n) {
     if (/\/[Ss]equence\//i.test(normalised)) mode = "Sequence";
 
     let variant = "";
-    if (n.key && n.key.includes(" / ")) {
-      variant = n.key.split(" / ")[0].trim();
-    } else if (n.type === "new_variant") {
-      variant = n.key || "";
+    if (mode === "Asset") {
+      // For assets: variant is stored directly in n.variant
+      variant = n.variant || "";
     } else {
-      variant = n.key || "";
+      // For sequences: key is "SHOT_0002 / v001", extract version if needed
+      if (n.key && n.key.includes(" / ")) {
+        variant = n.key.split(" / ")[1].trim();
+      } else {
+        variant = "";
+      }
     }
 
     const path = n.json_path;
@@ -570,34 +649,32 @@ function getTypePillHtml(n) {
     }
 
     if (!visible.length) {
-      list.innerHTML = "";
-      emptyState.classList.remove("hidden");
-      emptyState.classList.add("flex");
-      const sub = document.getElementById("notifEmptySubtext");
-      if (sub) {
-        sub.textContent =
-          activeSubFilter === "asset"
-            ? activeFilter === "3days"
-              ? "No asset notifications in last 3 days"
-              : "No asset notifications"
-            : activeFilter === "3days"
-              ? "No sequence notifications in last 3 days"
-              : "No sequence notifications";
-      }
-      markAllBtn?.classList.add("hidden");
-      headerCount.classList.add("hidden");
-      return;
-    }
+  list.innerHTML = "";
+  emptyState.classList.remove("hidden");
+  emptyState.classList.add("flex");
+  const sub = document.getElementById("notifEmptySubtext");
+  if (sub) {
+    sub.textContent =
+      activeSubFilter === "asset"
+        ? activeFilter === "3days"
+          ? "No asset notifications in last 3 days"
+          : "No asset notifications"
+        : activeFilter === "3days"
+          ? "No sequence notifications in last 3 days"
+          : "No sequence notifications";
+  }
+  // markAllBtn stays visible — removed hidden toggle
+  headerCount.classList.add("hidden");
+  headerCount.classList.remove("inline-flex");
+  return;
+}
 
     emptyState.classList.add("hidden");
     emptyState.classList.remove("flex");
-    markAllBtn?.classList.remove("hidden");
-    markAllBtn?.classList.add("flex");
     headerCount.classList.remove("hidden");
     headerCount.classList.add("inline-flex");
     document.getElementById("notifHeaderCountText").textContent =
       `${visible.length} new`;
-
 
     /* Smart diff: only add rows not already in DOM */
     const existingIds = new Set(
@@ -728,9 +805,9 @@ function getTypePillHtml(n) {
             <i class="fas ${cfg.icon}" style="font-size:8px;margin-right:3px;"></i>${cfg.label}
           </span>
           ${getTypePillHtml(n)}
-         
-          <span style="font-size:10px;color:#798aa3;margin-left:auto;white-space:nowrap;">
-            ${relTime(n.timestamp)}
+          <span data-ts="${escHtml(n.timestamp)}"
+          style="font-size:10px;color:#798aa3;margin-left:auto;white-space:nowrap;">
+          ${relTime(n.timestamp)}
           </span>
         </div>
         <p style="font-size:11px;line-height:1.5;margin:0 0 8px 0;">${escHtml(n.message)}</p>
@@ -777,19 +854,17 @@ function getTypePillHtml(n) {
     setTimeout(() => {
       row.remove();
       cleanEmptySections();
-      const totalUnread = (window._notifData || []).length;
-      updateBadge(totalUnread);
+      updateBadge(); // ← recomputes from active filter automatically
 
       const visibleCount = applyFilter(window._notifData || []).length;
-      if (visibleCount > 0) {
-        document.getElementById("notifHeaderCountText").textContent =
-          `${visibleCount} new`;
-      } else {
-        headerCount.classList.add("hidden");
-        headerCount.classList.remove("inline-flex");
-        markAllBtn?.classList.add("hidden");
-        markAllBtn?.classList.remove("flex");
-      }
+if (visibleCount > 0) {
+  document.getElementById("notifHeaderCountText").textContent =
+    `${visibleCount} new`;
+} else {
+  headerCount.classList.add("hidden");
+  headerCount.classList.remove("inline-flex");
+  // markAllBtn stays — removed hidden toggle
+}
 
       const domRows = list.querySelectorAll(".notif-row").length;
       if (domRows === 0) renderNotifications(window._notifData || []);
@@ -811,26 +886,6 @@ function getTypePillHtml(n) {
     });
   }
 
-  function updateBadge(count) {
-    const prevCount = parseInt(badge.textContent) || 0;
-    if (count > 0) {
-      badge.style.display = "inline-block";
-      badge.textContent = count > 99 ? "99+" : String(count);
-      bellIcon.classList.replace("far", "fas");
-      bellIcon.style.color = "#a78bfa";
-      if (count > prevCount) {
-        bellIcon.classList.remove("ringing");
-        void bellIcon.offsetWidth;
-        bellIcon.classList.add("ringing");
-        setTimeout(() => bellIcon.classList.remove("ringing"), 800);
-      }
-    } else {
-      badge.style.display = "none";
-      bellIcon.classList.replace("fas", "far");
-      bellIcon.style.color = "";
-    }
-  }
-
   /* ── URL config — populated by Django template tags in base.html ── */
   const NOTIF_URLS = window.NOTIF_URLS || {};
 
@@ -839,62 +894,64 @@ function getTypePillHtml(n) {
   }
 
   let _lastNotifSignature = "";
-async function _doFetch() {
-  const res = await fetch(NOTIF_URLS.list);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json();
-  return data.notifications || [];
-}
-async function fetchNotifications() {
-  try {
-    const incoming = await _doFetch();
-    const signature = incoming.map((n) => n.id).join(",");
 
-    if (signature !== _lastNotifSignature) {
+  async function _doFetch() {
+    const res = await fetch(NOTIF_URLS.list);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return data.notifications || [];
+  }
+
+  async function fetchNotifications() {
+    try {
+      const incoming = await _doFetch();
+      const signature = incoming.map((n) => n.id).join(",");
+
+      if (signature !== _lastNotifSignature) {
+        _lastNotifSignature = signature;
+        window._notifData = incoming;
+        if (isOpen) renderNotifications(window._notifData);
+      }
+
+      updateBadge(); // ← always recomputes from active filter
+    } catch (_) {}
+  }
+
+  refreshBtn?.addEventListener("click", async function () {
+    const icon = this.querySelector("i");
+    icon.classList.add("fa-spin");
+    this.disabled = true;
+
+    let success = false;
+    try {
+      const incoming = await _doFetch();
+      const signature = incoming.map((n) => n.id).join(",");
+
       _lastNotifSignature = signature;
       window._notifData = incoming;
-      if (isOpen) renderNotifications(window._notifData);
+      renderNotifications(window._notifData);
+
+      updateBadge(); // ← recomputes from active filter
+      success = true;
+
+    } catch (err) {
+      console.error("Notification refresh failed:", err);
+    } finally {
+      icon.classList.remove("fa-spin");
+      this.disabled = false;
+
+      const flashIn = success ? "fa-check" : "fa-xmark";
+      const color   = success ? "#34d399"  : "#f87171";
+      icon.classList.replace("fa-rotate-right", flashIn);
+      this.style.color = color;
+
+      setTimeout(() => {
+        icon.classList.replace(flashIn, "fa-rotate-right");
+        this.style.color = "";
+      }, 1200);
     }
+  });
 
-    const visibleCount = incoming.filter((n) => !HIDDEN_TYPES.has(n.type)).length;
-    updateBadge(visibleCount);
-  } catch (_) {}
-}
-refreshBtn?.addEventListener("click", async function () {
-  const icon = this.querySelector("i");
-  icon.classList.add("fa-spin");
-  this.disabled = true;
-
-  let success = false;
-  try {
-    const incoming = await _doFetch();             // throws on error
-    const signature = incoming.map((n) => n.id).join(",");
-
-    _lastNotifSignature = signature;               // always update
-    window._notifData = incoming;
-    renderNotifications(window._notifData);        // always re-render
-
-    const visibleCount = incoming.filter((n) => !HIDDEN_TYPES.has(n.type)).length;
-    updateBadge(visibleCount);
-    success = true;
-
-  } catch (err) {
-    console.error("Notification refresh failed:", err);
-  } finally {
-    icon.classList.remove("fa-spin");
-    this.disabled = false;
-
-    const flashIn = success ? "fa-check" : "fa-xmark";
-    const color   = success ? "#34d399"  : "#f87171";
-    icon.classList.replace("fa-rotate-right", flashIn);
-    this.style.color = color;
-
-    setTimeout(() => {
-      icon.classList.replace(flashIn, "fa-rotate-right");
-      this.style.color = "";
-    }, 1200);
-  }
-});
   function openDropdown() {
     isOpen = true;
     btn.setAttribute("aria-expanded", "true");
@@ -917,15 +974,33 @@ refreshBtn?.addEventListener("click", async function () {
       closeDropdown();
   });
 
-  markAllBtn?.addEventListener("click", async () => {
-    try {
-      await postJSON(NOTIF_URLS.markAll);
-    } catch (_) {}
-    window._notifData = [];
-    renderNotifications([]);
-    updateBadge(0);
-  });
 
+
+markAllBtn?.addEventListener("click", async () => {
+  // ── 1. Loading state ──────────────────────────────────────────────────
+  markAllBtn.disabled = true;
+  markAllBtn.innerHTML = `<i class="fas fa-spinner fa-spin text-[9px]"></i> Marking...`;
+  markAllBtn.style.opacity = "1";
+
+  try {
+    await postJSON(NOTIF_URLS.markAll);
+  } catch (_) {}
+
+  // ── 2. Brief success flash ────────────────────────────────────────────
+  markAllBtn.innerHTML = `<i class="fas fa-check-double text-[9px]"></i> All read!`;
+  markAllBtn.style.color = "#6ee7b7";   // emerald tint
+
+  // ── 3. Transition to empty state after 750ms ──────────────────────────
+  setTimeout(() => {
+    window._notifData = [];
+    _lastNotifSignature = "";
+    renderNotifications([]);
+    updateBadge();
+    markAllBtn.disabled = false;
+    markAllBtn.style.color = "";
+    markAllBtn.innerHTML = `<i class="fas fa-check-double text-[9px]"></i> Mark all read`;
+  }, 750);
+});
 
   function startPolling() {
     fetchNotifications();
@@ -934,51 +1009,11 @@ refreshBtn?.addEventListener("click", async function () {
 
   document.addEventListener("DOMContentLoaded", () => {
     window._notifData = [];
+    if (markAllBtn) markAllBtn.style.display = "flex";
     startPolling();
   });
   document.body.addEventListener("htmx:afterSwap", () => {
     if (!pollInterval) startPolling();
   });
-  
-// ── Refresh button ────────────────────────────────────────────────
-document.getElementById("refreshNotifBtn")?.addEventListener("click", async function () {
-  const btn  = this;
-  const icon = btn.querySelector("i");
 
-  // Spin the icon & disable while fetching
-  icon.classList.add("fa-spin");
-  btn.disabled = true;
-
-  try {
-    await fetchNotifications();          // reuse your existing fetch fn
-    
-    // Brief visual confirmation
-    icon.classList.remove("fa-rotate-right");
-    icon.classList.add("fa-check");
-    btn.style.color = "#34d399";         // emerald flash
-
-    setTimeout(() => {
-      icon.classList.remove("fa-check");
-      icon.classList.add("fa-rotate-right");
-      btn.style.color = "";
-    }, 1200);
-
-  } catch (err) {
-    console.error("Notification refresh failed:", err);
-
-    icon.classList.remove("fa-rotate-right");
-    icon.classList.add("fa-xmark");
-    btn.style.color = "#f87171";         // red flash on error
-
-    setTimeout(() => {
-      icon.classList.remove("fa-xmark");
-      icon.classList.add("fa-rotate-right");
-      btn.style.color = "";
-    }, 1200);
-
-  } finally {
-    icon.classList.remove("fa-spin");
-    btn.disabled = false;
-  }
-});
 })();

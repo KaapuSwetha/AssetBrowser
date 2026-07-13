@@ -2,7 +2,13 @@
 
 <div class="tree-guide space-y-1">
   <details class="group ml-1" data-key="cat:{{ project }}:{{ category }}">
-    <summary class="tree-row">
+    <summary
+      class="tree-row zip-node"
+      data-project="{{ project }}"
+      data-category="Asset"
+      data-path="{{ category }}"
+      data-label="{{ category }}"
+    >
       <i class="fa-solid fa-caret-right caret text-slate-400"></i>
       <i class="fa-regular fa-folder folder-closed ic-folder"></i>
       <i class="fa-regular fa-folder-open folder-open ic-folder-open"></i>
@@ -14,9 +20,15 @@
         {% for d in depts %}
           {% with dept_name=d.name %}
             {% regroup d.items by asset as asset_list %}
-            
+
             <details class="group ml-1" data-key="dept:{{ project }}:{{ category }}:{{ dept_name }}">
-              <summary class="tree-row">
+              <summary
+                class="tree-row zip-node"
+                data-project="{{ project }}"
+                data-category="Asset"
+                data-path="{{ category }}/{{ dept_name }}"
+                data-label="{{ category }} / {{ dept_name }}"
+              >
                 <i class="fa-solid fa-caret-right caret text-slate-400"></i>
                 <i class="fa-regular fa-folder folder-closed ic-dept"></i>
                 <i class="fa-regular fa-folder-open folder-open ic-dept"></i>
@@ -34,7 +46,13 @@
               <div class="tree-guide">
                 {% for asset_group in asset_list %}
                   <details class="group ml-1">
-                    <summary class="tree-row">
+                    <summary
+                      class="tree-row zip-node"
+                      data-project="{{ project }}"
+                      data-category="Asset"
+                      data-path="{{ category }}/{{ dept_name }}/{{ asset_group.grouper }}"
+                      data-label="{{ category }} / {{ dept_name }} / {{ asset_group.grouper }}"
+                    >
                       <i class="fa-solid fa-caret-right caret text-slate-400"></i>
                       <i class="fa-regular fa-folder folder-closed ic-folder"></i>
                       <i class="fa-regular fa-folder-open folder-open ic-folder-open"></i>
@@ -45,7 +63,12 @@
                       {% regroup asset_group.list by variant as variant_list %}
                       {% for variant_group in variant_list %}
                         {% with variant_item=variant_group.list.0 %}
-                          <div class="py-1">
+                          <div class="py-1 flex items-center gap-2 zip-node"
+                               data-project="{{ project }}"
+                               data-category="Asset"
+                               data-path="{{ category }}/{{ dept_name }}/{{ asset_group.grouper }}/{{ variant_item.variant }}"
+                               data-label="{{ category }} / {{ dept_name }} / {{ asset_group.grouper }} / {{ variant_item.variant }}"
+                          >
                             <a
                               class="inline-flex items-center gap-2 text-slate-200 hover:underline"
                               hx-get="{% url 'AssetView:get_asset_versions' %}?path={{ variant_item.path|urlencode }}&name={{ variant_item.asset|urlencode }}&variant={{ variant_item.variant|urlencode }}&mode={{ variant_item.mode|urlencode }}"

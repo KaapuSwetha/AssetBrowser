@@ -20,15 +20,15 @@
           ],
           "PreviewPath": [
             "C:/Ref/image1.avif"
-               ],
+          ],
           "PublishComment": [
-            "aa"
+            "k"
           ],
           "PublishdFilePath": [
             "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01415/maya/KAR_prp_baleno_blue_mod.ma"
           ],
           "Status": [
-            "Internal Approved"
+            "Internal Review"
           ],
           "TextureSourcePath": [
             "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01415/Sourceimages"
@@ -41,6 +41,17 @@
           ],
           "WorkFilePath": [
             "N:/KAR/03_Work/03_Model/prp/baleno_blue/maya/scenes/KAR_prp_baleno_blue_mod.ma"
+          ],
+          "History": [
+            {
+              "timestamp": "2026-05-04T10:52:45",
+              "asset_id": "hhs_hyd_KAR_01415",
+              "previous_status": "Internal Approved",
+              "new_status": "Internal Review",
+              "comment": "k",
+              "username": "localhost",
+              "ip_address": "127.0.0.1"
+            }
           ]
         }
       }
@@ -64,8 +75,8 @@
             "KAR_prp_ciaz2016_gold_mod_anim"
           ],
           "PreviewPath": [
-                "C:/Ref/image2.avif"
-               ],
+            "C:/Ref/image2.avif"
+          ],
           "PublishComment": "a",
           "PublishdFilePath": [
             "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01414/maya/KAR_prp_ciaz2016_gold_mod_anim.ma"
@@ -185,8 +196,8 @@
             "KAR_prp_ertiga_maroon_mod_anim"
           ],
           "PreviewPath": [
-          
-                "C:/Ref/image7.jpg"],
+            "C:/Ref/image7.jpg"
+          ],
           "PublishComment": [
             "ertiga_maroon model has been done.Please check and let us know\n"
           ],
@@ -327,11 +338,11 @@
             "KAR_prp_small_building_02_mod_anim"
           ],
           "PreviewPath": [
-          "C:/Ref/image1.avif",
-                "C:/Ref/image2.avif",
-                "C:/Ref/image7.jpg",
-                "C:/Ref/image8.jpg"
-                ],
+            "C:/Ref/image1.avif",
+            "C:/Ref/image2.avif",
+            "C:/Ref/image7.jpg",
+            "C:/Ref/image8.jpg"
+          ],
           "PublishComment": [
             "KAR_prp_small_building_02_mod_anim pipeline test.........",
             "KAR_prp_small_building_02_mod_anim test...",
@@ -394,10 +405,9 @@
             "KAR_prp_small_building_02_mod"
           ],
           "PreviewPath": [
-           
-                "C:/Ref/image7.jpg",
-                "C:/Ref/image8.jpg"
-                ],
+            "C:/Ref/image7.jpg",
+            "C:/Ref/image8.jpg"
+          ],
           "PublishComment": "x",
           "PublishdFilePath": [
             "N:/KAR/04_publish/03_Model/prp/hhs_hyd_KAR_01400/maya/KAR_prp_small_building_02_mod.ma",
@@ -461,12 +471,13 @@
             "KAR_prp_small_building_02_mod_render"
           ],
           "PreviewPath": [
-           "C:/Ref/image1.avif",
-                "C:/Ref/image2.avif",
-                "C:/Ref/image7.jpg",
-                "C:/Ref/image8.jpg",
-                "C:/Ref/image3.jpg",
-                "C:/Ref/image7.jpg" ],
+            "C:/Ref/image1.avif",
+            "C:/Ref/image2.avif",
+            "C:/Ref/image7.jpg",
+            "C:/Ref/image8.jpg",
+            "C:/Ref/image3.jpg",
+            "C:/Ref/image7.jpg"
+          ],
           "PublishComment": [
             "KAR_prp_small_building_02_mod_render pipeline test...........",
             "KAR_prp_small_building_02_mod_render pipeline test...........",
@@ -545,8 +556,8 @@
             "KAR_prp_tall_building_bhooja_mod"
           ],
           "PreviewPath": [
-           
-                "C:/Ref/image7.jpg"],
+            "C:/Ref/image7.jpg"
+          ],
           "PublishComment": [
             "pipeline test"
           ],
@@ -590,7 +601,8 @@
             "KAR_prp_wagonr_blue_mod_anim"
           ],
           "PreviewPath": [
-             "C:/Ref/image1.avif"],
+            "C:/Ref/image1.avif"
+          ],
           "PublishComment": [
             "wagonr_blue model has been done.Please check and let us know"
           ],

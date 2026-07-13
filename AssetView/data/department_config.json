@@ -1,4 +1,5 @@
 {
+    "Global_View_Roles": ["TD","Superviser", "Production", "EP"],
     "Department_Dependency": {
     "Modeling":   ["Rigging", "Texturing"],
     "Rigging":    ["Animation"],

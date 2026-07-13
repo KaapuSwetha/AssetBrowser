@@ -1,10 +1,12 @@
 {% extends "AssetView/base.html" %}
  {% load static %}
 
-{% block title %}Asset Browser{% endblock %}
+{% block title %}ATLAS{% endblock %}
 
 {% block content %}
 <div class="max-w-[2400px] mx-auto h-full flex flex-col gap-3 min-h-0">
+
+  <!-- Resizable grid container -->
   <div id="resizableGrid" class="flex gap-3 h-auto lg:h-[calc(100vh-8rem)] min-h-0">
 
     <!-- LEFT: Projects Panel -->
@@ -222,87 +224,89 @@ function switchPreviewTab2(tab) {
   btnHistory.style.color        = isPreview ? 'rgb(203 213 225 / var(--tw-text-opacity, 1))'              : 'rgb(203 213 225 / var(--tw-text-opacity, 1))';
   btnHistory.style.borderBottom = isPreview ? '2px solid transparent': '2px solid rgb(203 213 225 / var(--tw-text-opacity, 1))';
 }
+
+  // Lightweight HTMX request indicator
   document.body.addEventListener('htmx:request', () => document.body.classList.add('cursor-progress'));
   document.body.addEventListener('htmx:afterOnLoad', () => document.body.classList.remove('cursor-progress'));
   document.body.addEventListener('htmx:responseError', () => document.body.classList.remove('cursor-progress'));
-  (function() {
-      function isMobileDevice() {
-        return window.innerWidth <= 768 || 
-           ('ontouchstart' in window) || 
-           (navigator.maxTouchPoints > 0);
-      }
-    if (isMobileDevice()) {
-    return; 
+
+ (function () {
+  function isMobile() {
+    return window.matchMedia('(max-width: 768px)').matches;
   }
-  
-    const resizers = document.querySelectorAll('.resizer');
-    
-    resizers.forEach(resizer => {
-      let isResizing = false;
-      let startX = 0;
-      let startWidth = 0;
-      let targetPanel = null;
-      let direction = resizer.dataset.direction;
 
-      resizer.addEventListener('mousedown', initResize);
+  let active = null; // single active drag at a time
 
-      function initResize(e) {
-        isResizing = true;
-        startX = e.clientX;
-        
-        const targetId = resizer.dataset.target;
-        targetPanel = document.getElementById(targetId);
-        startWidth = targetPanel.offsetWidth;
+  document.querySelectorAll('.resizer').forEach(resizer => {
+    resizer.addEventListener('mousedown', e => {
+      if (isMobile()) return;
+      e.preventDefault();
 
-        resizer.classList.add('resizing');
-        document.body.classList.add('resizing');
+      const panel = document.getElementById(resizer.dataset.target);
+      if (!panel) return;
 
-        document.addEventListener('mousemove', resize);
-        document.addEventListener('mouseup', stopResize);
-        
-        e.preventDefault();
-      }
+      active = {
+        resizer,
+        panel,
+        direction: resizer.dataset.direction,
+        startX:    e.clientX,
+        startW:    panel.offsetWidth,
+      };
 
-      function resize(e) {
-        if (!isResizing) return;
-
-        const diff = e.clientX - startX;
-        let newWidth;
-
-        if (direction === 'right') {
-          newWidth = startWidth + diff;
-        } else {
-          newWidth = startWidth - diff;
-        }
-
-        const minWidth = parseInt(getComputedStyle(targetPanel).minWidth) || 200;
-        const maxWidth = parseInt(getComputedStyle(targetPanel).maxWidth) || 800;
-
-        newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
-        targetPanel.style.width = newWidth + 'px';
-      }
-
-      function stopResize() {
-        isResizing = false;
-        resizer.classList.remove('resizing');
-        document.body.classList.remove('resizing');
-        
-        document.removeEventListener('mousemove', resize);
-        document.removeEventListener('mouseup', stopResize);
-        if (targetPanel) {
-          localStorage.setItem(targetPanel.id + '_width', targetPanel.style.width);
-        }
-      }
+      resizer.classList.add('resizing');
+      document.body.classList.add('resizing');
     });
-    ['projectsPanel', 'detailsPanel'].forEach(panelId => {
-      const savedWidth = localStorage.getItem(panelId + '_width');
-      if (savedWidth) {
-        const panel = document.getElementById(panelId);
-        if (panel) panel.style.width = savedWidth;
-      }
-    });
-  })();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!active) return;
+
+    const diff   = e.clientX - active.startX;
+    const delta  = active.direction === 'right' ? diff : -diff;
+    const raw    = active.startW + delta;
+
+    // Safe parseInt — fall back to sensible defaults if CSS returns "none"/"auto"
+    const style  = getComputedStyle(active.panel);
+    const minW   = parseFloat(style.minWidth)  || 200;
+    const maxW   = parseFloat(style.maxWidth) !== 0 && isFinite(parseFloat(style.maxWidth))
+                   ? parseFloat(style.maxWidth)
+                   : 800;
+
+    active.panel.style.width = Math.max(minW, Math.min(maxW, raw)) + 'px';
+  });
+
+  function stopResize() {
+    if (!active) return;
+
+    active.resizer.classList.remove('resizing');
+    document.body.classList.remove('resizing');
+
+    // Persist width
+    localStorage.setItem(active.panel.id + '_width', active.panel.style.width);
+
+    active = null;
+  }
+
+  // Catch mouseup anywhere — including outside the browser window
+  document.addEventListener('mouseup',    stopResize);
+  window .addEventListener('blur',        stopResize); // tab switch or alt-tab
+  document.addEventListener('mouseleave', e => {
+    // Only stop if leaving the viewport entirely
+    if (e.relatedTarget === null) stopResize();
+  });
+
+  // Restore saved widths
+  ['projectsPanel', 'detailsPanel'].forEach(id => {
+    const w = localStorage.getItem(id + '_width');
+    if (w) {
+      const el = document.getElementById(id);
+      if (el) el.style.width = w;
+    }
+  });
+})();
 </script> 
+
+<!-- ADDED (non-breaking): load review UI helpers -->
 <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 <script src="https://unpkg.com/htmx.org@1.9.10/dist/ext/preload.js"></script>
 {% endblock %} 

@@ -1,13 +1,16 @@
 {% extends "AssetView/base.html" %}
 {% load static %}
 
-{% block title %}Asset Browser{% endblock %}
+{% block title %}ATLAS{% endblock %}
 
 {% block content %}
 <div class="max-w-[2400px] mx-auto h-full flex flex-col gap-3 min-h-0">
 
+  <!-- Grid fills available height (desktop); stacks on mobile -->
   <div class="grid grid-cols-12 gap-3 h-auto lg:h-[calc(100vh-8rem)] min-h-0">
 
+
+    <!-- LEFT: Project Tree -->
     <aside class="col-span-12 md:col-span-3 xl:col-span-3 card overflow-hidden flex flex-col min-h-[360px] md:min-h-0" aria-label="Projects">
       <div class="card-header">
         <i class="fa-regular fa-folder-open text-amber-300/90"></i>
@@ -20,12 +23,15 @@
            hx-trigger="load"
            hx-target="#projectTree"
            hx-swap="innerHTML">
+        <!-- Loading state -->
         <div class="p-4 text-center text-slate-500">
           <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
           <p>Loading projects…</p>
         </div>
       </div>
     </aside>
+
+    <!-- CENTER: Versions Table -->
     <section class="col-span-12 md:col-span-5 xl:col-span-5 flex flex-col gap-3 min-h-[420px] md:min-h-0" aria-label="Versions list">
       <div id="assetTableMount" class="card h-full flex flex-col overflow-hidden min-h-0">
         <div class="card-header">
@@ -34,9 +40,12 @@
           <span class="ml-auto text-[11px] text-slate-400 normal-case" id="versionCount">0 items</span>
         </div>
         <div id="versionsTable" class="flex-1 min-h-0 overflow-y-auto scroll-panel">
+          <!-- empty state -->
         </div>
       </div>
     </section>
+
+    <!-- RIGHT: Metadata + Preview -->
     <aside class="col-span-12 md:col-span-4 xl:col-span-4 flex flex-col gap-3 min-h-0" aria-label="Details and preview">
 
       <div id="metadataCard" class="card flex-1 min-h-[320px] md:min-h-0 flex flex-col overflow-hidden">
